@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.SQLOutput;
 
+import java.util.Scanner;
 import java.util.Arrays;
 
 //@SpringBootApplication
@@ -89,6 +90,95 @@ public class ZzzzApplication {
         System.out.println("d3的值：" + d3);
         System.out.println("d4的值：" + d4);
         System.out.println("abs函数：" + Math.abs(1 - 3));
+
+        // 多行字符串        从Java 13开始
+//        String s4 = """
+//                   SELECT * FROM
+//                     users
+//                   WHERE id > 100
+//                   ORDER BY name DESC
+//                """;
+//        System.out.println(s4);
+
+        // 赋值转变
+        String s5 = "hello";
+        String t1 = s5;
+        s5 = "world";
+        System.out.println("s5的值：" + s5);
+        System.out.println("t1的值：" + t1);
+
+        // null类型
+//        String s6;
+//        System.out.println("s6的值：" + s6);
+        String s7 = null;
+        System.out.println("s7的值：" + s7);
+
+        // 把 int 转成 String
+        int i1 = 3;
+        int i2 = 4;
+        int i3 = 5;
+        String s8  = String.valueOf(i1 + i2 + i3);
+        System.out.println(s8);
+
+        // int 数组
+        int[] ns = new int[5];
+        ns[0] = 11;
+        ns[1] = 12;
+        ns[2] = 13;
+        ns[3] = 14;
+        ns[4] = 15;
+        System.out.println("ns的第二个值：" + ns[1]);
+        System.out.println("ns的长度：" + ns.length);
+
+        int[] ns2 = new int[] {1, 2, 3, 4, 5};
+        System.out.println("ns2的长度：" + ns2.length);
+
+        int[] ns3 = {1, 3, 5, 7, 9};
+        System.out.println("ns3的长度：" + ns3.length);
+
+        // 不换行打印
+        System.out.print("A.");
+
+        // 格式化输出
+        double d2 = 3.131456;
+        System.out.printf("%.2f\n", d2);    // 显示两位小数3.13
+
+        // 输入
+//        Scanner scannerObj = new Scanner(System.in);
+//        System.out.println("输入你的名字：");
+//        String name = scannerObj.nextLine();
+//        System.out.println("输入你的年龄：");
+//        int age2 = scannerObj.nextInt();
+//        System.out.printf("Hi, %s, you are %d years old", name, age2);
+
+        // 浮点数不精确问题
+        double x2 = 1 - 9.0 / 10;
+        System.out.println("x2的值：" + x2);
+        if (x2 == 0.1) {        // 计算出现误差
+            System.out.println("x2 == 0.1 为 true");
+        } else {
+            System.out.println("x2 == 0.1 为 false");
+        }
+
+        System.out.println("x2的值：" + Math.abs(x2 - 0.1));
+        if (Math.abs(x2 - 0.1) < 0.00001) {
+            System.out.println("Math.abs(x2 - 0.1) < 0.00001 为 true");
+        } else {
+            System.out.println("Math.abs(x2 - 0.1) < 0.00001 为 false");
+        }
+
+        String ss1 = "hello";
+        String ss2 = "Hello".toLowerCase();
+        if (ss1 == ss2) {
+            System.out.println("ss1 == ss2 为 true");
+        } else {
+            System.out.println("ss1 == ss2 为 false");
+        }
+        if (ss1.equals(ss2)) {
+            System.out.println("ss1.equals(ss2) 为 true");
+        } else {
+            System.out.println("ss1.equals(ss2) 为 false");
+        }
 
         Person p = new Person();
         p.getAge();
