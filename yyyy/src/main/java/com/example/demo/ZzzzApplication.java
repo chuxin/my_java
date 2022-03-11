@@ -12,6 +12,8 @@ import com.example.demo.polymorphic.TestFinal;
 
 import com.example.demo.testAbstract.Student;
 
+import com.example.demo.testInterface.Student;
+
 //@SpringBootApplication
 public class ZzzzApplication {
 
@@ -131,6 +133,16 @@ public class ZzzzApplication {
         // 接口
         // 如果一个抽象类没有字段，所有方法全部都是抽象方法，就可以把该抽象类改写为接口
         // 所谓interface，就是比抽象类还要抽象的纯抽象接口，因为它连字段都不能有。因为接口定义的所有方法默认都是public abstract的，所以这两个修饰符不需要写出来（写不写效果都一样）。
+        //
+        //              abstract class	        interface
+        // 继承	        只能extends一个class	    可以implements多个interface
+        // 字段	        可以定义实例字段	        不能定义实例字段
+        // 抽象方法	    可以定义抽象方法	        可以定义抽象方法
+        // 非抽象方法	    可以定义非抽象方法	        可以定义default方法
+        //
+        // 合理设计interface和abstract class的继承关系，可以充分复用代码。一般来说，公共逻辑适合放在abstract class中，
+        // 具体逻辑放到各个子类，而接口层次代表抽象程度。
+        Student stuObj = new Student();
 
     }
 
