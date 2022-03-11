@@ -8,10 +8,11 @@ public class OOPknowledge {
 
     public String val22;
 
-    public String name;
+    public String name = "parentName";
     public int age;
+    protected String nationality = "China";
 
-    private String address;
+    public String address;
     private int sex;
 
     public String[] formerNames;
@@ -81,4 +82,14 @@ public class OOPknowledge {
         this.country = country;
         this.secondCountry = secondCountry;
     }
+
+    public void getThirdChildValue() {
+        System.out.println("我是父类 OOPknowledge ");
+    }
+
+    public int getThirdChildValue22() {
+        System.out.println("我是父类方法 getThirdChildValue22");
+        return 11;
+    }
 }
+

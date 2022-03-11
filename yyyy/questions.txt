@@ -1,0 +1,9 @@
+1、一个文件里有两个 public class 不行吗， 一个文件里定义两个类，我想都import，一般是不是没有这样的写法
+2、我现在需要在 spring boot 里传入参数
+3、>= java 15 一些特性需要看么，项目有用到吗    sealed，permits
+    1.6    1.8
+    1.8
+
+4、override 这个关键词不写行不行
+5、
+

@@ -1,7 +1,16 @@
 package com.example.demo;
 
-import com.example.demo.mypackages.BasicKnowledge;
 import com.example.demo.mypackages.OOPknowledge;
+import com.example.demo.mypackages.FirstChild;
+import com.example.demo.mypackages.SecondChid;
+import com.example.demo.mypackages.ThirdChild;
+
+import com.example.demo.polymorphic.Income;
+import com.example.demo.polymorphic.Salary;
+import com.example.demo.polymorphic.Allowance;
+import com.example.demo.polymorphic.TestFinal;
+
+import com.example.demo.testAbstract.Student;
 
 //@SpringBootApplication
 public class ZzzzApplication {
@@ -55,7 +64,83 @@ public class ZzzzApplication {
         System.out.println("重载方法，调用定义了两个参数的setCountry：" + myObjLoad22.country + ", " + myObjLoad22.secondCountry);
 
         // 继承
-        
+        FirstChild fcObj = new FirstChild();
+        fcObj.setAddress("子类地址,顾山镇，某某村");
+        fcObj.setSex(77);
+        fcObj.getParentAttributes();
+        fcObj.getSelfAttributes();
+
+        SecondChid scObj = new SecondChid("二儿子", 55, 130);
+        scObj.printInitValues();
+
+        // 向上转型
+        FirstChild fcObj22 = new FirstChild();
+        OOPknowledge oopObj22 = fcObj22;
+        Object o1 = fcObj22;
+        Object o2 = oopObj22;
+        Object o3 = null;
+        // 向下转型
+        OOPknowledge oopObj33 = new OOPknowledge();
+//        FirstChild fcObj33 = (FirstChild) oopObj33;       // cannot be cast to
+        // instanceof实际上判断一个变量所指向的实例是否是指定类型，或者这个类型的子类
+        // 避免转型出错，先判断一个实例究竟是不是某种类型
+        if (o3 instanceof OOPknowledge) {
+            System.out.println("父类对象 o3 属于 子类 OOPknowledge 的实例");
+        }
+        if (fcObj22 instanceof OOPknowledge) {
+            System.out.println("子类对象 fcObj22 属于 父类 OOPknowledge 的实例");
+        }
+
+        Object obj = "hello";
+        if (obj instanceof String) {
+            String ss = (String) obj;
+            System.out.println("从Java 14开始，判断instanceof后，可以直接转型为指定变量 " + ss.toUpperCase());
+        }
+
+        // 多态
+        // override 方法名相同，参数相同，返回值类型相同
+        // overload 方法名相同，返回值类型相同, 但参数不同。
+        // Java的实例方法调用是基于运行时的实际类型的动态调用，而非变量的声明类型。这个非常重要的特性在面向对象中称之为多态
+        OOPknowledge tcObj = new ThirdChild();
+        tcObj.getThirdChildValue();
+        OOPknowledge oopObj44 = new OOPknowledge();
+        oopObj44.getThirdChildValue();
+
+        Income[] objArr = {
+                new Income(100),
+                new Salary(20000),
+                new Allowance(300)
+        };
+        System.out.println(taxTotal(objArr));
+
+        // super 关键词
+        Salary sObj = new Salary(0);
+        System.out.println("super关键词测试：" + sObj.getTestSuper());
+
+        // final 关键词
+//        sObj.values = "jjjj";       // 无法为最终变量values分配值
+        TestFinal testObj = new TestFinal(99);
+        testObj.getQuota();
+//        testObj.setClothes(88);
+//        testObj.getClothes();     // 无法为最终变量clothes分配值
+
+        // 抽象类
+        Student studentObj = new Student();
+        studentObj.run();
+
+        // 接口
+        // 如果一个抽象类没有字段，所有方法全部都是抽象方法，就可以把该抽象类改写为接口
+        // 所谓interface，就是比抽象类还要抽象的纯抽象接口，因为它连字段都不能有。因为接口定义的所有方法默认都是public abstract的，所以这两个修饰符不需要写出来（写不写效果都一样）。
+
+    }
+
+    public static double taxTotal(Income... arr) {
+        double total = 0;
+        for(Income piece:arr) {
+            total += piece.getTax();
+        }
+
+        return total;
     }
 
 }
