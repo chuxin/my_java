@@ -12,7 +12,10 @@ import com.example.demo.polymorphic.TestFinal;
 
 import com.example.demo.testAbstract.Student;
 
-import com.example.demo.testInterface.Student;
+import com.example.demo.testStatic.MyStatic;
+import com.example.demo.testStatic.StaticInterface;
+import com.example.demo.testStatic.MyScope;
+import com.example.demo.testStatic.MyTestPackage;
 
 //@SpringBootApplication
 public class ZzzzApplication {
@@ -20,10 +23,46 @@ public class ZzzzApplication {
     public static void main(String[] args) {
 //        SpringApplication.run(ZzzzApplication.class, args);
 
+        /*********   java 基础  *********/
         String[] myArgs = {"aaa", "bbb"};
 //        BasicKnowledge bkObj = new BasicKnowledge();
 //        bkObj.testBasic(myArgs);
 
+        /*********   java 面向对象  *********/
+        testOOP();
+
+        // 作用域
+        // import.* 表示把这个包下面的所有class都导入进来（但不包括子包的class）
+        // 默认自动import当前package的其他class
+        // 默认自动import java.lang.*
+        // 确定唯一的包名。推荐的做法是使用倒置的域名来确保唯一性。例如：  com.liaoxuefeng.sample
+
+        // 推荐把private方法放到后面，因为public方法定义了类对外提供的功能，阅读代码的时候，应该先关注public方法
+        // Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，嵌套类拥有访问private的权限
+        MyScope msObj = new MyScope();
+        msObj.doSomething();
+
+        // 包作用域是指一个类允许访问同一个package的没有public、private修饰的class，以及没有public、protected、private修饰的字段和方法。
+        // 同一个package指：包名必须完全一致，包没有父子关系，com.apache和com.apache.abc是不同的包。
+        MyTestPackage mtpObj = new MyTestPackage();
+        mtpObj.printFriend();
+
+        // 最佳实践
+        // 如果不确定是否需要public，就不声明为public，即尽可能少地暴露对外的字段和方法。
+        // 一个.java文件只能包含一个public类，但可以包含多个非public类。如果有public类，文件名必须和public类的名字相同。
+        // Java内建的访问权限包括public、protected、private和package权限
+    }
+
+    public static double taxTotal(Income... arr) {
+        double total = 0;
+        for(Income piece:arr) {
+            total += piece.getTax();
+        }
+
+        return total;
+    }
+
+    public static void testOOP() {
         // 构造方法
         OOPknowledge mtObj = new OOPknowledge();
         System.out.println("第一个构造函数传入的值：" + mtObj.val11 + " " + mtObj.age11);
@@ -127,7 +166,7 @@ public class ZzzzApplication {
 //        testObj.getClothes();     // 无法为最终变量clothes分配值
 
         // 抽象类
-        Student studentObj = new Student();
+        com.example.demo.testAbstract.Student studentObj = new com.example.demo.testAbstract.Student();
         studentObj.run();
 
         // 接口
@@ -142,18 +181,37 @@ public class ZzzzApplication {
         //
         // 合理设计interface和abstract class的继承关系，可以充分复用代码。一般来说，公共逻辑适合放在abstract class中，
         // 具体逻辑放到各个子类，而接口层次代表抽象程度。
-        Student stuObj = new Student();
+        com.example.demo.testInterface.Student myStuObj = new com.example.demo.testInterface.Student("我的学生");
+        myStuObj.run();
+        System.out.println("MyStudent->name: " + myStuObj.getName());
 
+        // 接口定义 default 方法（JDK>=1.8），那么子类就不再必须重写此方法，只需要在需要覆写的地方去覆写。
+        // default方法和抽象类的普通方法是有所不同的。因为interface没有字段，default方法无法访问字段，而抽象类的普通方法可以访问实例字段。
+        myStuObj.noNeedInherit();
+        myStuObj.noNeedInherit2();
+
+        // 静态字段
+        // 在一个class中定义的字段，我们称之为实例字段
+        // 实例字段在每个实例中都有自己的一个独立“空间”，但是静态字段只有一个共享“空间”，所有实例都会共享该字段。
+        MyStatic msObj11 = new MyStatic("静态测试11");
+        MyStatic msObj22 = new MyStatic("静态测试22");
+        System.out.println("实例字段值不相同：" + msObj11.name + ", " + msObj22.name);
+        msObj11.number = 88;
+        System.out.println("静态字段值共享：" + msObj11.number + ", " + msObj22.number);
+        msObj11.number = 99;
+        System.out.println("静态字段值共享：" + msObj11.number + ", " + msObj22.number);
+        // 静态字段并不属于实例。实例对象并没有静态字段。推荐用类名来访问静态字段
+        // 通常情况下，通过实例变量访问静态字段和静态方法，会得到一个编译警告
+        System.out.println("静态字段值共享：" + MyStatic.number);
+
+        // 静态方法
+        // 调用静态方法通过类名就可以调用
+        // 静态方法内部，无法访问this变量，也无法访问实例字段，它只能访问静态字段。
+        // 静态方法经常用于工具类。例如：Arrays.sort()     Math.random()
+        MyStatic.setAge(77);
+        System.out.println("静态方法里对静态字段 age 赋值了： " + MyStatic.age);
+        // 接口的静态字段
+        System.out.println("接口静态字段： " + StaticInterface.male + ", " + StaticInterface.female);
     }
-
-    public static double taxTotal(Income... arr) {
-        double total = 0;
-        for(Income piece:arr) {
-            total += piece.getTax();
-        }
-
-        return total;
-    }
-
 }
 
