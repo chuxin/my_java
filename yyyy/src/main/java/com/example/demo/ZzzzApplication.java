@@ -17,6 +17,8 @@ import com.example.demo.testStatic.StaticInterface;
 import com.example.demo.testStatic.MyScope;
 import com.example.demo.testStatic.MyTestPackage;
 
+import java.util.HashMap;
+
 //@SpringBootApplication
 public class ZzzzApplication {
 
@@ -29,28 +31,10 @@ public class ZzzzApplication {
 //        bkObj.testBasic(myArgs);
 
         /*********   java 面向对象  *********/
-        testOOP();
+//        testOOP();
 
-        // 作用域
-        // import.* 表示把这个包下面的所有class都导入进来（但不包括子包的class）
-        // 默认自动import当前package的其他class
-        // 默认自动import java.lang.*
-        // 确定唯一的包名。推荐的做法是使用倒置的域名来确保唯一性。例如：  com.liaoxuefeng.sample
+        /*********   java 核心类  *********/
 
-        // 推荐把private方法放到后面，因为public方法定义了类对外提供的功能，阅读代码的时候，应该先关注public方法
-        // Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，嵌套类拥有访问private的权限
-        MyScope msObj = new MyScope();
-        msObj.doSomething();
-
-        // 包作用域是指一个类允许访问同一个package的没有public、private修饰的class，以及没有public、protected、private修饰的字段和方法。
-        // 同一个package指：包名必须完全一致，包没有父子关系，com.apache和com.apache.abc是不同的包。
-        MyTestPackage mtpObj = new MyTestPackage();
-        mtpObj.printFriend();
-
-        // 最佳实践
-        // 如果不确定是否需要public，就不声明为public，即尽可能少地暴露对外的字段和方法。
-        // 一个.java文件只能包含一个public类，但可以包含多个非public类。如果有public类，文件名必须和public类的名字相同。
-        // Java内建的访问权限包括public、protected、private和package权限
     }
 
     public static double taxTotal(Income... arr) {
@@ -212,6 +196,63 @@ public class ZzzzApplication {
         System.out.println("静态方法里对静态字段 age 赋值了： " + MyStatic.age);
         // 接口的静态字段
         System.out.println("接口静态字段： " + StaticInterface.male + ", " + StaticInterface.female);
+
+        // 作用域
+        // import.* 表示把这个包下面的所有class都导入进来（但不包括子包的class）
+        // 默认自动import当前package的其他class
+        // 默认自动import java.lang.*
+        // 确定唯一的包名。推荐的做法是使用倒置的域名来确保唯一性。例如：  com.liaoxuefeng.sample
+
+        // 推荐把private方法放到后面，因为public方法定义了类对外提供的功能，阅读代码的时候，应该先关注public方法
+        // Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，嵌套类拥有访问private的权限
+        MyScope msObj = new MyScope();
+        msObj.doSomething();
+
+        // 包作用域是指一个类允许访问同一个package的没有public、private修饰的class，以及没有public、protected、private修饰的字段和方法。
+        // 同一个package指：包名必须完全一致，包没有父子关系，com.apache和com.apache.abc是不同的包。
+        MyTestPackage mtpObj = new MyTestPackage();
+        mtpObj.printFriend();
+
+        // 最佳实践
+        // 如果不确定是否需要public，就不声明为public，即尽可能少地暴露对外的字段和方法。
+        // 一个.java文件只能包含一个public类，但可以包含多个非public类。如果有public类，文件名必须和public类的名字相同。
+        // Java内建的访问权限包括public、protected、private和package权限
+
+        // 三种内部类
+        // Inner Class
+        msObj.doSomething2();
+        // Anonymous Class
+        msObj.doSomething3();
+
+        HashMap<String, String> map1 = new HashMap<>();
+        HashMap<String, String> map2 = new HashMap<>(){}; // 匿名类!
+        HashMap<String, String> map3 = new HashMap<>(){
+            {
+                put("A", "你好啊啊啊");
+                put("B", "我很好");
+            }
+        };
+        System.out.println("这里用char就有问题，" + map3.get('B'));
+        System.out.println("这里用字符串就没问题，" + map3.get("B"));
+
+        // Static Nested Class
+        msObj.doSomething4();
+
+        // classpath
+        // classpath是JVM用到的一个环境变量，它用来指示JVM如何搜索class
+        // 在系统环境变量中设置classpath环境变量，不推荐
+        // 在启动JVM时设置classpath变量，推荐
+
+        // jar （没实践）
+        // 对散落在各层目录中的.class文件打成一个包
+        // Maven，可以非常方便地创建jar包
+        // JVM自带的Java标准库，实际上也是以jar文件形式存放的，这个文件叫rt.jar，一共有60多M
+        // 学习地址：https://www.liaoxuefeng.com/wiki/1252599548343744/1260466914339296
+
+        // 模块 （没实践）
+        // 如果a.jar必须依赖另一个b.jar才能运行，那我们应该给a.jar加点说明啥的，让程序在编译和运行的时候能自动定位到b.jar，这种自带“依赖关系”的class容器就是模块
+        // 模块的重要作用就是声明依赖关系
+        // 学习地址：https://www.liaoxuefeng.com/wiki/1252599548343744/1281795926523938
     }
 }
 
