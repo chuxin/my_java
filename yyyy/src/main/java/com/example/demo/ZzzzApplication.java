@@ -17,7 +17,21 @@ import com.example.demo.testStatic.StaticInterface;
 import com.example.demo.testStatic.MyScope;
 import com.example.demo.testStatic.MyTestPackage;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+
+import java.util.Arrays;
+import java.util.StringJoiner;
+
+import com.example.demo.coreClass.MyCounter;
+import com.example.demo.coreClass.MyJavaBean;
+
+import com.example.demo.coreClass.Weekday;
+import jdk.swing.interop.SwingInterOpUtils;
 
 //@SpringBootApplication
 public class ZzzzApplication {
@@ -26,7 +40,7 @@ public class ZzzzApplication {
 //        SpringApplication.run(ZzzzApplication.class, args);
 
         /*********   java 基础  *********/
-        String[] myArgs = {"aaa", "bbb"};
+//        String[] myArgs = {"aaa", "bbb"};
 //        BasicKnowledge bkObj = new BasicKnowledge();
 //        bkObj.testBasic(myArgs);
 
@@ -34,7 +48,210 @@ public class ZzzzApplication {
 //        testOOP();
 
         /*********   java 核心类  *********/
+        // String
+        String s = "hello";
+        System.out.println(s);
+        s = s.toUpperCase();
+        System.out.println(s);
+        // 比较字符串
+        String s1 = "hello11";
+        String s2 = "hello11";
+        // 所有相同的字符串当作一个对象放入常量池，自然s1和s2的引用就是相同的。
+        System.out.println("字符串比较：" + (s1 == s2));
+        System.out.println("字符串比较：" + s1.equals(s2));
+        String s3 = "hello22";
+        String s4 = "HELLo22".toLowerCase();
+        System.out.println("字符串比较：" + (s3 == s4));
+        System.out.println("字符串比较：" + s3.equals(s4));
+        System.out.println("字符串比较(忽略大小写)：" + s3.equalsIgnoreCase(s4));
+        // 搜索字符串
+        System.out.println("hello".contains("ll"));
+        System.out.println("hello".indexOf("l"));
+        System.out.println("hello".startsWith("he"));
+        System.out.println("hello".endsWith("lo"));
+        // 提取字符串
+        System.out.println("hello".substring(2));
+        System.out.println("hello".substring(2, 3));
+        // 去除首尾空白字符
+        System.out.println(" \thello\r\n".trim());
+        // 中文的空格字符\u3000
+        System.out.println("\u3000hello\u3000".strip());
+        System.out.println(" hello ".stripLeading());
+        System.out.println(" hello ".stripTrailing());
+        // isEmpty()和isBlank()来判断字符串是否为空和空白字符串
+        System.out.println("".isEmpty());
+        System.out.println(" ".isEmpty());
+        System.out.println(" \n".isBlank());
+        System.out.println(" hello ".isBlank());
+        // 替换字符串
+        System.out.println("hello".replace("l", "w"));
+        System.out.println("hello".replace("ll", "~~"));
+        System.out.println("A,,B;C ,D".replaceAll("[\\,\\;\\s]+", ","));
+        // 分割字符串
+        String s5 = "A,B,C,D";
+        String[] s5Arr = s5.split("\\,");
+        System.out.println(Arrays.toString(s5Arr));
+        // 拼接字符串
+        String[] s6Arr = {"x", "y", "z"};
+        String s6 = String.join("--", s6Arr);
+        System.out.println(s6);
+        // 格式化字符串
+        // 如果你不确定用啥占位符，那就始终用%s，因为%s可以显示任何数据类型
+        String s7 = "Hi %s, your score is %.2f, your age is %d";
+        System.out.println(String.format(s7, "louis", 88.8, 99));
+        // 类型转换
+        // 把任意基本类型或引用类型转换为字符串
+        System.out.println(String.valueOf(123));
+        System.out.println(String.valueOf(45.67));
+        System.out.println(String.valueOf(true));
+        System.out.println(String.valueOf(new Object()));
+        // 把字符串转换为int类型
+        System.out.println(Integer.parseInt("123"));
+        // 字符串转换为boolean类型
+        System.out.println(Boolean.parseBoolean("true"));
+        System.out.println(Boolean.parseBoolean("FALSE"));
+        // Integer有个getInteger(String)方法，它不是将字符串转换为int，而是把该字符串对应的系统变量转换为Integer
+        System.out.println(Integer.getInteger("java.version"));
+        // String -> char[]
+        char[] cs = "hello".toCharArray();
+        System.out.println(Arrays.toString(cs));
+        // char[] -> String
+        String s8 = new String(cs);
+        System.out.println(s8);
+        // char类型实际上就是两个字节的Unicode编码
+        // String和char在内存中总是以Unicode编码表示
+        // 转换编码就是将String和byte[]转换，需要指定编码
+        // 转换为byte[]时，始终优先考虑UTF-8编码
+        try {
+            // 把字符串转换成其他编码
+            byte[] b1 = "hello".getBytes(); // 按系统默认编码转换，不推荐
+            byte[] b2 = "hello".getBytes("UTF-8");  // 按UTF-8编码转换
+            byte[] b3 = "hello".getBytes("GBK");  // 按GBK编码转换
+            System.out.println(Arrays.toString(b1));
+            System.out.println(Arrays.toString(b2));
+            System.out.println(Arrays.toString(b3));
+            // 把已知编码的byte[]转换为String
+            byte[] b4 = {100, 101, 102};
+            String s9 = new String(b4, "GBK");
+            System.out.println(s9);
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("不支持的字符集");
+        }
 
+        // StringBuilder  高效拼接字符串, 不会每次循环都会创建新的字符串对象
+        StringBuilder sb = new StringBuilder(1024);
+        for (int i = 0; i < 10; i++) {
+            sb.append(i).append(",");
+        }
+        System.out.println(sb.toString());
+
+        MyCounter mcObj = new MyCounter();
+        System.out.println(mcObj.add(3).getNumber());
+        System.out.println(mcObj.add(5).incr().getNumber());
+
+        // 拼接字符串
+        // 方法一  StringBuilder 拼接
+        String[] namesArr = {"bob", "alice", "grace"};
+        var sb2 = new StringBuilder();
+        sb2.append("hello ");
+        for (String name:namesArr) {
+            sb2.append(name).append(", ");
+        }
+        sb2.delete(sb2.length()-2, sb2.length());
+        sb2.append("!");
+        System.out.println(sb2.toString());
+        // 方法二  StringJoiner  拼接
+        var sj = new StringJoiner(", ", "hello ", "!");
+        for (String name:namesArr) {
+            sj.add(name);
+        }
+        System.out.println(sj.toString());
+        // 方法三  String.join
+
+        // 包装类型
+        // Java的数据类型分两种：
+        // 基本类型：byte，short，int，long，boolean，float，double，char
+        // 引用类型：所有class和interface类型
+        // 引用类型可以赋值为null，表示空，但基本类型不能赋值为null
+
+        // int和Integer互相转换
+        Integer n = null;
+        Integer n2 = Integer.valueOf(99);
+        int n3 = n2.intValue();
+        System.out.println(n3);
+        Integer n4 = Integer.valueOf("88");
+        System.out.println(n4.intValue());
+
+        Integer n5 = 127;
+        Integer n6 = 127;
+        Integer n7 = 99999;
+        Integer n8 = 99999;
+        // 编译器把Integer x = 127;自动变为Integer x = Integer.valueOf(127);
+        // 为了节省内存，Integer.valueOf()对于较小的数，始终返回相同的实例，因此，==比较“恰好”为true，
+        // 但我们绝不能因为Java标准库的Integer内部有缓存优化就用==比较，必须用equals()方法比较两个Integer
+        System.out.println("n5 == n6: " + (n5 == n6));
+        System.out.println("n7 == n8: " + (n7 == n8));
+        System.out.println("n5.equals(n6): " + (n5.equals(n6)));
+        System.out.println("n7.equals(n8): " + (n7.equals(n8)));
+        // 把字符串解析成一个整数
+        int n9 = Integer.parseInt("100");
+        // 一些有用的静态变量
+        Boolean t = Boolean.TRUE;
+        Boolean f = Boolean.FALSE;
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+        int sizeOfLong = Long.SIZE;
+        int byteOfLong = Long.BYTES;
+        System.out.println(t + " " + f + " " + max + " " + min + " " + sizeOfLong + " " + byteOfLong);
+        // 所有的整数和浮点数的包装类型都继承自Number, 所以可以通过包装类型获取各种基本类型
+        Number num = Integer.valueOf(77);
+        byte b = num.byteValue();
+        int n10 = num.intValue();
+        long l = num.longValue();
+        double d = num.doubleValue();
+        float f2 = num.floatValue();
+        System.out.println(b + " " + n10 + " " + l + " " + d + " " + f2);
+
+        // javabean
+        // 把一组对应的读方法（getter）和写方法（setter）称为属性（property）
+        // boolean字段比较特殊，它的读方法一般命名为isXyz()
+        // 只有getter的属性，没有setter属性的，称为只读属性（read-only），反之为只写属性（write-only）
+
+        // 枚举JavaBean属性
+        try {
+            BeanInfo info = Introspector.getBeanInfo(MyJavaBean.class);
+            for (PropertyDescriptor piece:info.getPropertyDescriptors()) {
+                System.out.println("getName(): " + piece.getName());
+                System.out.println("getReadMethod(): " + piece.getReadMethod());
+                System.out.println("getWriteMethod(): " + piece.getWriteMethod());
+            }
+        } catch (IntrospectionException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // enum
+        // 使用enum定义的枚举类是一种引用类型
+        // enum类型可以使用==比较，也可以使用equals()方法比较，是个例外
+        // enum的构造方法要声明为private，字段强烈建议声明为final
+        Weekday day = Weekday.SUN;
+        if (day == Weekday.SUN) {
+            // 返回定义的常量的顺序，从0开始计数
+            System.out.println("今天是周末, 数值为：" + day.ordinal() + " ，中文名：" + day.name());
+        }
+        if (day.dayValue == 0) {
+            System.out.println("今天是周末, 数值为：" + day.dayValue + " ，中文名：" + day.toString() + " || " + day);
+        }
+        day = Weekday.MON;
+        switch (day) {
+            case MON:
+            case TUE:
+                System.out.println("Today is " + day);
+            case WES:
+            case SAT:
+                System.out.println("Today is --- " + day);
+            default:
+                throw new RuntimeException("找不到对应的日期");
+        }
     }
 
     public static double taxTotal(Income... arr) {
