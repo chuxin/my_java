@@ -7,3 +7,7 @@
 4、
 6、从Java 14开始，引入了新的Record类，这东西你们之前的项目里一般用得到么
 BigInteger、BigDecimal   项目里一般用得到么
+7、泛型里 extends，super 关键字  项目里用得到么
+8、
+9、
+

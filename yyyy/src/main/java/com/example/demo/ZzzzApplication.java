@@ -10,21 +10,17 @@ import com.example.demo.polymorphic.Salary;
 import com.example.demo.polymorphic.Allowance;
 import com.example.demo.polymorphic.TestFinal;
 
-import com.example.demo.testAbstract.Person;
-import com.example.demo.testAbstract.Student;
-
+import com.example.demo.testInterface.Student;
 import com.example.demo.testStatic.MyStatic;
 import com.example.demo.testStatic.StaticInterface;
 import com.example.demo.testStatic.MyScope;
 import com.example.demo.testStatic.MyTestPackage;
 
-import java.awt.*;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -35,13 +31,15 @@ import com.example.demo.coreClass.MyJavaBean;
 
 import com.example.demo.coreClass.Weekday;
 
-import java.math.BigInteger;
 import java.math.BigDecimal;
 
 import java.util.List;
 
 import com.example.demo.testT.PersonT;
 import com.example.demo.testT.Pair;
+
+import com.example.demo.testCollections.MyStudent;
+import com.example.demo.testCollections.Students;
 
 //@SpringBootApplication
 public class ZzzzApplication {
@@ -64,57 +62,128 @@ public class ZzzzApplication {
 //        testAnnotationHaHa();
 
         /*********   泛型  *********/
-        // 泛型就是编写模板代码来适应任意类型。不必对类型进行强制转换，它通过编译器对类型进行检查
-        // 泛型的继承关系：可以把ArrayList<Integer>向上转型为List<Integer>（T不能变！），但不能把ArrayList<Integer>向上转型为ArrayList<Number>（T不能变成父类）
-        ArrayList<String> strList = new ArrayList<String>();
-        strList.add("hello");
-        strList.add("louis");
-        System.out.println(strList.get(0));
+//        testGenericity()
 
-        List<Number> list = new ArrayList<Number>();
-        list.add(Integer.valueOf(33));
-        list.add(Float.valueOf(13.44f));
-        Number first = list.get(0);
-        Number second = list.get(1);
-        System.out.println(first + " " + second);
-        // 可以省略后面的Number，编译器可以自动推断泛型类型：
-        List<Number> list2 = new ArrayList<>();
-        // 泛型接口
-        // String本身已经实现了Comparable<String>接口,可以直接排序
-        String[] ss = new String[] {"Orange", "Apple", "Pear"};
-        Arrays.sort(ss);
-        System.out.println(Arrays.toString(ss));
-        // 自定义一个类实现按name进行排序
-        System.out.println("zello".compareTo("bbb"));
-        PersonT[] ps = new PersonT[] {
-                new PersonT("bob", 61),
-                new PersonT("alice", 88),
-                new PersonT("lily", 70)
-        };
-        Arrays.sort(ps);
-        System.out.println(Arrays.toString(ps));
+        /*********   集合  *********/
+        // 数组有如下限制:
+        //      数组初始化后大小不可变；
+        //      数组只能按索引顺序存取。
+        // 集合:
+        //      可变大小的顺序链表
+        //      保证无重复元素的集合
 
-        // 使用自定义的泛型类
-        Pair<String> p2 = new Pair<>("hello", "world");
-        String first2 = p2.getFirst();
-        String second2 = p2.getSecond();
-        System.out.println(first2 + ", " + second2);
+        // 使用 list      优先使用ArrayList
+        //                  ArrayList	    LinkedList
+        // 获取指定元素	    速度很快	        需要从头开始查找元素
+        // 添加元素到末尾	    速度很快	        速度很快
+        // 在指定位置添加/删除	需要移动元素	    不需要移动元素
+        // 内存占用	        少	            较大
 
-        Pair<Integer> p3 = new Pair<>(99, 88);
-        Integer first3 = p3.getFirst();
-        Integer second3 = p3.getSecond();
-        System.out.println(first3 + ", " + second3);
+        // ① 创建 list
+        List<String> list = new ArrayList<>();
+        list.add("apple");
+        list.add("pear");
+        list.add(null);
+        list.add("banana");
+        System.out.println(list.size());
+        String second = list.get(1);
+        System.out.println(second + ", " + list.get(2));
+        // ② 创建 list
+        List<Integer> list2 = List.of(1, 4, 8);  // 不接受null值
 
-        // 所有泛型实例，无论T的类型是什么，getClass()返回同一个Class实例，因为编译后它们全部都是Pair<Object>
-        Class c1 = p2.getClass();
-        Class c2 = p3.getClass();
-        System.out.println((c1 == c2) + ", " + (c1 == Pair.class));
+        // 遍历 list
+        List<String> list3 = List.of("aa", "bb", "cc");
+        // ① 繁琐，不常用
+        for (int i = 0; i < list3.size(); i++) {
+            String s = list3.get(i);
+            System.out.println(s);
+        }
+        // ② 写法复杂
+        for (Iterator<String> it = list3.iterator(); it.hasNext();) {
+            String s = it.next();
+            System.out.println(s);
+        }
+        // ③ 自动把for each循环变成Iterator的调用
+        for (String s: list3) {
+            System.out.println(s);
+        }
 
-        // extends 通配符  暂时先不看
+        // list 和 array 转换
+        // ① list -> array
+        List<String> list4 = List.of("xx", "yy", "zz");
+        Object[] arr4 = list4.toArray();
+        for (Object s: arr4) {
+            System.out.println(s);
+        }
+        // ② list -> array
+        String[] arr5 = list4.toArray(new String[3]);
+        for (String s: arr5) {
+            System.out.println(s);
+        }
+        // ③ list -> array      传入一个“恰好”大小的数组    常用
+//        String[] arr6 = list4.toArray(new String[list4.size()]);
+        String[] arr6 = list4.toArray(String[]::new);
+        for (String s: arr6) {
+            System.out.println(s);
+        }
 
-        // super 通配符  暂时先不看
+        // array -> list
+        Integer[] arr7 = {1, 3, 5};
+        List<Integer> list5 = List.of(arr7);
+//        list5.add(99);    // 返回的是一个只读List,不能添加元素，否则报错：UnsupportedOperationException
+
+        // list 常用函数
+        List<String> list6 = List.of("A", "B", "C");
+        System.out.println(list6.contains("C"));
+        System.out.println(list6.contains("c"));
+        System.out.println(list6.indexOf("C"));
+        System.out.println(list6.indexOf("c"));
+
+        // 使用 map
+        // 定义：键值（key-value）映射表的数据结构，作用就是能高效通过key快速查找value（元素）
+        // map存整型
+        Map<String, Integer> map = new HashMap<>();
+        map.put("apple", 11);
+        map.put("pear", 22);
+        map.put("banana", 44);
+        System.out.println(map.get("apple"));
+        map.put("apple", 33);
+        System.out.println(map.get("apple"));
+        // map存对象
+        MyStudent msObj = new MyStudent("louis", 999);
+        Map<String, MyStudent> map2 = new HashMap<>();
+        map2.put("louisXX", msObj);
+        MyStudent msObj2 = map2.get("louisXX");
+        System.out.println(msObj2);
+        System.out.println(msObj2 == msObj);    // true, 同一个实例
+        System.out.println(msObj2.score);
+        MyStudent msObj3 = map2.get("louisYY");
+        System.out.println(msObj3);
+        // 遍历 map  键值对输出顺序随机
+        // 方法①
+        for (String key: map.keySet()) {
+            Integer value = map.get(key);
+            System.out.println(key + " - " + value);
+        }
+        // 方法②
+        for (Map.Entry<String, Integer> entry: map.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            System.out.println(key + " - " + value);
+        }
+        // map 练习
+        Integer ii22 = new Integer(88);
+        System.out.println(ii22.intValue());
+        List<MyStudent> list7 = List.of(
+            new MyStudent("aaa", 91),
+            new MyStudent("bbb", 92),
+            new MyStudent("ccc", 93)
+        );
+        var holder = new Students(list7);
+        System.out.println(holder.getScore("aaa") == 91 ? "测试成功" : "测试失败");
+        System.out.println(holder.getScore("bbb") == 92 ? "测试成功" : "测试失败");
+        System.out.println(holder.getScore("ccc") == 94 ? "测试成功" : "测试失败");
         
-
     }
 
     public static double taxTotal(Income... arr) {
@@ -638,6 +707,58 @@ public class ZzzzApplication {
         // @override 让编译器检查该方法是否正确地实现了覆写
 
         // testAnnotation/* 的两个文件不知道怎么测试，先不深入看了
+    }
+
+    public static void testGenericity() {
+        // 泛型就是编写模板代码来适应任意类型。不必对类型进行强制转换，它通过编译器对类型进行检查
+        // 泛型的继承关系：可以把ArrayList<Integer>向上转型为List<Integer>（T不能变！），但不能把ArrayList<Integer>向上转型为ArrayList<Number>（T不能变成父类）
+        ArrayList<String> strList = new ArrayList<String>();
+        strList.add("hello");
+        strList.add("louis");
+        System.out.println(strList.get(0));
+
+        List<Number> list = new ArrayList<Number>();
+        list.add(Integer.valueOf(33));
+        list.add(Float.valueOf(13.44f));
+        Number first = list.get(0);
+        Number second = list.get(1);
+        System.out.println(first + " " + second);
+        // 可以省略后面的Number，编译器可以自动推断泛型类型：
+        List<Number> list2 = new ArrayList<>();
+        // 泛型接口
+        // String本身已经实现了Comparable<String>接口,可以直接排序
+        String[] ss = new String[] {"Orange", "Apple", "Pear"};
+        Arrays.sort(ss);
+        System.out.println(Arrays.toString(ss));
+        // 自定义一个类实现按name进行排序
+        System.out.println("zello".compareTo("bbb"));
+        PersonT[] ps = new PersonT[] {
+                new PersonT("bob", 61),
+                new PersonT("alice", 88),
+                new PersonT("lily", 70)
+        };
+        Arrays.sort(ps);
+        System.out.println(Arrays.toString(ps));
+
+        // 使用自定义的泛型类
+        Pair<String> p2 = new Pair<>("hello", "world");
+        String first2 = p2.getFirst();
+        String second2 = p2.getSecond();
+        System.out.println(first2 + ", " + second2);
+
+        Pair<Integer> p3 = new Pair<>(99, 88);
+        Integer first3 = p3.getFirst();
+        Integer second3 = p3.getSecond();
+        System.out.println(first3 + ", " + second3);
+
+        // 所有泛型实例，无论T的类型是什么，getClass()返回同一个Class实例，因为编译后它们全部都是Pair<Object>
+        Class c1 = p2.getClass();
+        Class c2 = p3.getClass();
+        System.out.println((c1 == c2) + ", " + (c1 == Pair.class));
+
+        // extends 通配符  暂时先忽略，不学
+
+        // super 通配符  暂时先忽略，不学
     }
 }
 
