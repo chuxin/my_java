@@ -20,6 +20,8 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
@@ -245,7 +247,47 @@ public class ZzzzApplication {
         System.out.println(map6.get(new HisStudent("louis", 1)));  // 没有上面的 == 判断，这里就是 null
 
         // 使用Properties
-        
+        // 读取配置文件
+        // ① 创建Properties实例；
+        // ② 调用load()读取文件；
+        // ③ 调用getProperty()获取配置。
+        try {
+            Properties props = new Properties();
+            // load(InputStream)方法接收一个InputStream实例，表示一个字节流，它不一定读的文件流  ①
+            // 下面两个地址都行
+//            String f = "src/main/java/com/example/demo/testCollections/test.properties";
+            String f = "/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/main/java/com/example/demo/testCollections/test.properties";
+            props.load(new FileInputStream(f));
+            String distributionUrl = props.getProperty("distributionUrl");
+            String xxx = props.getProperty("xxx");
+            System.out.println(distributionUrl + " " + xxx);
+        } catch (java.io.FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
+        // ② 从jar包中读取的资源流：  没试验成功 ？？？
+        ZzzzApplication zzzz = new ZzzzApplication();
+        System.out.println(zzzz.getClass().getResourceAsStream("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/11.properties"));
+        // ③ 从内存读取一个字节流
+        try {
+            String settings = "# test\n" + "course=Java\n" + "last_date=2019-08-07T12:35:01";
+            ByteArrayInputStream input = new ByteArrayInputStream(settings.getBytes("UTF-8"));
+            Properties props2 = new Properties();
+            props2.load(input);
+            System.out.println("course:" + props2.getProperty("course"));
+            System.out.println("last_date:" + props2.getProperty("last_date"));
+            System.out.println("last_file:" + props2.getProperty("last_file"));
+            System.out.println("auto_save:" + props2.getProperty("auto_save", "66"));
+        } catch (java.io.UnsupportedEncodingException e) {
+            System.out.println(e.getMessage());
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // 写入配置文件
+
+
 
         // 使用Set
         // set 是接口，它的实现类是HashSet，HashSet是无序的，没有实现SortedSet接口
