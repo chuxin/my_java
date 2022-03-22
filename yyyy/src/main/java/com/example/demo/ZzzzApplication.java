@@ -20,10 +20,9 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.DayOfWeek;
@@ -257,7 +256,9 @@ public class ZzzzApplication {
             // 下面两个地址都行
 //            String f = "src/main/java/com/example/demo/testCollections/test.properties";
             String f = "/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/main/java/com/example/demo/testCollections/test.properties";
-            props.load(new FileInputStream(f));
+            // java.io.FileInputStream 以ASCII编码读取字节流
+            // java.io.FileReader 支持中文，第二个参数指定编码
+            props.load(new FileReader(f, StandardCharsets.UTF_8));
             String distributionUrl = props.getProperty("distributionUrl");
             String xxx = props.getProperty("xxx");
             System.out.println(distributionUrl + " " + xxx);
@@ -286,7 +287,14 @@ public class ZzzzApplication {
         }
 
         // 写入配置文件
-
+        try {
+            Properties props3 = new Properties();
+            props3.setProperty("url", "www.baidu.com");
+            props3.setProperty("name", "百度");
+            props3.store(new FileOutputStream("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/writeIn.properties"), "这是写入的注释");
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
 
 
         // 使用Set
