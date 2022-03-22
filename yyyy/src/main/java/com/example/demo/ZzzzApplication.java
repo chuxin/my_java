@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.time.DayOfWeek;
 import java.util.*;
 
 import com.example.demo.coreClass.MyCounter;
@@ -40,6 +41,7 @@ import com.example.demo.testT.Pair;
 
 import com.example.demo.testCollections.MyStudent;
 import com.example.demo.testCollections.Students;
+import com.example.demo.testCollections.HisStudent;
 
 //@SpringBootApplication
 public class ZzzzApplication {
@@ -183,7 +185,71 @@ public class ZzzzApplication {
         System.out.println(holder.getScore("aaa") == 91 ? "测试成功" : "测试失败");
         System.out.println(holder.getScore("bbb") == 92 ? "测试成功" : "测试失败");
         System.out.println(holder.getScore("ccc") == 94 ? "测试成功" : "测试失败");
+        // 编写自己的equals和hashCode
+        // 在Map的内部，对key做比较是通过equals()实现的，这一点和List查找元素需要正确覆写equals()是一样的
+        // 下面的就没有再去研究了
+        //      当自定义一个类并放入HashMap时，要正确使用HashMap，作为key的类必须正确覆写equals()和hashCode()方法。覆写规则是：
+        //          如果equals()返回true，则hashCode()返回值必须相等；
+        //          如果equals()返回false，则hashCode()返回值尽量不要相等
+        Map<String, Integer> map3 = new HashMap<>();
+        String key1 = "a";
+        String key2 = new String("a");
+        map3.put(key1, 123);
+        System.out.println(map3.get(key2));
+        System.out.println(key1 == key2);
+        System.out.println(key1.equals(key2));
+
+        // 使用EnumMap
+        // EnumMap 在内部以一个非常紧凑的数组存储value，并且根据enum类型的key直接定位到内部数组的索引，并不需要计算hashCode()，效率最高，没有空间浪费
+        // HashMap是一种通过对key计算hashCode()，通过空间换时间的方式，直接定位到value所在的内部数组的索引，因此，查找效率非常高
+        Map<DayOfWeek, String> map4 = new EnumMap<>(DayOfWeek.class);
+        map4.put(DayOfWeek.MONDAY, "星期一拉拉");
+        map4.put(DayOfWeek.TUESDAY, "星期二拉拉");
+        map4.put(DayOfWeek.WEDNESDAY, "星期三拉拉");
+        map4.put(DayOfWeek.THURSDAY, "星期四拉拉");
+        map4.put(DayOfWeek.FRIDAY, "星期五拉拉");
+        map4.put(DayOfWeek.SATURDAY, "星期六拉拉");
+        map4.put(DayOfWeek.SUNDAY, "星期七拉拉");
+        System.out.println(map4);       // 输出格式记一下，貌似 map 特有的
+        System.out.println(map4.get(DayOfWeek.MONDAY));
+
+        // 使用 TreeMap
+        // SortedMap是接口，它的实现类是TreeMap，TreeMap在内部会对Key进行排序
+        // Java编程基本规则：出现问题，不要怀疑Java标准库，要从自身代码找原因。
+        // TreeMap不使用equals()和hashCode()，所以无需覆写 equals()和hashCode()
+        Map<String, Integer> map5 = new TreeMap<>();
+        map5.put("orange", 11);
+        map5.put("apple", 2);
+        map5.put("pear", 3);
+        for (String key:map5.keySet()) {
+            System.out.println(key);
+        }
+        // 使用TreeMap时，放入的Key必须实现Comparable接口。String、Integer这些类已经实现了Comparable接口，因此可以直接作为Key使用。作为Value的对象则没有任何要求。
+        // 如果作为Key的class没有实现Comparable接口，那么，必须在创建TreeMap时同时指定一个自定义排序算法
+        // TreeMap不需要覆盖 equals()和hashCode()
+        Map<HisStudent, Integer> map6 = new TreeMap<>(new Comparator<HisStudent>() {
+            public int compare(HisStudent hs1, HisStudent hs2) {
+                // 如果等于的情况注释， 下面循环之后输出的那句话，就是 null
+                if (hs1.age == hs2.age) {
+                    return 0;
+                }
+                return hs1.age > hs2.age ? -1 : 1;
+            }
+        });
+        map6.put(new HisStudent("Tom", 2), 2);
+        map6.put(new HisStudent("Bob", 3), 3);
+        map6.put(new HisStudent("louis", 1), 1);
+        for (HisStudent key: map6.keySet()) {
+            System.out.println(key);
+        }
+        System.out.println(map6.get(new HisStudent("louis", 1)));  // 没有上面的 == 判断，这里就是 null
+
+        // 使用Properties
         
+
+        // 使用Set
+        // set 是接口，它的实现类是HashSet，HashSet是无序的，没有实现SortedSet接口
+        // set 是接口，它的实现类是TreeSet，TreeSet是有序的，实现了SortedSet接口
     }
 
     public static double taxTotal(Income... arr) {

@@ -54,3 +54,5 @@ System.out.println();在IntellJ中是输入sout
 %d	格式化输出整数
 %f	格式化输出浮点数
 %s	格式化字符串
+
+引用类型使用Objects.equals()比较，基本类型使用==比较
