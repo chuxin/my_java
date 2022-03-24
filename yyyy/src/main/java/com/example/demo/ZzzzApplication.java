@@ -44,6 +44,8 @@ import com.example.demo.testCollections.MyStudent;
 import com.example.demo.testCollections.Students;
 import com.example.demo.testCollections.HisStudent;
 
+import com.example.demo.testCollections.User;
+
 //@SpringBootApplication
 public class ZzzzApplication {
 
@@ -296,10 +298,169 @@ public class ZzzzApplication {
             System.out.println(e.getMessage());
         }
 
-
         // 使用Set
+        Set<String> set = new HashSet<>();
+        // 将元素添加进Set<E>
+        System.out.println(set.add("abc"));
+        System.out.println(set.add("xyz"));
+        System.out.println(set.add("yyy"));
+        // 将元素从Set<E>删除
+        System.out.println(set.contains("abc"));
+        System.out.println(set.contains("xxx"));
+        // 判断是否包含元素
+        System.out.println(set.remove("hello"));
+        System.out.println(set.remove("xyz"));
+        System.out.println(set.size());
+
         // set 是接口，它的实现类是HashSet，HashSet是无序的，没有实现SortedSet接口
         // set 是接口，它的实现类是TreeSet，TreeSet是有序的，实现了SortedSet接口
+        // TreeSet,输出是有序的
+        Set<String> set2 = new TreeSet<>();
+        set2.add("apple");
+        set2.add("orange");
+        set2.add("pear");
+        set2.add("banana");
+        for (String s: set2) {
+            System.out.println(s);
+        }
+
+        // 使用Queue
+        // Queue和List的区别在于，List可以在任意位置添加和删除元素，而Queue只有两个操作：把元素添加到队列末尾；从队列头部取出元素。
+        // 注意：要避免把null添加到队列
+        //
+        // size() 获取队列长度
+        //                  throw Exception	    返回false或null
+        // 添加元素到队尾	    add(E e)	        boolean offer(E e)
+        // 取队首元素并删除	E remove()	        E poll()
+        // 取队首元素但不删除	E element()	        E peek()
+        Queue<String> q = new LinkedList<>();
+        // 添加
+        try {
+            q.add("apple");
+            System.out.println("添加成功");
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("添加失败");
+        }
+        if (q.offer("apple2")) {
+            System.out.println("添加成功");
+        } else {
+            System.out.println("添加失败");
+        }
+        // 取队首元素但不删除
+        try {
+            String s = q.element();
+            System.out.println(s);
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("取元素，但不删除，操作失败");
+        }
+        String s2 = q.peek();
+        if (s2 != null) {
+            System.out.println(s2);
+            System.out.println("取元素，但不删除，操作成功");
+        } else {
+            System.out.println("取元素，但不删除，操作失败");
+        }
+        // 取队首元素并删除
+        try {
+            String s3 = q.remove();
+            System.out.println("取元素，并删除，操作成功");
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("取元素，并删除，操作失败");
+        }
+        String s4 = q.poll();
+        if (s4 != null) {
+            System.out.println("取元素，并删除，操作成功");
+            System.out.println(s4);
+        } else {
+            System.out.println("取元素，并删除，操作失败");
+        }
+
+        // peek & poll 的区别
+        Queue<String> q2 = new LinkedList<>();
+        q2.offer("aaa");
+        q2.offer("bbb");
+        System.out.println(q2.poll());
+        System.out.println(q2.poll());
+        System.out.println(q2.poll()); // null,因为队列是空的
+
+        Queue<Integer> q3 = new LinkedList<>();
+        q3.offer(11);
+        q3.offer(22);
+        q3.offer(33);
+        System.out.println(q3.peek());
+        System.out.println(q3.peek());
+
+        // LinkedList即实现了List接口，又实现了Queue接口
+        List<String> list8 = new LinkedList<>();
+        Queue<String> q4 = new LinkedList<>();
+
+        // 使用PriorityQueue
+        // PriorityQueue和Queue的区别在于，它的出队顺序与元素的优先级有关，对PriorityQueue调用remove()或poll()方法，返回的总是优先级最高的元素
+        Queue<String> q5 = new PriorityQueue<>();
+        q5.offer("mmm");
+        q5.offer("xxx");
+        q5.offer("nnn");
+        System.out.println(q5.poll() + " " + q5.poll() + " " + q5.poll() + " " + q5.poll());
+        // 实现Comparable接口，决定元素排序顺序，出队优先级
+        Queue<User> q6 = new PriorityQueue<>();
+        q6.offer(new User("Bob", "A1"));
+        q6.offer(new User("Alice", "A2"));
+        q6.offer(new User("Alice", "A12"));
+        q6.offer(new User("Boss", "V1"));
+        System.out.println(q6.poll());
+        System.out.println(q6.poll());
+        System.out.println(q6.poll());
+        System.out.println(q6.poll());
+        System.out.println(q6.poll());  // null,因为队列为空
+
+        // 使用 deque
+        // 允许两头都进，两头都出，这种队列叫双端队列（Double Ended Queue），学名Deque
+        //                  Queue	                Deque
+        // 添加元素到队尾	    add(E e) / offer(E e)	addLast(E e) / offerLast(E e)
+        // 取队首元素并删除	E remove() / E poll()	E removeFirst() / E pollFirst()
+        // 取队首元素但不删除	E element() / E peek()	E getFirst() / E peekFirst()
+        // 添加元素到队首	    无	                    addFirst(E e) / offerFirst(E e)
+        // 取队尾元素并删除	无	                    E removeLast() / E pollLast()
+        // 取队尾元素但不删除	无	                    E getLast() / E peekLast()
+        //
+        // Deque是一个接口，它的实现类有ArrayDeque和LinkedList
+        Deque<String> deque = new LinkedList<>();
+        deque.offerLast("A"); // A
+        deque.offerLast("B"); // A <- B
+        deque.offerFirst("C"); // C <- A <- B
+        System.out.println(deque.pollFirst()); // A <- B
+        System.out.println(deque.pollLast()); // A
+        System.out.println(deque.pollFirst()); // null
+        // LinkedList真是一个全能选手，它即是List，又是Queue，还是Deque。但是我们在使用的时候，总是用特定的接口来引用它，
+        // 这是因为持有接口说明代码的抽象层次更高，而且接口本身定义的方法代表了特定的用途。
+        // 面向抽象编程的一个原则就是：尽量持有接口，而不是具体的实现类
+        // 不推荐的写法
+        LinkedList<String> d1 = new LinkedList<>();
+        d1.offerLast("z");
+        // 推荐的写法
+        Deque<String> d2 = new LinkedList<>();
+        d2.offerLast("z");
+
+        // 使用Stack  例子有点复杂，先不看
+
+        // 使用Iterator   例子有点复杂，先不看
+        // Java的集合类都可以使用for each循环，List、Set和Queue会迭代每个元素，Map会迭代每个key。
+
+        // 使用Collections
+
+
+        /*********   反射  *********/
+
+
+        /*********   Lambda  *********/
+
+
+        /*********   开始看框架 spring cloud  *********/
+
+
     }
 
     public static double taxTotal(Income... arr) {
