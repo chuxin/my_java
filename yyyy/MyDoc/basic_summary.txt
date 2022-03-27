@@ -1,58 +1,582 @@
-直接运行java Hello.java也是可以的,这是Java 11新增的一个功能，它可以直接运行一个单文件源码！
+1、Java数据类型 & 流程控制
+    基本数据类型
+        整型：byte，short，int，long
+        例子：
+            int x = 1;
+            System.out.println("x 第一次的值：" + x);     // x 第一次的值：1
+            long l = 33L;
+            System.out.println("l 的值：" + l);          // l 的值：33
 
-Java基本数据类型占用的字节数：
+        浮点型：float，double，NaN(表示Not a Number)，Infinity(表示无穷大)，-Infinity(表示负无穷大)
+        例子：
+            float f1 = 3.1415f;
+            float f2 = 3.2e5f;
+            System.out.println("f1的值：" + f1 + " f2的值：" + f2);   // f1的值：3.1415  f2的值：320000.0
+            double d1 = 4.1e5;
+            System.out.println("d1 的值：" + d1);  // d1 的值：410000.0
+            // 浮点数运算会产生误差
+            double d3 = 1.0 / 10;
+            double d4 = 1 - 9.0 / 10;
+            System.out.println("d3的值：" + d3);       // d3的值：0.1
+            System.out.println("d4的值：" + d4);       // d4的值：0.09999999999999998
+            // 浮点数不精确问题
+            double x2 = 1 - 9.0 / 10;
+            System.out.println("x2的值：" + x2);   // x2的值：0.09999999999999998
+            if (x2 == 0.1) {        // 计算出现误差
+                System.out.println("x2 == 0.1 为 true");
+            } else {
+                System.out.println("x2 == 0.1 为 false");    // x2 == 0.1 为 false
+            }
+            if (Math.abs(x2 - 0.1) < 0.00001) {
+                System.out.println("Math.abs(x2 - 0.1) < 0.00001 为 true");  // Math.abs(x2 - 0.1) < 0.00001 为 true
+            } else {
+                System.out.println("Math.abs(x2 - 0.1) < 0.00001 为 false");
+            }
+            // 特殊值
+            double d1 = 0.0 / 0;        // NaN
+            double d2 = 1.0 / 0;        // Infinity
+            double d3 = -1.0 / 0;       // -Infinity
 
-       ┌───┐
-  byte │   │
-       └───┘
-       ┌───┬───┐
- short │   │   │
-       └───┴───┘
-       ┌───┬───┬───┬───┐
-   int │   │   │   │   │
-       └───┴───┴───┴───┘
-       ┌───┬───┬───┬───┬───┬───┬───┬───┐
-  long │   │   │   │   │   │   │   │   │
-       └───┴───┴───┴───┴───┴───┴───┴───┘
-       ┌───┬───┬───┬───┐
- float │   │   │   │   │
-       └───┴───┴───┴───┘
-       ┌───┬───┬───┬───┬───┬───┬───┬───┐
-double │   │   │   │   │   │   │   │   │
-       └───┴───┴───┴───┴───┴───┴───┴───┘
-       ┌───┬───┐
-  char │   │   │
-       └───┴───┘
-byte恰好就是一个字节，而long和double需要8个字节。
+        布尔类型：boolean
+        例子：
+            boolean b1 = true;
+            boolean isGreater = 5 > 4;
+            System.out.println("b1的值：" + b1);       // b1的值：true
+            System.out.println("isGreater的值：" + isGreater); // isGreater的值：true
+
+        字符类型：char
+        例子：
+            // 注意char类型使用单引号'，且仅有一个字符，要和双引号"的字符串类型区分开。
+            char a = 'A';
+            char zh = '中';
+            System.out.println("字符a的值：" + a);   // 字符a的值：A
+            System.out.println("字符zh的值：" + zh); // 字符zh的值：中
+
+    引用类型
+        概念：除了基本类型，剩下的都是引用类型。最常用的就是String字符串
+        例子：
+            // 字符串
+            String s = "hello";
+            String s2 = "中国";
+            System.out.println("s的值：" + s);     // s的值：hello
+            System.out.println("s2的值：" + s2);   // s2的值：中国
+            // 空字符串是一个有效的字符串对象，它不等于null
+            String s7 = null;
+            System.out.println("s7的值：" + s7);   // s7的值：null
+            // 字符串比较，不能用 == ，改用 equals
+            String ss1 = "hello";
+            String ss2 = "Hello".toLowerCase();
+            if (ss1 == ss2) {
+                System.out.println("ss1 == ss2 为 true");
+            } else {
+                System.out.println("ss1 == ss2 为 false");       // ss1 == ss2 为 false
+            }
+            if (ss1.equals(ss2)) {
+                System.out.println("ss1.equals(ss2) 为 true");   // ss1.equals(ss2) 为 true
+            } else {
+                System.out.println("ss1.equals(ss2) 为 false");
+            }
+            // 常量
+            final double PI = 3.3;
+            System.out.println("PI的值：" + PI);   // PI的值：3.3
+            // var关键字。编译器会根据赋值语句自动推断出变量v1的类型
+            var v1 = "你好xxx";
+            System.out.println(v1);               // 你好xxx
+
+            // 数组定义
+            // 定义方式①
+            int[] ns = new int[5];
+            ns[0] = 11; ns[1] = 12; ns[2] = 13; ns[3] = 14; ns[4] = 15;
+            System.out.println("ns的第二个值：" + ns[1]);     // ns的第二个值：12
+            System.out.println("ns的长度：" + ns.length);    // ns的长度：5
+            // 定义方式②
+            int[] ns2 = new int[] {1, 2, 3, 4, 5};
+            System.out.println("ns2的长度：" + ns2.length);  // ns2的长度：5
+            // 定义方式③
+            int[] ns3 = {1, 3, 5, 7, 9};
+            System.out.println("ns3的长度：" + ns3.length);  // ns3的长度：5
+            // 数组排序
+            int[] ttArr = {8, 4, 1, 5, 7, 6};
+            Arrays.sort(ttArr);
+            System.out.println("ttArr数组排序后的内容：" + Arrays.toString(ttArr));  // ttArr数组排序后的内容：[1, 4, 5, 6, 7, 8]
+            System.out.println(Arrays.toString(ttArr).equals("[1, 4, 5, 6, 7, 8]"));    // true
+            // 二维数组
+            int[][] twoDimenArr = {
+                    {15, 6, 7, 8},
+                    {9, 20, 11, 12, 88},
+                    {1, 3, 7, 0}
+            };
+            System.out.println("二维数组 twoDimenArr 的长度：" + twoDimenArr.length);   // 二维数组 twoDimenArr 的长度：3
+            System.out.println("二维数组 twoDimenArr, 第二维的值：" + Arrays.toString(twoDimenArr[1])); // 二维数组 twoDimenArr, 第二维的值：[9, 20, 11, 12, 88]
+            System.out.println("二维数组 twoDimenArr, 第二维的长度：" + twoDimenArr[1].length); // 二维数组 twoDimenArr, 第二维的长度：5
+            System.out.println("二维数组 twoDimenArr, 打印某个值：" + twoDimenArr[1][1]); // 二维数组 twoDimenArr, 打印某个值：20
+            // 打印二维数组
+            for (int[] onePiece : twoDimenArr) {
+                System.out.print("二维中的每一维值：");
+                for (int oneEle : onePiece) {
+                    // 二维中的每一维值：15, 6, 7, 8,
+                    // 二维中的每一维值：9, 20, 11, 12, 88,
+                    // 二维中的每一维值：1, 3, 7, 0,
+                    System.out.print(oneEle + ", ");
+                }
+                System.out.println();
+            }
+            // 一次性打印二维数组：[[15, 6, 7, 8], [9, 20, 11, 12, 88], [1, 3, 7, 0]]
+            System.out.println("一次性打印二维数组：" + Arrays.deepToString(twoDimenArr));
+            // 定义三维数组
+            int[][][] threeDimenArr = {
+                    {
+                            {1, 3, 7},
+                            {4, 2, 9}
+                    },
+                    {
+                            {11, 31, 7},
+                            {41, 21, 9},
+                            {42, 22, 91}
+                    },
+                    {
+                            {21, 311, 7},
+                            {31, 111, 9},
+                            {12, 212, 91}
+                    }
+            };
+            // 一次性打印三维数组：[[[1, 3, 7], [4, 2, 9]], [[11, 31, 7], [41, 21, 9], [42, 22, 91]], [[21, 311, 7], [31, 111, 9], [12, 212, 91]]]
+            System.out.println("一次性打印三维数组：" + Arrays.deepToString(threeDimenArr));
+
+    变量作用域
+        概念：以{ }作为它们自身的作用范围
+        例子：
+            if (true) {
+                int x1 = 11;
+                if (true) {
+                    int x2 = 22;
+                    System.out.println(x2);      // 22
+                }
+                // System.out.println(x2);       // 作用域报错
+            }
+
+    类型自动提升与强制转型
+        概念：如果参与运算的两个数类型不一致，那么计算结果为较大类型的整型
+        注意：整型和浮点型运算时，整型会自动提升为浮点型
+        例子：
+            short s3 = 1234;
+            int ii = 123456;
+            int x5 = s3 + ii;
+            System.out.println("x5 的值：" + x5);      // x5 的值：124690
+            short y2 = (short) (s3 + ii);  // 超出范围的强制转型会得到错误的结果，原因是转型时，int的两个高位字节直接被扔掉，仅保留了低位的两个字节
+            System.out.println("y 的值：" + y2);       // y 的值：-6382
+            // 把 int 转成 String
+            int i1 = 3, i2 = 4, i3 = 5;
+            String s8  = String.valueOf(i1 + i2 + i3);
+            System.out.println(s8);     // 12
+
+    流程控制
+        例子：
+            // for 循环 ①
+            int[] nsArr = {1, 3 ,5 ,7, 0};
+            sum = 0;
+            for (int i = 0; i < nsArr.length; i++) {
+                sum += nsArr[i];
+            }
+            System.out.println("sum的值：" + sum); // sum的值：16
+            // for 循环 ②
+            for(int j : nsArr) {
+                System.out.println("遍历数组的值：" + j);  // 遍历数组的值：1 3 5 7 0
+            }
+            // break 使用
+            for (int i=1; i<4; i++) {
+                System.out.println("i的值：" + i); // i的值：1 2 3
+                for (int j=1; ;j++) {
+                    if (j == 10) {
+                        System.out.println("j的值:" + j); // j的值:10
+                        break;
+                    }
+                }
+            }
 
 
-Java定义了以下几种基本数据类型：
+2、面向对象
+    构造方法
+        public class OOPknowledge {
+            public String val11;
+            public int age11;
+            public String val22;
 
-整数类型：byte，short，int，long
+            public String name = "parentName";
+            public int age;
+            protected String nationality = "China";
+            public String address;
+            private int sex;
 
-浮点数类型：float，double
+            public String[] formerNames;
+            public String[] formerAddresses;
 
-字符类型：char
+            public String country;
+            public String secondCountry;
 
-布尔类型：boolean
+            public final int quota;
+
+            // 第一个构造函数
+            public OOPknowledge() {
+                // 什么都没有
+            }
+            // 第二个构造函数
+            public OOPknowledge(String val11, int age11) {
+                this.val11 = val11;
+                this.age11 = age11;
+            }
+            // 第三个构造函数
+            public OOPknowledge(String val22) {
+                // 这里第三个构造函数 去 调用第二个构造方法
+                this("ccc22", 44);
+                this.val22 = val22;
+            }
+            public String getAddress() {
+                // 判断非 null，非空
+                if (this.address == null || this.address.isBlank()) {
+                    throw new IllegalArgumentException("invalid name");
+                }
+                // 去掉收尾空格
+                return this.address.strip();
+            }
+            public void setSex(int sex) {
+                if (this.sex > 100) {
+                    throw new IllegalArgumentException("invalid sex value");
+                }
+                this.sex = sex;
+            }
+            public int getSex() {
+                return sex;  // 如果没有命名冲突，可以省略this
+            }
+            // 可变参数
+            public void getFormerNames(String... formerNames) {
+                this.formerNames = formerNames;
+                System.out.println("曾用名：" + Arrays.toString(this.formerNames));
+            }
+            public void getFormerAddresses(String[] formerAddresses) {
+                this.formerAddresses = formerAddresses;
+                System.out.println("曾用地址：" + Arrays.toString(this.formerAddresses));
+            }
+            public void setCountry(String country) {
+                this.country = country;
+            }
+            public void setCountry(String country, String secondCountry) {
+                this.country = country;
+                this.secondCountry = secondCountry;
+            }
+            public TestFinal(int quota) {
+                this.quota = quota;
+            }
+        }
+        public class FirstChild extends OOPknowledge {
+            private String name = "childName";
+
+            public void getSelfAttributes() {
+                System.out.println("获取当前类的属性name(注意，此name属性父类也有)：" + this.name);
+                System.out.println("获取父类的属性name：" + super.name);
+            }
+        }
+        public class ThirdChild extends OOPknowledge {
+            @Override
+            public void getThirdChildValue() {
+                System.out.println("我是子类 ThirdChild ");
+            }
+            // overload
+            public int getThirdChildValue22(int test) {
+                System.out.println("我是子类方法 getThirdChildValue22 - " + test);
+                return 22;
+            }
+        }
+        // 构造方法没有返回值（也没有void），调用构造方法，必须用new操作符
+        // 没有定义构造方法时，编译器会自动创建一个默认的无参数构造方法
+        OOPknowledge mtObj = new OOPknowledge();
+        System.out.println("第一个构造函数传入的值：" + mtObj.val11 + " " + mtObj.age11);     // 第一个构造函数传入的值：null 0
+        OOPknowledge mtObj11 = new OOPknowledge("bbb", 33);
+        System.out.println("第二个构造函数传入的值：" + mtObj11.val11 + " " + mtObj11.age11); // 第二个构造函数传入的值：bbb 33
+        OOPknowledge mtObj22 = new OOPknowledge("ccc");
+        System.out.println("第三个构造函数传入的值：" + mtObj22.val22 + mtObj22.val11 + mtObj22.age11); // 第三个构造函数传入的值：ccc ccc22 44
+        // 可变参数用类型...定义，可变参数相当于数组类型
+        OOPknowledge mtObj = new OOPknowledge();
+        mtObj.getFormerNames("aa", "bb", "xxx", "yyy");       // 曾用名：[aa, bb, xxx, yyy]
+        mtObj.getFormerNames("aa");     // 曾用名：[aa]
+        mtObj.getFormerNames();         // 曾用名：[]
+        mtObj.getFormerNames(null);     // 曾用名：null
+        mtObj.getFormerAddresses(new String[] {"mm", "nn", "pp"});  // 曾用地址：[mm, nn, pp]
+        mtObj.getFormerAddresses(new String[] {});  // 曾用地址：[]
+        mtObj.getFormerAddresses(null);     // 曾用地址：null
+
+    向上转型 & 向下转型
+        // 向上转型
+        FirstChild fcObj22 = new FirstChild();
+        OOPknowledge oopObj22 = fcObj22;
+        Object o1 = fcObj22;
+        Object o2 = oopObj22;
+        Object o3 = null;
+        // 向下转型会报错
+        OOPknowledge oopObj33 = new OOPknowledge();
+        // FirstChild fcObj33 = (FirstChild) oopObj33;       // cannot be cast to
+        // instanceof实际上判断一个变量所指向的实例是否是指定类型，或者这个类型的子类
+        // 避免转型出错，先判断一个实例究竟是不是某种类型
+        if (o3 instanceof OOPknowledge) {
+            System.out.println("父类对象 o3 属于 子类 OOPknowledge 的实例");
+        }
+        if (fcObj22 instanceof OOPknowledge) {
+            System.out.println("子类对象 fcObj22 属于 父类 OOPknowledge 的实例"); // 子类对象 fcObj22 属于 父类 OOPknowledge 的实例
+        }
+
+    多态
+        // override 方法名相同，参数相同，返回值类型相同
+        // overload 方法名相同，返回值类型相同, 但参数不同。
+        // Java的实例方法调用是基于运行时的实际类型的动态调用，而非变量的声明类型。这个非常重要的特性在面向对象中称之为多态
+        OOPknowledge tcObj = new ThirdChild();
+        tcObj.getThirdChildValue();     // 我是子类 ThirdChild
+        OOPknowledge oopObj44 = new OOPknowledge();
+        oopObj44.getThirdChildValue();  // 我是父类 OOPknowledge
+
+    抽象类
+        public abstract class Person {
+            public abstract void run();
+        }
+        public class Student extends Person {
+            @Override
+            public void run() {
+                System.out.println("student.run");
+            }
+        }
+        com.example.demo.testAbstract.Student studentObj = new com.example.demo.testAbstract.Student();
+        studentObj.run();   // student.run
+
+    接口
+        // 如果一个抽象类没有字段，所有方法全部都是抽象方法，就可以把该抽象类改写为接口
+        // 所谓interface，就是比抽象类还要抽象的纯抽象接口，因为它连字段都不能有。因为接口定义的所有方法默认都是public abstract的，所以这两个修饰符不需要写出来（写不写效果都一样）。
+        //
+        //              abstract class	        interface
+        // 继承	        只能extends一个class	    可以implements多个interface
+        // 字段	        可以定义实例字段	        不能定义实例字段
+        // 抽象方法	    可以定义抽象方法	        可以定义抽象方法
+        // 非抽象方法	    可以定义非抽象方法	        可以定义default方法
+        //
+        // 合理设计interface和abstract class的继承关系，可以充分复用代码。一般来说，公共逻辑适合放在abstract class中，
+        // 具体逻辑放到各个子类，而接口层次代表抽象程度。
+        public interface Hello {
+            void hello();
+        }
+        public interface Person {
+            void run();
+            String getName();
+
+            default void noNeedInherit() {
+                System.out.println(getName() + " noNeedInherit");
+            }
+            default void noNeedInherit2() {
+                System.out.println("我是父类的noNeedInherit2");
+            }
+        }
+        public class Student implements Person, Hello {
+            public String name;
+
+            public Student(String name) {
+                this.name = name;
+            }
+            @Override
+            public void run() {
+                System.out.println(this.name + " run");
+            }
+            @Override
+            public String getName() {
+                return this.name;
+            }
+            @Override
+            public void hello() {
+                System.out.println(this.name + " hello");
+            }
+            @Override
+            public void noNeedInherit() {
+                System.out.println("我是子类的noNeedInherit");
+            }
+        }
+        com.example.demo.testInterface.Student myStuObj = new com.example.demo.testInterface.Student("我的学生");
+        myStuObj.run();     // 我的学生 run
+        System.out.println("MyStudent->name: " + myStuObj.getName());   // MyStudent->name: 我的学生
+        // 接口定义 default 方法（JDK>=1.8），那么子类就不再必须重写此方法，只需要在需要覆写的地方去覆写。
+        // default方法和抽象类的普通方法是有所不同的。因为interface没有字段，default方法无法访问字段，而抽象类的普通方法可以访问实例字段。
+        myStuObj.noNeedInherit();   // 我是子类的noNeedInherit
+        myStuObj.noNeedInherit2();  // 我是父类的noNeedInherit2
+
+    静态字段 & 静态方法
+        // 静态字段
+        // 实例字段：在一个class中定义的字段，实例字段在每个实例中都有自己的一个独立“空间”
+        // 静态字段：只有一个共享“空间”，所有实例都会共享该字段。
+        public class MyStatic {
+            public static int number;
+            public static int age;
+
+            public static void setAge(int param) {
+                age = param;
+            }
+        }
+        public interface StaticInterface {
+            public static final int male = 1;
+            int female = 2;         // 编译器会自动加上public statc final:
+        }
+        MyStatic msObj11 = new MyStatic();
+        msObj11.number = 88;
+        System.out.println("静态字段值共享：" + MyStatic.number);
+        // 静态方法
+        // 调用静态方法通过类名就可以调用
+        // 静态方法内部，无法访问this变量，也无法访问实例字段，它只能访问静态字段。
+        // 静态方法经常用于工具类。例如：Arrays.sort()     Math.random()
+        MyStatic.setAge(77);
+        System.out.println("静态方法里对静态字段 age 赋值了： " + MyStatic.age);  // 静态方法里对静态字段 age 赋值了： 77
+        System.out.println("接口静态字段： " + StaticInterface.male + ", " + StaticInterface.female); // 接口静态字段： 1, 2
+
+    作用域 & 三种内部类
+        // import.* 表示把这个包下面的所有class都导入进来（但不包括子包的class）
+        // 默认自动import当前package的其他class
+        // 默认自动import java.lang.*
+        // 确定唯一的包名。推荐的做法是使用倒置的域名来确保唯一性。例如：  com.liaoxuefeng.sample
+        //
+        // 包作用域是指一个类允许访问同一个package的没有public、private修饰的class，以及没有public、protected、private修饰的字段和方法。
+        // 同一个package指：包名必须完全一致，包没有父子关系，com.apache和com.apache.abc是不同的包。
+        //
+        // 最佳实践
+        // 如果不确定是否需要public，就不声明为public，即尽可能少地暴露对外的字段和方法。
+        // 一个.java文件只能包含一个public类，但可以包含多个非public类。如果有public类，文件名必须和public类的名字相同。
+        // Java内建的访问权限包括public、protected、private和package权限
+        // 阅读代码的时候，应该先关注public方法
+        public class MyScope {
+            public void doSomething() {
+                MyInner miObj = new MyInner();
+                miObj.printSome();
+            }
+            public void doSomething2() {
+                Outer2 outerObj = new Outer2(1);
+                Outer2.YouInner yiObj = outerObj.new YouInner();
+                yiObj.printYouSome();
+            }
+            public void doSomething3() {
+                Outer3 outerObj = new Outer3("用异步编程测试匿名类");
+                outerObj.asyncHello();
+            }
+            public void doSomething4() {
+                Outer4.YouInner yiObj = new Outer4.YouInner();
+                yiObj.hello();
+            }
+            private static void printFather() {
+                System.out.println("类名为：MyScope");
+            }
+            static class MyInner {
+                public void printSome() {
+                    MyScope.printFather();
+                }
+            }
+        }
+        class Outer2 {
+            private int sex = 0;
+            public Outer2(int sex) {
+                this.sex = sex;
+            }
+            class YouInner {
+                public void printYouSome() {
+                    System.out.println("printYouSome: " + Outer2.this.sex);
+                }
+            }
+        }
+        class Outer3 {
+            private String name;
+
+            Outer3(String name) {
+                this.name = name;
+            }
+            void asyncHello() {
+                // 匿名类!
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("hello, " + Outer3.this.name);
+                    }
+                };
+                new Thread(r).start();
+            }
+        }
+        class Outer4 {
+            private static String yourName = "Louis";
+            private String name;
+
+            Outer4(String name) {
+                this.name = name;
+            }
+            static class YouInner {
+                void hello() {
+                    System.out.println("测试内部静态类" + Outer4.yourName);
+                }
+            }
+        }
+        // Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，嵌套类拥有访问private的权限
+        MyScope msObj = new MyScope();
+        msObj.doSomething();    // 类名为：MyScope
+        // 三种内部类
+        // ① 内部类(Inner Class)
+        msObj.doSomething2();   // printYouSome: 1
+        // ② 匿名类(Anonymous Class)
+        msObj.doSomething3();   // hello, 用异步编程测试匿名类
+        // ③ 静态嵌套类(Static Nested Class)
+        msObj.doSomething4();   // 测试内部静态类Louis
+
+    classpath(没实践)
+        // classpath是JVM用到的一个环境变量，它用来指示JVM如何搜索class
+        // 在系统环境变量中设置classpath环境变量，不推荐
+        // 在启动JVM时设置classpath变量，推荐
+
+    jar(没实践)
+        // 对散落在各层目录中的.class文件打成一个包
+        // Maven，可以非常方便地创建jar包
+        // JVM自带的Java标准库，实际上也是以jar文件形式存放的，这个文件叫rt.jar，一共有60多M
+        // 学习地址：https://www.liaoxuefeng.com/wiki/1252599548343744/1260466914339296
+
+    模块(没实践)
+        // 如果a.jar必须依赖另一个b.jar才能运行，那我们应该给a.jar加点说明啥的，让程序在编译和运行的时候能自动定位到b.jar，这种自带“依赖关系”的class容器就是模块
+        // 模块的重要作用就是声明依赖关系
+        // 学习地址：https://www.liaoxuefeng.com/wiki/1252599548343744/1281795926523938
 
 
-int 是基本类型，直接存数值，而integer是对象，用一个引用指向这个对象
-1.int是基本的数据类型；
-2.Integer是int的封装类；
-3.int和Integer都可以表示某一个数值；
 
 
-ping用来检查网络是否通畅或者网络连接速度的命令
-    ping www.baidu.com
-telnet是用来探测指定ip是否开放指定端口
-    尝试telnet 百度的http端口      telnet www.baidu.com 80
-    尝试telnet百度的ftp端口        telnet www.baidu.com 21
+3、常规库
+    // 不换行打印
+    System.out.print("A."); // A.
+    // 格式化输出
+    double d2 = 3.131456;
+    System.out.printf("%.2f\n", d2);    // 3.13
+    // 输入
+    Scanner scannerObj = new Scanner(System.in);
+    System.out.println("输入你的名字：");
+    String name = scannerObj.nextLine();
+    System.out.println("输入你的年龄：");
+    int age2 = scannerObj.nextInt();
+    System.out.printf("Hi, %s, you are %d years old", name, age2);
+    // 字符串查找
+    String s = "Test string";
+    int n1 = s.indexOf("t");
+    int n2 = s.indexOf("es");
+    int n3 = s.indexOf("t", 4);
+    System.out.println("indexOf函数，传入不同参数，返回的位置分别是：" + n1 + ", " + n2 + ", " + n3); // indexOf函数，传入不同参数，返回的位置分别是：3, 1, 6
 
-System.out.println();在IntellJ中是输入sout
 
-%d	格式化输出整数
-%f	格式化输出浮点数
-%s	格式化字符串
 
-引用类型使用Objects.equals()比较，基本类型使用==比较
+2、集合
+
+
+
+3、泛型
+
+
+
+4、注解
+
+
+
+5、
+
+
+

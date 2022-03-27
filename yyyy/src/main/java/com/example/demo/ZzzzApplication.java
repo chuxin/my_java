@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.mypackages.OOPknowledge;
+import com.example.demo.mypackages.BasicKnowledge;
 import com.example.demo.mypackages.FirstChild;
 import com.example.demo.mypackages.SecondChid;
 import com.example.demo.mypackages.ThirdChild;
@@ -30,12 +31,12 @@ import java.util.*;
 
 import com.example.demo.coreClass.MyCounter;
 import com.example.demo.coreClass.MyJavaBean;
-
 import com.example.demo.coreClass.Weekday;
 
 import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.demo.testT.PersonT;
 import com.example.demo.testT.Pair;
@@ -43,8 +44,9 @@ import com.example.demo.testT.Pair;
 import com.example.demo.testCollections.MyStudent;
 import com.example.demo.testCollections.Students;
 import com.example.demo.testCollections.HisStudent;
-
 import com.example.demo.testCollections.User;
+
+import com.example.demo.testFunctionalProgramming.Person;
 
 //@SpringBootApplication
 public class ZzzzApplication {
@@ -58,7 +60,7 @@ public class ZzzzApplication {
 //        bkObj.testBasic(myArgs);
 
         /*********   java 面向对象  *********/
-//        testOOP();
+        testOOP();
 
         /*********   java 核心类  *********/
 //        testCoreClass();
@@ -67,9 +69,57 @@ public class ZzzzApplication {
 //        testAnnotationHaHa();
 
         /*********   泛型  *********/
-//        testGenericity()
+//        testGenericity();
 
         /*********   集合  *********/
+//        testCollection();
+
+        /*********   反射 Reflection   有点复杂，先不看  *********/
+        // Java的反射是指程序在运行期可以拿到一个对象的所有信息
+
+        /*********   Functional Programming   *********/
+//        testFunctionalProgramming();
+
+        /*********   make a summary   *********/
+
+
+        /*********   开始看框架 spring cloud  *********/
+
+
+    }
+
+    public static double taxTotal(Income... arr) {
+        double total = 0;
+        for(Income piece:arr) {
+            total += piece.getTax();
+        }
+
+        return total;
+    }
+
+    public static void testFunctionalProgramming() {
+        // Lambda表达式简化了Java的函数式编程
+        String[] arr = new String[]{"Apple", "Orange", "Banana", "Lemon"};
+//        Arrays.sort(arr, (s1, s2) -> {
+//            return s1.compareTo(s2);
+//        });
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+
+        // 把一个List<String>转换为List<Person>
+        // 方法①
+        List<String> names = List.of("ee", "ff", "gg");
+        List<Person> persons = new ArrayList<>();
+        for (String name: names) {
+            persons.add(new Person(name));
+        }
+        System.out.println(persons);
+        // 方法②  看不懂， map, Person::new
+        List<Person> persons2 = names.stream().map(Person::new).collect(Collectors.toList());
+        System.out.println(persons2);
+    }
+
+    public static void testCollection() {
         // 数组有如下限制:
         //      数组初始化后大小不可变；
         //      数组只能按索引顺序存取。
@@ -180,9 +230,9 @@ public class ZzzzApplication {
         Integer ii22 = new Integer(88);
         System.out.println(ii22.intValue());
         List<MyStudent> list7 = List.of(
-            new MyStudent("aaa", 91),
-            new MyStudent("bbb", 92),
-            new MyStudent("ccc", 93)
+                new MyStudent("aaa", 91),
+                new MyStudent("bbb", 92),
+                new MyStudent("ccc", 93)
         );
         var holder = new Students(list7);
         System.out.println(holder.getScore("aaa") == 91 ? "测试成功" : "测试失败");
@@ -449,38 +499,18 @@ public class ZzzzApplication {
         // 使用Iterator   例子有点复杂，先不看
         // Java的集合类都可以使用for each循环，List、Set和Queue会迭代每个元素，Map会迭代每个key。
 
-        // 使用Collections
-
-
-        /*********   反射  *********/
-
-
-        /*********   Lambda  *********/
-
-
-        /*********   开始看框架 spring cloud  *********/
-
-
-    }
-
-    public static double taxTotal(Income... arr) {
-        double total = 0;
-        for(Income piece:arr) {
-            total += piece.getTax();
-        }
-
-        return total;
+        // 使用Collections   例子有点复杂，先不看
     }
 
     public static void testOOP() {
         // 构造方法
         OOPknowledge mtObj = new OOPknowledge();
-        System.out.println("第一个构造函数传入的值：" + mtObj.val11 + " " + mtObj.age11);
+        System.out.println("第一个构造函数传入的值：" + mtObj.val11 + " " + mtObj.age11);     // 第一个构造函数传入的值：null 0
         OOPknowledge mtObj11 = new OOPknowledge("bbb", 33);
-        System.out.println("第二个构造函数传入的值：" + mtObj11.val11 + " " + mtObj11.age11);
+        System.out.println("第二个构造函数传入的值：" + mtObj11.val11 + " " + mtObj11.age11); // 第二个构造函数传入的值：bbb 33
         OOPknowledge mtObj22 = new OOPknowledge("ccc");
         System.out.println("第三个构造函数传入的值：" + mtObj22.val22 + " " + mtObj22.val11
-                + " " + mtObj22.age11);
+                + " " + mtObj22.age11);     // 第三个构造函数传入的值：ccc ccc22 44
 
         // 方法
         mtObj.name = "louis qian";
@@ -488,41 +518,47 @@ public class ZzzzApplication {
 
         mtObj.setAddress(" 无锡市 顾山镇 ");
         mtObj.setSex(999);
-        System.out.println("地址是：" + mtObj.getAddress());
-        System.out.println("年龄是：" + mtObj.getSex());
+        System.out.println("地址是：" + mtObj.getAddress());    // 地址是：无锡市 顾山镇
+        System.out.println("年龄是：" + mtObj.getSex());        // 年龄是：999
 
-        mtObj.getFormerNames("aa", "bb", "xxx", "yyy");
-        mtObj.getFormerNames("aa");
-        mtObj.getFormerNames();
-        mtObj.getFormerNames(null);
+        mtObj.getFormerNames("aa", "bb", "xxx", "yyy");       // 曾用名：[aa, bb, xxx, yyy]
+        mtObj.getFormerNames("aa");     // 曾用名：[aa]
+        mtObj.getFormerNames();         // 曾用名：[]
+        mtObj.getFormerNames(null);     // 曾用名：null
 
-        mtObj.getFormerAddresses(new String[] {"mm", "nn", "pp"});
-        mtObj.getFormerAddresses(new String[] {});
-        mtObj.getFormerAddresses(null);
+        mtObj.getFormerAddresses(new String[] {"mm", "nn", "pp"});  // 曾用地址：[mm, nn, pp]
+        mtObj.getFormerAddresses(new String[] {});  // 曾用地址：[]
+        mtObj.getFormerAddresses(null);     // 曾用地址：null
 
         // 方法重载
         String s = "Test string";
         int n1 = s.indexOf("t");
         int n2 = s.indexOf("es");
         int n3 = s.indexOf("t", 4);
-        System.out.println("indexOf函数，传入不同参数，返回的位置分别是：" + n1 + ", " + n2 + ", " + n3);
+        System.out.println("indexOf函数，传入不同参数，返回的位置分别是：" + n1 + ", " + n2 + ", " + n3); // indexOf函数，传入不同参数，返回的位置分别是：3, 1, 6
 
         OOPknowledge myObjLoad11 = new OOPknowledge();
         OOPknowledge myObjLoad22 = new OOPknowledge();
         myObjLoad11.setCountry("test overload 11");
         myObjLoad22.setCountry("test overload 22", "test overload 22-22");
+        // 重载方法，调用定义了一个参数的setCountry：test overload 11, null
         System.out.println("重载方法，调用定义了一个参数的setCountry：" + myObjLoad11.country + ", " + myObjLoad11.secondCountry);
+        // 重载方法，调用定义了两个参数的setCountry：test overload 22, test overload 22-22
         System.out.println("重载方法，调用定义了两个参数的setCountry：" + myObjLoad22.country + ", " + myObjLoad22.secondCountry);
 
         // 继承
         FirstChild fcObj = new FirstChild();
         fcObj.setAddress("子类地址,顾山镇，某某村");
         fcObj.setSex(77);
+        // 获取父类的public属性address：子类地址,顾山镇，某某村
+        // 获取父类的protected属性nationality：China
         fcObj.getParentAttributes();
+        // 获取当前类的属性name(注意，此name属性父类也有)：childName
+        // 获取父类的属性name：parentName
         fcObj.getSelfAttributes();
 
         SecondChid scObj = new SecondChid("二儿子", 55, 130);
-        scObj.printInitValues();
+        scObj.printInitValues();    // 打印构造函数里初始化的参数列表：二儿子 55 130
 
         // 向上转型
         FirstChild fcObj22 = new FirstChild();
@@ -539,12 +575,13 @@ public class ZzzzApplication {
             System.out.println("父类对象 o3 属于 子类 OOPknowledge 的实例");
         }
         if (fcObj22 instanceof OOPknowledge) {
-            System.out.println("子类对象 fcObj22 属于 父类 OOPknowledge 的实例");
+            System.out.println("子类对象 fcObj22 属于 父类 OOPknowledge 的实例"); // 子类对象 fcObj22 属于 父类 OOPknowledge 的实例
         }
 
         Object obj = "hello";
         if (obj instanceof String) {
             String ss = (String) obj;
+            // 从Java 14开始，判断instanceof后，可以直接转型为指定变量 HELLO
             System.out.println("从Java 14开始，判断instanceof后，可以直接转型为指定变量 " + ss.toUpperCase());
         }
 
@@ -553,31 +590,31 @@ public class ZzzzApplication {
         // overload 方法名相同，返回值类型相同, 但参数不同。
         // Java的实例方法调用是基于运行时的实际类型的动态调用，而非变量的声明类型。这个非常重要的特性在面向对象中称之为多态
         OOPknowledge tcObj = new ThirdChild();
-        tcObj.getThirdChildValue();
+        tcObj.getThirdChildValue();     // 我是子类 ThirdChild
         OOPknowledge oopObj44 = new OOPknowledge();
-        oopObj44.getThirdChildValue();
+        oopObj44.getThirdChildValue();  // 我是父类 OOPknowledge
 
         Income[] objArr = {
                 new Income(100),
                 new Salary(20000),
                 new Allowance(300)
         };
-        System.out.println(taxTotal(objArr));
+        System.out.println(taxTotal(objArr));   // 3010.0
 
         // super 关键词
         Salary sObj = new Salary(0);
-        System.out.println("super关键词测试：" + sObj.getTestSuper());
+        System.out.println("super关键词测试：" + sObj.getTestSuper());    // super关键词测试：43
 
         // final 关键词
 //        sObj.values = "jjjj";       // 无法为最终变量values分配值
         TestFinal testObj = new TestFinal(99);
-        testObj.getQuota();
+        testObj.getQuota();     // quota的值：99
 //        testObj.setClothes(88);
 //        testObj.getClothes();     // 无法为最终变量clothes分配值
 
         // 抽象类
         com.example.demo.testAbstract.Student studentObj = new com.example.demo.testAbstract.Student();
-        studentObj.run();
+        studentObj.run();   // student.run
 
         // 接口
         // 如果一个抽象类没有字段，所有方法全部都是抽象方法，就可以把该抽象类改写为接口
@@ -592,36 +629,36 @@ public class ZzzzApplication {
         // 合理设计interface和abstract class的继承关系，可以充分复用代码。一般来说，公共逻辑适合放在abstract class中，
         // 具体逻辑放到各个子类，而接口层次代表抽象程度。
         com.example.demo.testInterface.Student myStuObj = new com.example.demo.testInterface.Student("我的学生");
-        myStuObj.run();
-        System.out.println("MyStudent->name: " + myStuObj.getName());
+        myStuObj.run();     // 我的学生 run
+        System.out.println("MyStudent->name: " + myStuObj.getName());   // MyStudent->name: 我的学生
 
         // 接口定义 default 方法（JDK>=1.8），那么子类就不再必须重写此方法，只需要在需要覆写的地方去覆写。
         // default方法和抽象类的普通方法是有所不同的。因为interface没有字段，default方法无法访问字段，而抽象类的普通方法可以访问实例字段。
-        myStuObj.noNeedInherit();
-        myStuObj.noNeedInherit2();
+        myStuObj.noNeedInherit();   // 我是子类的noNeedInherit
+        myStuObj.noNeedInherit2();  // 我是父类的noNeedInherit2
 
         // 静态字段
         // 在一个class中定义的字段，我们称之为实例字段
         // 实例字段在每个实例中都有自己的一个独立“空间”，但是静态字段只有一个共享“空间”，所有实例都会共享该字段。
         MyStatic msObj11 = new MyStatic("静态测试11");
         MyStatic msObj22 = new MyStatic("静态测试22");
-        System.out.println("实例字段值不相同：" + msObj11.name + ", " + msObj22.name);
+        System.out.println("实例字段值不相同：" + msObj11.name + ", " + msObj22.name);   // 实例字段值不相同：静态测试11, 静态测试22
         msObj11.number = 88;
-        System.out.println("静态字段值共享：" + msObj11.number + ", " + msObj22.number);
+        System.out.println("静态字段值共享：" + msObj11.number + ", " + msObj22.number); // 静态字段值共享：88, 88
         msObj11.number = 99;
-        System.out.println("静态字段值共享：" + msObj11.number + ", " + msObj22.number);
+        System.out.println("静态字段值共享：" + msObj11.number + ", " + msObj22.number); // 静态字段值共享：99, 99
         // 静态字段并不属于实例。实例对象并没有静态字段。推荐用类名来访问静态字段
         // 通常情况下，通过实例变量访问静态字段和静态方法，会得到一个编译警告
-        System.out.println("静态字段值共享：" + MyStatic.number);
+        System.out.println("静态字段值共享：" + MyStatic.number);   // 静态字段值共享：99
 
         // 静态方法
         // 调用静态方法通过类名就可以调用
         // 静态方法内部，无法访问this变量，也无法访问实例字段，它只能访问静态字段。
         // 静态方法经常用于工具类。例如：Arrays.sort()     Math.random()
         MyStatic.setAge(77);
-        System.out.println("静态方法里对静态字段 age 赋值了： " + MyStatic.age);
+        System.out.println("静态方法里对静态字段 age 赋值了： " + MyStatic.age);  // 静态方法里对静态字段 age 赋值了： 77
         // 接口的静态字段
-        System.out.println("接口静态字段： " + StaticInterface.male + ", " + StaticInterface.female);
+        System.out.println("接口静态字段： " + StaticInterface.male + ", " + StaticInterface.female); // 接口静态字段： 1, 2
 
         // 作用域
         // import.* 表示把这个包下面的所有class都导入进来（但不包括子包的class）
@@ -632,12 +669,12 @@ public class ZzzzApplication {
         // 推荐把private方法放到后面，因为public方法定义了类对外提供的功能，阅读代码的时候，应该先关注public方法
         // Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，嵌套类拥有访问private的权限
         MyScope msObj = new MyScope();
-        msObj.doSomething();
+        msObj.doSomething();    // 类名为：MyScope
 
         // 包作用域是指一个类允许访问同一个package的没有public、private修饰的class，以及没有public、protected、private修饰的字段和方法。
         // 同一个package指：包名必须完全一致，包没有父子关系，com.apache和com.apache.abc是不同的包。
         MyTestPackage mtpObj = new MyTestPackage();
-        mtpObj.printFriend();
+        mtpObj.printFriend();   // 我的隔壁文件里有个静态age，值为；66
 
         // 最佳实践
         // 如果不确定是否需要public，就不声明为public，即尽可能少地暴露对外的字段和方法。
@@ -646,9 +683,9 @@ public class ZzzzApplication {
 
         // 三种内部类
         // Inner Class
-        msObj.doSomething2();
+        msObj.doSomething2();   // printYouSome: 1
         // Anonymous Class
-        msObj.doSomething3();
+        msObj.doSomething3();   // hello, 用异步编程测试匿名类
 
         HashMap<String, String> map1 = new HashMap<>();
         HashMap<String, String> map2 = new HashMap<>(){}; // 匿名类!
@@ -658,11 +695,11 @@ public class ZzzzApplication {
                 put("B", "我很好");
             }
         };
-        System.out.println("这里用char就有问题，" + map3.get('B'));
-        System.out.println("这里用字符串就没问题，" + map3.get("B"));
+        System.out.println("这里用char就有问题，" + map3.get('B'));   // 这里用char就有问题，null
+        System.out.println("这里用字符串就没问题，" + map3.get("B"));  // 这里用字符串就没问题，我很好
 
         // Static Nested Class
-        msObj.doSomething4();
+        msObj.doSomething4();   // 测试内部静态类Louis
 
         // classpath
         // classpath是JVM用到的一个环境变量，它用来指示JVM如何搜索class
@@ -684,74 +721,74 @@ public class ZzzzApplication {
     public static void testCoreClass() {
         // String
         String s = "hello";
-        System.out.println(s);
+        System.out.println(s);  // hello
         s = s.toUpperCase();
-        System.out.println(s);
+        System.out.println(s);  // HELLO
         // 比较字符串
         String s1 = "hello11";
         String s2 = "hello11";
         // 所有相同的字符串当作一个对象放入常量池，自然s1和s2的引用就是相同的。
-        System.out.println("字符串比较：" + (s1 == s2));
-        System.out.println("字符串比较：" + s1.equals(s2));
+        System.out.println("字符串比较：" + (s1 == s2));      // 字符串比较：true
+        System.out.println("字符串比较：" + s1.equals(s2));   // 字符串比较：true
         String s3 = "hello22";
         String s4 = "HELLo22".toLowerCase();
-        System.out.println("字符串比较：" + (s3 == s4));
-        System.out.println("字符串比较：" + s3.equals(s4));
-        System.out.println("字符串比较(忽略大小写)：" + s3.equalsIgnoreCase(s4));
+        System.out.println("字符串比较：" + (s3 == s4));      // 字符串比较：false
+        System.out.println("字符串比较：" + s3.equals(s4));   // 字符串比较：true
+        System.out.println("字符串比较(忽略大小写)：" + s3.equalsIgnoreCase(s4));  // 字符串比较(忽略大小写)：true
         // 搜索字符串
-        System.out.println("hello".contains("ll"));
-        System.out.println("hello".indexOf("l"));
-        System.out.println("hello".startsWith("he"));
-        System.out.println("hello".endsWith("lo"));
+        System.out.println("hello".contains("ll"));         // true
+        System.out.println("hello".indexOf("l"));           // 2
+        System.out.println("hello".startsWith("he"));       // true
+        System.out.println("hello".endsWith("lo"));         // true
         // 提取字符串
-        System.out.println("hello".substring(2));
-        System.out.println("hello".substring(2, 3));
+        System.out.println("hello".substring(2));           // llo
+        System.out.println("hello".substring(2, 3));        // l
         // 去除首尾空白字符
-        System.out.println(" \thello\r\n".trim());
+        System.out.println(" \thello\r\n".trim());          // hello
         // 中文的空格字符\u3000
-        System.out.println("\u3000hello\u3000".strip());
-        System.out.println(" hello ".stripLeading());
-        System.out.println(" hello ".stripTrailing());
+        System.out.println("\u3000hello\u3000".strip());    // hello
+        System.out.println(" hello ".stripLeading());       // hello
+        System.out.println(" hello ".stripTrailing());      //  hello
         // isEmpty()和isBlank()来判断字符串是否为空和空白字符串
-        System.out.println("".isEmpty());
-        System.out.println(" ".isEmpty());
-        System.out.println(" \n".isBlank());
-        System.out.println(" hello ".isBlank());
+        System.out.println("".isEmpty());                   // true
+        System.out.println(" ".isEmpty());                  // false
+        System.out.println(" \n".isBlank());                // true
+        System.out.println(" hello ".isBlank());            // false
         // 替换字符串
-        System.out.println("hello".replace("l", "w"));
-        System.out.println("hello".replace("ll", "~~"));
-        System.out.println("A,,B;C ,D".replaceAll("[\\,\\;\\s]+", ","));
+        System.out.println("hello".replace("l", "w"));      // hewwo
+        System.out.println("hello".replace("ll", "~~"));    // he~~o
+        System.out.println("A,,B;C ,D".replaceAll("[\\,\\;\\s]+", ","));    // A,B,C,D
         // 分割字符串
         String s5 = "A,B,C,D";
         String[] s5Arr = s5.split("\\,");
-        System.out.println(Arrays.toString(s5Arr));
+        System.out.println(Arrays.toString(s5Arr));      // [A, B, C, D]
         // 拼接字符串
         String[] s6Arr = {"x", "y", "z"};
         String s6 = String.join("--", s6Arr);
-        System.out.println(s6);
+        System.out.println(s6);         // x--y--z
         // 格式化字符串
         // 如果你不确定用啥占位符，那就始终用%s，因为%s可以显示任何数据类型
         String s7 = "Hi %s, your score is %.2f, your age is %d";
-        System.out.println(String.format(s7, "louis", 88.8, 99));
+        System.out.println(String.format(s7, "louis", 88.8, 99));   // Hi louis, your score is 88.80, your age is 99
         // 类型转换
         // 把任意基本类型或引用类型转换为字符串
-        System.out.println(String.valueOf(123));
-        System.out.println(String.valueOf(45.67));
-        System.out.println(String.valueOf(true));
-        System.out.println(String.valueOf(new Object()));
+        System.out.println(String.valueOf(123));           // 123
+        System.out.println(String.valueOf(45.67));         // 45.67
+        System.out.println(String.valueOf(true));          // true
+        System.out.println(String.valueOf(new Object()));  // java.lang.Object@776ec8df
         // 把字符串转换为int类型
-        System.out.println(Integer.parseInt("123"));
+        System.out.println(Integer.parseInt("123"));    // 123
         // 字符串转换为boolean类型
-        System.out.println(Boolean.parseBoolean("true"));
-        System.out.println(Boolean.parseBoolean("FALSE"));
+        System.out.println(Boolean.parseBoolean("true"));   // true
+        System.out.println(Boolean.parseBoolean("FALSE"));  // false
         // Integer有个getInteger(String)方法，它不是将字符串转换为int，而是把该字符串对应的系统变量转换为Integer
-        System.out.println(Integer.getInteger("java.version"));
+        System.out.println(Integer.getInteger("java.version")); // null
         // String -> char[]
         char[] cs = "hello".toCharArray();
-        System.out.println(Arrays.toString(cs));
+        System.out.println(Arrays.toString(cs));            // [h, e, l, l, o]
         // char[] -> String
         String s8 = new String(cs);
-        System.out.println(s8);
+        System.out.println(s8);                             // hello
         // char类型实际上就是两个字节的Unicode编码
         // String和char在内存中总是以Unicode编码表示
         // 转换编码就是将String和byte[]转换，需要指定编码
@@ -760,14 +797,14 @@ public class ZzzzApplication {
             // 把字符串转换成其他编码
             byte[] b1 = "hello".getBytes(); // 按系统默认编码转换，不推荐
             byte[] b2 = "hello".getBytes("UTF-8");  // 按UTF-8编码转换
-            byte[] b3 = "hello".getBytes("GBK");  // 按GBK编码转换
-            System.out.println(Arrays.toString(b1));
-            System.out.println(Arrays.toString(b2));
-            System.out.println(Arrays.toString(b3));
+            byte[] b3 = "hello".getBytes("GBK");    // 按GBK编码转换
+            System.out.println(Arrays.toString(b1));        // [104, 101, 108, 108, 111]
+            System.out.println(Arrays.toString(b2));        // [104, 101, 108, 108, 111]
+            System.out.println(Arrays.toString(b3));        // [104, 101, 108, 108, 111]
             // 把已知编码的byte[]转换为String
             byte[] b4 = {100, 101, 102};
             String s9 = new String(b4, "GBK");
-            System.out.println(s9);
+            System.out.println(s9);                     // def
         } catch (UnsupportedEncodingException e) {
             System.out.println("不支持的字符集");
         }
@@ -777,11 +814,11 @@ public class ZzzzApplication {
         for (int i = 0; i < 10; i++) {
             sb.append(i).append(",");
         }
-        System.out.println(sb.toString());
+        System.out.println(sb.toString());              // 0,1,2,3,4,5,6,7,8,9,
 
         MyCounter mcObj = new MyCounter();
-        System.out.println(mcObj.add(3).getNumber());
-        System.out.println(mcObj.add(5).incr().getNumber());
+        System.out.println(mcObj.add(3).getNumber());   // 3
+        System.out.println(mcObj.add(5).incr().getNumber());    // 9
 
         // 拼接字符串
         // 方法一  StringBuilder 拼接
@@ -793,13 +830,13 @@ public class ZzzzApplication {
         }
         sb2.delete(sb2.length()-2, sb2.length());
         sb2.append("!");
-        System.out.println(sb2.toString());
+        System.out.println(sb2.toString());     // hello bob, alice, grace!
         // 方法二  StringJoiner  拼接
         var sj = new StringJoiner(", ", "hello ", "!");
         for (String name:namesArr) {
             sj.add(name);
         }
-        System.out.println(sj.toString());
+        System.out.println(sj.toString());      // hello bob, alice, grace!
         // 方法三  String.join
 
         // 包装类型
@@ -812,9 +849,9 @@ public class ZzzzApplication {
         Integer n = null;
         Integer n2 = Integer.valueOf(99);
         int n3 = n2.intValue();
-        System.out.println(n3);
+        System.out.println(n3);             // 99
         Integer n4 = Integer.valueOf("88");
-        System.out.println(n4.intValue());
+        System.out.println(n4.intValue());  // 88
 
         Integer n5 = 127;
         Integer n6 = 127;
@@ -823,10 +860,10 @@ public class ZzzzApplication {
         // 编译器把Integer x = 127;自动变为Integer x = Integer.valueOf(127);
         // 为了节省内存，Integer.valueOf()对于较小的数，始终返回相同的实例，因此，==比较“恰好”为true，
         // 但我们绝不能因为Java标准库的Integer内部有缓存优化就用==比较，必须用equals()方法比较两个Integer
-        System.out.println("n5 == n6: " + (n5 == n6));
-        System.out.println("n7 == n8: " + (n7 == n8));
-        System.out.println("n5.equals(n6): " + (n5.equals(n6)));
-        System.out.println("n7.equals(n8): " + (n7.equals(n8)));
+        System.out.println("n5 == n6: " + (n5 == n6));      // n5 == n6: true
+        System.out.println("n7 == n8: " + (n7 == n8));      // n7 == n8: false
+        System.out.println("n5.equals(n6): " + (n5.equals(n6)));    // n5.equals(n6): true
+        System.out.println("n7.equals(n8): " + (n7.equals(n8)));    // n7.equals(n8): true
         // 把字符串解析成一个整数
         int n9 = Integer.parseInt("100");
         // 一些有用的静态变量
@@ -836,6 +873,7 @@ public class ZzzzApplication {
         int min = Integer.MIN_VALUE;
         int sizeOfLong = Long.SIZE;
         int byteOfLong = Long.BYTES;
+        // true  false  2147483647  -2147483648  64  8
         System.out.println(t + " " + f + " " + max + " " + min + " " + sizeOfLong + " " + byteOfLong);
         // 所有的整数和浮点数的包装类型都继承自Number, 所以可以通过包装类型获取各种基本类型
         Number num = Integer.valueOf(77);
@@ -844,7 +882,7 @@ public class ZzzzApplication {
         long l = num.longValue();
         double d = num.doubleValue();
         float f2 = num.floatValue();
-        System.out.println(b + " " + n10 + " " + l + " " + d + " " + f2);
+        System.out.println(b + " " + n10 + " " + l + " " + d + " " + f2);  // 77 77 77 77.0 77.0
 
         // javabean
         // 把一组对应的读方法（getter）和写方法（setter）称为属性（property）
@@ -855,6 +893,15 @@ public class ZzzzApplication {
         try {
             BeanInfo info = Introspector.getBeanInfo(MyJavaBean.class);
             for (PropertyDescriptor piece:info.getPropertyDescriptors()) {
+                // getName(): age
+                // getReadMethod(): public int com.example.demo.coreClass.MyJavaBean.getAge()
+                // getWriteMethod(): public void com.example.demo.coreClass.MyJavaBean.setAge(int)
+                // getName(): class
+                // getReadMethod(): public final native java.lang.Class java.lang.Object.getClass()
+                // getWriteMethod(): null
+                // getName(): name
+                // getReadMethod(): public java.lang.String com.example.demo.coreClass.MyJavaBean.getName()
+                // getWriteMethod(): public void com.example.demo.coreClass.MyJavaBean.setName(java.lang.String)
                 System.out.println("getName(): " + piece.getName());
                 System.out.println("getReadMethod(): " + piece.getReadMethod());
                 System.out.println("getWriteMethod(): " + piece.getWriteMethod());
@@ -870,16 +917,16 @@ public class ZzzzApplication {
         Weekday day = Weekday.SUN;
         if (day == Weekday.SUN) {
             // 返回定义的常量的顺序，从0开始计数
-            System.out.println("今天是周末, 数值为：" + day.ordinal() + " ，中文名：" + day.name());
+            System.out.println("今天是周末, 数值为：" + day.ordinal() + " ，中文名：" + day.name());  // 今天是周末, 数值为：0 ，中文名：SUN
         }
         if (day.dayValue == 0) {
-            System.out.println("今天是周末, 数值为：" + day.dayValue + " ，中文名：" + day.toString() + " || " + day);
+            System.out.println("今天是周末, 数值为：" + day.dayValue + " ，中文名：" + day.toString() + " || " + day); // 今天是周末, 数值为：0 ，中文名：呃呃呃-星期天 || 呃呃呃-星期天
         }
         day = Weekday.MON;
         switch (day) {
             case MON:
             case TUE:
-                System.out.println("Hmmmm, Today is a " + day);
+                System.out.println("Hmmmm, Today is a " + day);     // Hmmmm, Today is a 呃呃呃-星期一
                 break;
             case WES:
             case SAT:
@@ -900,16 +947,16 @@ public class ZzzzApplication {
         // BigInteger
         // 和long型整数运算比，BigInteger不会有范围限制，但缺点是速度比较慢
         BigInteger bi = new BigInteger("100");
-        System.out.println(bi.pow(5));
-        System.out.println(bi.longValue());
+        System.out.println(bi.pow(5));      // 10000000000
+        System.out.println(bi.longValue()); // 100
         // 如果BigInteger表示的范围超过了基本类型的范围，转换时将丢失高位信息，即结果不一定是准确的。
         // 如果需要准确地转换成基本类型，可以使用intValueExact()、longValueExact()等方法，在转换时如果超出范围，将直接抛出ArithmeticException异常。
-        System.out.println(bi.multiply(bi).longValueExact());
+        System.out.println(bi.multiply(bi).longValueExact());   // 10000
         // 加法运算
         BigInteger bi2 = new BigInteger("12345678901234567890");
-        System.out.println(bi2.add(bi));
+        System.out.println(bi2.add(bi));    // 12345678901234567990
         try {
-            System.out.println(bi2.multiply(bi2).longValueExact());
+            System.out.println(bi2.multiply(bi2).longValueExact());  // BigInteger out of long range
         } catch (ArithmeticException e) {
             System.out.println(e.getMessage());
         }
@@ -918,23 +965,23 @@ public class ZzzzApplication {
         // BigDecimal   没学完，后面再看
         // https://www.liaoxuefeng.com/wiki/1252599548343744/1279768011997217
         BigDecimal bg = new BigDecimal("50.55");
-        System.out.println(bg.multiply(bg));
+        System.out.println(bg.multiply(bg));        // 2555.3025
         BigDecimal bg2 = new BigDecimal("50");
         BigDecimal bg3 = new BigDecimal("50.00");
         // 用scale()表示小数位数
-        System.out.println(bg.multiply(bg).scale());
-        System.out.println(bg.scale());
-        System.out.println(bg2.scale());
-        System.out.println(bg3.scale());
+        System.out.println(bg.multiply(bg).scale());        // 4
+        System.out.println(bg.scale());     // 2
+        System.out.println(bg2.scale());    // 0
+        System.out.println(bg3.scale());    // 2
 
         // Math 类
-        System.out.println(Math.abs(-100));
-        System.out.println(Math.abs(-7.8));
-        System.out.println(Math.max(100, 98));
-        System.out.println(Math.min(100, 80));
-        System.out.println(Math.pow(2, 3));
-        System.out.println(Math.sqrt(9));
-        System.out.println(Math.random());
+        System.out.println(Math.abs(-100)); // 100
+        System.out.println(Math.abs(-7.8)); // 7.8
+        System.out.println(Math.max(100, 98));  // 100
+        System.out.println(Math.min(100, 80));  // 80
+        System.out.println(Math.pow(2, 3)); // 8.0
+        System.out.println(Math.sqrt(9));   // 3.0
+        System.out.println(Math.random());  // 0.7252868739713516
         // 伪随机数
         // 我们创建Random实例时，如果不给定种子，就使用系统当前时间戳作为种子，因此每次运行时，种子不同，得到的伪随机数序列就不同
         Random r = new Random();
@@ -945,8 +992,8 @@ public class ZzzzApplication {
         System.out.println(r.nextDouble());     // 0.3716...生成一个[0,1)之间的double
         // 指定种子相同，伪随机数序列就相同
         r = new Random(30);
-        System.out.println(r.nextInt(100));
-        System.out.println(r.nextInt(100));
+        System.out.println(r.nextInt(100));     // 6
+        System.out.println(r.nextInt(100));     // 68
         // 真随机数
         SecureRandom sr = null;
         try {
@@ -956,8 +1003,8 @@ public class ZzzzApplication {
         }
         byte[] bArr = new byte[16];
         sr.nextBytes(bArr);     // 用安全随机数填充buffer
-        System.out.println(Arrays.toString(bArr));
-        System.out.println(sr.nextInt(100));
+        System.out.println(Arrays.toString(bArr));  // [33, 58, -38, -76, -70, -52, 112, 7, 30, -14, -7, -69, 27, -29, -19, -23]
+        System.out.println(sr.nextInt(100)); // 7
     }
 
     public static void testAnnotationHaHa() {

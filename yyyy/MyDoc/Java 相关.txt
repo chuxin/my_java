@@ -65,6 +65,10 @@ https://www.cnblogs.com/lovebean/p/10652675.html
 我们口中说的Java8、JDK8、JDK1.8都是同一个东西
 JAVA就是指JDK开发工具，所以我们可以理解为JAVA等价于JDK
 
+目前最新的长期稳定支持版本是Java 17，历史上有三个：
+Java 8（2014年）
+Java 11（2018年）
+Java 17（2021年）
 
 【全套视频教程下载】   --  选择性看看，太费时间了
 下载地址：https://pan.baidu.com/s/1LxIxcHDO7SYB96SE-GZfuQ
