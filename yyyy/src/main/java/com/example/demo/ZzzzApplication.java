@@ -63,7 +63,7 @@ public class ZzzzApplication {
 //        testOOP();
 
         /*********   java 核心类  *********/
-        testCoreClass();
+//        testCoreClass();
 
         /*********   注解  *********/
 //        testAnnotationHaHa();
@@ -81,10 +81,10 @@ public class ZzzzApplication {
 //        testFunctionalProgramming();
 
         /*********   make a summary   *********/
-
+        // done
 
         /*********   开始看框架 spring cloud  *********/
-
+        
 
     }
 
@@ -140,9 +140,9 @@ public class ZzzzApplication {
         list.add("pear");
         list.add(null);
         list.add("banana");
-        System.out.println(list.size());
+        System.out.println(list.size());    // 4
         String second = list.get(1);
-        System.out.println(second + ", " + list.get(2));
+        System.out.println(second + ", " + list.get(2));    // pear, null
         // ② 创建 list
         List<Integer> list2 = List.of(1, 4, 8);  // 不接受null值
 
@@ -151,16 +151,16 @@ public class ZzzzApplication {
         // ① 繁琐，不常用
         for (int i = 0; i < list3.size(); i++) {
             String s = list3.get(i);
-            System.out.println(s);
+            System.out.println(s);  // aa bb cc
         }
         // ② 写法复杂
         for (Iterator<String> it = list3.iterator(); it.hasNext();) {
             String s = it.next();
-            System.out.println(s);
+            System.out.println(s);  // aa bb cc
         }
         // ③ 自动把for each循环变成Iterator的调用
         for (String s: list3) {
-            System.out.println(s);
+            System.out.println(s);  // aa bb cc
         }
 
         // list 和 array 转换
@@ -168,18 +168,18 @@ public class ZzzzApplication {
         List<String> list4 = List.of("xx", "yy", "zz");
         Object[] arr4 = list4.toArray();
         for (Object s: arr4) {
-            System.out.println(s);
+            System.out.println(s);  // xx yy zz
         }
         // ② list -> array
         String[] arr5 = list4.toArray(new String[3]);
         for (String s: arr5) {
-            System.out.println(s);
+            System.out.println(s);  // xx yy zz
         }
         // ③ list -> array      传入一个“恰好”大小的数组    常用
 //        String[] arr6 = list4.toArray(new String[list4.size()]);
         String[] arr6 = list4.toArray(String[]::new);
         for (String s: arr6) {
-            System.out.println(s);
+            System.out.println(s);  // xx yy zz
         }
 
         // array -> list
@@ -189,10 +189,10 @@ public class ZzzzApplication {
 
         // list 常用函数
         List<String> list6 = List.of("A", "B", "C");
-        System.out.println(list6.contains("C"));
-        System.out.println(list6.contains("c"));
-        System.out.println(list6.indexOf("C"));
-        System.out.println(list6.indexOf("c"));
+        System.out.println(list6.contains("C"));    // true
+        System.out.println(list6.contains("c"));    // false
+        System.out.println(list6.indexOf("C"));     // 2
+        System.out.println(list6.indexOf("c"));     // -1
 
         // 使用 map
         // 定义：键值（key-value）映射表的数据结构，作用就是能高效通过key快速查找value（元素）
@@ -201,43 +201,49 @@ public class ZzzzApplication {
         map.put("apple", 11);
         map.put("pear", 22);
         map.put("banana", 44);
-        System.out.println(map.get("apple"));
+        System.out.println(map.get("apple"));   // 11
         map.put("apple", 33);
-        System.out.println(map.get("apple"));
+        System.out.println(map.get("apple"));   // 33
         // map存对象
         MyStudent msObj = new MyStudent("louis", 999);
         Map<String, MyStudent> map2 = new HashMap<>();
         map2.put("louisXX", msObj);
         MyStudent msObj2 = map2.get("louisXX");
-        System.out.println(msObj2);
+        System.out.println(msObj2);             // com.example.demo.testCollections.MyStudent@87aac27
         System.out.println(msObj2 == msObj);    // true, 同一个实例
-        System.out.println(msObj2.score);
+        System.out.println(msObj2.score);       // 999
         MyStudent msObj3 = map2.get("louisYY");
-        System.out.println(msObj3);
+        System.out.println(msObj3);             // null
         // 遍历 map  键值对输出顺序随机
         // 方法①
         for (String key: map.keySet()) {
             Integer value = map.get(key);
             System.out.println(key + " - " + value);
+            // banana - 44
+            // apple - 33
+            // pear - 22
         }
         // 方法②
         for (Map.Entry<String, Integer> entry: map.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
             System.out.println(key + " - " + value);
+            // banana - 44
+            // apple - 33
+            // pear - 22
         }
         // map 练习
         Integer ii22 = new Integer(88);
-        System.out.println(ii22.intValue());
+        System.out.println(ii22.intValue());    // 88
         List<MyStudent> list7 = List.of(
                 new MyStudent("aaa", 91),
                 new MyStudent("bbb", 92),
                 new MyStudent("ccc", 93)
         );
         var holder = new Students(list7);
-        System.out.println(holder.getScore("aaa") == 91 ? "测试成功" : "测试失败");
-        System.out.println(holder.getScore("bbb") == 92 ? "测试成功" : "测试失败");
-        System.out.println(holder.getScore("ccc") == 94 ? "测试成功" : "测试失败");
+        System.out.println(holder.getScore("aaa") == 91 ? "测试成功" : "测试失败"); // 测试成功
+        System.out.println(holder.getScore("bbb") == 92 ? "测试成功" : "测试失败"); // 测试成功
+        System.out.println(holder.getScore("ccc") == 94 ? "测试成功" : "测试失败"); // 测试失败
         // 编写自己的equals和hashCode
         // 在Map的内部，对key做比较是通过equals()实现的，这一点和List查找元素需要正确覆写equals()是一样的
         // 下面的就没有再去研究了
@@ -248,9 +254,9 @@ public class ZzzzApplication {
         String key1 = "a";
         String key2 = new String("a");
         map3.put(key1, 123);
-        System.out.println(map3.get(key2));
-        System.out.println(key1 == key2);
-        System.out.println(key1.equals(key2));
+        System.out.println(map3.get(key2));     // 123
+        System.out.println(key1 == key2);       // false
+        System.out.println(key1.equals(key2));  // true
 
         // 使用EnumMap
         // EnumMap 在内部以一个非常紧凑的数组存储value，并且根据enum类型的key直接定位到内部数组的索引，并不需要计算hashCode()，效率最高，没有空间浪费
@@ -263,8 +269,9 @@ public class ZzzzApplication {
         map4.put(DayOfWeek.FRIDAY, "星期五拉拉");
         map4.put(DayOfWeek.SATURDAY, "星期六拉拉");
         map4.put(DayOfWeek.SUNDAY, "星期七拉拉");
-        System.out.println(map4);       // 输出格式记一下，貌似 map 特有的
-        System.out.println(map4.get(DayOfWeek.MONDAY));
+        System.out.println(map4);   // 输出格式记一下，貌似 map 特有的
+        // {MONDAY=星期一拉拉, TUESDAY=星期二拉拉, WEDNESDAY=星期三拉拉, THURSDAY=星期四拉拉, FRIDAY=星期五拉拉, SATURDAY=星期六拉拉, SUNDAY=星期七拉拉}
+        System.out.println(map4.get(DayOfWeek.MONDAY)); // 星期一拉拉
 
         // 使用 TreeMap
         // SortedMap是接口，它的实现类是TreeMap，TreeMap在内部会对Key进行排序
@@ -275,7 +282,7 @@ public class ZzzzApplication {
         map5.put("apple", 2);
         map5.put("pear", 3);
         for (String key:map5.keySet()) {
-            System.out.println(key);
+            System.out.println(key);    // apple orange pear
         }
         // 使用TreeMap时，放入的Key必须实现Comparable接口。String、Integer这些类已经实现了Comparable接口，因此可以直接作为Key使用。作为Value的对象则没有任何要求。
         // 如果作为Key的class没有实现Comparable接口，那么，必须在创建TreeMap时同时指定一个自定义排序算法
@@ -294,8 +301,11 @@ public class ZzzzApplication {
         map6.put(new HisStudent("louis", 1), 1);
         for (HisStudent key: map6.keySet()) {
             System.out.println(key);
+            // HisStudent{name='Bob', age=3}
+            // HisStudent{name='Tom', age=2}
+            // HisStudent{name='louis', age=1}
         }
-        System.out.println(map6.get(new HisStudent("louis", 1)));  // 没有上面的 == 判断，这里就是 null
+        System.out.println(map6.get(new HisStudent("louis", 1)));  // 1  ,  没有上面的 == 判断，这里就是 null
 
         // 使用Properties
         // 读取配置文件
@@ -313,7 +323,7 @@ public class ZzzzApplication {
             props.load(new FileReader(f, StandardCharsets.UTF_8));
             String distributionUrl = props.getProperty("distributionUrl");
             String xxx = props.getProperty("xxx");
-            System.out.println(distributionUrl + " " + xxx);
+            System.out.println(distributionUrl + " " + xxx);    // ddddddd 111
         } catch (java.io.FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (java.io.IOException e) {
@@ -328,10 +338,10 @@ public class ZzzzApplication {
             ByteArrayInputStream input = new ByteArrayInputStream(settings.getBytes("UTF-8"));
             Properties props2 = new Properties();
             props2.load(input);
-            System.out.println("course:" + props2.getProperty("course"));
-            System.out.println("last_date:" + props2.getProperty("last_date"));
-            System.out.println("last_file:" + props2.getProperty("last_file"));
-            System.out.println("auto_save:" + props2.getProperty("auto_save", "66"));
+            System.out.println("course:" + props2.getProperty("course"));           // course:Java
+            System.out.println("last_date:" + props2.getProperty("last_date"));     // last_date:2019-08-07T12:35:01
+            System.out.println("last_file:" + props2.getProperty("last_file"));     // last_file:null
+            System.out.println("auto_save:" + props2.getProperty("auto_save", "66")); // auto_save:66
         } catch (java.io.UnsupportedEncodingException e) {
             System.out.println(e.getMessage());
         } catch (java.io.IOException e) {
@@ -351,16 +361,16 @@ public class ZzzzApplication {
         // 使用Set
         Set<String> set = new HashSet<>();
         // 将元素添加进Set<E>
-        System.out.println(set.add("abc"));
-        System.out.println(set.add("xyz"));
-        System.out.println(set.add("yyy"));
+        System.out.println(set.add("abc"));     // true
+        System.out.println(set.add("xyz"));     // true
+        System.out.println(set.add("yyy"));     // true
         // 将元素从Set<E>删除
-        System.out.println(set.contains("abc"));
-        System.out.println(set.contains("xxx"));
+        System.out.println(set.contains("abc"));    // true
+        System.out.println(set.contains("xxx"));    // false
         // 判断是否包含元素
-        System.out.println(set.remove("hello"));
-        System.out.println(set.remove("xyz"));
-        System.out.println(set.size());
+        System.out.println(set.remove("hello")); // false
+        System.out.println(set.remove("xyz"));   // true
+        System.out.println(set.size());             // 2
 
         // set 是接口，它的实现类是HashSet，HashSet是无序的，没有实现SortedSet接口
         // set 是接口，它的实现类是TreeSet，TreeSet是有序的，实现了SortedSet接口
@@ -371,7 +381,7 @@ public class ZzzzApplication {
         set2.add("pear");
         set2.add("banana");
         for (String s: set2) {
-            System.out.println(s);
+            System.out.println(s);  // apple banana orange pear
         }
 
         // 使用Queue
@@ -387,43 +397,43 @@ public class ZzzzApplication {
         // 添加
         try {
             q.add("apple");
-            System.out.println("添加成功");
+            System.out.println("添加成功");     // 添加成功
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
             System.out.println("添加失败");
         }
         if (q.offer("apple2")) {
-            System.out.println("添加成功");
+            System.out.println("添加成功");     // 添加成功
         } else {
             System.out.println("添加失败");
         }
         // 取队首元素但不删除
         try {
             String s = q.element();
-            System.out.println(s);
+            System.out.println(s);              // apple
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
             System.out.println("取元素，但不删除，操作失败");
         }
         String s2 = q.peek();
         if (s2 != null) {
-            System.out.println(s2);
-            System.out.println("取元素，但不删除，操作成功");
+            System.out.println(s2);             // apple
+            System.out.println("取元素，但不删除，操作成功");    // 取元素，但不删除，操作成功
         } else {
             System.out.println("取元素，但不删除，操作失败");
         }
         // 取队首元素并删除
         try {
             String s3 = q.remove();
-            System.out.println("取元素，并删除，操作成功");
+            System.out.println("取元素，并删除，操作成功"); // 取元素，并删除，操作成功
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
             System.out.println("取元素，并删除，操作失败");
         }
         String s4 = q.poll();
         if (s4 != null) {
-            System.out.println("取元素，并删除，操作成功");
-            System.out.println(s4);
+            System.out.println("取元素，并删除，操作成功");  // 取元素，并删除，操作成功
+            System.out.println(s4);                     // apple2
         } else {
             System.out.println("取元素，并删除，操作失败");
         }
@@ -432,16 +442,16 @@ public class ZzzzApplication {
         Queue<String> q2 = new LinkedList<>();
         q2.offer("aaa");
         q2.offer("bbb");
-        System.out.println(q2.poll());
-        System.out.println(q2.poll());
-        System.out.println(q2.poll()); // null,因为队列是空的
+        System.out.println(q2.poll());  // aaa
+        System.out.println(q2.poll());  // bbb
+        System.out.println(q2.poll());  // null  ,   因为队列是空的
 
         Queue<Integer> q3 = new LinkedList<>();
         q3.offer(11);
         q3.offer(22);
         q3.offer(33);
-        System.out.println(q3.peek());
-        System.out.println(q3.peek());
+        System.out.println(q3.peek());  // 11
+        System.out.println(q3.peek());  // 11
 
         // LinkedList即实现了List接口，又实现了Queue接口
         List<String> list8 = new LinkedList<>();
@@ -453,17 +463,17 @@ public class ZzzzApplication {
         q5.offer("mmm");
         q5.offer("xxx");
         q5.offer("nnn");
-        System.out.println(q5.poll() + " " + q5.poll() + " " + q5.poll() + " " + q5.poll());
+        System.out.println(q5.poll() + " " + q5.poll() + " " + q5.poll() + " " + q5.poll());    // mmm nnn xxx null
         // 实现Comparable接口，决定元素排序顺序，出队优先级
         Queue<User> q6 = new PriorityQueue<>();
         q6.offer(new User("Bob", "A1"));
         q6.offer(new User("Alice", "A2"));
         q6.offer(new User("Alice", "A12"));
         q6.offer(new User("Boss", "V1"));
-        System.out.println(q6.poll());
-        System.out.println(q6.poll());
-        System.out.println(q6.poll());
-        System.out.println(q6.poll());
+        System.out.println(q6.poll());  // Boss/V1
+        System.out.println(q6.poll());  // Bob/A1
+        System.out.println(q6.poll());  // Alice/A2
+        System.out.println(q6.poll());  // Alice/A12
         System.out.println(q6.poll());  // null,因为队列为空
 
         // 使用 deque
@@ -481,9 +491,9 @@ public class ZzzzApplication {
         deque.offerLast("A"); // A
         deque.offerLast("B"); // A <- B
         deque.offerFirst("C"); // C <- A <- B
-        System.out.println(deque.pollFirst()); // A <- B
-        System.out.println(deque.pollLast()); // A
-        System.out.println(deque.pollFirst()); // null
+        System.out.println(deque.pollFirst());  // C   ,  A <- B
+        System.out.println(deque.pollLast());   // B   ,  A
+        System.out.println(deque.pollFirst());  // A   ,  null
         // LinkedList真是一个全能选手，它即是List，又是Queue，还是Deque。但是我们在使用的时候，总是用特定的接口来引用它，
         // 这是因为持有接口说明代码的抽象层次更高，而且接口本身定义的方法代表了特定的用途。
         // 面向抽象编程的一个原则就是：尽量持有接口，而不是具体的实现类
@@ -1043,46 +1053,46 @@ public class ZzzzApplication {
         ArrayList<String> strList = new ArrayList<String>();
         strList.add("hello");
         strList.add("louis");
-        System.out.println(strList.get(0));
+        System.out.println(strList.get(0));     // hello
 
         List<Number> list = new ArrayList<Number>();
         list.add(Integer.valueOf(33));
         list.add(Float.valueOf(13.44f));
         Number first = list.get(0);
         Number second = list.get(1);
-        System.out.println(first + " " + second);
+        System.out.println(first + " " + second);   // 33 13.44
         // 可以省略后面的Number，编译器可以自动推断泛型类型：
         List<Number> list2 = new ArrayList<>();
         // 泛型接口
         // String本身已经实现了Comparable<String>接口,可以直接排序
         String[] ss = new String[] {"Orange", "Apple", "Pear"};
         Arrays.sort(ss);
-        System.out.println(Arrays.toString(ss));
+        System.out.println(Arrays.toString(ss));    // [Apple, Orange, Pear]
         // 自定义一个类实现按name进行排序
-        System.out.println("zello".compareTo("bbb"));
+        System.out.println("zello".compareTo("bbb"));   // 24
         PersonT[] ps = new PersonT[] {
                 new PersonT("bob", 61),
                 new PersonT("alice", 88),
                 new PersonT("lily", 70)
         };
         Arrays.sort(ps);
-        System.out.println(Arrays.toString(ps));
+        System.out.println(Arrays.toString(ps));        // [alice,88, bob,61, lily,70]
 
         // 使用自定义的泛型类
         Pair<String> p2 = new Pair<>("hello", "world");
         String first2 = p2.getFirst();
         String second2 = p2.getSecond();
-        System.out.println(first2 + ", " + second2);
+        System.out.println(first2 + ", " + second2);    // hello, world
 
         Pair<Integer> p3 = new Pair<>(99, 88);
         Integer first3 = p3.getFirst();
         Integer second3 = p3.getSecond();
-        System.out.println(first3 + ", " + second3);
+        System.out.println(first3 + ", " + second3);    // 99, 88
 
         // 所有泛型实例，无论T的类型是什么，getClass()返回同一个Class实例，因为编译后它们全部都是Pair<Object>
         Class c1 = p2.getClass();
         Class c2 = p3.getClass();
-        System.out.println((c1 == c2) + ", " + (c1 == Pair.class));
+        System.out.println((c1 == c2) + ", " + (c1 == Pair.class)); // true, true
 
         // extends 通配符  暂时先忽略，不学
 

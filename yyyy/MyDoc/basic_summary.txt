@@ -639,11 +639,21 @@
 
         // 把字符串转换为int类型
         System.out.println(Integer.parseInt("123"));    // 123
-        // 数字类型字符串转成包装类型 Integer
-        String sss = "223";
-        System.out.println(Integer.valueOf(sss));       // 223
+        // int和Integer互相转换
+        Integer n = null;
+        Integer n2 = Integer.valueOf(99);
+        int n3 = n2.intValue();
+        System.out.println(n3);             // 99
+        Integer n4 = Integer.valueOf("88");
+        System.out.println(n4.intValue());  // 88
+        // 编译器把Integer x = 127;自动变为Integer x = Integer.valueOf(127);
+        // 为了节省内存，Integer.valueOf()对于较小的数，始终返回相同的实例，因此，==比较“恰好”为true，
+        // 但我们绝不能因为Java标准库的Integer内部有缓存优化就用==比较，必须用equals()方法比较两个Integer
         // Integer有个getInteger(String)方法，它不是将字符串转换为int，而是把该字符串对应的系统变量转换为Integer
         System.out.println(Integer.getInteger("java.version")); // null
+
+        // 把字符串解析成一个整数
+        int n9 = Integer.parseInt("100");
 
         // 字符串转换为boolean类型
         System.out.println(Boolean.parseBoolean("true"));   // true
@@ -657,35 +667,662 @@
         String s8 = new String(cs);
         System.out.println(s8);                             // hello
 
+        // 所有的整数和浮点数的包装类型都继承自Number, 包装类型 转换为 各种基本类型
+        Number num = Integer.valueOf(77);
+        byte b = num.byteValue();
+        int n10 = num.intValue();
+        long l = num.longValue();
+        double d = num.doubleValue();
+        float f2 = num.floatValue();
+        System.out.println(b + " " + n10 + " " + l + " " + d + " " + f2);  // 77 77 77 77.0 77.0
+
+    一些有用的静态变量
+        Boolean t = Boolean.TRUE;
+        Boolean f = Boolean.FALSE;
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+        int sizeOfLong = Long.SIZE;
+        int byteOfLong = Long.BYTES;
+        // true  false  2147483647  -2147483648  64  8
+        System.out.println(t + " " + f + " " + max + " " + min + " " + sizeOfLong + " " + byteOfLong);
+
+    javabean
+        // 把一组对应的读方法（getter）和写方法（setter）称为属性（property）
+        // boolean字段比较特殊，它的读方法一般命名为isXyz()
+        // 只有getter的属性，没有setter属性的，称为只读属性（read-only），反之为只写属性（write-only）
+        // 枚举JavaBean属性
+        public class MyJavaBean {
+            private String name;
+
+            public String getName() {
+                return name;
+            }
+            public void setName(String name) {
+                this.name = name;
+            }
+        }
+        try {
+            BeanInfo info = Introspector.getBeanInfo(MyJavaBean.class);
+            for (PropertyDescriptor piece:info.getPropertyDescriptors()) {
+                // getName(): class
+                // getReadMethod(): public final native java.lang.Class java.lang.Object.getClass()
+                // getWriteMethod(): null
+                // getName(): name
+                // getReadMethod(): public java.lang.String com.example.demo.coreClass.MyJavaBean.getName()
+                // getWriteMethod(): public void com.example.demo.coreClass.MyJavaBean.setName(java.lang.String)
+                System.out.println("getName(): " + piece.getName());
+                System.out.println("getReadMethod(): " + piece.getReadMethod());
+                System.out.println("getWriteMethod(): " + piece.getWriteMethod());
+            }
+        } catch (IntrospectionException e) {
+            System.out.println(e.getMessage());
+        }
+
+    枚举类型 enum
+        // 使用enum定义的枚举类是一种引用类型
+        // enum类型可以使用==比较，也可以使用equals()方法比较，是个例外
+        // enum的构造方法要声明为private，字段强烈建议声明为final
+        public enum Weekday {
+            SUN(0, "星期天"), MON(1, "星期一"), TUE(2, "星期二"), WES(3, "星期三"),
+            THU(4, "星期四"), FRI(5, "星期五"), SAT(6, "星期六");
+
+            public final int dayValue;
+            private final String name;
+
+            private Weekday(int dayValue, String name) {
+                this.dayValue = dayValue;
+                this.name = name;
+            }
+            @Override
+            public String toString() {
+                return "呃呃呃-" + this.name;
+            }
+        }
+        Weekday day = Weekday.SUN;
+        if (day == Weekday.SUN) {
+            // 返回定义的常量的顺序，从0开始计数
+            System.out.println("今天是周末, 数值为：" + day.ordinal() + " ，中文名：" + day.name());  // 今天是周末, 数值为：0 ，中文名：SUN
+        }
+        if (day.dayValue == 0) {
+            System.out.println("今天是周末, 数值为：" + day.dayValue + " ，中文名：" + day.toString() + " || " + day); // 今天是周末, 数值为：0 ，中文名：呃呃呃-星期天 || 呃呃呃-星期天
+        }
+        day = Weekday.MON;
+        switch (day) {
+            case MON:
+            case TUE:
+                System.out.println("Hmmmm, Today is a " + day);     // Hmmmm, Today is a 呃呃呃-星期一
+                break;
+            case WES:
+            case SAT:
+                System.out.println("Hmmmm, Today is a --- " + day);
+                break;
+            default:
+                throw new RuntimeException("找不到对应的日期");
+        }
+
+    记录类  为了不让你用Lombok   没学完，后面再看
+        // https://www.liaoxuefeng.com/wiki/1252599548343744/1331429187256353
+
+    BigInteger
+        // 和long型整数运算比，BigInteger不会有范围限制，但缺点是速度比较慢
+        BigInteger bi = new BigInteger("100");
+        System.out.println(bi.pow(5));      // 10000000000
+        System.out.println(bi.longValue()); // 100
+        // 如果BigInteger表示的范围超过了基本类型的范围，转换为基本类型时不一定是准确的。
+        // 如果需要准确地转换成基本类型，可以使用intValueExact()、longValueExact()等方法，在转换时如果超出范围，将直接抛出ArithmeticException异常。
+        System.out.println(bi.multiply(bi).longValueExact());   // 10000
+        // 加法运算
+        BigInteger bi2 = new BigInteger("12345678901234567890");
+        System.out.println(bi2.add(bi));    // 12345678901234567990
+        try {
+            System.out.println(bi2.multiply(bi2).longValueExact());  // BigInteger out of long range
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
+
+    BigDecimal   没学完，后面再看
+        // https://www.liaoxuefeng.com/wiki/1252599548343744/1279768011997217
+        BigDecimal bg = new BigDecimal("50.55");
+        System.out.println(bg.multiply(bg));        // 2555.3025
+        // 用scale()表示小数位数
+        BigDecimal bg2 = new BigDecimal("50");
+        BigDecimal bg3 = new BigDecimal("50.00");
+        System.out.println(bg.multiply(bg).scale());        // 4
+        System.out.println(bg.scale());         // 2
+        System.out.println(bg2.scale());        // 0
+        System.out.println(bg3.scale());        // 2
+
+    Math 类
+        System.out.println(Math.abs(-100));     // 100
+        System.out.println(Math.max(100, 98));  // 100
+        System.out.println(Math.min(100, 80));  // 80
+        System.out.println(Math.pow(2, 3));     // 8.0
+        System.out.println(Math.sqrt(9));       // 3.0
+        System.out.println(Math.random());      // 0.7252868739713516
+        // 伪随机数
+        // 我们创建Random实例时，如果不给定种子，就使用系统当前时间戳作为种子，因此每次运行时，种子不同，得到的伪随机数序列就不同
+        Random r = new Random();
+        System.out.println(r.nextInt());        // 2071575453,每次都不一样
+        System.out.println(r.nextInt(10));      // 5,生成一个[0,10)之间的int
+        System.out.println(r.nextLong());       // 8811649292570369305,每次都不一样
+        System.out.println(r.nextFloat());      // 0.54335...生成一个[0,1)之间的float
+        System.out.println(r.nextDouble());     // 0.3716...生成一个[0,1)之间的double
+        // 指定种子相同，伪随机数序列就相同
+        r = new Random(30);
+        System.out.println(r.nextInt(100));     // 6
+        System.out.println(r.nextInt(100));     // 68
+        // 真随机数
+        SecureRandom sr = null;
+        try {
+            sr = SecureRandom.getInstanceStrong();  // 获取高强度安全随机数生成器
+        } catch (NoSuchAlgorithmException e) {
+            sr = new SecureRandom();    // 获取普通的安全随机数生成器
+        }
+        byte[] bArr = new byte[16];
+        sr.nextBytes(bArr);     // 用安全随机数填充buffer
+        System.out.println(Arrays.toString(bArr));  // [33, 58, -38, -76, -70, -52, 112, 7, 30, -14, -7, -69, 27, -29, -19, -23]
+        System.out.println(sr.nextInt(100)); // 7
+
+    命令行接受参数输入
+        Scanner scannerObj = new Scanner(System.in);
+        System.out.println("输入你的名字：");
+        String name = scannerObj.nextLine();
+        System.out.println("输入你的年龄：");
+        int age2 = scannerObj.nextInt();
+        System.out.printf("Hi, %s, you are %d years old", name, age2);
+
+
+4、集合
+    数组有如下限制: 数组初始化后大小不可变； 数组只能按索引顺序存取。
+    集合: 可变大小的顺序链表 保证无重复元素的集合
+
+    List
+        定义：是一种有序列表，内部按照放入元素的先后顺序存放，每个元素都可以通过索引确定自己的位置。和数组几乎差不多。
+        例子：
+            // 使用 list , 优先使用 ArrayList
+            //                  ArrayList	    LinkedList
+            // 获取指定元素	    速度很快	        需要从头开始查找元素
+            // 添加元素到末尾	    速度很快	        速度很快
+            // 在指定位置添加/删除	需要移动元素	    不需要移动元素
+            // 内存占用	        少	            较大
+
+            // 创建 list
+            // 方式 ①
+            List<String> list = new ArrayList<>();
+            list.add("apple");
+            list.add("pear");
+            list.add(null);
+            list.add("banana");
+            System.out.println(list.size());    // 4
+            String second = list.get(1);
+            System.out.println(second + ", " + list.get(2));    // pear, null
+            // 方式 ②
+            List<Integer> list2 = List.of(1, 4, 8);  // 不接受null值
+
+            // 遍历 list
+            List<String> list3 = List.of("aa", "bb", "cc");
+            // ① 繁琐，不常用
+            for (int i = 0; i < list3.size(); i++) {
+                String s = list3.get(i);
+                System.out.println(s);  // aa bb cc
+            }
+            // ② 写法复杂
+            for (Iterator<String> it = list3.iterator(); it.hasNext();) {
+                String s = it.next();
+                System.out.println(s);  // aa bb cc
+            }
+            // ③ 自动把for each循环变成Iterator的调用
+            for (String s: list3) {
+                System.out.println(s);  // aa bb cc
+            }
+
+            // list 和 array 转换
+            List<String> list4 = List.of("xx", "yy", "zz");
+            // ① list -> array
+            Object[] arr4 = list4.toArray();
+            for (Object s: arr4) {
+                System.out.println(s);  // xx yy zz
+            }
+            // ② list -> array
+            String[] arr5 = list4.toArray(new String[3]);
+            for (String s: arr5) {
+                System.out.println(s);  // xx yy zz
+            }
+            // ③ list -> array      传入一个“恰好”大小的数组    常用
+            // String[] arr6 = list4.toArray(new String[list4.size()]);
+            String[] arr6 = list4.toArray(String[]::new);
+            for (String s: arr6) {
+                System.out.println(s);  // xx yy zz
+            }
+
+            // array -> list
+            Integer[] arr7 = {1, 3, 5};
+            List<Integer> list5 = List.of(arr7);
+            // list5.add(99);       // 返回的是一个只读List,不能添加元素，否则报错：UnsupportedOperationException
+
+            // list 常用函数
+            List<String> list6 = List.of("A", "B", "C");
+            System.out.println(list6.contains("C"));    // true
+            System.out.println(list6.contains("c"));    // false
+            System.out.println(list6.indexOf("C"));     // 2
+            System.out.println(list6.indexOf("c"));     // -1
+
+    Map
+        定义：键值（key-value）映射表的数据结构，作用就是能高效通过key快速查找value（元素）
+        注意：在Map的内部，对key做比较是通过equals()实现的，这一点和List查找元素需要正确覆写equals()是一样的
+        例子：
+            使用HashMap
+                // HashMap是一种通过对key计算hashCode()，通过空间换时间的方式，直接定位到value所在的内部数组的索引，因此，查找效率非常高
+                // map存整型
+                Map<String, Integer> map = new HashMap<>();
+                map.put("apple", 11);
+                System.out.println(map.get("apple"));   // 11
+
+                // map存对象
+                Map<String, MyStudent> map2 = new HashMap<>();
+                MyStudent msObj = new MyStudent("louis", 999);
+                map2.put("louisXX", msObj);
+                MyStudent msObj2 = map2.get("louisXX");
+                System.out.println(msObj2);             // com.example.demo.testCollections.MyStudent@87aac27
+                System.out.println(msObj2 == msObj);    // true, 同一个实例
+                System.out.println(msObj2.score);       // 999
+                MyStudent msObj3 = map2.get("louisYY");
+                System.out.println(msObj3);             // null
+
+                // 遍历 map
+                // 注意：键值对输出顺序随机
+                // 方法①
+                for (String key: map.keySet()) {
+                    Integer value = map.get(key);
+                    System.out.println(key + " - " + value);    // banana - 44   apple - 33   pear - 22
+                }
+                // 方法②
+                for (Map.Entry<String, Integer> entry: map.entrySet()) {
+                    String key = entry.getKey();
+                    Integer value = entry.getValue();
+                    System.out.println(key + " - " + value);    // banana - 44   apple - 33   pear - 22
+                }
+
+            使用EnumMap
+                // EnumMap 在内部以一个非常紧凑的数组存储value，并且根据enum类型的key直接定位到内部数组的索引，并不需要计算hashCode()，效率最高，没有空间浪费
+                Map<DayOfWeek, String> map4 = new EnumMap<>(DayOfWeek.class);
+                map4.put(DayOfWeek.MONDAY, "星期一拉拉");
+                map4.put(DayOfWeek.TUESDAY, "星期二拉拉");
+                map4.put(DayOfWeek.WEDNESDAY, "星期三拉拉");
+                System.out.println(map4);
+                // {MONDAY=星期一拉拉, TUESDAY=星期二拉拉, WEDNESDAY=星期三拉拉}
+                System.out.println(map4.get(DayOfWeek.MONDAY)); // 星期一拉拉
+
+            使用TreeMap
+                // SortedMap是接口，它的实现类是TreeMap，TreeMap在内部会对Key进行排序
+                // TreeMap不使用equals()和hashCode()，所以无需覆写 equals()和hashCode()
+                Map<String, Integer> map5 = new TreeMap<>();
+                map5.put("orange", 11); map5.put("apple", 2); map5.put("pear", 3);
+                for (String key:map5.keySet()) {
+                    System.out.println(key);    // apple orange pear
+                }
+                // 使用TreeMap时，放入的Key必须实现Comparable接口。String、Integer这些类已经实现了Comparable接口，因此可以直接作为Key使用。作为Value的对象则没有任何要求。
+                // 如果作为Key的class没有实现Comparable接口，那么，必须在创建TreeMap时同时指定一个自定义排序算法
+                // TreeMap不需要覆盖 equals() 和 hashCode()
+                public class HisStudent {
+                    private String name;
+                    public int age;
+
+                    public HisStudent(String name, int age) {
+                        this.name = name;
+                        this.age = age;
+                    }
+                    @Override
+                    public String toString() {
+                        return "HisStudent{" + "name='" + name + '\'' + ", age=" + age + '}';
+                    }
+                }
+                Map<HisStudent, Integer> map6 = new TreeMap<>(new Comparator<HisStudent>() {
+                    public int compare(HisStudent hs1, HisStudent hs2) {
+                        // 如果等于的情况注释，下面循环之后输出的那句话，就是 null
+                        if (hs1.age == hs2.age) {
+                            return 0;
+                        }
+                        return hs1.age > hs2.age ? -1 : 1;
+                    }
+                });
+                map6.put(new HisStudent("Tom", 2), 2);
+                map6.put(new HisStudent("Bob", 3), 3);
+                map6.put(new HisStudent("louis", 1), 1);
+                for (HisStudent key: map6.keySet()) {
+                    System.out.println(key);
+                    // HisStudent{name='Bob', age=3}
+                    // HisStudent{name='Tom', age=2}
+                    // HisStudent{name='louis', age=1}
+                }
+                System.out.println(map6.get(new HisStudent("louis", 1)));  // 1  ,  没有上面的 == 判断，这里就是 null
+
+    Properties
+        // 读取配置文件
+        // 1、创建Properties实例
+        // 2、调用load()读取文件
+        // 3、调用getProperty()获取配置。
+        // 方法 ①
+        try {
+            Properties props = new Properties();
+            // load(InputStream)方法接收一个InputStream实例，表示一个字节流，它不一定读的文件流
+            // 下面两个地址都行
+            // String f = "src/main/java/com/example/demo/testCollections/test.properties";
+            String f = "/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/main/java/com/example/demo/testCollections/test.properties";
+            // java.io.FileInputStream 以ASCII编码读取字节流
+            // java.io.FileReader 支持中文，第二个参数指定编码
+            props.load(new FileReader(f, StandardCharsets.UTF_8));
+            String distributionUrl = props.getProperty("distributionUrl");
+            String xxx = props.getProperty("xxx");
+            System.out.println(distributionUrl + " " + xxx);    // ddddddd 111
+        } catch (java.io.FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
+        // ② 从jar包中读取的资源流：  没试验成功 ！！！
+        ZzzzApplication zzzz = new ZzzzApplication();
+        System.out.println(zzzz.getClass().getResourceAsStream("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/11.properties"));
+        // ③ 从内存读取一个字节流
+        try {
+            String settings = "# test\n" + "course=Java\n" + "last_date=2019-08-07T12:35:01";
+            ByteArrayInputStream input = new ByteArrayInputStream(settings.getBytes("UTF-8"));
+            Properties props2 = new Properties();
+            props2.load(input);
+            System.out.println("course:" + props2.getProperty("course"));           // course:Java
+            System.out.println("last_date:" + props2.getProperty("last_date"));     // last_date:2019-08-07T12:35:01
+            System.out.println("last_file:" + props2.getProperty("last_file"));     // last_file:null
+            System.out.println("auto_save:" + props2.getProperty("auto_save", "66")); // auto_save:66
+        } catch (java.io.UnsupportedEncodingException e) {
+            System.out.println(e.getMessage());
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // 写入配置文件
+        try {
+            Properties props3 = new Properties();
+            props3.setProperty("url", "www.baidu.com");
+            props3.setProperty("name", "百度");
+            props3.store(new FileOutputStream("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/writeIn.properties"), "这是写入的注释");
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    Set
+        使用HashSet
+            Set<String> set = new HashSet<>();
+            // 将元素添加进Set<E>
+            System.out.println(set.add("abc"));         // true
+            System.out.println(set.add("xyz"));         // true
+            System.out.println(set.add("yyy"));         // true
+            // 判断是否包含元素
+            System.out.println(set.contains("abc"));    // true
+            System.out.println(set.contains("xxx"));    // false
+            // 将元素从Set<E>删除
+            System.out.println(set.remove("hello"));    // false
+            System.out.println(set.remove("xyz"));      // true
+            System.out.println(set.size());             // 2
+
+        使用TreeSet
+            // set 是接口，它的实现类是HashSet，HashSet是无序的，没有实现SortedSet接口
+            // set 是接口，它的实现类是TreeSet，TreeSet是有序的，实现了SortedSet接口
+            // TreeSet, 输出是有序的
+            Set<String> set2 = new TreeSet<>();
+            set2.add("apple"); set2.add("orange"); set2.add("pear"); set2.add("banana");
+            for (String s: set2) {
+                System.out.println(s);  // apple banana orange pear
+            }
+
+    Queue
+        定义：Queue和List的区别在于，List可以在任意位置添加和删除元素，而Queue只有两个操作：把元素添加到队列末尾；从队列头部取出元素。
+        注意：要避免把null添加到队列
+                            throw Exception	    返回false或null
+            添加元素到队尾	    add(E e)	        boolean offer(E e)
+            取队首元素并删除	E remove()	        E poll()
+            取队首元素但不删除	E element()	        E peek()
+        例子：
+            Queue<String> q = new LinkedList<>();
+            // 添加
+            try {
+                q.add("apple");
+                System.out.println("添加成功");     // 添加成功
+            } catch (IllegalStateException e) {
+                System.out.println(e.getMessage());
+                System.out.println("添加失败");
+            }
+            if (q.offer("apple2")) {
+                System.out.println("添加成功");     // 添加成功
+            } else {
+                System.out.println("添加失败");
+            }
+            // peek & poll 的区别
+            Queue<String> q2 = new LinkedList<>();
+            q2.offer("aaa");
+            q2.offer("bbb");
+            System.out.println(q2.peek());  // aaa
+            System.out.println(q2.peek());  // aaa
+            System.out.println(q2.poll());  // aaa
+            System.out.println(q2.poll());  // bbb
+            System.out.println(q2.poll());  // null  ,   因为队列是空的
+
+    PriorityQueue
+        定义：PriorityQueue和Queue的区别在于，它的出队顺序与元素的优先级有关，对PriorityQueue调用remove()或poll()方法，返回的总是优先级最高的元素
+        例子：
+            Queue<String> q5 = new PriorityQueue<>();
+            q5.offer("mmm");
+            q5.offer("xxx");
+            q5.offer("nnn");
+            System.out.println(q5.poll() + " " + q5.poll() + " " + q5.poll() + " " + q5.poll());    // mmm nnn xxx null
+            // 实现Comparable接口，决定元素排序顺序，出队优先级
+            public class User implements Comparable<User> {
+                private String name;
+                private String number;
+
+                public User(String name, String number) {
+                    this.name = name;
+                    this.number = number;
+                }
+                public String toString() {
+                    return this.name + "/" + this.number;
+                }
+                public int compareTo(User other) {
+                    if (this.number.charAt(0) == other.number.charAt(0)) {
+                        // return this.number.compareTo(other.number);   // 这么写有 bug
+                        return Integer.parseInt(this.number.substring(1)) - Integer.parseInt(other.number.substring(1));
+                    }
+                    if (this.number.charAt(0) == 'V') {
+                        // V 开头优先级高
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+            }
+            Queue<User> q6 = new PriorityQueue<>();
+            q6.offer(new User("Bob", "A1"));
+            q6.offer(new User("Alice", "A2"));
+            q6.offer(new User("Alice", "A12"));
+            q6.offer(new User("Boss", "V1"));
+            System.out.println(q6.poll());  // Boss/V1
+            System.out.println(q6.poll());  // Bob/A1
+            System.out.println(q6.poll());  // Alice/A2
+            System.out.println(q6.poll());  // Alice/A12
+            System.out.println(q6.poll());  // null,因为队列为空
+
+    deque
+        定义：允许两头都进，两头都出，这种队列叫双端队列（Double Ended Queue），学名Deque
+                             Queue	                Deque
+            添加元素到队尾	    add(E e) / offer(E e)	addLast(E e) / offerLast(E e)
+            取队首元素并删除	E remove() / E poll()	E removeFirst() / E pollFirst()
+            取队首元素但不删除	E element() / E peek()	E getFirst() / E peekFirst()
+            添加元素到队首	    无	                    addFirst(E e) / offerFirst(E e)
+            取队尾元素并删除	无	                    E removeLast() / E pollLast()
+            取队尾元素但不删除	无	                    E getLast() / E peekLast()
+        例子：
+            // Deque是一个接口，它的实现类有ArrayDeque和LinkedList
+            Deque<String> deque = new LinkedList<>();
+            deque.offerLast("A");   // A
+            deque.offerLast("B");   // A <- B
+            deque.offerFirst("C");  // C <- A <- B
+            System.out.println(deque.pollFirst());  // C   ,  A <- B
+            System.out.println(deque.pollLast());   // B   ,  A
+            System.out.println(deque.pollFirst());  // A   ,  null
+            // LinkedList真是一个全能选手，它即是List，又是Queue，还是Deque。但是我们在使用的时候，总是用特定的接口来引用它，这是因为持有接口说明代码的抽象层次更高，而且接口本身定义的方法代表了特定的用途。
+            // 面向抽象编程的一个原则就是：尽量持有接口，而不是具体的实现类
+            // 不推荐的写法
+            LinkedList<String> d1 = new LinkedList<>();
+            d1.offerLast("z");
+            // 推荐的写法
+            Deque<String> d2 = new LinkedList<>();
+            d2.offerLast("z");
+        小结：
+            // LinkedList即实现了List接口，又实现了Queue接口，还实现了 Deque接口
+            List<String> list8 = new LinkedList<>();
+            Queue<String> q4 = new LinkedList<>();
+            Deque<String> d2 = new LinkedList<>();
+
+    Stack   例子有点复杂，先不看
+
+    Iterator    例子有点复杂，先不看
+
+    Collections     例子有点复杂，先不看
+
+
+5、泛型
+    定义：泛型就是编写模板代码来适应任意类型。不必对类型进行强制转换，它通过编译器对类型进行检查
+    注意：泛型的继承关系，可以把ArrayList<Integer>向上转型为List<Integer>（T不能变！），
+        但不能把ArrayList<Integer>向上转型为ArrayList<Number>（T不能变成父类）
+    例子：
+        // 基本使用
+        List<Number> list = new ArrayList<Number>();
+        list.add(Integer.valueOf(33));
+        list.add(Float.valueOf(13.44f));
+        Number first = list.get(0);
+        Number second = list.get(1);
+        System.out.println(first + " " + second);   // 33 13.44
+        // 可以省略后面的Number，编译器可以自动推断泛型类型：
+        List<Number> list2 = new ArrayList<>();
+
+        // 泛型接口
+        // String本身已经实现了Comparable<String>接口,可以直接排序
+        String[] ss = new String[] {"Orange", "Apple", "Pear"};
+        Arrays.sort(ss);
+        System.out.println(Arrays.toString(ss));        // [Apple, Orange, Pear]
+        System.out.println("zello".compareTo("bbb"));   // 24
+        // 自定义一个类实现按name进行排序
+        // 实现泛型接口
+        public class PersonT implements Comparable<PersonT> {
+            String name;
+            int age;
+
+            public PersonT(String name, int age) {
+                this.name = name;
+                this.age = age;
+            }
+            // 让PersonT实现Comparable<T>接口，从而自定义比较逻辑
+            public int compareTo(PersonT other) {
+                return this.name.compareTo(other.name);
+            }
+            public String toString() {
+                return this.name + "," + this.age;
+            }
+        }
+        PersonT[] ps = new PersonT[] {
+                new PersonT("bob", 61),
+                new PersonT("alice", 88),
+                new PersonT("lily", 70)
+        };
+        Arrays.sort(ps);
+        System.out.println(Arrays.toString(ps));        // [alice,88, bob,61, lily,70]
+
+        // 自定义的泛型类
+        public class Pair<T> {
+            private T first;
+            private T second;
+
+            public Pair(T first, T second) {
+                this.first = first;
+                this.second = second;
+            }
+            public T getFirst() {
+                return this.first;
+            }
+            public T getSecond() {
+                return this.second;
+            }
+            // 静态方法不能引用泛型类型<T>，必须定义其他类型（例如<K>）来实现静态泛型方法
+            public static<X> Pair<X> create(X first, X second) {
+                return new Pair<X>(first, second);
+            }
+        }
+        Pair<String> p2 = new Pair<>("hello", "world");
+        String first2 = p2.getFirst();
+        String second2 = p2.getSecond();
+        System.out.println(first2 + ", " + second2);    // hello, world
+        // 所有泛型实例，无论T的类型是什么，getClass()返回同一个Class实例，因为编译后它们全部都是Pair<Object>
+        Pair<Integer> p3 = new Pair<>(99, 88);
+        Class c1 = p2.getClass();
+        Class c2 = p3.getClass();
+        System.out.println((c1 == c2) + ", " + (c1 == Pair.class)); // true, true
+
+        // extends 通配符  暂时先忽略，不学
+
+        // super 通配符  暂时先忽略，不学
+
+
+6、注解（Annotation）
+    定义：是Java语言用于工具处理的标注
+    例子：
+         可以修饰其他注解，这些注解就称为元注解（meta annotation）
+             @Target可以定义Annotation能够被应用于源码的哪些位置
+                 类或接口：ElementType.TYPE；
+                 字段：ElementType.FIELD；
+                 方法：ElementType.METHOD；
+                 构造方法：ElementType.CONSTRUCTOR；
+                 方法参数：ElementType.PARAMETER
+             @Retention定义了Annotation的生命周期
+                 仅编译期：RetentionPolicy.SOURCE；
+                     注解在编译期就被丢掉了
+                     主要由编译器使用，因此我们一般只使用，不编写
+                 仅class文件：RetentionPolicy.CLASS；
+                     注解仅保存在class文件中，它们不会被加载进JVM
+                     主要由底层工具库使用，涉及到class的加载，一般我们很少用到
+                 运行期：RetentionPolicy.RUNTIME
+                     注解会被加载进JVM，并且在运行期可以被程序读取
+                     不但要使用，还经常需要编写
+             @Repeatable可以定义Annotation是否可重复。应用不是特别广泛。
+             @Inherited定义子类是否可继承父类定义的Annotation
+             @override 让编译器检查该方法是否正确地实现了覆写
+
+
+5、Lambda
+    定义：表达式简化了Java的函数式编程
+    例子：
+        String[] arr = new String[]{"Apple", "Orange", "Banana", "Lemon"};
+        // Arrays.sort(arr, (s1, s2) -> {
+        //     return s1.compareTo(s2);
+        // });
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+
+        // 把一个List<String>转换为List<Person>
+        // 方法①
+        List<String> names = List.of("ee", "ff", "gg");
+        List<Person> persons = new ArrayList<>();
+        for (String name: names) {
+            persons.add(new Person(name));
+        }
+        System.out.println(persons);
+        // 方法②  看不懂， map, Person::new
+        List<Person> persons2 = names.stream().map(Person::new).collect(Collectors.toList());
+        System.out.println(persons2);
+
+
+6、
 
 
 
-
-
-    // 输入
-    Scanner scannerObj = new Scanner(System.in);
-    System.out.println("输入你的名字：");
-    String name = scannerObj.nextLine();
-    System.out.println("输入你的年龄：");
-    int age2 = scannerObj.nextInt();
-    System.out.printf("Hi, %s, you are %d years old", name, age2);
-
-
-
-
-2、集合
-
-
-
-3、泛型
-
-
-
-4、注解
-
-
-
-5、
-
-
+X、其它
+// Java编程基本规则：出现问题，不要怀疑Java标准库，要从自身代码找原因。
 
