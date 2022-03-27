@@ -60,10 +60,10 @@ public class ZzzzApplication {
 //        bkObj.testBasic(myArgs);
 
         /*********   java 面向对象  *********/
-        testOOP();
+//        testOOP();
 
         /*********   java 核心类  *********/
-//        testCoreClass();
+        testCoreClass();
 
         /*********   注解  *********/
 //        testAnnotationHaHa();
@@ -783,6 +783,10 @@ public class ZzzzApplication {
         System.out.println(Boolean.parseBoolean("FALSE"));  // false
         // Integer有个getInteger(String)方法，它不是将字符串转换为int，而是把该字符串对应的系统变量转换为Integer
         System.out.println(Integer.getInteger("java.version")); // null
+        // 字符串转整型
+        String sss = "223";
+        System.out.println(Integer.valueOf(sss));       // 223
+        System.out.println(Integer.parseInt(sss));      // 223
         // String -> char[]
         char[] cs = "hello".toCharArray();
         System.out.println(Arrays.toString(cs));            // [h, e, l, l, o]

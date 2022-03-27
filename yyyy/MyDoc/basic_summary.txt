@@ -1,4 +1,9 @@
 1、Java数据类型 & 流程控制
+    Java的数据类型分两种：
+        基本类型：byte，short，int，long，boolean，float，double，char
+        引用类型：所有class和interface类型
+            注意：引用类型可以赋值为null，表示空，但基本类型不能赋值为null
+
     基本数据类型
         整型：byte，short，int，long
         例子：
@@ -540,14 +545,123 @@
         // 学习地址：https://www.liaoxuefeng.com/wiki/1252599548343744/1281795926523938
 
 
+3、核心类
+    字符串相关
+        // 大写字符串
+        String s = "hello".toUpperCase();
+        System.out.println(s);  // HELLO
+
+        // 比较字符串
+        String s1 = "hello11";
+        String s2 = "hello11";
+        System.out.println("字符串比较：" + (s1 == s2));      // 字符串比较：true
+        System.out.println("字符串比较：" + s1.equals(s2));   // 字符串比较：true
+        String s3 = "hello22";
+        String s4 = "HELLo22".toLowerCase();
+        System.out.println("字符串比较：" + (s3 == s4));      // 字符串比较：false
+        System.out.println("字符串比较：" + s3.equals(s4));   // 字符串比较：true
+        System.out.println("字符串比较(忽略大小写)：" + s3.equalsIgnoreCase(s4));  // 字符串比较(忽略大小写)：true
+
+        // 字符串查找
+        System.out.println("hello".contains("ll"));         // true
+        System.out.println("hello".startsWith("he"));       // true
+        System.out.println("hello".endsWith("lo"));         // true
+        System.out.println("hello".indexOf("l"));           // 2
+        String s = "Test string";
+        int n1 = s.indexOf("t");
+        int n2 = s.indexOf("es");
+        int n3 = s.indexOf("t", 4);
+        System.out.println("indexOf函数，传入不同参数，返回的位置分别是：" + n1 + ", " + n2 + ", " + n3); // indexOf函数，传入不同参数，返回的位置分别是：3, 1, 6
+
+        // 截取字符串
+        System.out.println("hello".substring(2));           // llo
+        System.out.println("hello".substring(2, 3));        // l
+
+        // 去除首尾空白字符
+        System.out.println(" \thello\r\n".trim());          // hello
+        // 中文的空格字符\u3000
+        System.out.println("\u3000hello\u3000".strip());    // hello
+        System.out.println(" hello ".stripLeading());       // hello
+        System.out.println(" hello ".stripTrailing());      //  hello
+
+        // isEmpty()和isBlank()来判断字符串是否为空和空白字符串
+        System.out.println("".isEmpty());                   // true
+        System.out.println(" ".isEmpty());                  // false
+        System.out.println(" \n".isBlank());                // true
+        System.out.println(" hello ".isBlank());            // false
+
+        // 替换字符串
+        System.out.println("hello".replace("l", "w"));      // hewwo
+        System.out.println("hello".replace("ll", "~~"));    // he~~o
+        System.out.println("A,,B;C ,D".replaceAll("[\\,\\;\\s]+", ","));    // A,B,C,D
+
+        // 分割字符串
+        String s5 = "A,B,C,D";
+        String[] s5Arr = s5.split("\\,");
+        // String[] s5Arr = s5.split(",");  // 一样的结果
+        System.out.println(Arrays.toString(s5Arr));      // [A, B, C, D]
+
+        // 拼接字符串
+        // ① StringBuilder  高效拼接字符串, 不会每次循环都会创建新的字符串对象
+        String[] namesArr = {"bob", "alice", "grace"};
+        var sb2 = new StringBuilder();
+        sb2.append("hello ");
+        for (String name:namesArr) {
+            sb2.append(name).append(", ");
+        }
+        sb2.delete(sb2.length()-2, sb2.length());
+        sb2.append("!");
+        System.out.println(sb2.toString());     // hello bob, alice, grace!
+        // ② StringJoiner  拼接
+        var sj = new StringJoiner(", ", "hello ", "!");
+        for (String name:namesArr) {
+            sj.add(name);
+        }
+        System.out.println(sj.toString());      // hello bob, alice, grace!
+        // ③ String.join
+        String[] s6Arr = {"x", "y", "z"};
+        String s6 = String.join("--", s6Arr);
+        System.out.println(s6);         // x--y--z
+
+        // 格式化输出
+        // 如果你不确定用啥占位符，那就始终用%s，因为%s可以显示任何数据类型
+        String s7 = "Hi %s, your score is %.2f, your age is %d";
+        System.out.println(String.format(s7, "louis", 88.8, 99));   // Hi louis, your score is 88.80, your age is 99
+        double d2 = 3.131456;
+        System.out.printf("%.2f\n", d2);    // 3.13
+
+    类型转换
+        // 把任意基本类型或引用类型转换为字符串
+        System.out.println(String.valueOf(123));           // 123
+        System.out.println(String.valueOf(45.67));         // 45.67
+        System.out.println(String.valueOf(true));          // true
+        System.out.println(String.valueOf(new Object()));  // java.lang.Object@776ec8df
+
+        // 把字符串转换为int类型
+        System.out.println(Integer.parseInt("123"));    // 123
+        // 数字类型字符串转成包装类型 Integer
+        String sss = "223";
+        System.out.println(Integer.valueOf(sss));       // 223
+        // Integer有个getInteger(String)方法，它不是将字符串转换为int，而是把该字符串对应的系统变量转换为Integer
+        System.out.println(Integer.getInteger("java.version")); // null
+
+        // 字符串转换为boolean类型
+        System.out.println(Boolean.parseBoolean("true"));   // true
+        System.out.println(Boolean.parseBoolean("FALSE"));  // false
+
+        // 字符和字符串互转
+        // String -> char[]
+        char[] cs = "hello".toCharArray();
+        System.out.println(Arrays.toString(cs));            // [h, e, l, l, o]
+        // char[] -> String
+        String s8 = new String(cs);
+        System.out.println(s8);                             // hello
 
 
-3、常规库
-    // 不换行打印
-    System.out.print("A."); // A.
-    // 格式化输出
-    double d2 = 3.131456;
-    System.out.printf("%.2f\n", d2);    // 3.13
+
+
+
+
     // 输入
     Scanner scannerObj = new Scanner(System.in);
     System.out.println("输入你的名字：");
@@ -555,12 +669,7 @@
     System.out.println("输入你的年龄：");
     int age2 = scannerObj.nextInt();
     System.out.printf("Hi, %s, you are %d years old", name, age2);
-    // 字符串查找
-    String s = "Test string";
-    int n1 = s.indexOf("t");
-    int n2 = s.indexOf("es");
-    int n3 = s.indexOf("t", 4);
-    System.out.println("indexOf函数，传入不同参数，返回的位置分别是：" + n1 + ", " + n2 + ", " + n3); // indexOf函数，传入不同参数，返回的位置分别是：3, 1, 6
+
 
 
 
