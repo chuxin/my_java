@@ -87,7 +87,9 @@ public class ZzzzApplication {
         // done
 
         /*********   开始看框架 spring cloud  *********/
-
+        // 1、crud  postman实现
+        // 2、登录 + curd + 页面展示
+        // 3、github上找个完整的项目看看  （不一定做，后面再说）
     }
 
     public static double taxTotal(Income... arr) {
