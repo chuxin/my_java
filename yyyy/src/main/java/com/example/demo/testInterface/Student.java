@@ -1,8 +1,5 @@
 package com.example.demo.testInterface;
 
-import com.example.demo.testInterface.Person;
-import com.example.demo.testInterface.Hello;
-
 public class Student implements Person, Hello {
     public String name;
 

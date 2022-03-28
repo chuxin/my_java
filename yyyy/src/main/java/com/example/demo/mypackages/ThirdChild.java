@@ -1,7 +1,5 @@
 package com.example.demo.mypackages;
 
-import com.example.demo.mypackages.OOPknowledge;
-
 public class ThirdChild extends OOPknowledge {
 
     @Override

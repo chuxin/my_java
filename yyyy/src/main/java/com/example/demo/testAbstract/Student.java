@@ -1,7 +1,5 @@
 package com.example.demo.testAbstract;
 
-import com.example.demo.testAbstract.Person;
-
 public class Student extends Person {
 
     @Override

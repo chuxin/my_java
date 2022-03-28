@@ -1,7 +1,5 @@
 package com.example.demo.testCollections;
 
-import com.example.demo.testCollections.MyStudent;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

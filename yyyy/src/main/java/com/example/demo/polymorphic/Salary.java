@@ -1,7 +1,5 @@
 package com.example.demo.polymorphic;
 
-import com.example.demo.polymorphic.Income;
-
 public class Salary extends Income {
     public final String values = "xxxx";
 

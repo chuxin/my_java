@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import com.example.demo.mypackages.OOPknowledge;
 import com.example.demo.mypackages.BasicKnowledge;
 import com.example.demo.mypackages.FirstChild;
@@ -48,11 +51,11 @@ import com.example.demo.testCollections.User;
 
 import com.example.demo.testFunctionalProgramming.Person;
 
-//@SpringBootApplication
+@SpringBootApplication
 public class ZzzzApplication {
 
     public static void main(String[] args) {
-//        SpringApplication.run(ZzzzApplication.class, args);
+        SpringApplication.run(ZzzzApplication.class, args);
 
         /*********   java 基础  *********/
 //        String[] myArgs = {"aaa", "bbb"};
@@ -84,7 +87,6 @@ public class ZzzzApplication {
         // done
 
         /*********   开始看框架 spring cloud  *********/
-        
 
     }
 
@@ -1099,4 +1101,3 @@ public class ZzzzApplication {
         // super 通配符  暂时先忽略，不学
     }
 }
-
