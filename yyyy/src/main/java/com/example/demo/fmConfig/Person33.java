@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@PropertySource(value = "classpath:person33.properties") // 指向对应的配置文件
+@PropertySource(value = "classpath:Person33.properties") // 指向对应的配置文件， 这里要特别注意大小写 ！！
 @Component
 @ConfigurationProperties(prefix = "person44")
 public class Person33 {
@@ -93,7 +93,7 @@ public class Person33 {
 
     @Override
     public String toString() {
-        return "Person22 { lastName=" + lastName + ", age=" + age + ", boss=" + boss
+        return "Person33 { lastName=" + lastName + ", age=" + age + ", boss=" + boss
                 + ", birth=" + birth + ", maps=" + maps + ", lists=" + lists
                 + ", dog=" + dog;
     }
