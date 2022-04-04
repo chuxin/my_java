@@ -91,7 +91,7 @@ public class HelloController {
     //      application.properties 的配置会覆盖 application.yml 的配置
 
     // Spring Boot默认配置文件
-    // 配置文件加载优先级顺序从大到小
+    // 配置文件加载优先级顺序从大到小，注意：resources，config 的目录名称不能修改
     // application.properties 先加载
     //   yyyy/config/mmm/.
     //   yyyy/config/.
@@ -100,5 +100,48 @@ public class HelloController {
     //   yyyy/src/main/resources/.      ( classpath )
     // application.yml 后加载
     //   yyyy/src/main/resources/application.yml    ( classpath )
+    //
+    // 配置文件的优先级顺序，遵循以下规则：
+    //   先加载 JAR 包外的配置文件，再加载 JAR 包内的配置文件；
+    //     JAR 包外的 application.yml 优先级最高
+    //     创建一个 run-yyyy 目录，其下再新建 application.yml ，并设置上下文路径为“/out-default”，并激活生产环境（prod）Profile
+    //     执行命令 java -jar mybootdemo-0.0.1-SNAPSHOT.jar
+    //     此时项目的优先级顺序为：JAR 包外 application.yml > JAR 包内 application-prod.yml > JAR 包内其他配置文件
+    //   先加载 config 目录内的配置文件，再加载 config 目录外的配置文件；
+    //   先加载 config 子目录下的配置文件，再加载 config 目录下的配置文件；
+    //   先加载 appliction-{profile}.properties/yml，再加载 application.properties/yml；
+    //   先加载 .properties 文件，再加载 .yml 文件。
 
+    // Maven使用
+    // Maven 对项目进行打包时，位于项目根目录下的配置文件是无法被打包进项目的 JAR 包的，因此位于根目录下的默认配置文件无法在 JAR 中生效
+
+    // Spring Boot 指定项目外部配置文件
+    // ① java -jar target/demo-0.0.1-SNAPSHOT.jar --spring.config.location=/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/MyDoc/test/application.properties
+    // 会使项目本身的配置文件失效，只使用外部配置文件
+    //
+    // ② java -jar target/demo-0.0.1-SNAPSHOT.jar --spring.config.additional-location=/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/MyDoc/test/application.properties
+    // 不会使项目本身的配置文件失效，且其优先级是最高的
+    // 因此加载顺序为：
+    // spring.config.additional-location 指定的外部配置文件 /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/MyDoc/test/application.properties
+    // classpath:/config/application.yml
+    // classpath:/application.yml
+
+    // Spring Boot配置加载顺序
+    //
+    // Spring Boot 配置形式及其加载顺序（优先级由高到低）：
+    //   命令行参数
+    //     java -jar {Jar文件名} --{参数1}={参数值1} --{参数2}={参数值2}
+    //     java -jar springbootdemo-0.0.1-SNAPSHOT.jar --server.port=8081 --server.servlet.context-path=/bcb
+    //   来自 java:comp/env 的 JNDI 属性
+    //   Java 系统属性（System.getProperties()）
+    //   操作系统环境变量
+    //   RandomValuePropertySource 配置的 random.* 属性值
+    //   配置文件（YAML 文件、Properties 文件）
+    //   @Configuration 注解类上的 @PropertySource 指定的配置文件
+    //   通过 SpringApplication.setDefaultProperties 指定的默认属性
+
+    // Spring Boot自动配置原理
+    // 这一章讲得比较深奥，跳过
+
+    // SpringBoot 底层使用 slf4j+logback 的方式记录日志
 }

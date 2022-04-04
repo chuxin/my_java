@@ -79,6 +79,9 @@ https://code.ziqiangxuetang.com/java/java-tutorial.html 自强学堂
 ssm是主流，springboot是在spring的基础上做到了开箱即用一些框架工具小伙伴，springcloud则是一种生态。
 
 
+Springboot和SpringMVC区别
+https://www.cnblogs.com/xdyixia/p/9279644.html
+
 Spring、SpringMVC、SpringBoot、SpringCloud概述
 https://www.cnblogs.com/lovebean/p/10652675.html
 
