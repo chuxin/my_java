@@ -91,9 +91,14 @@ public class HelloController {
     //      application.properties 的配置会覆盖 application.yml 的配置
 
     // Spring Boot默认配置文件
-    //
-    //
-    //
-    //
+    // 配置文件加载优先级顺序从大到小
+    // application.properties 先加载
+    //   yyyy/config/mmm/.
+    //   yyyy/config/.
+    //   yyyy/.
+    //   yyyy/src/main/resources/config/.   ( classpath )
+    //   yyyy/src/main/resources/.      ( classpath )
+    // application.yml 后加载
+    //   yyyy/src/main/resources/application.yml    ( classpath )
 
 }
