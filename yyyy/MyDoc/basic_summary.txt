@@ -1384,3 +1384,12 @@ System.out.println();在IntellJ中是输入sout
 %s	格式化字符串
 
 引用类型使用Objects.equals()比较，基本类型使用==比较
+
+
+JavaBean的作用
+通过IDE，可以快速生成getter和setter。例如，在Eclipse中，先输入以下代码：
+public class Person {
+    private String name;
+    private int age;
+}
+然后，点击右键，在弹出的菜单中选择“Source”，“Generate Getters and Setters”，在弹出的对话框中选中需要生成getter和setter方法的字段，点击确定即可由IDE自动完成所有方法代码。

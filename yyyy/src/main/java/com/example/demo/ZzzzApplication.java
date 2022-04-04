@@ -50,12 +50,16 @@ import com.example.demo.testCollections.HisStudent;
 import com.example.demo.testCollections.User;
 
 import com.example.demo.testFunctionalProgramming.Person;
+import org.springframework.context.annotation.ImportResource;
 
+// 方法①  @ImportResource 导入 Spring 配置文件  不推荐
+//@ImportResource(locations = {"classpath:/beans.xml"})
 @SpringBootApplication
 public class ZzzzApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ZzzzApplication.class, args);
+
 
         /*********   java 基础  *********/
 //        String[] myArgs = {"aaa", "bbb"};
@@ -87,6 +91,7 @@ public class ZzzzApplication {
         // done
 
         /*********   开始看框架 spring cloud  *********/
+        // 0. spring boot 文档粗略看一下。看什么？ 目录结构分别干什么用，配置文件分别干什么用
         // 1、crud  postman实现
         // 2、登录 + curd + 页面展示
         // 3、github上找个完整的项目看看  （不一定做，后面再说）
