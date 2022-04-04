@@ -80,5 +80,20 @@ public class HelloController {
     //     spring boot 导入配置文件，跟 spring 无关，感觉像是为了定义一些规范
     //     通过单元测试来验证是否导入成功
 
+    // Spring Boot Profile（多环境配置）
+    // properties 配置     src/main/resources/Person33.properties
+    // yml 配置    src/main/resources/application.yml
+    //
+    // 命令行激活配置  java -jar helloworld-0.0.1-SNAPSHOT.jar  --spring.profiles.active=dev
+    // 虚拟机参数激活  java -Dspring.profiles.active=prod -jar helloworld-0.0.1-SNAPSHOT.jar
+    //
+    // 个人感悟：
+    //      application.properties 的配置会覆盖 application.yml 的配置
+
+    // Spring Boot默认配置文件
+    //
+    //
+    //
+    //
 
 }

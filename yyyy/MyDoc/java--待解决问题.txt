@@ -1,0 +1,15 @@
+1、一个文件里有两个 public class 不行吗， 一个文件里定义两个类，我想都import，一般是不是没有这样的写法
+2、我现在需要在 spring boot 里传入参数  ==
+3、>= java 15 一些特性需要看么，项目有用到吗    sealed，permits
+    1.6    1.8
+    1.8
+4、从Java 14开始，引入了新的Record类，这东西你们之前的项目里一般用得到么
+  BigInteger、BigDecimal   项目里一般用得到么
+  泛型里 extends，super 关键字  项目里用得到么
+5、mvn clean package 打包以后，程序运行不起来
+问题描述：nested exception is java.io.FileNotFoundException: class path resource [person33.properties] cannot be opened because it does not exist
+6、
+7、
+8、
+9、
+

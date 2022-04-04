@@ -1393,3 +1393,14 @@ public class Person {
     private int age;
 }
 然后，点击右键，在弹出的菜单中选择“Source”，“Generate Getters and Setters”，在弹出的对话框中选中需要生成getter和setter方法的字段，点击确定即可由IDE自动完成所有方法代码。
+
+
+==============
+
+MAC 安装 mvn
+brew install mvn
+mvn --version
+mvn clean package   # 将项目打包
+
+
+

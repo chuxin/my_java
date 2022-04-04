@@ -1,5 +1,9 @@
-#数据源配置
+# 默认配置
+server:
+  port: 8080
+
 spring:
+  #数据源配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -9,6 +13,9 @@ spring:
     initialSize: 20
     minIdle: 50
     maxActive: 500
+  # 选择对应的环境配置，这里选择了 test
+  profiles:
+    active: prod
 
 #上下文配置
 #server:
@@ -28,3 +35,33 @@ person:
   dog:
     name: 二哈
     age: 5
+
+---
+# 开发环境
+server:
+  port: 8081
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+# 测试环境
+server:
+  port: 8082
+
+spring:
+  config:
+    activate:
+      on-profile: test
+
+---
+# 生产环境
+server:
+  port: 8083
+
+spring:
+  config:
+    activate:
+      on-profile: prod

@@ -35,6 +35,28 @@ Java高级
 高阶
     springCloud
 
+---
+
+list
+collection
+lombok
+Comparator
+
+应用层面
+    java基础语法
+        基础语法
+        面向对象
+        注解
+        Maven基础
+        泛型
+        集合
+        IO
+        Lambda 基础
+        Spring 开发
+    springBoot（MyBatis）
+    springCloud（概念）
+JVM
+
 参考文档：
     https://www.zhihu.com/question/56110328     黑马程序员
     https://zhuanlan.zhihu.com/p/106682327      Java学习教程路线图（2020完整版）
