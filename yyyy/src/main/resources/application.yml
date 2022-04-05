@@ -32,6 +32,15 @@ spring:
   profiles:
     active: prod
 
+# mybatis:
+#   # 指定 mapper.xml 的位置
+#   mapper-locations: classpath:mybatis/mapper/*.xml
+#   # 扫描实体类的位置, 此处指明实体类的包在哪里，这样在 mapper.xml 中就可以不写实体类的全路径名
+#   type-aliases-package: com.example.demo
+#   configuration:
+#     # 驼峰命名。可以不用配置，默认是开启的
+#     map-underscore-to-camel-case: true
+
 ---
 # 开发环境
 server:

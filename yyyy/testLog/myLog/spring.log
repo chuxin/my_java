@@ -212,3 +212,247 @@
 2022-04-05 === [main] === ERROR === com.example.demo.ZzzzApplicationTests === - error 级别日志
 2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
 2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - Starting ZzzzApplicationTests using Java 16.0.1 on macdeMacBook-Pro.local with PID 18049 (started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplicationTests === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - Started ZzzzApplicationTests in 7.026 seconds (JVM running for 8.001)
+2022-04-05 === [main] === TRACE === com.example.demo.ZzzzApplicationTests === - trace 级别日志
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplicationTests === - debug 级别日志
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - info 级别日志
+2022-04-05 === [main] === WARN  === com.example.demo.ZzzzApplicationTests === - warn 级别日志
+2022-04-05 === [main] === ERROR === com.example.demo.ZzzzApplicationTests === - error 级别日志
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 20156 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 946 ms
+2022-04-05 === [main] === WARN  === o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext === - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'Person' is already mapped to the value 'com.example.demo.testAbstract.Person'.
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Stopping service [Tomcat]
+2022-04-05 === [main] === INFO  === o.s.b.a.l.ConditionEvaluationReportLoggingListener === - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-04-05 === [main] === ERROR === org.springframework.boot.SpringApplication === - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'Person' is already mapped to the value 'com.example.demo.testAbstract.Person'.
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:953)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:740)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:415)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at com.example.demo.ZzzzApplication.main(ZzzzApplication.java:61)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'Person' is already mapped to the value 'com.example.demo.testAbstract.Person'.
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 19 common frames omitted
+Caused by: org.apache.ibatis.type.TypeException: The alias 'Person' is already mapped to the value 'com.example.demo.testAbstract.Person'.
+	at org.apache.ibatis.type.TypeAliasRegistry.registerAlias(TypeAliasRegistry.java:157)
+	at org.apache.ibatis.type.TypeAliasRegistry.registerAlias(TypeAliasRegistry.java:147)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1694)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:534)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:491)
+	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:633)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:179)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$557e7990.CGLIB$sqlSessionFactory$1(<generated>)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$557e7990$$FastClassBySpringCGLIB$$a7b77255.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$557e7990.sqlSessionFactory(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 20 common frames omitted
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 20446 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1028 ms
+2022-04-05 === [main] === WARN  === o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext === - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Stopping service [Tomcat]
+2022-04-05 === [main] === INFO  === o.s.b.a.l.ConditionEvaluationReportLoggingListener === - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-04-05 === [main] === ERROR === org.springframework.boot.SpringApplication === - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:953)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:740)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:415)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at com.example.demo.ZzzzApplication.main(ZzzzApplication.java:61)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 19 common frames omitted
+Caused by: org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+	at org.apache.ibatis.type.TypeAliasRegistry.registerAlias(TypeAliasRegistry.java:157)
+	at org.apache.ibatis.type.TypeAliasRegistry.registerAlias(TypeAliasRegistry.java:147)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1694)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:534)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:491)
+	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:633)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:179)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$78509b4.CGLIB$sqlSessionFactory$1(<generated>)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$78509b4$$FastClassBySpringCGLIB$$8ce5fb61.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$78509b4.sqlSessionFactory(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 20 common frames omitted
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 20574 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1036 ms
+2022-04-05 === [main] === WARN  === o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext === - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Stopping service [Tomcat]
+2022-04-05 === [main] === INFO  === o.s.b.a.l.ConditionEvaluationReportLoggingListener === - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-04-05 === [main] === ERROR === org.springframework.boot.SpringApplication === - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:953)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:740)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:415)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at com.example.demo.ZzzzApplication.main(ZzzzApplication.java:61)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 19 common frames omitted
+Caused by: org.apache.ibatis.type.TypeException: The alias 'User' is already mapped to the value 'com.example.demo.testCollections.User'.
+	at org.apache.ibatis.type.TypeAliasRegistry.registerAlias(TypeAliasRegistry.java:157)
+	at org.apache.ibatis.type.TypeAliasRegistry.registerAlias(TypeAliasRegistry.java:147)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1694)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:534)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:491)
+	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:633)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:179)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$78509b4.CGLIB$sqlSessionFactory$1(<generated>)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$78509b4$$FastClassBySpringCGLIB$$8ce5fb61.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$78509b4.sqlSessionFactory(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 20 common frames omitted
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 20632 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1019 ms
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9996 (http) with context path '/aaa'
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 2.064 seconds (JVM running for 7.526)

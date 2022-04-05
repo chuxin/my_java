@@ -93,13 +93,13 @@ public class ZzzzApplication {
         /*********   开始看框架 spring boot  *********/
         // 1. spring boot 文档粗略看一下。看什么？ 目录结构分别干什么用，配置文件分别干什么用
         // 2、教程基本要看完，涉及纯理论的，原理性的东西，可以先忽略
-        // 3、crud  postman实现
 
         /*********   make a summary (spring boot)   *********/
-        //
+        // 
 
         /*********   开始看框架 spring  *********/
         // http://c.biancheng.net/spring/
+        // 0、crud  postman实现
         // 1、登录 + curd + 页面展示
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
 
@@ -110,7 +110,7 @@ public class ZzzzApplication {
         // 把之前没看的，没学的，都看一遍
         // https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610
 
-        /*********   make a summary (spring)   *********/
+        /*********   make a summary at second time (basic)   *********/
         //
     }
 

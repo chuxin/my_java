@@ -1402,5 +1402,12 @@ brew install mvn
 mvn --version
 mvn clean package   # 将项目打包
 
+===============
+
+ String xx = null;
+        System.out.println(xx);     // null
+//        System.out.println(xx.trim());  // Cannot invoke "String.trim()" because "xx" is null
+
+================
 
 
