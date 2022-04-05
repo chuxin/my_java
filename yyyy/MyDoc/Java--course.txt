@@ -82,8 +82,9 @@ ssm是主流，springboot是在spring的基础上做到了开箱即用一些框�
 Springboot和SpringMVC区别
 https://www.cnblogs.com/xdyixia/p/9279644.html
 
-Spring、SpringMVC、SpringBoot、SpringCloud概述
-https://www.cnblogs.com/lovebean/p/10652675.html
+Spring、SpringMVC和Springboot的区别   我觉得讲得特别好，通俗易懂
+https://www.cnblogs.com/kaffeetrinken/articles/8545444.html
+
 
 第一是JDK8，第二是JDK11
  大部分都还是jdk8，毕竟是长期支持版本；如果是个全新项目建议使用jdk11，也是一个长期支持版本
