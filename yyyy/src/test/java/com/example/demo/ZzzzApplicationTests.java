@@ -9,6 +9,10 @@ import org.springframework.context.ApplicationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 @SpringBootTest
 class ZzzzApplicationTests {
     // IOC 容器
@@ -16,6 +20,11 @@ class ZzzzApplicationTests {
     ApplicationContext ioc;
     @Autowired
     Person person;
+
+    @Autowired
+    DataSource dataSource;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -54,5 +63,15 @@ class ZzzzApplicationTests {
         logger.info("info 级别日志");
         logger.warn("warn 级别日志");
         logger.error("error 级别日志");
+    }
+
+    @Test
+    public void testJDBC() throws SQLException {
+        System.out.println("默认数据源为：" + dataSource.getClass());
+        System.out.println("数据库连接实例：" + dataSource.getConnection());
+        //访问数据库
+        System.out.println(Integer.class);
+        Integer i = jdbcTemplate.queryForObject("select count(1) from `user`", Integer.class);
+        System.out.println("user表共有：" + i + " 条数据");
     }
 }

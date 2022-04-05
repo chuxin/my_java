@@ -144,4 +144,47 @@ public class HelloController {
     // 这一章讲得比较深奥，跳过
 
     // SpringBoot 底层使用 slf4j+logback 的方式记录日志
+    // 具体使用参考： src/test/java/com/example/demo/ZzzzApplicationTests.java
+
+    // Spring Boot静态资源映射
+    // WebJars 映射
+    //   到 https://www.webjars.org/ 寻找需要的插件，选择 classic WebJars
+    //   pom.xml 里添加依赖关系。
+    //     <dependency>
+    //      <groupId>org.webjars</groupId>
+    //      <artifactId>jquery</artifactId>
+    //      <version>3.6.0</version>
+    //     </dependency>
+    //   右击 pom.xml 文件，Maven -> load project， 更新配置文件对应的本地插件库
+    //
+    // 默认资源映射
+    //   优先级顺序
+    //      classpath:/META-INF/resources/     (src/main/resources/META-INF/resources/test.html)
+    //      classpath:/resources/              (src/main/resources/resources/test.html)
+    //      classpath:/static/                 (src/main/resources/static/test.html)
+    //      classpath:/public/                 (src/main/resources/public/test.html)
+
+    // Spring Boot JDBC访问数据库
+    // ① 导入 JDBC 插件
+    //   <!--导入JDBC的场景启动器-->
+    //   <dependency>
+    //       <groupId>org.springframework.boot</groupId>
+    //       <artifactId>spring-boot-starter-data-jdbc</artifactId>
+    //   </dependency>
+    //    <!--导入数据库驱动-->
+    //   <dependency>
+    //       <groupId>mysql</groupId>
+    //       <artifactId>mysql-connector-java</artifactId>
+    //       <scope>runtime</scope>
+    //   </dependency>
+    // ② 配置数据源 application.yml
+    //   spring:
+    //     datasource:
+    //       username: root
+    //       password: root
+    //       url: jdbc:mysql://127.0.0.1:3306/bianchengbang_jdbc
+    //       driver-class-name: com.mysql.cj.jdbc.Driver
+    // ③ 连接数据库
+
+    // Spring Boot数据源配置原理  先忽略
 }

@@ -103,3 +103,112 @@
 2022-04-05 === [http-nio-9996-exec-1] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Initializing Servlet 'dispatcherServlet'
 2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Completed initialization in 0 ms
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 10042 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 668 ms
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9996 (http) with context path '/aaa'
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 1.292 seconds (JVM running for 6.727)
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Initializing Servlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Completed initialization in 0 ms
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 10081 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 655 ms
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9996 (http) with context path '/aaa'
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 1.262 seconds (JVM running for 6.639)
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Initializing Servlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Completed initialization in 0 ms
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 10154 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 628 ms
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9996 (http) with context path '/aaa'
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 1.21 seconds (JVM running for 6.664)
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Initializing Servlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Completed initialization in 0 ms
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 10239 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 650 ms
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9996 (http) with context path '/aaa'
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 1.233 seconds (JVM running for 6.657)
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Initializing Servlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Completed initialization in 0 ms
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 10804 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 655 ms
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9996 (http) with context path '/aaa'
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 1.27 seconds (JVM running for 6.667)
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Initializing Servlet 'dispatcherServlet'
+2022-04-05 === [http-nio-9996-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet === - Completed initialization in 1 ms
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 13552 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9996 (http)
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-04-05 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-05 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-04-05 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 893 ms
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-04-05 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9996 (http) with context path '/aaa'
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 1.88 seconds (JVM running for 7.347)
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - Starting ZzzzApplicationTests using Java 16.0.1 on macdeMacBook-Pro.local with PID 13577 (started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplicationTests === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - Started ZzzzApplicationTests in 7.032 seconds (JVM running for 8.025)
+2022-04-05 === [main] === TRACE === com.example.demo.ZzzzApplicationTests === - trace 级别日志
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplicationTests === - debug 级别日志
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - info 级别日志
+2022-04-05 === [main] === WARN  === com.example.demo.ZzzzApplicationTests === - warn 级别日志
+2022-04-05 === [main] === ERROR === com.example.demo.ZzzzApplicationTests === - error 级别日志
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - Starting ZzzzApplicationTests using Java 16.0.1 on macdeMacBook-Pro.local with PID 13678 (started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplicationTests === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - The following 1 profile is active: "prod"
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-04-05 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 11 ms. Found 0 JDBC repository interfaces.
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-04-05 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - Started ZzzzApplicationTests in 7.061 seconds (JVM running for 7.974)
+2022-04-05 === [main] === TRACE === com.example.demo.ZzzzApplicationTests === - trace 级别日志
+2022-04-05 === [main] === DEBUG === com.example.demo.ZzzzApplicationTests === - debug 级别日志
+2022-04-05 === [main] === INFO  === com.example.demo.ZzzzApplicationTests === - info 级别日志
+2022-04-05 === [main] === WARN  === com.example.demo.ZzzzApplicationTests === - warn 级别日志
+2022-04-05 === [main] === ERROR === com.example.demo.ZzzzApplicationTests === - error 级别日志
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-04-05 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.

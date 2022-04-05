@@ -78,6 +78,10 @@ https://code.ziqiangxuetang.com/java/java-tutorial.html 自强学堂
 (Struts也可以不用学，0202年了，有Struts的项目几乎为零了)。hibernate在公司使用偏少一些了，更多了解它的思想。
 ssm是主流，springboot是在spring的基础上做到了开箱即用一些框架工具小伙伴，springcloud则是一种生态。
 
+如果想要学好SpringBoot，首先要从如下知识点进行循序渐近的方式来学习。
+1、Java编程语言基础开始。熟悉掌握Java SE部分。(变量的声明、条件语句、常用类库、集合、）等相关是必要的，所有的技术语言的基本都离不开SE技术。
+2、Spring、SpringMVC框架要熟练应用。毕竟SpringBoot是基于Spring基础来构建的。
+
 
 Springboot和SpringMVC区别
 https://www.cnblogs.com/xdyixia/p/9279644.html
