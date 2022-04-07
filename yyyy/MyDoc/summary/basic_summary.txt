@@ -1401,6 +1401,7 @@ MAC 安装 mvn
 brew install mvn
 mvn --version
 mvn clean package   # 将项目打包
+# Maven 对项目进行打包时，位于项目根目录下的配置文件是无法被打包进项目的 JAR 包的，因此位于根目录下的默认配置文件无法在 JAR 中生效
 
 ===============
 

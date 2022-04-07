@@ -6,8 +6,7 @@
 4、从Java 14开始，引入了新的Record类，这东西你们之前的项目里一般用得到么
   BigInteger、BigDecimal   项目里一般用得到么
   泛型里 extends，super 关键字  项目里用得到么
-5、mvn clean package 打包以后，程序运行不起来
-问题描述：nested exception is java.io.FileNotFoundException: class path resource [person33.properties] cannot be opened because it does not exist
+5、
 6、
 7、
 8、

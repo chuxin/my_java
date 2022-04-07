@@ -95,7 +95,7 @@ public class ZzzzApplication {
         // 2、教程基本要看完，涉及纯理论的，原理性的东西，可以先忽略
 
         /*********   make a summary (spring boot)   *********/
-        // 
+        // done
 
         /*********   开始看框架 spring  *********/
         // http://c.biancheng.net/spring/
@@ -112,6 +112,7 @@ public class ZzzzApplication {
 
         /*********   make a summary at second time (basic)   *********/
         //
+        
     }
 
     public static double taxTotal(Income... arr) {
