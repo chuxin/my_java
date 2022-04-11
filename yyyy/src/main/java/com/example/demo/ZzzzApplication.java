@@ -112,7 +112,9 @@ public class ZzzzApplication {
 
         /*********   make a summary at second time (basic)   *********/
         //
-        
+
+
+
     }
 
     public static double taxTotal(Income... arr) {
