@@ -3,15 +3,13 @@ package com.demo.ccc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class Grade {
-    private static final Log LOGGER = LogFactory.getLog(Grade.class);
+public class Parent22 {
+    private static final Log LOGGER = LogFactory.getLog(Parent22.class);
     private Integer gradeId;
     private String gradeName;
 
-    public Grade(Integer gradeId, String gradeName) {
-        LOGGER.info("正在执行 【Grade】 的有参数的构造方法，参数分别为gradeId:" + gradeId + ", gradeName：" + gradeName);
-        this.gradeId = gradeId;
-        this.gradeName = gradeName;
+    // 无参构造方法, 在没有其他带参构造方法的情况下，可以省略
+    public Parent22() {
     }
 
     public Integer getGradeId() {
@@ -32,7 +30,7 @@ public class Grade {
 
     @Override
     public String toString() {
-        return "【Grade】 {" + "gradeId=" + gradeId + ", gradeName=" + gradeName + "}";
+        return "【Parent22】 {" + "gradeId=" + gradeId + ", gradeName=" + gradeName + "}";
     }
 
 }

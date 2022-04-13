@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="helloworld22" class="HelloWorld">
         <property name="message" value="lalala22"></property>
@@ -15,4 +17,25 @@
         <constructor-arg name="gradeId" value="4"></constructor-arg>
         <constructor-arg name="gradeName" value="年级名称"></constructor-arg>
     </bean>
+
+    <bean id="Child22" class="com.demo.ccc.Child22">
+        <property name="id" value="5"></property>
+        <property name="childNo" value="44"></property>
+        <property name="parent22Obj" ref="Parent22"></property>
+    </bean>
+    <bean id="Parent22" class="com.demo.ccc.Parent22">
+        <property name="gradeId" value="6"></property>
+        <property name="gradeName" value="初中名称"></property>
+    </bean>
+
+    <bean id="employee33" class="com.demo.ccc.Employee33" p:empNo="88" p:empName="louis聊聊" p:dept-ref="dept33"></bean>
+    <bean id="dept33" class="com.demo.ccc.Dept33" p:deptNo="99" p:deptName="jim理论"></bean>
+
+    <bean id="employee44" class="com.demo.ccc.Employee44" c:empNo="66" c:empName="louis|心心" c:dept-ref="dept44"></bean>
+    <bean id="dept44" class="com.demo.ccc.Dept44" c:deptNo="77" c:deptName="哈哈44"></bean>
 </beans>
+
+
+
+
+

@@ -10,7 +10,7 @@ public class Student {
     private Grade gradeObj;
 
     public Student(Integer id, Integer studentNo, Grade gradeObj) {
-        LOGGER.info("正在执行 Student 的有参数的构造方法，参数分别为id:" + id + ", studentNo:" + studentNo + ", gradeObj：" + gradeObj);
+        LOGGER.info("正在执行 【Student】 的有参数的构造方法，参数分别为id:" + id + ", studentNo:" + studentNo + ", gradeObj：" + gradeObj);
         this.id = id;
         this.studentNo = studentNo;
         this.gradeObj = gradeObj;
@@ -18,6 +18,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", studentNo=" + studentNo + ", gradeObj=" + gradeObj + "}";
+        return "【Student】 {" + "id=" + id + ", studentNo=" + studentNo + ", gradeObj=" + gradeObj + "}";
     }
 }

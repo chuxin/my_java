@@ -1,4 +1,4 @@
-import com.demo.ccc.Student;
+import com.demo.ccc.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -10,6 +10,7 @@ public class MainApp {
     private static final Log LOGGER = LogFactory.getLog(MainApp.class);
 
     public static void main(String[] args) {
+        System.out.println("---创建一个测试Bean---");
         // 方法一，没成功
 //        ApplicationContext context = new FileSystemXmlApplicationContext("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/aaaa/src/Test.xml");
         // 方法二
@@ -22,10 +23,28 @@ public class MainApp {
         obj.getMessage();
 
         // 构造函数注入
+        System.out.println("---构造函数注入【System.out.println】---");
+        LOGGER.info("---构造函数注入【LOGGER.info】---");
         Student stuObj = context.getBean("Student", Student.class);
         LOGGER.info(stuObj.toString());
+
         // setter 注入
-        
+        System.out.println("---setter 注入【System.out.println】---");      // 注意这里的sout信息 比 上面LOGGER.info先输出
+        LOGGER.info("---setter 注入【LOGGER.info】---");
+        Parent22 parent22Obj = context.getBean("Parent22", Parent22.class);
+        LOGGER.info(parent22Obj.toString());
+        Child22 child22Obj = context.getBean("Child22", Child22.class);
+        LOGGER.info(child22Obj.toString());
+
+        // 短命名空间注入
+        System.out.println("---短命名空间注入【System.out.println】---");      // 注意这里的sout信息 比 上面LOGGER.info先输出
+        LOGGER.info("---短命名空间注入【LOGGER.info】---");
+        // p 命名空间注入
+        Employee33 emp33Obj = context.getBean("employee33", Employee33.class);
+        LOGGER.info(emp33Obj.toString());
+        // c 命名空间注入
+        Employee44 emp44Obj = context.getBean("employee44", Employee44.class);
+        LOGGER.info(emp44Obj.toString());
     }
 
 }
@@ -55,5 +74,13 @@ public class MainApp {
 //  构造函数注入
 //  setter 注入
 //  短命名空间注入
+//        短命名空间	    简化的 XML 配置	                        说明
+//        p 命名空间	    <bean> 元素中嵌套的 <property> 元素	    是 setter 方式属性注入的一种快捷实现方式
+//        c 命名空间	    <bean> 元素中嵌套的 <constructor> 元素	    是构造函数属性注入的一种快捷实现方式
+//
+//        使用 p 命名空间注入依赖时，必须注意以下 3 点：
+//            Java 类中必须有 setter 方法；
+//            Java 类中必须有无参构造器（类中不包含任何带参构造函数的情况，无参构造函数默认存在）；
+//            在使用 p 命名空间实现属性注入前，XML 配置的 <beans> 元素内必须先导入 p 命名空间的 XML 约束。
 
-
+// Spring注入内部Bean
