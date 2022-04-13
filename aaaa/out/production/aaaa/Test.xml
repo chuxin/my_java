@@ -5,4 +5,14 @@
     <bean id="helloworld22" class="HelloWorld">
         <property name="message" value="lalala22"></property>
     </bean>
+
+    <bean id="Student" class="com.demo.ccc.Student">
+        <constructor-arg name="id" value="2"></constructor-arg>
+        <constructor-arg name="studentNo" value="33"></constructor-arg>
+        <constructor-arg name="gradeObj" ref="Grade"></constructor-arg>
+    </bean>
+    <bean id="Grade" class="com.demo.ccc.Grade">
+        <constructor-arg name="gradeId" value="4"></constructor-arg>
+        <constructor-arg name="gradeName" value="年级名称"></constructor-arg>
+    </bean>
 </beans>
