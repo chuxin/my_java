@@ -33,6 +33,97 @@
 
     <bean id="employee44" class="com.demo.ccc.Employee44" c:empNo="66" c:empName="louis|心心" c:dept-ref="dept44"></bean>
     <bean id="dept44" class="com.demo.ccc.Dept44" c:deptNo="77" c:deptName="哈哈44"></bean>
+
+    <bean id="employee55" class="com.demo.ccc.Employee55">
+        <property name="empNo" value="001"></property>
+        <property name="empName" value="小王"></property>
+        <property name="dept">
+            <!--  内部bean -->
+            <bean class="com.demo.ccc.Dept55">
+                <property name="deptNo" value="002"></property>
+                <property name="deptName" value="技术部门"></property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="employee66" class="com.demo.ccc.Employee66">
+        <constructor-arg name="empNo" value="003"></constructor-arg>
+        <constructor-arg name="empName" value="小李"></constructor-arg>
+        <constructor-arg name="dept">
+            <!--  内部bean -->
+            <bean class="com.demo.ccc.Dept66">
+                <constructor-arg name="deptNo" value="004"></constructor-arg>
+                <constructor-arg name="deptName" value="产品部"></constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="collectionObject11" class="com.demo.ccc.CollectionObject">
+        <property name="collId" value="111"></property>
+        <property name="collName" value="名字1号"></property>
+    </bean>
+    <bean id="collectionObject22" class="com.demo.ccc.CollectionObject">
+        <property name="collId" value="222"></property>
+        <property name="collName" value="名字2号"></property>
+    </bean>
+    <bean id="collectionObject33" class="com.demo.ccc.CollectionObject">
+        <property name="collId" value="333"></property>
+        <property name="collName" value="名字3号"></property>
+    </bean>
+    <bean id="javaCollection" class="com.demo.ccc.JavaCollection">
+        <!-- 数组类型 -->
+        <property name="courses">
+            <array>
+                <value>java</value>
+                <value>php</value>
+                <value>c++</value>
+            </array>
+        </property>
+        <!-- list 类型 -->
+        <property name="list">
+            <list>
+                <value>张三</value>
+                <value>李四</value>
+                <value>王五</value>
+                <value>溜溜</value>
+            </list>
+        </property>
+        <!-- maps 类型 -->
+        <property name="maps">
+            <map>
+                <entry key="jack" value="杰克"></entry>
+                <entry key="louis" value="路易斯"></entry>
+            </map>
+        </property>
+        <!-- set 类型 -->
+        <property name="sets">
+            <set>
+                <value>sqlserver999</value>
+                <value>redis</value>
+            </set>
+        </property>
+        <!-- 对象数组类型 -->
+        <property name="cos">
+            <array>
+                <ref bean="collectionObject11"></ref>
+                <ref bean="collectionObject22"></ref>
+                <ref bean="collectionObject33"></ref>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="exampleBean" class="com.demo.ccc.ExampleBean">
+        <!--使用null标签 注入 Null 值-->
+        <property name="propertyNull">
+            <null></null>
+        </property>
+        <!--使用空字符串-->
+        <property name="propertyEmpty" value=""></property>
+        <!--字面量-->
+        <property name="propertyLiteral" value="&lt;C语言中文网&gt;"></property>
+        <property name="propertyLiteral22">
+            <value><![CDATA[<<www.baidu.com>>]]></value>
+        </property>
+    </bean>
 </beans>
 
 

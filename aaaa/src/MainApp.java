@@ -45,6 +45,27 @@ public class MainApp {
         // c 命名空间注入
         Employee44 emp44Obj = context.getBean("employee44", Employee44.class);
         LOGGER.info(emp44Obj.toString());
+
+        // Spring注入内部Bean
+        //   setter 方式注入内部 Bean
+        Employee55 emp55Obj = context.getBean("employee55", Employee55.class);
+        LOGGER.info(emp55Obj.toString());
+        //   构造函数方式注入内部 Bean
+        Employee66 emp66Obj = context.getBean("employee66", Employee66.class);
+        LOGGER.info(emp66Obj.toString());
+
+        // Spring注入集合
+        //   <list>	用于注入 list 类型的值，允许重复
+        //   <set>	用于注入 set 类型的值，不允许重复
+        //   <map>	用于注入 key-value 的集合，其中 key 和 value 都可以是任意类型
+        //   <props>	用于注入 key-value 的集合，其中 key  和 value 都是字符串类型
+        //   在集合中设置对象类型的值
+        JavaCollection jcObj = context.getBean("javaCollection", JavaCollection.class);
+        LOGGER.info(jcObj.toString());
+
+        // Spring注入其他类型的属性
+        ExampleBean ebObj = context.getBean("exampleBean", ExampleBean.class);
+        LOGGER.info(ebObj.toString());
     }
 
 }
@@ -84,3 +105,8 @@ public class MainApp {
 //            在使用 p 命名空间实现属性注入前，XML 配置的 <beans> 元素内必须先导入 p 命名空间的 XML 约束。
 
 // Spring注入内部Bean
+
+
+
+
+
