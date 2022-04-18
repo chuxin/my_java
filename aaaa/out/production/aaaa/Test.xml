@@ -123,7 +123,47 @@
         <property name="propertyLiteral22">
             <value><![CDATA[<<www.baidu.com>>]]></value>
         </property>
+        <!-- 注入依赖的 Bean , 级联属性赋值 -->
+        <property name="dependBean" ref="dependBean"></property>
+        <property name="dependBean.dependProperty" value="我是级联属性赋值,忽略下面的 dependBean 的定义及赋值"></property>
     </bean>
+
+    <!--对 dependBean 进行定义-->
+    <bean id="dependBean" class="com.demo.ccc.DependBean">
+        <property name="dependProperty" value="对属性进行赋值1000"></property>
+    </bean>
+
+    <!-- singleton 作用域 -->
+    <bean id="singletonBean" class="com.demo.ccc.PatternBean" scope="singleton">
+        <property name="str" value="我是单例作用域"></property>
+    </bean>
+    <!-- prototype 作用域 -->
+    <bean id="prototypeBean" class="com.demo.ccc.PatternBean" scope="prototype">
+        <property name="str" value="我是原型作用域"></property>
+    </bean>
+
+    <!-- 自定义 Bean 的生命周期-->
+    <!-- 通过接口实现-->
+    <bean id="lifeCycleBean" class="com.demo.ccc.LifeCycleBean">
+        <property name="webName" value="网站名字"></property>
+        <property name="url" value="网站地址"></property>
+    </bean>
+    <!-- 通过 XML 配置实现-->
+    <bean id="lifeCycleBean22" class="com.demo.ccc.LifeCycleBean22" init-method="init" destroy-method="destroy">
+        <property name="webName" value="网站名字22"></property>
+        <property name="url" value="网站地址22"></property>
+    </bean>
+
+    <bean id="myWorld" class="com.demo.ccc.MyWorld" init-method="init" destroy-method="destroy">
+        <property name="message" value="你好，世界，我在测试注册处理器"></property>
+    </bean>
+    <!-- 注册处理器-->
+    <bean class="com.demo.ccc.MyWorldBean"></bean>
+    <bean class="com.demo.ccc.MyWorldBean22"></bean>
+
+
+
+
 </beans>
 
 

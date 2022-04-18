@@ -106,6 +106,13 @@ public class ZzzzApplication {
         /*********   make a summary (spring)   *********/
         //
 
+        /*********   开始看框架 mybatis & ibatis  *********/
+        //
+
+        /*********   make a summary (mybatis)   *********/
+        //
+
+
         /*********   回过头看最初的教程   *********/
         // 把之前没看的，没学的，都看一遍
         // https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610
