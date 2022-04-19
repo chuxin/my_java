@@ -12,3 +12,9 @@ https://blog.csdn.net/qq_41404112/article/details/107313840
 Maven 包源地址： https://repo.maven.apache.org/maven2/
 
 
+问题描述：
+    intellij  Cannot resolve symbol 'springframework'
+原因：
+    粗暴的把项目从一个目录拷贝到另一个目录导致, lib 目录下的包关联不到
+解决办法：
+    File -> project structure -> problems -> [fix]
