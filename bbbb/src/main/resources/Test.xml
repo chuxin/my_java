@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="helloworld22" class="HelloWorld">
+        <property name="message" value="lalala22"></property>
+    </bean>
+
+    <bean id="Student" class="com.demo.ccc.Student">
+        <constructor-arg name="id" value="2"></constructor-arg>
+        <constructor-arg name="studentNo" value="33"></constructor-arg>
+        <constructor-arg name="gradeObj" ref="Grade"></constructor-arg>
+    </bean>
+    <bean id="Grade" class="com.demo.ccc.Grade">
+        <constructor-arg name="gradeId" value="4"></constructor-arg>
+        <constructor-arg name="gradeName" value="年级名称"></constructor-arg>
+    </bean>
+
+    <bean id="Child22" class="com.demo.ccc.Child22">
+        <property name="id" value="5"></property>
+        <property name="childNo" value="44"></property>
+        <property name="parent22Obj" ref="Parent22"></property>
+    </bean>
+    <bean id="Parent22" class="com.demo.ccc.Parent22">
+        <property name="gradeId" value="6"></property>
+        <property name="gradeName" value="初中名称"></property>
+    </bean>
+
+    <bean id="employee33" class="com.demo.ccc.Employee33" p:empNo="88" p:empName="louis聊聊" p:dept-ref="dept33"></bean>
+    <bean id="dept33" class="com.demo.ccc.Dept33" p:deptNo="99" p:deptName="jim理论"></bean>
+
+    <bean id="employee44" class="com.demo.ccc.Employee44" c:empNo="66" c:empName="louis|心心" c:dept-ref="dept44"></bean>
+    <bean id="dept44" class="com.demo.ccc.Dept44" c:deptNo="77" c:deptName="哈哈44"></bean>
+
+    <bean id="employee55" class="com.demo.ccc.Employee55">
+        <property name="empNo" value="001"></property>
+        <property name="empName" value="小王"></property>
+        <property name="dept">
+            <!--  内部bean -->
+            <bean class="com.demo.ccc.Dept55">
+                <property name="deptNo" value="002"></property>
+                <property name="deptName" value="技术部门"></property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="employee66" class="com.demo.ccc.Employee66">
+        <constructor-arg name="empNo" value="003"></constructor-arg>
+        <constructor-arg name="empName" value="小李"></constructor-arg>
+        <constructor-arg name="dept">
+            <!--  内部bean -->
+            <bean class="com.demo.ccc.Dept66">
+                <constructor-arg name="deptNo" value="004"></constructor-arg>
+                <constructor-arg name="deptName" value="产品部"></constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="collectionObject11" class="com.demo.ccc.CollectionObject">
+        <property name="collId" value="111"></property>
+        <property name="collName" value="名字1号"></property>
+    </bean>
+    <bean id="collectionObject22" class="com.demo.ccc.CollectionObject">
+        <property name="collId" value="222"></property>
+        <property name="collName" value="名字2号"></property>
+    </bean>
+    <bean id="collectionObject33" class="com.demo.ccc.CollectionObject">
+        <property name="collId" value="333"></property>
+        <property name="collName" value="名字3号"></property>
+    </bean>
+    <bean id="javaCollection" class="com.demo.ccc.JavaCollection">
+        <!-- 数组类型 -->
+        <property name="courses">
+            <array>
+                <value>java</value>
+                <value>php</value>
+                <value>c++</value>
+            </array>
+        </property>
+        <!-- list 类型 -->
+        <property name="list">
+            <list>
+                <value>张三</value>
+                <value>李四</value>
+                <value>王五</value>
+                <value>溜溜</value>
+            </list>
+        </property>
+        <!-- maps 类型 -->
+        <property name="maps">
+            <map>
+                <entry key="jack" value="杰克"></entry>
+                <entry key="louis" value="路易斯"></entry>
+            </map>
+        </property>
+        <!-- set 类型 -->
+        <property name="sets">
+            <set>
+                <value>sqlserver999</value>
+                <value>redis</value>
+            </set>
+        </property>
+        <!-- 对象数组类型 -->
+        <property name="cos">
+            <array>
+                <ref bean="collectionObject11"></ref>
+                <ref bean="collectionObject22"></ref>
+                <ref bean="collectionObject33"></ref>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="exampleBean" class="com.demo.ccc.ExampleBean">
+        <!--使用null标签 注入 Null 值-->
+        <property name="propertyNull">
+            <null></null>
+        </property>
+        <!--使用空字符串-->
+        <property name="propertyEmpty" value=""></property>
+        <!--字面量-->
+        <property name="propertyLiteral" value="&lt;C语言中文网&gt;"></property>
+        <property name="propertyLiteral22">
+            <value><![CDATA[<<www.baidu.com>>]]></value>
+        </property>
+        <!-- 注入依赖的 Bean , 级联属性赋值 -->
+        <property name="dependBean" ref="dependBean"></property>
+        <property name="dependBean.dependProperty" value="我是级联属性赋值,忽略下面的 dependBean 的定义及赋值"></property>
+    </bean>
+
+    <!--对 dependBean 进行定义-->
+    <bean id="dependBean" class="com.demo.ccc.DependBean">
+        <property name="dependProperty" value="对属性进行赋值1000"></property>
+    </bean>
+
+    <!-- singleton 作用域 -->
+    <bean id="singletonBean" class="com.demo.ccc.PatternBean" scope="singleton">
+        <property name="str" value="我是单例作用域"></property>
+    </bean>
+    <!-- prototype 作用域 -->
+    <bean id="prototypeBean" class="com.demo.ccc.PatternBean" scope="prototype">
+        <property name="str" value="我是原型作用域"></property>
+    </bean>
+
+    <!-- 自定义 Bean 的生命周期-->
+    <!-- 通过接口实现-->
+    <bean id="lifeCycleBean" class="com.demo.ccc.LifeCycleBean">
+        <property name="webName" value="网站名字"></property>
+        <property name="url" value="网站地址"></property>
+    </bean>
+    <!-- 通过 XML 配置实现-->
+    <bean id="lifeCycleBean22" class="com.demo.ccc.LifeCycleBean22" init-method="init" destroy-method="destroy">
+        <property name="webName" value="网站名字22"></property>
+        <property name="url" value="网站地址22"></property>
+    </bean>
+
+    <bean id="myWorld" class="com.demo.ccc.MyWorld" init-method="init" destroy-method="destroy">
+        <property name="message" value="你好，世界，我在测试注册处理器"></property>
+    </bean>
+    <!-- 注册处理器-->
+    <bean class="com.demo.ccc.MyWorldBean"></bean>
+    <bean class="com.demo.ccc.MyWorldBean22"></bean>
+
+    <!-- bean 继承-->
+    <bean id="animal" class="com.demo.ccc.Animal">
+        <property name="name" value="动物类"></property>
+        <property name="age" value="95"></property>
+    </bean>
+    <bean id="animalDog" class="com.demo.ccc.AnimalDog" parent="animal">
+        <property name="name" value="小狗"></property>
+        <property name="age" value="91"></property>
+        <property name="call" value="旺旺叫"></property>
+    </bean>
+</beans>
+
+
+
+
+

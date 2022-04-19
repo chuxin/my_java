@@ -1,0 +1,14 @@
+问题描述：
+    java: 错误: 不支持发行版本 5
+解决办法：
+    https://blog.csdn.net/qq_51263533/article/details/120209830
+        采用了文章中 4.半劳永逸解决 的办法
+
+
+Maven搭建Spring框架
+https://blog.csdn.net/qq_41404112/article/details/107313840
+
+
+Maven 包源地址： https://repo.maven.apache.org/maven2/
+
+

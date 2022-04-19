@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-autowire="byType">
+
+    <bean id="dept779988" class="com.demo.ccc.Dept77">
+        <property name="deptNo" value="111"></property>
+        <property name="deptName" value="技术部"></property>
+    </bean>
+    <bean id="employee77" class="com.demo.ccc.Employee77" autowire="default">
+        <property name="empNo" value="002"></property>
+        <property name="empName" value="小郭"></property>
+    </bean>
+</beans>

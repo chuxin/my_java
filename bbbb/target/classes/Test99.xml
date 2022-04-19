@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dept779988" class="com.demo.ccc.Dept77">
+        <constructor-arg name="deptNo" value="111"></constructor-arg>
+        <constructor-arg name="deptName" value="技术部"></constructor-arg>
+    </bean>
+    <bean id="employee77" class="com.demo.ccc.Employee77" autowire="constructor">
+        <constructor-arg name="empNo" value="002"></constructor-arg>
+        <constructor-arg name="empName" value="小郭"></constructor-arg>
+    </bean>
+</beans>
