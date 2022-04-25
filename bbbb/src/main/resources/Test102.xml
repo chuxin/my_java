@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 定义目标（target）对象 -->
+    <bean id="aopDao" class="com.demo.dao.AopDaoImpl"></bean>
+    <!-- 定义增强-->
+    <bean id="beforeAdvice" class="com.demo.advice.AopDaoBeforeAdvice"></bean>
+    <!-- 给 UserDao 配置代理对象-->
+    <bean id="aopDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- 设置目标对象 -->
+        <property name="target" ref="aopDao"></property>
+        <!-- 设置实现的接口 ,value 中写接口的全路径 -->
+        <property name="proxyInterfaces" value="com.demo.dao.AopDao"></property>
+        <!-- 需要使用value:增强 Bean 的名称 -->
+        <property name="interceptorNames" value="beforeAdvice"></property>
+    </bean>
+</beans>

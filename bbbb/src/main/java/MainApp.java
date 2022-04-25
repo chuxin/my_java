@@ -1,8 +1,13 @@
 import com.demo.ccc.*;
 import com.demo.ccc.MyWorld;
+import com.demo.config.AopDaoConfig;
+import com.demo.controller.UserController;
+import com.demo.dao.AopDao;
+import com.demo.dao.OrderDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -153,6 +158,116 @@ public class MainApp {
         System.out.println(empObj100);
 
         // Spring自动装配（基于注解）
+        // Spring 默认不使用注解装配 Bean，因此我们需要在 XML 配置中，通过 <context:component-scan> 元素开启 Spring Beans的自动扫描功能。
+        //     自动从扫描指定的包（base-package 属性设置）及其子包下的所有类，如果类上使用了 @Component 注解，就将该类装配到容器中。
+        //
+        //  使用注解定义 Bean
+        //  注解                              说明
+        //  @Component	        该注解用于描述 Spring 中的 Bean，它是一个泛化的概念，仅仅表示容器中的一个组件（Bean），并且可以作用在应用的任何层次，例如 Service 层、Dao 层等。
+        //                      使用时只需将该注解标注在相应类上即可。
+        //  @Repository	        该注解用于将数据访问层（Dao 层）的类标识为 Spring 中的 Bean，其功能与 @Component 相同。
+        //  @Service	        该注解通常作用在业务层（Service 层），用于将业务层的类标识为 Spring 中的 Bean，其功能与 @Component 相同。
+        //  @Controller	        该注解通常作用在控制层（如 Struts2 的 Action、SpringMVC 的 Controller），用于将控制层的类标识为 Spring 中的 Bean，其功能与 @Component 相同。\
+        //
+        //  基于注解方式实现依赖注入
+        //  注解	                说明
+        //  @Autowired	        可以应用到 Bean 的属性变量、setter 方法、非 setter 方法及构造函数等，默认按照 Bean 的类型进行装配。
+        //
+        //  @Autowired      注解默认按照 Bean 的类型进行装配，默认情况下它要求依赖对象必须存在，如果允许 null 值，可以设置它的 required 属性为 false。如果我们想使用按照名称（byName）来装配，可以结合 @Qualifier 注解一起使用
+        //                  @Resource	作用与 Autowired 相同，区别在于 @Autowired 默认按照 Bean 类型装配，而 @Resource 默认按照 Bean 的名称进行装配。
+        //                  @Resource 中有两个重要属性：name 和 type。
+        //                  Spring 将 name 属性解析为 Bean 的实例名称，type 属性解析为 Bean 的实例类型。
+        //                  如果都不指定，则先按 Bean 实例名称装配，如果不能匹配，则再按照 Bean 类型进行装配；如果都无法匹配，则抛出 NoSuchBeanDefinitionException 异常。
+        //  @Qualifier	        与 @Autowired 注解配合使用，会将默认的按 Bean 类型装配修改为按 Bean 的实例名称装配，Bean 的实例名称由 @Qualifier 注解的参数指定。
+        ApplicationContext context_11 = new ClassPathXmlApplicationContext("Test101.xml");
+        UserController ucObj = context_11.getBean("userController22", UserController.class);
+        ucObj.doStr();
+
+
+
+
+
+
+        // Spring AOP编程
+        // Spring AOP 的底层是通过以下 2 种动态代理机制，为目标对象（Target Bean）执行横向织入的
+        //      JDK 动态代理	Spring AOP 默认的动态代理方式，若目标对象实现了若干接口，Spring 使用 JDK 的 java.lang.reflect.Proxy 类进行代理。
+        //      CGLIB 动态代理	若目标对象没有实现任何接口，Spring 则使用 CGLIB 库生成目标对象的子类，以实现对目标对象的代理。
+        // Spring AOP 通知类型（Advice）
+        //      @Aspect	            用于定义一个切面。
+        //          可以通过 @Aspect 注解将一个 Bean 定义为切面。
+        //          在启用了 @AspectJ 注解支持的情况下，Spring 会自动将 IoC 容器（ApplicationContext）中的所有使用了 @Aspect 注解的 Bean 识别为一个切面。
+        //      @Pointcut	        用于定义一个切入点。
+        //      @Before	            用于定义前置通知，相当于 BeforeAdvice。
+        //      @AfterReturning	    用于定义后置通知，相当于 AfterReturningAdvice。
+        //      @Around	            用于定义环绕通知，相当于 MethodInterceptor。
+        //      @AfterThrowing	    用于定义抛出通知，相当于 ThrowAdvice。
+        //      @After	            用于定义最终通知，不管是否异常，该通知都会执行。
+        //      @DeclareParents	    用于定义引介通知，相当于 IntroductionInterceptor（不要求掌握）。
+        // Spring AOP 切面类型
+        //      一般切面：对目标对象（Target）中的所有方法连接点进行拦截
+        //      切点切面：用来表示带切点的切面，我们可以通过包名、类名、方法名等信息更加灵活的定义切面中的切入点，提供更具有适用性的切面
+        //      引介切面：特殊的切面，它应用于类层面上，所以引介切面适用 ClassFilter 进行定义
+        // 自动代理 3 种方案，不需要在 XML 配置中通过 ProxyFactoryBean 创建 代理对象（Proxy Bean）
+        //      BeanNameAutoProxyCreator：根据 Bean 名称创建代理对象。
+        //      DefaultAdvisorAutoProxyCreator：根据 Advisor 本身包含信息创建代理对象。
+        //      AnnotationAwareAspectJAutoProxyCreator：基于 Bean 中的 AspectJ 注解进行自动代理对象。
+
+        // 一般切面的 AOP 开发
+        System.out.println("=====一般切面的 AOP 开发=====");
+        ApplicationContext context_12 = new ClassPathXmlApplicationContext("Test102.xml");
+        AopDao aopDaoObj = context_12.getBean("aopDaoProxy", AopDao.class);
+        aopDaoObj.add();
+        aopDaoObj.delete();
+        aopDaoObj.get();
+        aopDaoObj.modify();
+
+        // 自动代理
+        System.out.println("=====自动代理 - BeanNameAutoProxyCreator====");
+        ApplicationContext context_13 = new ClassPathXmlApplicationContext("Test103.xml");
+        AopDao aopDaoObj22 = context_13.getBean("aopDao", AopDao.class);
+        aopDaoObj22.add();
+        aopDaoObj22.delete();
+        aopDaoObj22.get();
+        aopDaoObj22.modify();
+
+        OrderDao orderDaoObj = context_13.getBean("orderDao", OrderDao.class);
+        orderDaoObj.add();
+        orderDaoObj.adds();
+        orderDaoObj.delete();
+        orderDaoObj.get();
+        orderDaoObj.modify();
+
+        System.out.println("=====自动代理 - DefaultAdvisorAutoProxyCreator====");
+        ApplicationContext context_14 = new ClassPathXmlApplicationContext("Test104.xml");
+        AopDao aopDaoObj33 = context_14.getBean("aopDao", AopDao.class);
+        aopDaoObj33.add();
+        aopDaoObj33.delete();
+        aopDaoObj33.get();
+        aopDaoObj33.modify();
+
+        OrderDao orderDaoObj33 = context_14.getBean("orderDao", OrderDao.class);
+        orderDaoObj33.add();
+        orderDaoObj33.adds();
+        orderDaoObj33.delete();
+        orderDaoObj33.get();
+        orderDaoObj33.modify();
+
+        // Spring使用AspectJ进行AOP开发（基于注解）
+        // 干了些什么事情：
+        // ① 定义一个 dao 类
+        // ② 定义一个 实现dao 类
+        // ③ 定义一个 bean，对 实现dao 类里的方法各种 前置通知、后置通知，一顿操作
+        // ④ 定义一个 daoConfig 类，把 bean 注入到 springIOC
+        // ⑤ 主函数里 new springIOC , 调用 dao 类，来实现功能
+        System.out.println("=====Spring使用AspectJ进行AOP开发（基于注解）====");
+        ApplicationContext context_15 = new AnnotationConfigApplicationContext(AopDaoConfig.class);
+        AopDao aopDaoObj44 = context_15.getBean("aopDao", AopDao.class);
+        aopDaoObj44.add();
+        aopDaoObj44.modify();
+        aopDaoObj44.delete();
+        aopDaoObj44.get();
+
+        // Spring JdbcTemplate（使用详解）
 
     }
 
