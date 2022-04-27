@@ -4,6 +4,8 @@ import com.demo.config.AopDaoConfig;
 import com.demo.controller.UserController;
 import com.demo.dao.AopDao;
 import com.demo.dao.OrderDao;
+import com.demo.entity.MyUser;
+import com.demo.service.MyUserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainApp {
     private static final Log LOGGER = LogFactory.getLog(MainApp.class);
@@ -179,14 +183,10 @@ public class MainApp {
         //                  Spring 将 name 属性解析为 Bean 的实例名称，type 属性解析为 Bean 的实例类型。
         //                  如果都不指定，则先按 Bean 实例名称装配，如果不能匹配，则再按照 Bean 类型进行装配；如果都无法匹配，则抛出 NoSuchBeanDefinitionException 异常。
         //  @Qualifier	        与 @Autowired 注解配合使用，会将默认的按 Bean 类型装配修改为按 Bean 的实例名称装配，Bean 的实例名称由 @Qualifier 注解的参数指定。
+        // No.1  因为自动扫描包的问题，不兼容
         ApplicationContext context_11 = new ClassPathXmlApplicationContext("Test101.xml");
         UserController ucObj = context_11.getBean("userController22", UserController.class);
         ucObj.doStr();
-
-
-
-
-
 
         // Spring AOP编程
         // Spring AOP 的底层是通过以下 2 种动态代理机制，为目标对象（Target Bean）执行横向织入的
@@ -259,6 +259,7 @@ public class MainApp {
         // ③ 定义一个 bean，对 实现dao 类里的方法各种 前置通知、后置通知，一顿操作
         // ④ 定义一个 daoConfig 类，把 bean 注入到 springIOC
         // ⑤ 主函数里 new springIOC , 调用 dao 类，来实现功能
+        // No.2  因为自动扫描包的问题，不兼容
         System.out.println("=====Spring使用AspectJ进行AOP开发（基于注解）====");
         ApplicationContext context_15 = new AnnotationConfigApplicationContext(AopDaoConfig.class);
         AopDao aopDaoObj44 = context_15.getBean("aopDao", AopDao.class);
@@ -267,11 +268,62 @@ public class MainApp {
         aopDaoObj44.delete();
         aopDaoObj44.get();
 
-        // Spring JdbcTemplate（使用详解）
+        // Spring JdbcTemplate（使用详解）    No.3  因为自动扫描包的问题，不兼容
+        // 干了些什么事情：
+        // ① 定义一个DB表实体类 MyUser          表字段的 set & get
+        // ② 定义一个 MyUserDao 接口类          对 MyUser 表的操作定义接口，增删改查，统计，按什么查询等等，都是跟数据库打交道
+        // ③ 定义一个 MyUserDaoImpl 类         对 MyUser 表的操作实现接口
+        // ④ 定义一个 MyUserService 接口类      调用 MyUserDao 接口类 实现 对 MyUser 表的操作，对 MyUser 业务的操作，都是接口
+        // ⑤ 定义一个 MyUserServiceImpl 类      具体实现接口
+        // ⑥ 定义一个 jdbc.properties ，配置数据库
+        // ⑦ 定义一个 Test110.xml 实现以上bean的自动扫描，纳入 IOC
+//        ApplicationContext context_16 = new ClassPathXmlApplicationContext("Test110.xml");
+//        MyUserService musObj = context_16.getBean("myUserService222", MyUserService.class);
+//
+//        MyUser myUser = new MyUser();
+//        myUser.setUserName("小张");
+//        myUser.setStatus("离线");
+//        int i = musObj.addMyUser(myUser);
+//        System.out.println("新增用户成功 " + i);
+//
+//        MyUser myUser22 = new MyUser();
+//        myUser22.setUserName("小张");
+//        myUser22.setStatus("在线");
+//        int u = musObj.updateMyUser(myUser22);
+//        System.out.println("修改用户成功 " + u);
+//
+//        List<Object[]> batchArgs = new ArrayList<>();
+//        Object[] o1 = {"小明", "在线"};
+//        Object[] o2 = {"小龙", "离线"};
+//        Object[] o3 = {"小林", "在线"};
+//        Object[] o4 = {"小李", "在线"};
+//        batchArgs.add(o1);
+//        batchArgs.add(o2);
+//        batchArgs.add(o3);
+//        batchArgs.add(o4);
+//        musObj.batchAddMyUser(batchArgs);
+//        System.out.println("批量增加完毕");
+//
+//        MyUser myUser33 = new MyUser();
+//        myUser33.setStatus("在线");
+//        int count = musObj.countMyUser(myUser33);
+//        System.out.println("在线用户的个数为：" + count);
+//
+//        List<MyUser> myUsersList = musObj.getMyUserList(myUser33);
+//        System.out.println("在线用户查询：");
+//        for (MyUser muObj:myUsersList) {
+//            System.out.println("用户ID：" + muObj.getUserId() + ", 用户名：" + muObj.getUserName() + ", 状态：" + muObj.getStatus());
+//        }
 
+        // Spring事务（Transaction）
+
+        // Spring基于注解实现事务管理
+
+        
     }
 
 }
+
 
 // 创建 spring项目，输出第一个 helloworld
 // https://blog.csdn.net/qq_46631566/article/details/118114677
