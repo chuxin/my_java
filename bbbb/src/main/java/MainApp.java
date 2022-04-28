@@ -5,7 +5,9 @@ import com.demo.controller.UserController;
 import com.demo.dao.AopDao;
 import com.demo.dao.OrderDao;
 import com.demo.entity.MyUser;
+import com.demo.entity.Order22;
 import com.demo.service.MyUserService;
+import com.demo.service.Order22Service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -184,9 +187,9 @@ public class MainApp {
         //                  如果都不指定，则先按 Bean 实例名称装配，如果不能匹配，则再按照 Bean 类型进行装配；如果都无法匹配，则抛出 NoSuchBeanDefinitionException 异常。
         //  @Qualifier	        与 @Autowired 注解配合使用，会将默认的按 Bean 类型装配修改为按 Bean 的实例名称装配，Bean 的实例名称由 @Qualifier 注解的参数指定。
         // No.1  因为自动扫描包的问题，不兼容
-        ApplicationContext context_11 = new ClassPathXmlApplicationContext("Test101.xml");
-        UserController ucObj = context_11.getBean("userController22", UserController.class);
-        ucObj.doStr();
+//        ApplicationContext context_11 = new ClassPathXmlApplicationContext("Test101.xml");
+//        UserController ucObj = context_11.getBean("userController22", UserController.class);
+//        ucObj.doStr();
 
         // Spring AOP编程
         // Spring AOP 的底层是通过以下 2 种动态代理机制，为目标对象（Target Bean）执行横向织入的
@@ -261,12 +264,12 @@ public class MainApp {
         // ⑤ 主函数里 new springIOC , 调用 dao 类，来实现功能
         // No.2  因为自动扫描包的问题，不兼容
         System.out.println("=====Spring使用AspectJ进行AOP开发（基于注解）====");
-        ApplicationContext context_15 = new AnnotationConfigApplicationContext(AopDaoConfig.class);
-        AopDao aopDaoObj44 = context_15.getBean("aopDao", AopDao.class);
-        aopDaoObj44.add();
-        aopDaoObj44.modify();
-        aopDaoObj44.delete();
-        aopDaoObj44.get();
+//        ApplicationContext context_15 = new AnnotationConfigApplicationContext(AopDaoConfig.class);
+//        AopDao aopDaoObj44 = context_15.getBean("aopDao", AopDao.class);
+//        aopDaoObj44.add();
+//        aopDaoObj44.modify();
+//        aopDaoObj44.delete();
+//        aopDaoObj44.get();
 
         // Spring JdbcTemplate（使用详解）    No.3  因为自动扫描包的问题，不兼容
         // 干了些什么事情：
@@ -315,11 +318,52 @@ public class MainApp {
 //            System.out.println("用户ID：" + muObj.getUserId() + ", 用户名：" + muObj.getUserName() + ", 状态：" + muObj.getStatus());
 //        }
 
+
         // Spring事务（Transaction）
-
+        // Spring 中提供了以下隔离级别
+        //      ISOLATION_DEFAULT	        使用后端数据库默认的隔离级别
+        //      ISOLATION_READ_UNCOMMITTED	允许读取尚未提交的更改，可能导致脏读、幻读和不可重复读
+        //      ISOLATION_READ_COMMITTED	Oracle 默认级别，允许读取已提交的并发事务，防止脏读，可能出现幻读和不可重复读
+        //      ISOLATION_REPEATABLE_READ	MySQL 默认级别，多次读取相同字段的结果是一致的，防止脏读和不可重复读，可能出现幻读
+        //      ISOLATION_SERIALIZABLE	    完全服从 ACID 的隔离级别，防止脏读、不可重复读和幻读
+        //
+        // 事务传播行为（propagation behavior）：当一个事务方法被另一个事务方法调用时，这个事务方法应该如何运行。
+        //      例如，事务方法 A 在调用事务方法 B 时，B 方法是继续在调用者 A 方法的事务中运行呢，还是为自己开启一个新事务运行，这就是由事务方法 B 的事务传播行为决定的。
+        // Spring 提供了以下 7 种不同的事务传播行为
+        //      PROPAGATION_MANDATORY	    支持当前事务，如果不存在当前事务，则引发异常。
+        //      PROPAGATION_NESTED	        如果当前事务存在，则在嵌套事务中执行。
+        //      PROPAGATION_NEVER	        不支持当前事务，如果当前事务存在，则引发异常。
+        //      PROPAGATION_NOT_SUPPORTED	不支持当前事务，始终以非事务方式执行。
+        //      PROPAGATION_REQUIRED	    默认传播行为，如果存在当前事务，则当前方法就在当前事务中运行，如果不存在，则创建一个新的事务，并在这个新建的事务中运行。
+        //      PROPAGATION_REQUIRES_NEW	创建新事务，如果已经存在事务则暂停当前事务。
+        //      PROPAGATION_SUPPORTS	    支持当前事务，如果不存在事务，则以非事务方式执行。
+        //
+        // TransactionStatus 接口
+        //      boolean  hasSavepoint()	    获取是否存在保存点
+        //      boolean  isCompleted()	    获取事务是否完成
+        //      boolean  isNewTransaction()	获取是否是新事务
+        //      boolean  isRollbackOnly()	获取事务是否回滚
+        //      void     setRollbackOnly()	设置事务回滚
+        //
+        // @Transactional 注解包含多个属性，其中常用属性如下表。
+        //      事务属性	            说明
+        //      propagation	        指定事务的传播行为。
+        //      isolation	        指定事务的隔离级别。
+        //      read-only	        指定是否为只读事务。
+        //      timeout	            表示超时时间，单位为“秒”；声明的事务在指定的超时时间后，自动回滚，避免事务长时间不提交会回滚导致的数据库资源的占用。
+        //      rollback-for	    指定事务对于那些类型的异常应当回滚，而不提交。
+        //      no-rollback-for	    指定事务对于那些异常应当继续运行，而不回滚。
+        //
         // Spring基于注解实现事务管理
-
-        
+        ApplicationContext context_17 = new ClassPathXmlApplicationContext("Test111.xml");
+        Order22Service o22sObj = context_17.getBean("order22Service", Order22Service.class);
+        Order22 order22Obj = new Order22();
+        order22Obj.setProductId("1");
+        order22Obj.setCount(30);
+        order22Obj.setMoney(new BigDecimal(600));
+        order22Obj.setUserId("1");
+        order22Obj.setStatus(0);
+        o22sObj.createOrder(order22Obj);
     }
 
 }
