@@ -98,10 +98,7 @@ public class ZzzzApplication {
         // done
 
         /*********   开始看框架 spring  *********/
-        // http://c.biancheng.net/spring/
-        // 0、crud  postman实现
-        // 1、登录 + curd + 页面展示
-        // 2、github上找个完整的项目看看  （不一定做，后面再说）
+        // done
 
         /*********   make a summary (spring)   *********/
         //
@@ -111,7 +108,9 @@ public class ZzzzApplication {
 
         /*********   make a summary (mybatis)   *********/
         //
-
+        // 0、crud  postman实现
+        // 1、登录 + curd + 页面展示
+        // 2、github上找个完整的项目看看  （不一定做，后面再说）
 
         /*********   回过头看最初的教程   *********/
         // 把之前没看的，没学的，都看一遍

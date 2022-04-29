@@ -17,6 +17,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -379,7 +382,28 @@ public class MainApp {
         tlObj.getMessage();
         log22.info("代码执行完成了");
 
+        // Spring SpEL表达式语言 Spring Expression Language（简称 SpEL）
+        // 表达式语言一般是用最简单的形式完成最主要的工作，以此减少工作量。
 
+        // 输出一个简单的字符串
+        // 构造解析器
+        ExpressionParser parser = new SpelExpressionParser();
+        // 解析器解析字符串表达式
+        Expression exp = parser.parseExpression("'hello,c语言'");
+        // 获取表达式的值
+        String message = (String) exp.getValue();
+        System.out.println(message);
+
+        // 使用 SpEL 调用 concat() 方法
+        Expression exp2 = parser.parseExpression("'welcome, xx'.concat('!!')");
+        System.out.println((String) exp2.getValue());
+
+        // 使用 SpEL 调用 String 的属性 bytes，将字符串转换为字节数组
+        Expression exp3 = parser.parseExpression("'good job中国'.bytes");
+        byte[] bytes = (byte[]) exp3.getValue();
+        for (int i = 0; i< bytes.length; i++) {
+            System.out.print(bytes[i] + " ");
+        }
     }
 
 }
