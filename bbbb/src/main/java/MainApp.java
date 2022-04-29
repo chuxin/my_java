@@ -6,10 +6,13 @@ import com.demo.dao.AopDao;
 import com.demo.dao.OrderDao;
 import com.demo.entity.MyUser;
 import com.demo.entity.Order22;
+import com.demo.mylog.TestLog;
 import com.demo.service.MyUserService;
 import com.demo.service.Order22Service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -21,6 +24,7 @@ import java.util.List;
 
 public class MainApp {
     private static final Log LOGGER = LogFactory.getLog(MainApp.class);
+    private static final Logger log22 = LoggerFactory.getLogger(MainApp.class);
 
     public static void main(String[] args) {
         System.out.println("---创建一个测试Bean---");
@@ -280,6 +284,7 @@ public class MainApp {
         // ⑤ 定义一个 MyUserServiceImpl 类      具体实现接口
         // ⑥ 定义一个 jdbc.properties ，配置数据库
         // ⑦ 定义一个 Test110.xml 实现以上bean的自动扫描，纳入 IOC
+        // note:数据库开启一下
 //        ApplicationContext context_16 = new ClassPathXmlApplicationContext("Test110.xml");
 //        MyUserService musObj = context_16.getBean("myUserService222", MyUserService.class);
 //
@@ -355,15 +360,26 @@ public class MainApp {
         //      no-rollback-for	    指定事务对于那些异常应当继续运行，而不回滚。
         //
         // Spring基于注解实现事务管理
-        ApplicationContext context_17 = new ClassPathXmlApplicationContext("Test111.xml");
-        Order22Service o22sObj = context_17.getBean("order22Service", Order22Service.class);
-        Order22 order22Obj = new Order22();
-        order22Obj.setProductId("1");
-        order22Obj.setCount(30);
-        order22Obj.setMoney(new BigDecimal(600));
-        order22Obj.setUserId("1");
-        order22Obj.setStatus(0);
-        o22sObj.createOrder(order22Obj);
+        // note:数据库开启一下
+//        ApplicationContext context_17 = new ClassPathXmlApplicationContext("Test111.xml");
+//        Order22Service o22sObj = context_17.getBean("order22Service", Order22Service.class);
+//        Order22 order22Obj = new Order22();
+//        order22Obj.setProductId("1");
+//        order22Obj.setCount(30);
+//        order22Obj.setMoney(new BigDecimal(600));
+//        order22Obj.setUserId("1");
+//        order22Obj.setStatus(0);
+//        o22sObj.createOrder(order22Obj);
+
+        // Spring整合日志框架Log4j2
+        System.out.println("=====Spring整合日志框架Log4j2====");
+        ApplicationContext context_18 = new ClassPathXmlApplicationContext("Test120.xml");
+        log22.info("正在从容器中获取 TestLog 的 bean");
+        TestLog tlObj = context_18.getBean("testLog", TestLog.class);
+        tlObj.getMessage();
+        log22.info("代码执行完成了");
+
+
     }
 
 }
