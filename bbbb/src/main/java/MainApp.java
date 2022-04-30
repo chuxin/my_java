@@ -401,8 +401,8 @@ public class MainApp {
         // 使用 SpEL 调用 String 的属性 bytes，将字符串转换为字节数组
         Expression exp3 = parser.parseExpression("'good job中国'.bytes");
         byte[] bytes = (byte[]) exp3.getValue();
-        for (int i = 0; i< bytes.length; i++) {
-            System.out.print(bytes[i] + " ");
+        for (int j = 0; j< bytes.length; j++) {
+            System.out.print(bytes[j] + " ");
         }
     }
 

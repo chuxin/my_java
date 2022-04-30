@@ -726,19 +726,410 @@
         public int[] batchUpdate(String sql, List<Object[]> batchArgs, final int[] argTypes)
             argTypes：需要注入的 SQL 参数的 JDBC 类型；
             batchArgs：表示需要传入到 SQL 语句的参数。
+    例子：
+        ① 定义一个DB表实体类 MyUser          表字段的 set & get
+            CREATE TABLE `my_user` (
+              `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户 ID',
+              `user_name` varchar(255) DEFAULT NULL COMMENT '用户名',
+              `status` varchar(255) DEFAULT NULL COMMENT '用户状态',
+              PRIMARY KEY (`user_id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+            public class MyUser {
+                private Integer userId;
+                private String userName;
+                private String status;
+            }
+        ② 定义一个 MyUserDao 接口类          对 MyUser 表的操作定义接口，增删改查，统计，按什么查询等等，都是跟数据库打交道
+        ③ 定义一个 MyUserDaoImpl 类         对 MyUser 表的操作实现接口
+            @Repository
+            public class MyUserDaoImpl implements MyUserDao {
+                @Resource
+                private JdbcTemplate jdbcTemplate;
 
+                @Override
+                public int addMyUser(MyUser myUser) {
+                    String sql = "insert into `my_user` (`my_user`.user_name, `my_user`.`status`) values (?, ?);";
+                    int update = jdbcTemplate.update(sql, myUser.getUserName(), myUser.getStatus());
+                    return update;
+                }
+                @Override
+                public int updateMyUser(MyUser myUser) {
+                    String sql = "UPDATE `my_user` SET status=? WHERE user_name=?;";
+                    return jdbcTemplate.update(sql, myUser.getStatus(), myUser.getUserName());
+                }
+                @Override
+                public int delete(MyUser myUser) {
+                    String sql = "DELETE FROM `my_user` where user_name=?;";
+                    return jdbcTemplate.update(sql, myUser.getUserName());
+                }
+                @Override
+                public int count(MyUser myUser) {
+                    String sql = "SELECT COUNT(*) FROM `my_user` where `status`=?;";
+                    return jdbcTemplate.queryForObject(sql, Integer.class, myUser.getStatus());
+                }
+                @Override
+                public List<MyUser> getList(MyUser myUser) {
+                    String sql = "SELECT * FROM `my_user` where `status`=?;";
+                    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<MyUser>(MyUser.class), myUser.getStatus());
+                }
+                @Override
+                public MyUser getMyUser(MyUser myUser) {
+                    String sql = "SELECT * FROM `my_user` where `user_id`=?;";
+                    return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<MyUser>(MyUser.class), myUser.getUserId());
+                }
+                @Override
+                public void batchAddMyUser(List<Object[]> batchArgs) {
+                    String sql = "INSERT into `my_user` (`my_user`.user_name,`my_user`.`status`) VALUES(?,?);";
+                    jdbcTemplate.batchUpdate(sql, batchArgs);
+                }
+            }
+        ④ 定义一个 MyUserService 接口类      调用 MyUserDao 接口类 实现 对 MyUser 表的操作，对 MyUser 业务的操作，都是接口
+        ⑤ 定义一个 MyUserServiceImpl 类      具体实现接口
+            @Service("myUserService222")
+            public class MyUserServiceImpl implements MyUserService {
+                @Resource
+                private MyUserDao myUserDao;
 
-
+                @Override
+                public int addMyUser(MyUser myUser) {
+                    return myUserDao.addMyUser(myUser);
+                }
+                @Override
+                public int updateMyUser(MyUser myUser) {
+                    return myUserDao.updateMyUser(myUser);
+                }
+                @Override
+                public int deleteMyUser(MyUser myUser) {
+                    return myUserDao.delete(myUser);
+                }
+                @Override
+                public int countMyUser(MyUser myUser) {
+                    return myUserDao.count(myUser);
+                }
+                @Override
+                public List<MyUser> getMyUserList(MyUser myUser) {
+                    return myUserDao.getList(myUser);
+                }
+                @Override
+                public MyUser getMyUser(MyUser myUser) {
+                    return myUserDao.getMyUser(myUser);
+                }
+                @Override
+                public void batchAddMyUser(List<Object[]> batchArgs) {
+                    myUserDao.batchAddMyUser(batchArgs);
+                }
+            }
+        ⑥ 定义一个 jdbc.properties ，配置数据库
+            jdbc.driver=com.mysql.cj.jdbc.Driver
+            jdbc.url=jdbc:mysql://127.0.0.1:8889/springboot
+            jdbc.username=root
+            jdbc.password=root
+        ⑦ 定义一个 Test110.xml 实现以上bean的自动扫描，纳入 IOC
+            <!--开启组件扫描-->
+            <context:component-scan base-package="com.demo"></context:component-scan>
+            <!--引入 jdbc.properties 中的配置-->
+            <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+            <!--定义数据源 Bean-->
+            <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+                <!--数据库连接地址-->
+                <property name="url" value="${jdbc.url}"/>
+                <!--数据库的用户名-->
+                <property name="username" value="${jdbc.username}"/>
+                <!--数据库的密码-->
+                <property name="password" value="${jdbc.password}"/>
+                <!--数据库驱动-->
+                <property name="driverClassName" value="${jdbc.driver}"/>
+            </bean>
+            <!--定义JdbcTemplate Bean-->
+            <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+                <!--将数据源的 Bean 注入到 JdbcTemplate 中-->
+                <property name="dataSource" ref="dataSource"></property>
+            </bean>
+        ⑧ 主函数内调用执行
+            ApplicationContext context_16 = new ClassPathXmlApplicationContext("Test110.xml");
+            MyUserService musObj = context_16.getBean("myUserService222", MyUserService.class);
+            // 新增用户
+            MyUser myUser = new MyUser();
+            myUser.setUserName("小张");
+            myUser.setStatus("离线");
+            int i = musObj.addMyUser(myUser);
+            System.out.println("新增用户成功 " + i);  // 新增用户成功 1
+            // 修改用户状态
+            MyUser myUser22 = new MyUser();
+            myUser22.setUserName("小张");
+            myUser22.setStatus("在线");
+            int u = musObj.updateMyUser(myUser22);
+            System.out.println("修改用户成功 " + u);  // 修改用户成功 2
+            // 批量增加用户
+            List<Object[]> batchArgs = new ArrayList<>();
+            Object[] o1 = {"小明", "在线"};
+            Object[] o2 = {"小龙", "离线"};
+            Object[] o3 = {"小林", "在线"};
+            Object[] o4 = {"小李", "在线"};
+            batchArgs.add(o1);
+            batchArgs.add(o2);
+            batchArgs.add(o3);
+            batchArgs.add(o4);
+            musObj.batchAddMyUser(batchArgs);
+            System.out.println("批量增加完毕");
+            // 查询 status 为 1 的在线用户
+            MyUser myUser33 = new MyUser();
+            myUser33.setStatus("在线");
+            int count = musObj.countMyUser(myUser33);
+            System.out.println("在线用户的个数为：" + count);    // 在线用户的个数为：8
+            // 在线用户查询：
+            List<MyUser> myUsersList = musObj.getMyUserList(myUser33);
+            System.out.println("在线用户查询：");
+            for (MyUser muObj:myUsersList) {
+                System.out.println("用户ID：" + muObj.getUserId() + ", 用户名：" + muObj.getUserName() + ", 状态：" + muObj.getStatus());
+                // 用户ID：1, 用户名：小张, 状态：在线
+                // 用户ID：2, 用户名：小明, 状态：在线
+                // ... ...
+            }
 
 7、事务
+    隔离级别：
+        ISOLATION_DEFAULT	        使用后端数据库默认的隔离级别
+        ISOLATION_READ_UNCOMMITTED	允许读取尚未提交的更改，可能导致脏读、幻读和不可重复读
+        ISOLATION_READ_COMMITTED	Oracle 默认级别，允许读取已提交的并发事务，防止脏读，可能出现幻读和不可重复读
+        ISOLATION_REPEATABLE_READ	MySQL 默认级别，多次读取相同字段的结果是一致的，防止脏读和不可重复读，可能出现幻读
+        ISOLATION_SERIALIZABLE	    完全服从 ACID 的隔离级别，防止脏读、不可重复读和幻读
 
+    事务传播行为（propagation behavior）：
+        概念：当一个事务方法被另一个事务方法调用时，这个事务方法应该如何运行。例如，事务方法 A 在调用事务方法 B 时，
+            B 方法是继续在调用者 A 方法的事务中运行呢，还是为自己开启一个新事务运行，这就是由事务方法 B 的事务传播行为决定的。
+        7种传播行为：
+            PROPAGATION_MANDATORY	    支持当前事务，如果不存在当前事务，则引发异常。
+            PROPAGATION_NESTED	        如果当前事务存在，则在嵌套事务中执行。
+            PROPAGATION_NEVER	        不支持当前事务，如果当前事务存在，则引发异常。
+            PROPAGATION_NOT_SUPPORTED	不支持当前事务，始终以非事务方式执行。
+            PROPAGATION_REQUIRED	    默认传播行为，如果存在当前事务，则当前方法就在当前事务中运行，如果不存在，则创建一个新的事务，并在这个新建的事务中运行。
+            PROPAGATION_REQUIRES_NEW	创建新事务，如果已经存在事务则暂停当前事务。
+            PROPAGATION_SUPPORTS	    支持当前事务，如果不存在事务，则以非事务方式执行。
 
+    TransactionStatus 接口：
+        概念：控制事务的执行、查询事务的状态
+        5个具体接口：
+            boolean  hasSavepoint()	    获取是否存在保存点
+            boolean  isCompleted()	    获取事务是否完成
+            boolean  isNewTransaction()	获取是否是新事务
+            boolean  isRollbackOnly()	获取事务是否回滚
+            void     setRollbackOnly()	设置事务回滚
 
+    @Transactional 注解的属性介绍：
+        propagation	        指定事务的传播行为。
+        isolation	        指定事务的隔离级别。
+        read-only	        指定是否为只读事务。
+        timeout	            表示超时时间，单位为“秒”；声明的事务在指定的超时时间后，自动回滚，避免事务长时间不提交会回滚导致的数据库资源的占用。
+        rollback-for	    指定事务对于那些类型的异常应当回滚，而不提交。
+        no-rollback-for	    指定事务对于那些异常应当继续运行，而不回滚。
 
+    例子：
+        <!--开启注解事务-->
+        <tx:annotation-driven></tx:annotation-driven>
+        <!--开启组件扫描-->
+        <context:component-scan base-package="com.demo"></context:component-scan>
+        <!--引入 jdbc.properties 中的配置-->
+        <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+        <!--定义数据源 Bean-->
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="url" value="${jdbc.url}"/>
+            <property name="username" value="${jdbc.username}"/>
+            <property name="password" value="${jdbc.password}"/>
+            <property name="driverClassName" value="${jdbc.driver}"/>
+        </bean>
+        <!--定义JdbcTemplate Bean-->
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+            <!--将数据源的 Bean 注入到 JdbcTemplate 中-->
+            <property name="dataSource" ref="dataSource"></property>
+        </bean>
+        <!--配置事务管理器-->
+        <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource" ref="dataSource"></property>
+        </bean>
+
+        @Service("order22Service")
+        public class Order22ServiceImpl implements Order22Service {
+            @Autowired
+            private Order22Dao order22Dao;
+            @Autowired
+            private AccountDao accountDao;
+            @Autowired
+            private StorageDao storageDao;
+
+            @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED, timeout = 10, readOnly = false)
+            @Override
+            public void createOrder(Order22 order22) {
+                // 自动生成订单id
+                SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+                String format = df.format(new Date());
+                String orderId = order22.getUserId() + "-" + order22.getProductId() + "-" + format;
+                System.out.println("自动生成的订单ID为：" + orderId);
+                order22.setOrderId(orderId);
+                System.out.println("开始创建订单数据，订单号为：" + orderId);
+
+                // 创建订单数据
+                order22Dao.CreateOrder(order22);
+                System.out.println("订单数据创建成功，订单号为：" + orderId);
+
+                // 查询库存
+                System.out.println("开始查询商品库存，商品 id 为：" + order22.getProductId());
+                Storage storageObj = storageDao.selectByProductId(order22.getProductId());
+                if (storageObj != null && storageObj.getResidue().intValue() >= order22.getCount().intValue()) {
+                    System.out.println("库存充足，正在扣减商品库存");
+                    storageObj.setUsed(storageObj.getUsed() + order22.getCount());
+                    storageObj.setResidue(storageObj.getTotal().intValue() - storageObj.getUsed());
+                    int decrease = storageDao.decrease(storageObj);
+                    System.out.println("商品库存扣减完成");
+                } else {
+                    System.out.println("警告：商品库存不足，正在执行回滚操作");
+                    throw new RuntimeException("库存不足啊啊啊");
+                }
+
+                // 查询用户账户金额
+                System.out.println("开始查询用户的账户金额");
+                Account account = accountDao.selectByUserId(order22.getUserId());
+                if (account != null && account.getResidue().intValue() >= order22.getMoney().intValue()) {
+                    System.out.println("账户金额充足，正在扣减账户金额");
+                    accountDao.decrease(order22.getUserId(), order22.getMoney());
+                    System.out.println("账户金额扣减完成");
+                } else {
+                    System.out.println("警告：账户余额不足，正在执行回滚操作！");
+                    throw new RuntimeException("账户余额不足");
+                }
+
+                System.out.println("开始修改订单状态，未完成 -> 已完成");
+                order22Dao.updateOrderStatus(order22.getOrderId(), 0);
+                System.out.println("修改订单状态完成！");
+            }
+        }
+
+        @Repository
+        public class Order22DaoImpl implements Order22Dao {
+            @Autowired
+            private JdbcTemplate jdbcTemplate;
+
+            @Override
+            public int CreateOrder(Order22 order22) {
+                String sql = "insert into `order22`(order_id, user_id, product_id, count, money, status) values" +
+                        " (?, ?, ?, ?, ?, ?)";
+                int update = jdbcTemplate.update(sql, order22.getOrderId(), order22.getUserId(), order22.getProductId(),
+                        order22.getCount(), order22.getMoney(), order22.getStatus());
+                return update;
+            }
+            @Override
+            public void updateOrderStatus(String orderId, Integer status) {
+                String sql = " update order22 set status = 1 where order_id = ? and status = ?;";
+                jdbcTemplate.update(sql, orderId, status);
+            }
+        }
+
+        @Repository
+        public class AccountDaoImpl implements AccountDao {
+            @Autowired
+            private JdbcTemplate jdbcTemplate;
+
+            @Override
+            public Account selectByUserId(String userId) {
+                String sql = "select * from account where user_id = ?";
+                return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Account>(Account.class), userId);
+            }
+            @Override
+            public int decrease(String userId, BigDecimal money) {
+                String sql = "update account set residue = residue - ?, used=used + ? where user_id = ?;";
+                return jdbcTemplate.update(sql, money, money, userId);
+            }
+        }
+
+        @Repository
+        public class StorageDaoImpl implements StorageDao {
+            @Autowired
+            private JdbcTemplate jdbcTemplate;
+
+            @Override
+            public Storage selectByProductId(String productId) {
+                String sql = "select * from storage where product_id = ?";
+                return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Storage>(Storage.class), productId);
+            }
+            @Override
+            public int decrease(Storage record) {
+                String sql = "update storage set used=?, residue=? where product_id=?";
+                return jdbcTemplate.update(sql, record.getUsed(), record.getResidue(), record.getProductId());
+            }
+        }
+
+        定义三个 entity 实体，Account 、 Order22 、 Storage
+
+        // 此方法第一次执行 ok， 第二次执行报错，账户余额不满 600 元，执行回滚操作
+        ApplicationContext context_17 = new ClassPathXmlApplicationContext("Test111.xml");
+        Order22Service o22sObj = context_17.getBean("order22Service", Order22Service.class);
+        Order22 order22Obj = new Order22();
+        order22Obj.setProductId("1");
+        order22Obj.setCount(30);
+        order22Obj.setMoney(new BigDecimal(600));
+        order22Obj.setUserId("1");
+        order22Obj.setStatus(0);
+        o22sObj.createOrder(order22Obj);
 
 8、日志
+    概念：抽象层（例如slf4j-api-xx.jar）+ 中间层（例如slf4j-log4j12）+ 实现层（例如log4j）这三层都配置好才能保证SLF4J正常运行。
+        中间层有的时候也可以去掉
+    例子：
+        // src/main/resources/log4j.properties
+        # Set root logger level to DEBUG and its only appender to console.
+        log4j.rootLogger=INFO, console
+        # console is set to be a ConsoleAppender.
+        log4j.appender.console=org.apache.log4j.ConsoleAppender
+        # console uses PatternLayout.
+        log4j.appender.console.layout=org.apache.log4j.PatternLayout
+        log4j.appender.console.Target = System.out
+        log4j.appender.console.Threshold = INFO
+        log4j.appender.console.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
+        # log4j.appender.console.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
 
+        <bean id="testLog" class="com.demo.mylog.TestLog">
+            <property name="message" value="Hello,louis22!"/>
+        </bean>
 
+        public class TestLog {
+            private static final Logger log = LoggerFactory.getLogger(TestLog.class);
+            private String message;
 
+            public void setMessage(String message) {
+                this.message = message;
+            }
+            public void getMessage() {
+                log.info("自定义消息为：" + message);
+            }
+        }
 
+        ApplicationContext context_18 = new ClassPathXmlApplicationContext("Test120.xml");
+        log22.info("正在从容器中获取 TestLog 的 bean");  // 1285 [main] INFO  MainApp  - 正在从容器中获取 TestLog 的 bean
+        TestLog tlObj = context_18.getBean("testLog", TestLog.class);
+        tlObj.getMessage();             // 1285 [main] INFO  com.demo.mylog.TestLog  - 自定义消息为：Hello,louis22!
+        log22.info("代码执行完成了");      // 1285 [main] INFO  MainApp  - 代码执行完成了
 
+9、Spring SpEL表达式语言
+    概念：Spring Expression Language（简称 SpEL）。表达式语言一般是用最简单的形式完成最主要的工作，以此减少工作量。
+    例子：
+        // 输出一个简单的字符串
+        // 构造解析器
+        ExpressionParser parser = new SpelExpressionParser();
+        // 解析器解析字符串表达式
+        Expression exp = parser.parseExpression("'hello,c语言'");
+        // 获取表达式的值
+        String message = (String) exp.getValue();
+        System.out.println(message);        // hello,c语言
+
+        // 使用 SpEL 调用 concat() 方法
+        Expression exp2 = parser.parseExpression("'welcome, xx'.concat('!!')");
+        System.out.println((String) exp2.getValue());   // welcome, xx!!
+
+        // 使用 SpEL 调用 String 的属性 bytes，将字符串转换为字节数组
+        Expression exp3 = parser.parseExpression("'good job中国'.bytes");
+        byte[] bytes = (byte[]) exp3.getValue();
+        for (int j = 0; j< bytes.length; j++) {
+            // 103 111 111 100 32 106 111 98 -28 -72 -83 -27 -101 -67 Bean 将要被销毁
+            System.out.print(bytes[j] + " ");
+        }
+        
