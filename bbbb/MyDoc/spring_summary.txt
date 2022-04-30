@@ -50,131 +50,134 @@
         ① XML 采用树形结构，适用于大型的复杂的项目
         ② Properties 以 key-value 键值对的形式存在，适用于简单的属性配置
 
-    <Bean>元素的属性及子元素介绍
-        id	            Bean 的唯一标识符。
-        name            Bean 的名称，我们可以通过 name 属性为同一个 Bean 同时指定多个名称，每个名称之间用逗号或分号隔开。
-        class           Bean 的具体实现类，它必须是一个完整的类名，即类的全限定名。
-        scope           Bean 的作用域，属性值可以为 singleton（单例）、prototype（原型）、request、session 和 global Session。默认值是 singleton。
-        constructor-arg	<bean>元素的子元素，我们可以通过该元素，将构造参数传入，以实现 Bean 的实例化。
-        property	    <bean>元素的子元素，用于调用 Bean 实例中的 setter 方法对属性进行赋值，从而完成属性的注入。
-        ref	            <property> 和 <constructor-arg> 等元素的子元索，用于指定对某个 Bean 实例的引用，即 <bean> 元素中的 id 或 name 属性。
-        value	        <property> 和 <constractor-arg> 等元素的子元素，用于直接指定一个常量值。
-        list            用于封装 List 或数组类型的属性注入。
-        set	            用于封装 Set 类型的属性注入。
-        map	            用于封装 Map 类型的属性注入。
-        props	        用于注入字符串类型
-    例子：
-        // setter注入
-        <bean id="helloworld22" class="HelloWorld">
-            <property name="message" value="lalala22"></property>
-        </bean>
-        // 构造函数注入
-        <bean id="Grade" class="com.demo.ccc.Grade">
-            <constructor-arg name="gradeId" value="4"></constructor-arg>
-            <constructor-arg name="gradeName" value="年级名称"></constructor-arg>
-        </bean>
-        <bean id="Student" class="com.demo.ccc.Student">
-            <constructor-arg name="id" value="2"></constructor-arg>
-            <constructor-arg name="studentNo" value="33"></constructor-arg>
-            <constructor-arg name="gradeObj" ref="Grade"></constructor-arg>
-        </bean>
-        // 集合注入
-        <bean id="collectionObject11" class="com.demo.ccc.CollectionObject">
-            <property name="collId" value="111"></property>
-            <property name="collName" value="名字1号"></property>
-        </bean>
-        <bean id="collectionObject22" class="com.demo.ccc.CollectionObject">
-            <property name="collId" value="222"></property>
-            <property name="collName" value="名字2号"></property>
-        </bean>
-        <bean id="javaCollection" class="com.demo.ccc.JavaCollection">
-            <!-- 数组类型 -->
-            <property name="courses">
-                <array>
-                    <value>java</value>
-                    <value>php</value>
-                </array>
-            </property>
-            <!-- list 类型 -->
-            <property name="list">
-                <list>
-                    <value>张三</value>
-                    <value>李四</value>
-                </list>
-            </property>
-            <!-- maps 类型 -->
-            <property name="maps">
-                <map>
-                    <entry key="jack" value="杰克"></entry>
-                    <entry key="louis" value="路易斯"></entry>
-                </map>
-            </property>
-            <!-- set 类型 -->
-            <property name="sets">
-                <set>
-                    <value>sqlserver999</value>
-                    <value>redis</value>
-                </set>
-            </property>
-            <!-- 对象数组类型 -->
-            <property name="cos">
-                <array>
-                    <ref bean="collectionObject11"></ref>
-                    <ref bean="collectionObject22"></ref>
-                </array>
-            </property>
-        </bean>
-        // 其它类型注入
-        <bean id="exampleBean" class="com.demo.ccc.ExampleBean">
-            <!--使用null标签 注入 Null 值-->
-            <property name="propertyNull">
-                <null></null>
-            </property>
-            <!--使用空字符串-->
-            <property name="propertyEmpty" value=""></property>
-            <!--“<”、“>”、“&”等特殊字符-->
-            <property name="propertyLiteral" value="&lt;C语言中文网&gt;"></property>
-            <!-- <![CDATA[]]> 让 XML 解析器忽略对其中内容的解析-->
-            <property name="propertyLiteral22">
-                <value><![CDATA[<<www.baidu.com>>]]></value>
-            </property>
-            <!-- 注入依赖的 Bean , 级联属性赋值 -->
-            <property name="dependBean" ref="dependBean"></property>
-            <property name="dependBean.dependProperty" value="我是级联属性赋值,忽略下面的 dependBean 的定义及赋值"></property>
-        </bean>
-        <!--对 dependBean 进行定义-->
-        <bean id="dependBean" class="com.demo.ccc.DependBean">
-            <property name="dependProperty" value="对属性进行赋值1000"></property>
-        </bean>
+    最基本的使用
+        <Bean>元素的属性及子元素介绍
+            id	            Bean 的唯一标识符。
+            name            Bean 的名称，我们可以通过 name 属性为同一个 Bean 同时指定多个名称，每个名称之间用逗号或分号隔开。
+            class           Bean 的具体实现类，它必须是一个完整的类名，即类的全限定名。
+            scope           Bean 的作用域，属性值可以为 singleton（单例）、prototype（原型）、request、session 和 global Session。默认值是 singleton。
+            constructor-arg	<bean>元素的子元素，我们可以通过该元素，将构造参数传入，以实现 Bean 的实例化。
+            property	    <bean>元素的子元素，用于调用 Bean 实例中的 setter 方法对属性进行赋值，从而完成属性的注入。
+            ref	            <property> 和 <constructor-arg> 等元素的子元索，用于指定对某个 Bean 实例的引用，即 <bean> 元素中的 id 或 name 属性。
+            value	        <property> 和 <constractor-arg> 等元素的子元素，用于直接指定一个常量值。
+            list            用于封装 List 或数组类型的属性注入。
+            set	            用于封装 Set 类型的属性注入。
+            map	            用于封装 Map 类型的属性注入。
+            props	        用于注入字符串类型
+            init-method	    容器加载 Bean 时调用该方法
+            destroy-method	容器删除 Bean 时调用该方法。该方法只在 scope=singleton 时有效
+        例子：
+            // setter注入
+            <bean id="helloworld22" class="HelloWorld">
+                <property name="message" value="lalala22"></property>
+            </bean>
+            // 构造函数注入
+            <bean id="Grade" class="com.demo.ccc.Grade">
+                <constructor-arg name="gradeId" value="4"></constructor-arg>
+                <constructor-arg name="gradeName" value="年级名称"></constructor-arg>
+            </bean>
+            <bean id="Student" class="com.demo.ccc.Student">
+                <constructor-arg name="id" value="2"></constructor-arg>
+                <constructor-arg name="studentNo" value="33"></constructor-arg>
+                <constructor-arg name="gradeObj" ref="Grade"></constructor-arg>
+            </bean>
+            // 集合注入
+            <bean id="collectionObject11" class="com.demo.ccc.CollectionObject">
+                <property name="collId" value="111"></property>
+                <property name="collName" value="名字1号"></property>
+            </bean>
+            <bean id="collectionObject22" class="com.demo.ccc.CollectionObject">
+                <property name="collId" value="222"></property>
+                <property name="collName" value="名字2号"></property>
+            </bean>
+            <bean id="javaCollection" class="com.demo.ccc.JavaCollection">
+                <!-- 数组类型 -->
+                <property name="courses">
+                    <array>
+                        <value>java</value>
+                        <value>php</value>
+                    </array>
+                </property>
+                <!-- list 类型 -->
+                <property name="list">
+                    <list>
+                        <value>张三</value>
+                        <value>李四</value>
+                    </list>
+                </property>
+                <!-- maps 类型 -->
+                <property name="maps">
+                    <map>
+                        <entry key="jack" value="杰克"></entry>
+                        <entry key="louis" value="路易斯"></entry>
+                    </map>
+                </property>
+                <!-- set 类型 -->
+                <property name="sets">
+                    <set>
+                        <value>sqlserver999</value>
+                        <value>redis</value>
+                    </set>
+                </property>
+                <!-- 对象数组类型 -->
+                <property name="cos">
+                    <array>
+                        <ref bean="collectionObject11"></ref>
+                        <ref bean="collectionObject22"></ref>
+                    </array>
+                </property>
+            </bean>
+            // 其它类型注入
+            <bean id="exampleBean" class="com.demo.ccc.ExampleBean">
+                <!--使用null标签 注入 Null 值-->
+                <property name="propertyNull">
+                    <null></null>
+                </property>
+                <!--使用空字符串-->
+                <property name="propertyEmpty" value=""></property>
+                <!--“<”、“>”、“&”等特殊字符-->
+                <property name="propertyLiteral" value="&lt;C语言中文网&gt;"></property>
+                <!-- <![CDATA[]]> 让 XML 解析器忽略对其中内容的解析-->
+                <property name="propertyLiteral22">
+                    <value><![CDATA[<<www.baidu.com>>]]></value>
+                </property>
+                <!-- 注入依赖的 Bean , 级联属性赋值 -->
+                <property name="dependBean" ref="dependBean"></property>
+                <property name="dependBean.dependProperty" value="我是级联属性赋值,忽略下面的 dependBean 的定义及赋值"></property>
+            </bean>
+            <!--对 dependBean 进行定义-->
+            <bean id="dependBean" class="com.demo.ccc.DependBean">
+                <property name="dependProperty" value="对属性进行赋值1000"></property>
+            </bean>
 
-        public class JavaCollection {
-            // 数组类型
-            private String[] courses;
-            // list 集合类型
-            private List<String> list;
-            // map 集合类型
-            private Map<String, String> maps;
-            // set 集合类型
-            private Set<String> sets;
-            // 对象数组类型
-            private CollectionObject[] cos;
+            public class JavaCollection {
+                // 数组类型
+                private String[] courses;
+                // list 集合类型
+                private List<String> list;
+                // map 集合类型
+                private Map<String, String> maps;
+                // set 集合类型
+                private Set<String> sets;
+                // 对象数组类型
+                private CollectionObject[] cos;
 
-            public void setCos(CollectionObject[] cos) {
-                this.cos = cos;
+                public void setCos(CollectionObject[] cos) {
+                    this.cos = cos;
+                }
+                public void setCourses(String[] courses) {
+                    this.courses = courses;
+                }
+                public void setList(List<String> list) {
+                    this.list = list;
+                }
+                public void setMaps(Map<String, String> maps) {
+                    this.maps = maps;
+                }
+                public void setSets(Set<String> sets) {
+                    this.sets = sets;
+                }
             }
-            public void setCourses(String[] courses) {
-                this.courses = courses;
-            }
-            public void setList(List<String> list) {
-                this.list = list;
-            }
-            public void setMaps(Map<String, String> maps) {
-                this.maps = maps;
-            }
-            public void setSets(Set<String> sets) {
-                this.sets = sets;
-            }
-        }
 
     短命名空间
         作用：简化 xml 配置
@@ -237,33 +240,503 @@
             LOGGER.info(pb22);   // 实例地址不相同
 
     Bean生命周期
-        
+        流程：
+            ① Bean 的实例化
+            ② Bean 属性赋值
+            ③ Bean 的初始化
+            ④ Bean 的使用
+            ⑤ Bean 的销毁
+            详细流程查看：Spring Bean生命周期流程.png
+
+        Bean生命周期 与 Bean作用域：
+            singleton 作用域的 Bean 的生命周期：Spring IoC 容器能够精确地控制 Bean 何时被创建、何时初始化完成以及何时被销毁；
+            prototype 作用域的 Bean 的生命周期：Spring IoC 容器只负责创建，然后就将 Bean 的实例交给客户端代码管理，Spring IoC 容器将不再跟踪其生命周期。
+
+        Bean生命周期的回调方法：
+            概念：
+                ① 初始化回调方法：在 Spring Bean 被初始化后调用，执行一些自定义的回调操作。
+                ② 销毁回调方法：在 Spring Bean 被销毁前调用，执行一些自定义的回调操作。
+            实现方式：
+                ① 接口实现
+                    初始化回调：调用InitializingBean接口，实现 afterPropertiesSet() ，这个方法会在 Spring Bean 被初始化后被调用，执行一些自定义的回调操作。
+                    销毁回调：调用DisposableBean接口，实现 destroy()，这个方法会在 Spring Bean 被销毁前被调用，执行一些自定义的回调操作。
+                ② XML 配置实现
+                    // xml里的 init-method 属性指定初始化回调方法
+                    // xml里的 destory-method 属性指定销毁回调方法
+                    <bean id="lifeCycleBean22" class="com.demo.ccc.LifeCycleBean22" init-method="init" destroy-method="destroy">
+                        <property name="webName" value="网站名字22"></property>
+                        <property name="url" value="网站地址22"></property>
+                    </bean>
+                ③ 注解实现
+                    // @PostConstruct 指定初始化回调方法
+                    // @PreDestroy 指定销毁回调方法
+                    public class LifeCycleBean33 {
+                        @PostConstruct
+                        public void init() {
+                            LOGGER.info("在 XML 配置中通过 init-method 属性指定初始化方法：init()");
+                        }
+                        @PreDestroy
+                        public void destroy() {
+                            LOGGER.info("在 XML 配置中通过 destroy-method 属性指定回调方法：destroy()");
+                        }
+                    }
+
+    Bean后置处理器（BeanPostProcessor）：
+        概念：通过该接口可以实现回调函数，在 bean 生命周期的两个 BeanPostProcessor(后置处理器) 过程时，穿插做些事情。
+            postProcessBeforeInitialization() 方法：在 Bean 实例化、属性注入后，初始化前调用。 全局性的，每个 bean 初始化前都会调用
+            postProcessAfterInitialization() 方法：在 Bean 实例化、属性注入、初始化都完成后调用。  全局性的，每个 bean 初始化后都会调用
+            getOrder() 方法：指定后置处理器的执行顺序
+        例子：
+            public class MyWorldBean implements BeanPostProcessor, Ordered {
+                @Override
+                public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+                    System.out.println("A before: " + beanName);
+                    return bean;
+                }
+                @Override
+                public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+                    System.out.println("A after: " + beanName);
+                    return bean;
+                }
+                @Override
+                public int getOrder() {
+                    return 5;
+                }
+            }
+
+    Bean继承：
+        <bean id="animal" class="com.demo.ccc.Animal">
+            <property name="name" value="动物类"></property>
+            <property name="age" value="95"></property>
+        </bean>
+        <bean id="animalDog" class="com.demo.ccc.AnimalDog" parent="animal">
+            <property name="name" value="小狗"></property>
+            <property name="age" value="91"></property>
+            <property name="call" value="旺旺叫"></property>
+        </bean>
+
+    Bean自动装配：
+        概念：IOC 容器本身不过是一个空壳，需要我们主动将 Bean 放进去，并告诉它 Bean 和 Bean 之间的依赖关系，它才能完成装配工作
+        装配方式
+            a、基于 xml 的5种装配规则：
+                ① byName	    按名称自动装配。
+                    <bean id="dept77" class="com.demo.ccc.Dept77">
+                        <property name="deptNo" value="111"></property>
+                        <property name="deptName" value="技术部"></property>
+                    </bean>
+                    <bean id="employee77" class="com.demo.ccc.Employee77" autowire="byName">
+                        <property name="empNo" value="002"></property>
+                        <property name="empName" value="小郭"></property>
+                    </bean>
+                    public class Employee77 {
+                        //员工编号
+                        private String empNo;
+                        //员工姓名
+                        private String empName;
+                        //部门信息
+                        private Dept77 dept77;
+                    }
+                ② byType	    按类型自动装配。
+                ③ constructor	根据构造器参数的数据类型，进行 byType 模式的自动装配。
+                ④ default	    表示默认采用上一级元素 <beans> 设置的自动装配规则（default-autowire）进行装配。
+                ⑤ no	        默认值，表示不使用自动装配，Bean 的依赖关系必须通过 <constructor-arg>和 <property> 元素的 ref 属性来定义。
+
+            b、基于注解
+                注解定义：
+                    @Component	 泛化的概念，表示容器中的一个组件（Bean），并且可以作用在应用的任何层次，例如 Service 层、Dao 层等。
+                    @Repository	 该注解用于将数据访问层（Dao 层）的 Bean
+                    @Service	 该注解通常作用在业务层（Service 层）的 Bean
+                    @Controller	 该注解通常作用在控制层
+                注解如何被调用：
+                    @Autowired	可以应用到 Bean 的属性变量、setter 方法、非 setter 方法及构造函数等，默认按照 Bean 的类型进行装配。
+                                如果允许 null 值，可以设置它的 required 属性为 false。
+                                如果我们想使用按照名称（byName）来装配，可以结合 @Qualifier 注解一起使用
+                    @Resource   @Resource 默认按照 Bean 的名称进行装配。
+                                @Resource 中有两个重要属性：name 和 type。
+                                name 属性解析为 Bean 的实例名称，type 属性解析为 Bean 的实例类型。
+                                如果都不指定，则先按 Bean 实例名称装配，如果不能匹配，则再按照 Bean 类型进行装配；如果都无法匹配，则抛出 NoSuchBeanDefinitionException 异常。
+                    @Qualifier	与 @Autowired 注解配合使用，会将默认的按 Bean 类型装配修改为按 Bean 的实例名称装配，Bean 的实例名称由 @Qualifier 注解的参数指定。
+                xml 里的配置
+                    <!--开启组件扫描功能-->
+                    <context:component-scan base-package="net.biancheng.c"></context:component-scan>
+                例子：
+                    @Repository("userDao")
+                    public class UserDaoImpl implements UserDao {
+                        @Override
+                        public void print() {
+                            System.out.println("我是 UserDaoImpl ");
+                        }
+                    }
+
+                    @Service("userService")
+                    public class UserServiceImpl implements UserService {
+                        @Resource
+                        private UserDao userDao;
+
+                        public UserDao getUserDao() {
+                            return userDao;
+                        }
+                        public void setUserDao(UserDao userDao) {
+                            this.userDao = userDao;
+                        }
+                        @Override
+                        public void out() {
+                            System.out.println("我是 UserServiceImpl ");
+                        }
+                    }
+
+                    @Controller("userController22")
+                    public class UserController {
+                        @Resource
+                        private UserService userService;
+
+                        public UserService getUserService() {
+                            return userService;
+                        }
+                        public void setUserService(UserService userService) {
+                            this.userService = userService;
+                        }
+                        public void doStr() {
+                            userService.out();
+                            System.out.println("我是 UserController ");
+                        }
+                    }
+
+                    ApplicationContext context_11 = new ClassPathXmlApplicationContext("Test101.xml");
+                    UserController ucObj = context_11.getBean("userController22", UserController.class);
+                    ucObj.doStr();
+
+4、面向切面编程 - Aop
+    概念：OOP 纵向的父子继承关系，AOP 是通过横向的抽取机制实现的。
+        将应用中的一些非业务的通用功能抽取出来单独维护，并通过声明的方式（例如配置文件、注解等）定义这些功能要以何种方式作用在那个应用中，而不是在业务模块的代码中直接调用。
+        作为 EJB 声明式服务的替代品。
+
+    AOP术语：
+        Joinpoint（连接点）	AOP 的核心概念，程序执行期间明确定义的一个点，这个点就比如是方法的调用、类初始化、对象实例化等。连接点可以被动态代理拦截目标类的方法。
+        Pointcut（切入点）	又称切点，指要对哪些 Joinpoint 进行拦截，即被拦截的连接点。
+        Advice（通知）	    指拦截到 Joinpoint 之后要执行的代码，即对切入点增强的内容。有如下 5 种类型：
+            before（前置通知）	        在目标方法调用之前执行
+            after（后置通知）	            在目标方法返回或异常后调用
+            after-returning（返回后通知）	会在目标方法返回后调用
+            after-throwing（抛出异常通知）	会在目标方法抛出异常后调用
+            around（环绕通知）	        会将目标方法封装起来
+        Target（目标）	    指代理的目标对象，通常也被称为被通知（advised）对象。
+        Weaving（织入）	    指把增强代码应用到目标对象上，生成代理对象的过程。
+        Proxy（代理）	    指生成的代理对象。
+        Aspect（切面）	    切面是切入点（Pointcut）和通知（Advice）的结合。
 
 
 
-3、Aop
+    AOP框架：
+        Spring AOP
+            概念：Spring AOP 的底层是通过以下 2 种动态代理机制，为目标对象（Target Bean）执行横向织入的
+             ① JDK 动态代理。默认的动态代理方式，若目标对象实现了若干接口，Spring 使用 JDK 的 java.lang.reflect.Proxy 类进行代理。
+             ② CGLIB 动态代理。若目标对象没有实现任何接口，Spring 则使用 CGLIB 库生成目标对象的子类，以实现对目标对象的代理。
+
+            AOP 切面类型：
+                ① 一般切面
+                    概念：org.springframework.aop.Advisor接口。对目标对象（Target）中的所有方法连接点进行拦截
+                    例子：
+                        <!--******Advisor : 代表一般切面，Advice 本身就是一个切面，对目标类所有方法进行拦截(* 不带有切点的切面.针对所有方法进行拦截)*******-->
+                        <!-- 定义目标（target）对象 -->
+                        <bean id="aopDao" class="com.demo.dao.AopDaoImpl"></bean>
+                        <!-- 定义增强-->
+                        <bean id="beforeAdvice" class="com.demo.advice.AopDaoBeforeAdvice"></bean>
+                        <!-- 给 UserDao 配置代理对象-->
+                        <bean id="aopDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+                            <!-- 设置目标对象 -->
+                            <property name="target" ref="aopDao"></property>
+                            <!-- 设置实现的接口 ,value 中写接口的全路径 -->
+                            <property name="proxyInterfaces" value="com.demo.dao.AopDao"></property>
+                            <!-- 需要使用value:增强 Bean 的名称 -->
+                            <property name="interceptorNames" value="beforeAdvice"></property>
+                        </bean>
+
+                        public class AopDaoImpl implements AopDao {
+                            @Override
+                            public void add() {
+                                System.out.println("正在执行 AopDaoImpl 的 add() 方法……");
+                            }
+                            @Override
+                            public void delete() {
+                                System.out.println("正在执行 AopDaoImpl 的 delete() 方法……");
+                            }
+                            @Override
+                            public void modify() {
+                                System.out.println("正在执行 AopDaoImpl 的 modify() 方法……");
+                            }
+                            @Override
+                            public void get() {
+                                System.out.println("正在执行 AopDaoImpl 的 get() 方法……");
+                            }
+                        }
+
+                        public class AopDaoBeforeAdvice implements MethodBeforeAdvice {
+                            @Override
+                            public void before(Method method, Object[] args, Object target) throws Throwable {
+                                System.out.println("AopDaoBeforeAdvice 正在执行前置增强操作…………");
+                            }
+                        }
+
+                ② 切点切面：org.springframework.aop.PointcutAdvisor接口。用来表示带切点的切面
+                ③ 引介切面：org.springframework.aop.IntroductionAdvisor接口。特殊的切面，它应用于类层面上，所以引介切面适用 ClassFilter 进行定义
+
+            自动代理：
+                概念：基于后处理 Bean 实现的，即在 Bean 创建的过程中完成增强，并将目标对象替换为自动生成的代理对象。
+                3种代理方案：
+                    ① BeanNameAutoProxyCreator：根据 Bean 名称创建代理对象。
+                        <!-- 定义目标（target）对象 -->
+                        <bean id="aopDao" class="com.demo.dao.AopDaoImpl"></bean>
+                        <bean id="orderDao" class="com.demo.dao.OrderDao"></bean>
+                        <!-- 定义增强-->
+                        <bean id="beforeAdvice" class="com.demo.advice.AopDaoBeforeAdvice"></bean>
+                        <bean id="aroundAdvice" class="com.demo.advice.OrderDaoAroundAdvice"></bean>
+                        <!--Spring 自动代理：根据 Bean 名称创建代理独享-->
+                        <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+                            <property name="beanNames" value="*Dao"></property>
+                            <property name="interceptorNames" value="beforeAdvice,aroundAdvice"></property>
+                        </bean>
+
+                        public class AopDaoImpl implements AopDao {
+                            @Override
+                            public void add() {
+                                System.out.println("正在执行 AopDaoImpl 的 add() 方法……");
+                            }
+                            @Override
+                            public void delete() {
+                                System.out.println("正在执行 AopDaoImpl 的 delete() 方法……");
+                            }
+                            @Override
+                            public void modify() {
+                                System.out.println("正在执行 AopDaoImpl 的 modify() 方法……");
+                            }
+                            @Override
+                            public void get() {
+                                System.out.println("正在执行 AopDaoImpl 的 get() 方法……");
+                            }
+                        }
+
+                        public class OrderDao {
+                            public void add() {
+                                System.out.println("正在执行 OrderDao 的 add() 方法……");
+                            }
+                            public void adds() {
+                                System.out.println("正在执行 OrderDao 的 adds() 方法……");
+                            }
+                            public void delete() {
+                                System.out.println("正在执行 OrderDao 的 delete() 方法……");
+                            }
+                            public void modify() {
+                                System.out.println("正在执行 OrderDao 的 modify() 方法……");
+                            }
+                            public void get() {
+                                System.out.println("正在执行 OrderDao 的 get() 方法……");
+                            }
+                        }
+
+                        public class AopDaoBeforeAdvice implements MethodBeforeAdvice {
+                            @Override
+                            public void before(Method method, Object[] args, Object target) throws Throwable {
+                                System.out.println("AopDaoBeforeAdvice 正在执行前置增强操作…………");
+                            }
+                        }
+
+                        public class OrderDaoAroundAdvice implements MethodInterceptor {
+                            @Override
+                            public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+                                System.out.println("环绕增强前********");
+                                //执行被代理对象中的逻辑
+                                Object result = methodInvocation.proceed();
+                                System.out.println("环绕增强后********");
+                                return result;
+                            }
+                        }
+
+                        ApplicationContext context_14 = new ClassPathXmlApplicationContext("Test104.xml");
+                        AopDao aopDaoObj33 = context_14.getBean("aopDao", AopDao.class);
+                        aopDaoObj33.add();
+                        aopDaoObj33.delete();
+
+                        // 命令行结果输出
+                        AopDaoBeforeAdvice 正在执行前置增强操作…………
+                        环绕增强前********
+                        正在执行 AopDaoImpl 的 add() 方法……
+                        环绕增强后********
+                        AopDaoBeforeAdvice 正在执行前置增强操作…………
+                        环绕增强前********
+                        正在执行 AopDaoImpl 的 delete() 方法……
+                        环绕增强后********
+
+                        AopDaoBeforeAdvice 正在执行前置增强操作…………
+                        环绕增强前********
+                        正在执行 OrderDao 的 add() 方法……
+                        环绕增强后********
+                        AopDaoBeforeAdvice 正在执行前置增强操作…………
+                        环绕增强前********
+                        正在执行 OrderDao 的 adds() 方法……
+                        环绕增强后********
+                        AopDaoBeforeAdvice 正在执行前置增强操作…………
+                        环绕增强前********
+                        正在执行 OrderDao 的 delete() 方法……
+                        环绕增强后********
+
+                    ② DefaultAdvisorAutoProxyCreator：根据 Advisor 本身包含信息创建代理对象。
+                        <!-- 定义目标（target）对象 -->
+                        <bean id="aopDao" class="com.demo.dao.AopDaoImpl"></bean>
+                        <bean id="orderDao" class="com.demo.dao.OrderDao"></bean>
+                        <!-- 定义增强-->
+                        <bean id="beforeAdvice" class="com.demo.advice.AopDaoBeforeAdvice"></bean>
+                        <bean id="aroundAdvice" class="com.demo.advice.OrderDaoAroundAdvice"></bean>
+                        <!--定义切面-->
+                        <bean id="myPointCutAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+                            <!--定义表达式，规定哪些方法进行拦截 .* 表示所有方法-->
+                            <!--<property name="pattern" value=".*"></property>-->
+                            <property name="patterns" value="com.demo.dao.OrderDao.add.*, com.demo.dao.OrderDao.delete.*"></property>
+                            <property name="advice" ref="aroundAdvice"></property>
+                        </bean>
+                        <!--Spring 自动代理：根据切面 myPointCutAdvisor 中信息创建代理对象-->
+                        <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+
+                        OrderDao orderDaoObj33 = context_14.getBean("orderDao", OrderDao.class);
+                        orderDaoObj33.add();
+                        orderDaoObj33.adds();
+                        orderDaoObj33.delete();
+                        orderDaoObj33.get();
+                        orderDaoObj33.modify();
+
+                        // 命令行结果输出
+                        正在执行 AopDaoImpl 的 add() 方法……
+                        正在执行 AopDaoImpl 的 delete() 方法……
+                        正在执行 AopDaoImpl 的 get() 方法……
+                        正在执行 AopDaoImpl 的 modify() 方法……
+                        环绕增强前********
+                        正在执行 OrderDao 的 add() 方法……
+                        环绕增强后********
+                        环绕增强前********
+                        正在执行 OrderDao 的 adds() 方法……
+                        环绕增强后********
+                        环绕增强前********
+                        正在执行 OrderDao 的 delete() 方法……
+                        环绕增强后********
+                        正在执行 OrderDao 的 get() 方法……
+                        正在执行 OrderDao 的 modify() 方法……
+
+                    ③ AnnotationAwareAspectJAutoProxyCreator：基于 Bean 中的 AspectJ 注解进行自动代理对象。
+
+        AspectJ
+            概念：Spring AOP 是一个简化版的 AOP 实现，仅支持执行公共（public）非静态方法的调用作为连接点。
+                并没有提供完整版的 AOP 功能，如果向受保护的（protected）或私有的（private）的方法进行增强，需要AspectJ来实现
+
+            框架注解介绍：
+                @Aspect	        用于定义一个切面。
+                @Pointcut	    用于定义一个切入点。
+                @Before	        用于定义前置通知，相当于 BeforeAdvice。
+                @AfterReturning	用于定义后置通知，相当于 AfterReturningAdvice。
+                @Around	        用于定义环绕通知，相当于 MethodInterceptor。
+                @AfterThrowing	用于定义抛出通知，相当于 ThrowAdvice。
+                @After	        用于定义最终通知，不管是否异常，该通知都会执行。
+                @DeclareParents	用于定义引介通知，相当于 IntroductionInterceptor（不要求掌握）。
+
+            例子：
+                ① 定义一个 dao 类
+                ② 定义一个 实现dao 类
+                    public class AopDaoImpl implements AopDao {
+                        @Override
+                        public void add() {
+                            System.out.println("正在执行 AopDaoImpl 的 add() 方法……");
+                        }
+                        @Override
+                        public void delete() {
+                            System.out.println("正在执行 AopDaoImpl 的 delete() 方法……");
+                        }
+                        @Override
+                        public void modify() {
+                            System.out.println("正在执行 AopDaoImpl 的 modify() 方法……");
+                        }
+                        @Override
+                        public void get() {
+                            System.out.println("正在执行 AopDaoImpl 的 get() 方法……");
+                        }
+                    }
+                ③ 定义一个 bean，对 实现dao 类里的方法各种 前置通知、后置通知，一顿操作
+                    @Component  // 定义成 Bean
+                    @Aspect // 定义为切面
+                    public class MyAspect {
+                        @After("execution(* com.demo.dao.AopDao.get(..))")
+                        public void after(JoinPoint joinPoint) {
+                            System.out.println("MyAspect - 最终通知 - " + joinPoint);
+                        }
+                        // 将 com.demo.dao 包下的 AopDao 类中的 get() 方法 定义为一个切点
+                        @Pointcut(value = "execution(* com.demo.dao.AopDao.get(..))")
+                        public void pointCut1() {
+
+                        }
+                        // 将 com.demo.dao 包下的 AopDao 类中的 get() 方法 定义为一个切点
+                        @Pointcut(value = "execution(* com.demo.dao.AopDao.delete(..))")
+                        public void pointCut2() {
+
+                        }
+                        // 切入点引用
+                        @Around("MyAspect.pointCut2()")
+                        public void around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+                            System.out.println("环绕通知……1");
+                            proceedingJoinPoint.proceed();
+                            System.out.println("环绕通知……2");
+                        }
+                        // 使用切入点表达式
+                        @AfterReturning(value="execution(* com.demo.dao.AopDao.modify(..))", returning = "returnValue")
+                        public void afterReturning(Object returnValue) {
+                            System.out.println("后置返回通知……,方法返回值为：" + returnValue);
+                        }
+                    }
+                ④ 定义一个 daoConfig 类，把 bean 注入到 springIOC
+                    // 两种方式启用 @AspectJ 注解支持： Java 配置类启动（标注了 @Configuration 注解的类），另一种是 基于 XML 配置，暂不考虑
+                    // 使用 @EnableAspectJAutoProxy 和 @ComponentScan 启用 @AspectJ 注解支持。
+                    @Configuration
+                    @ComponentScan(basePackages = "com.demo")   // 注解扫描
+                    @EnableAspectJAutoProxy                     // 开启 AspectJ 的自动代理
+                    public class AopDaoConfig {
+                    }
+                ⑤ 主函数里 new springIOC , 调用 dao 类，来实现功能
+                    ApplicationContext context_15 = new AnnotationConfigApplicationContext(AopDaoConfig.class);
+                    AopDao aopDaoObj44 = context_15.getBean("aopDao", AopDao.class);
+                    aopDaoObj44.add();
+                    aopDaoObj44.modify();
+                    aopDaoObj44.delete();
+                    aopDaoObj44.get();
+
+6、Jdbc
+    概念：数据库增删改查
+    方法：
+        ① 用于执行新增、更新、删除等语句；
+        public int update(String sql)
+            sql：需要执行的 SQL 语句；
+        public int update(String sql,Object... args)
+            args 表示需要传入到 SQL 语句中的参数。
+        ② 可以执行任意 SQL，一般用于执行 DDL 语句；
+        public void execute(String sql)
+        public T execute(String sql, PreparedStatementCallback action)
+            action 表示执行完 SQL 语句后，要调用的函数。
+        ③ 用于执行查询语句；
+        public <T> List<T> query(String sql, RowMapper<T> rowMapper, @Nullable Object... args)
+        public <T> T queryForObject(String sql, RowMapper<T> rowMapper, @Nullable Object... args)
+            rowMapper：用于确定返回的集合（List）的类型；
+            args：表示需要传入到 SQL 语句的参数。
+        ④ 用于批量执行新增、更新、删除等语句；
+        public int[] batchUpdate(String sql, List<Object[]> batchArgs, final int[] argTypes)
+            argTypes：需要注入的 SQL 参数的 JDBC 类型；
+            batchArgs：表示需要传入到 SQL 语句的参数。
 
 
 
 
-4、AspectJ
-
-
-
-
-5、Jdbc - CRUD
+7、事务
 
 
 
 
 
-6、事务
-
-
-
-
-
-7、日志
+8、日志
 
 
 

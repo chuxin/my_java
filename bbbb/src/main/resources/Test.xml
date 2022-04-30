@@ -158,8 +158,8 @@
         <property name="message" value="你好，世界，我在测试注册处理器"></property>
     </bean>
     <!-- 注册处理器-->
-    <bean class="com.demo.ccc.MyWorldBean"></bean>
-    <bean class="com.demo.ccc.MyWorldBean22"></bean>
+<!--    <bean class="com.demo.ccc.MyWorldBean"></bean>-->
+<!--    <bean class="com.demo.ccc.MyWorldBean22"></bean>-->
 
     <!-- bean 继承-->
     <bean id="animal" class="com.demo.ccc.Animal">
