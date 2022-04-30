@@ -1,10 +1,243 @@
 1、spring 介绍
-    
+    spring 技术栈：
+        ① Spring Data，Spring 提供的数据访问模块，对 JDBC 和 ORM 提供了很好的支持。
+        ② Spring Batch，日常批处理任务的轻量级框架
+        ③ Spring Security，定制化的身份验证和访问控制框架
+        ④ Spring Mobile，移动端 Web 应用的开发
+        ⑤ Spring Boot，对 Spring 以及第三方库的配置做到开箱即用，简化配置
+        ⑥ Spring Cloud，一款基于 Spring Boot 实现的微服务框架，包含了一些列微服务解决方案
 
+    模块组成：
+        ① Data Access/Integration（数据访问／集成），包括 JDBC、ORM、OXM、JMS 和 Transactions 模块
+        ② Web 模块，包括 Web、Servlet、WebSocket 和 Portlet 组件
+        ③ Core Container（Spring 的核心容器），由 Beans 模块、Core 核心模块、Context 上下文模块和 SpEL 表达式语言模块组成
+        ④ 在 Core Container 之上是 AOP、Aspects、Instrumentation 和 Messaging 模块
+        ⑤ Test 模块，支持 Junit 和 TestNG 测试框架
 
+    创建 spring 项目
+        ① 编辑器里直接创建 spring 项目
+            参考文章：https://blog.csdn.net/qq_46631566/article/details/118114677
+            注意：创建时选择 Spring Initializr
+        ② Maven搭建Spring项目
+            参考文章：https://blog.csdn.net/qq_41404112/article/details/107313840
+            a、创建一个 Maven 项目
+            b、右击项目，add frameworkSupport，选择 springMVC
+            c、在 src/main/java 目录下新建两个 Hello World.Java 和 MainApp.java 文件，添加代码
+            d、在 src/resources 目录下新建一个 Beans.xml 文件，添加代码
+            e、运行主函数 MainApp.java
 
-2、Bean
+2、Spring IoC（控制反转）
+    概念：IoC 是 Inversion of Control 的简写。Spring 通过 IoC 容器来管理所有 Java 对象的实例化和初始化，控制对象与对象之间的依赖关系。
 
+    步骤：
+        ① 开发人员通过 XML 配置文件、注解、Java 配置类等方式，对 Java 对象进行定义
+        ② Spring 启动时，IoC 容器会自动根据对象定义，将这些对象创建并管理起来。这些被 IoC 容器创建并管理的对象被称为 Spring Bean
+        ③ 当我们想要使用某个 Bean 时，可以直接从 IoC 容器中获取（例如通过 ApplicationContext 的 getBean() 方法）
+        ④ 把原本调用者通过代码实现的对象的创建，反转给 IoC 容器来帮忙实现。
+
+    两种IOC容器：
+        ① BeanFactory
+            BeanFactory context = new ClassPathXmlApplicationContext("Beans.xml");
+            HelloWorld obj = context.getBean("helloWorld", HelloWorld.class);
+            obj.getMessage();
+        ② ApplicationContext （ApplicationContext 是 BeanFactory 接口的子接口）
+            ApplicationContext context = new ClassPathXmlApplicationContext("Test.xml");
+            HelloWorld obj = context.getBean("helloWorld", HelloWorld.class);
+            obj.getMessage();
+
+3、Bean
+    配置文件分 XML 和 Properties 文件格式
+        ① XML 采用树形结构，适用于大型的复杂的项目
+        ② Properties 以 key-value 键值对的形式存在，适用于简单的属性配置
+
+    <Bean>元素的属性及子元素介绍
+        id	            Bean 的唯一标识符。
+        name            Bean 的名称，我们可以通过 name 属性为同一个 Bean 同时指定多个名称，每个名称之间用逗号或分号隔开。
+        class           Bean 的具体实现类，它必须是一个完整的类名，即类的全限定名。
+        scope           Bean 的作用域，属性值可以为 singleton（单例）、prototype（原型）、request、session 和 global Session。默认值是 singleton。
+        constructor-arg	<bean>元素的子元素，我们可以通过该元素，将构造参数传入，以实现 Bean 的实例化。
+        property	    <bean>元素的子元素，用于调用 Bean 实例中的 setter 方法对属性进行赋值，从而完成属性的注入。
+        ref	            <property> 和 <constructor-arg> 等元素的子元索，用于指定对某个 Bean 实例的引用，即 <bean> 元素中的 id 或 name 属性。
+        value	        <property> 和 <constractor-arg> 等元素的子元素，用于直接指定一个常量值。
+        list            用于封装 List 或数组类型的属性注入。
+        set	            用于封装 Set 类型的属性注入。
+        map	            用于封装 Map 类型的属性注入。
+        props	        用于注入字符串类型
+    例子：
+        // setter注入
+        <bean id="helloworld22" class="HelloWorld">
+            <property name="message" value="lalala22"></property>
+        </bean>
+        // 构造函数注入
+        <bean id="Grade" class="com.demo.ccc.Grade">
+            <constructor-arg name="gradeId" value="4"></constructor-arg>
+            <constructor-arg name="gradeName" value="年级名称"></constructor-arg>
+        </bean>
+        <bean id="Student" class="com.demo.ccc.Student">
+            <constructor-arg name="id" value="2"></constructor-arg>
+            <constructor-arg name="studentNo" value="33"></constructor-arg>
+            <constructor-arg name="gradeObj" ref="Grade"></constructor-arg>
+        </bean>
+        // 集合注入
+        <bean id="collectionObject11" class="com.demo.ccc.CollectionObject">
+            <property name="collId" value="111"></property>
+            <property name="collName" value="名字1号"></property>
+        </bean>
+        <bean id="collectionObject22" class="com.demo.ccc.CollectionObject">
+            <property name="collId" value="222"></property>
+            <property name="collName" value="名字2号"></property>
+        </bean>
+        <bean id="javaCollection" class="com.demo.ccc.JavaCollection">
+            <!-- 数组类型 -->
+            <property name="courses">
+                <array>
+                    <value>java</value>
+                    <value>php</value>
+                </array>
+            </property>
+            <!-- list 类型 -->
+            <property name="list">
+                <list>
+                    <value>张三</value>
+                    <value>李四</value>
+                </list>
+            </property>
+            <!-- maps 类型 -->
+            <property name="maps">
+                <map>
+                    <entry key="jack" value="杰克"></entry>
+                    <entry key="louis" value="路易斯"></entry>
+                </map>
+            </property>
+            <!-- set 类型 -->
+            <property name="sets">
+                <set>
+                    <value>sqlserver999</value>
+                    <value>redis</value>
+                </set>
+            </property>
+            <!-- 对象数组类型 -->
+            <property name="cos">
+                <array>
+                    <ref bean="collectionObject11"></ref>
+                    <ref bean="collectionObject22"></ref>
+                </array>
+            </property>
+        </bean>
+        // 其它类型注入
+        <bean id="exampleBean" class="com.demo.ccc.ExampleBean">
+            <!--使用null标签 注入 Null 值-->
+            <property name="propertyNull">
+                <null></null>
+            </property>
+            <!--使用空字符串-->
+            <property name="propertyEmpty" value=""></property>
+            <!--“<”、“>”、“&”等特殊字符-->
+            <property name="propertyLiteral" value="&lt;C语言中文网&gt;"></property>
+            <!-- <![CDATA[]]> 让 XML 解析器忽略对其中内容的解析-->
+            <property name="propertyLiteral22">
+                <value><![CDATA[<<www.baidu.com>>]]></value>
+            </property>
+            <!-- 注入依赖的 Bean , 级联属性赋值 -->
+            <property name="dependBean" ref="dependBean"></property>
+            <property name="dependBean.dependProperty" value="我是级联属性赋值,忽略下面的 dependBean 的定义及赋值"></property>
+        </bean>
+        <!--对 dependBean 进行定义-->
+        <bean id="dependBean" class="com.demo.ccc.DependBean">
+            <property name="dependProperty" value="对属性进行赋值1000"></property>
+        </bean>
+
+        public class JavaCollection {
+            // 数组类型
+            private String[] courses;
+            // list 集合类型
+            private List<String> list;
+            // map 集合类型
+            private Map<String, String> maps;
+            // set 集合类型
+            private Set<String> sets;
+            // 对象数组类型
+            private CollectionObject[] cos;
+
+            public void setCos(CollectionObject[] cos) {
+                this.cos = cos;
+            }
+            public void setCourses(String[] courses) {
+                this.courses = courses;
+            }
+            public void setList(List<String> list) {
+                this.list = list;
+            }
+            public void setMaps(Map<String, String> maps) {
+                this.maps = maps;
+            }
+            public void setSets(Set<String> sets) {
+                this.sets = sets;
+            }
+        }
+
+    短命名空间
+        作用：简化 xml 配置
+        格式：
+            p 命名空间  ->  <bean> 元素中嵌套的 <property> 元素
+            c 命名空间  ->  <bean> 元素中嵌套的 <constructor> 元素
+            <bean id="Bean 唯一标志符" class="包名+类名" p:普通属性="普通属性值" p:对象属性-ref="对象的引用">
+            <bean id="Bean 唯一标志符" class="包名+类名" c:普通属性="普通属性值" c:对象属性-ref="对象的引用">
+        例子：
+            <bean id="dept33" class="com.demo.ccc.Dept33" p:deptNo="99" p:deptName="jim理论"></bean>
+            <bean id="employee33" class="com.demo.ccc.Employee33" p:empNo="88" p:empName="louis聊聊" p:dept-ref="dept33"></bean>
+            <bean id="dept44" class="com.demo.ccc.Dept44" c:deptNo="77" c:deptName="哈哈44"></bean>
+            <bean id="employee44" class="com.demo.ccc.Employee44" c:empNo="66" c:empName="louis|心心" c:dept-ref="dept44"></bean>
+
+    内部 Bean
+        概念：定义在 <bean> 元素的 <property> 或 <constructor-arg> 元素内部的 Bean
+        例子：
+            <bean id="employee55" class="com.demo.ccc.Employee55">
+                <property name="empNo" value="001"></property>
+                <property name="empName" value="小王"></property>
+                <property name="dept">
+                    <!--  内部bean -->
+                    <bean class="com.demo.ccc.Dept55">
+                        <property name="deptNo" value="002"></property>
+                        <property name="deptName" value="技术部门"></property>
+                    </bean>
+                </property>
+            </bean>
+
+    Bean作用域
+        概念：
+            singleton	  默认值，单例模式，表示在 Spring 容器中只有一个 Bean 实例
+            prototype	  原型模式，表示每次通过 Spring 容器获取 Bean 时，容器都会创建一个新的 Bean 实例。
+            request	      每次 HTTP 请求，容器都会创建一个 Bean 实例。该作用域只在当前 HTTP Request 内有效。
+            session	      同一个 HTTP Session 共享一个 Bean 实例，不同的 Session 使用不同的 Bean 实例。该作用域仅在当前 HTTP Session 内有效。
+            application	  同一个 Web 应用共享一个 Bean 实例，该作用域在当前 ServletContext 内有效。
+                          与 singleton 类似，但 singleton 表示每个 IoC 容器中仅有一个 Bean 实例，
+                          而一个 Web 应用中可能会存在多个 IoC 容器，但一个 Web 应用只会有一个 ServletContext，
+                          也可以说 application 才是 Web 应用中货真价实的单例模式。
+            websocket	  websocket 的作用域是 WebSocket ，即在整个 WebSocket 中有效。
+        例子：
+            <!-- singleton 作用域 -->
+            <bean id="singletonBean" class="com.demo.ccc.PatternBean" scope="singleton">
+                <property name="str" value="我是单例作用域"></property>
+            </bean>
+            <!-- prototype 作用域 -->
+            <bean id="prototypeBean" class="com.demo.ccc.PatternBean" scope="prototype">
+                <property name="str" value="我是原型作用域"></property>
+            </bean>
+
+            //   singleton
+            PatternBean sb11 = context.getBean("singletonBean", PatternBean.class);
+            PatternBean sb22 = context.getBean("singletonBean", PatternBean.class);
+            LOGGER.info(sb11);   // 实例地址完全相同
+            LOGGER.info(sb22);   // 实例地址完全相同
+            //   prototype
+            PatternBean pb11 = context.getBean("prototypeBean", PatternBean.class);
+            PatternBean pb22 = context.getBean("prototypeBean", PatternBean.class);
+            LOGGER.info(pb11);   // 实例地址不相同
+            LOGGER.info(pb22);   // 实例地址不相同
+
+    Bean生命周期
+        
 
 
 
