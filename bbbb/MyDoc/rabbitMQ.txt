@@ -1,0 +1,119 @@
+1、概念
+Exchange：消息交换机，它指定消息按什么规则，路由到哪个队列。
+　　Queue：消息队列载体，每个消息都会被投入到一个或多个队列。
+　　Binding：绑定，它的作用就是把exchange和queue按照路由规则绑定起来。
+　　Routing Key：路由关键字，exchange根据这个关键字进行消息投递。
+　　vhost：虚拟主机，一个broker里可以开设多个vhost，用作不同用户的权限分离。
+　　producer：消息生产者，就是投递消息的程序。
+　　consumer：消息消费者，就是接受消息的程序。
+　　channel：消息通道，在客户端的每个连接里，可建立多个channel，每个channel代表一个会话任务。
+
+
+消息队列的使用过程大概如下：
+（1）客户端连接到消息队列服务器，打开一个channel。
+　　（2）客户端声明一个exchange，并设置相关属性。
+　　（3）客户端声明一个queue，并设置相关属性。
+　　（4）客户端使用routing key，在exchange和queue之间建立好绑定关系。
+　　（5）客户端投递消息到exchange。
+
+
+rabbit_consumer.php作为消费者
+<?php
+//配置信息
+$conn_args = array(
+    'host' => '127.0.0.1',
+    'port' => '5672',
+    'login' => 'guest',
+    'password' => 'guest',
+    'vhost'=>'/'
+);
+$e_name = 'e_linvo'; //交换机名
+$q_name = 'q_linvo'; //队列名
+$k_route = 'key_1'; //路由key
+
+//创建连接和channel
+$conn = new AMQPConnection($conn_args);
+if (!$conn->connect()) {
+    die("Cannot connect to the broker!\n");
+}
+$channel = new AMQPChannel($conn);
+
+//创建交换机
+$ex = new AMQPExchange($channel);
+$ex->setName($e_name);
+$ex->setType(AMQP_EX_TYPE_DIRECT); //direct类型
+$ex->setFlags(AMQP_DURABLE); //持久化
+echo "Exchange Status:".$ex->declare()."\n";
+
+//创建队列
+$q = new AMQPQueue($channel);
+$q->setName($q_name);
+$q->setFlags(AMQP_DURABLE); //持久化
+echo "Message Total:".$q->declare()."\n";
+
+//绑定交换机与队列，并指定路由键
+echo 'Queue Bind: '.$q->bind($e_name, $k_route)."\n";
+
+//阻塞模式接收消息
+echo "Message:\n";
+while(True){
+    $q->consume('processMessage');
+    //$q->consume('processMessage', AMQP_AUTOACK); //自动ACK应答
+}
+$conn->disconnect();
+
+/**
+ * 消费回调函数
+ * 处理消息
+ */
+function processMessage($envelope, $queue) {
+    $msg = $envelope->getBody();
+    echo $msg."\n"; //处理消息
+    $queue->ack($envelope->getDeliveryTag()); //手动发送ACK应答
+}
+?>
+
+
+rabbit_publisher.php作为生产者
+<?php
+//配置信息
+$conn_args = array(
+    'host' => '127.0.0.1',
+    'port' => '5672',
+    'login' => 'guest',
+    'password' => 'guest',
+    'vhost'=>'/'
+);
+$e_name = 'e_linvo'; //交换机名
+//$q_name = 'q_linvo'; //无需队列名
+$k_route = 'key_1'; //路由key
+
+//创建连接和channel
+$conn = new AMQPConnection($conn_args);
+if (!$conn->connect()) {
+    die("Cannot connect to the broker!\n");
+}
+$channel = new AMQPChannel($conn);
+
+//创建交换机对象
+$ex = new AMQPExchange($channel);
+$ex->setName($e_name);
+date_default_timezone_set("Asia/Shanghai");
+//发送消息
+//$channel->startTransaction(); //开始事务
+for($i=0; $i<5; ++$i){
+    sleep(1);//休眠1秒
+    //消息内容
+    $message = "TEST MESSAGE!".date("h:i:sa");
+    echo "Send Message:".$ex->publish($message, $k_route)."\n";
+}
+//$channel->commitTransaction(); //提交事务
+
+$conn->disconnect();
+?>
+
+
+参考文章：
+    https://www.cnblogs.com/miketwais/p/RabbitMQ.html
+
+

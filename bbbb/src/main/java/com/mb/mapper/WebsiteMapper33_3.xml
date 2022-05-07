@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mb.mapper.WebsiteMapper33_3">
+    <!-- 通过 JavaBean 传递参数过来 -->
+    <insert id="addWebsiteByJavaBean" keyProperty="id" useGeneratedKeys="true">
+        insert into website(name, url)
+        values(#{name}, #{url})
+    </insert>
+
+    <!-- 若数据库不支持主键自动递增（例如 Oracle），需要自己递增主键 -->
+    <insert id="addWebsiteByJavaBean222">
+        <!-- 先使用selectKey标签定义主键，然后再定义SQL语句 -->
+        <selectKey keyProperty="id" resultType="Integer" order="BEFORE">
+            select if(max(id) is null,1,max(id)+1) as newId from Website
+        </selectKey>
+        insert into Website (id,name,url) values(#{id},#{name},#{url})
+    </insert>
+
+    <update id="updateWebsiteByJavaBean">
+        update website set name = #{name}, url = #{url} where id = #{id}
+    </update>
+
+    <delete id="deleteWebsiteByJavaBean">
+        delete from website where name = #{name} and url = #{url}
+    </delete>
+
+    <select id="selectWebsiteByJavaBean" resultType="com.mb.po.Website">
+        SELECT id,NAME,url FROM website
+        WHERE name LIKE CONCAT ('%',#{name},'%')
+        AND url LIKE CONCAT ('%',#{url},'%')
+    </select>
+</mapper>

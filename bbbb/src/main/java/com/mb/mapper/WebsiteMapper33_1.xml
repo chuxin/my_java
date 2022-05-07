@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mb.mapper.WebsiteMapper33_1">
+    <insert id="addWebsite" parameterType="string">
+        insert into website(name)
+        values(#{name})
+    </insert>
+    <insert id="addWebsite_2" parameterType="map">
+        insert into website(name, url)
+        values(#{name}, #{url})
+    </insert>
+
+    <update id="updateWebstieByMap" parameterType="map">
+        update website set name=#{name}, url=#{url} where id=#{id}
+    </update>
+
+    <delete id="deleteWebsiteByMap" parameterType="map">
+        delete from website where name=#{name} and id=#{id}
+    </delete>
+
+    <select id="selectWebsiteByMap" resultType="com.mb.po.Website" parameterType="map">
+        select id, name, url from website
+        where name like concat('%', #{name}, '%')
+        and url like concat('%', #{url}, '%')
+    </select>
+</mapper>

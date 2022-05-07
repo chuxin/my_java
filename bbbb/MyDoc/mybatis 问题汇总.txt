@@ -1,0 +1,28 @@
+问题描述：
+    Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource
+原因：
+    编辑器idea不会编译src的java目录的xml文件
+解决办法：
+    将IDEA maven项目中src源代码下的xml等资源文件编译进classes文件夹
+    具体操作就是在 pom.xml 里添加
+    <bulid>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+
+问题描述：
+    Error querying database.  Cause: java.lang.IllegalArgumentException: Mapped Statements collection d
+原因：
+    1、mapper.xml中没有加入namespace
+    2、mapper.xml中的方法和接口mapper的方法不对应
+    3、mapper.xml没有加入到mybatis-config.xml中(即总的配置文件),例外:配置了mapper文件的包路径的除外
+    4、mapper.xml文件名和所写的mapper名称不相同。
+        指定要执行的sql语句的标识。 sql映射文件中的namespace + “.” + 标签的id值 中sql映射文件的路径错误
+        sql的xml文件的 id属性绑定的值与方法的ID不相同

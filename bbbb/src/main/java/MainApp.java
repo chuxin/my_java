@@ -1,35 +1,272 @@
 import com.demo.ccc.*;
 import com.demo.ccc.MyWorld;
-import com.demo.config.AopDaoConfig;
-import com.demo.controller.UserController;
 import com.demo.dao.AopDao;
 import com.demo.dao.OrderDao;
-import com.demo.entity.MyUser;
-import com.demo.entity.Order22;
 import com.demo.mylog.TestLog;
-import com.demo.service.MyUserService;
-import com.demo.service.Order22Service;
+import com.mb.mapper.*;
+import com.mb.po.Website;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.WatchEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainApp {
     private static final Log LOGGER = LogFactory.getLog(MainApp.class);
     private static final Logger log22 = LoggerFactory.getLogger(MainApp.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+//        //   第一个MyBatis程序
+//        // 读取配置文件mybatis-config.xml
+//        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
+//        // 根据配置文件构建SqlSessionFactory
+//        // SqlSessionFactory 对象一旦创建，就会在整个应用程序过程中始终存在。作用域是 Application，即随着应用程序的生命周期一直存在
+//        // SqlSessionFactoryBuilder 存在于方法体内，也就是局部变量。创建 SqlSessionFactory 对象之后，这个类就不存在了
+//        SqlSessionFactory ssfObj = new SqlSessionFactoryBuilder().build(config);
+//        // 通过SqlSessionFactory创建SqlSession。
+//        // SqlSession 的作用域范围是 request 作用域或方法体作用域内。每次访问数据库时都需要创建 SqlSession 对象
+//        SqlSession ssObj = ssfObj.openSession();
+//        // 添加网站
+//        Website websiteObj = new Website();
+//        websiteObj.setName("编程版本");
+//        websiteObj.setUrl("https://www.biancheng.net/");
+//        websiteObj.setAge(21);
+//        websiteObj.setCountry("CN");
+//        ssObj.insert("com.mb.mapper.WebsiteMapper.addWebsite", websiteObj);
+//        // 查询网站
+//        List<Website> listWeb = ssObj.selectList("com.mb.mapper.WebsiteMapper.selectAllWebsite");
+//        for (Website site : listWeb) {
+//            System.out.println(site);
+//        }
+//        // 提交事务
+//        ssObj.commit();
+//        // 关闭 SqlSession
+//        ssObj.close();
+
+
+//        // MyBatis Mapper（映射器）
+//        // ① xml 实现映射器 ， 企业里比较流行，灵活方便       sql写在 xml 里
+//        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
+//        SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(config);
+//        SqlSession ss = ssf.openSession();
+//        WebsiteMapper wsmObj = ss.getMapper(WebsiteMapper.class);
+//        List<Website> websiteList = wsmObj.selectAllRecords();
+//        for (Website site: websiteList) {
+//            System.out.println(site);
+//        }
+//        ss.commit();
+//        // ② 注解 实现映射器           sql 写在 接口里
+//        WebsiteMapper22 wsmObj22 = ss.getMapper(WebsiteMapper22.class);
+//        List<Website> websiteList22 = wsmObj22.selectAllRecords22();
+//        for (Website site: websiteList22) {
+//            System.out.println(site);
+//        }
+//        ss.commit();
+//        ss.close();
+
+
+        // MyBatis执行SQL的两种方式
+        // ① SqlSession发送SQL        没有例子，待试验 ？？？
+
+
+        // ② Mapper接口发送 SQL     主流    第一个MyBatis程序已实践过，可忽略
+
+
+
+        // MyBatis 增删改查 三种方式
+        // ① 使用 Map 传递参数
+//        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
+//        SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(config);
+//        SqlSession ss = ssf.openSession();
+//        WebsiteMapper33_1 wsmObj = ss.getMapper(WebsiteMapper33_1.class);
+        // a.insert
+        // 插入1个字段
+//        String name = "我是谁";
+//        int counter11 = wsmObj.addWebsite(name);
+//        ss.commit();
+//        // 插入2个字段
+//        Map<String, String> params = new HashMap<>();
+//        params.put("name", "what's your name");
+//        params.put("url", "www.google.com");
+//        int counter22 = wsmObj.addWebsite_2(params);
+//        ss.commit();
+//        System.out.println("共插入了 " + (counter11 + counter22) + " 条记录");
+        // b.update
+//        Map<String, Object> params22 = new HashMap<>();
+//        params22.put("id", 1);
+//        params22.put("name", "map方式更新字段");
+//        params22.put("url", "www.quora.com");
+//        int counter33 = wsmObj.updateWebstieByMap(params22);
+//        ss.commit();
+//        System.out.println("共更新了 " + counter33 + " 条记录");
+        // c.delete
+//        Map<String, Object> params33 = new HashMap<>();
+//        params33.put("name", "我是谁333");
+//        params33.put("id", 20);
+//        int counter44 = wsmObj.deleteWebsiteByMap(params33);
+//        ss.commit();
+//        System.out.println("通过 Map 传递参数，共删除了 " + counter44 + " 条记录");
+        // d.select
+//        Map<String, String> params44 = new HashMap<String, String>();
+//        params44.put("name", "我是谁22");
+//        params44.put("url", "www.google.com");
+//        List<Website> resultList = wsmObj.selectWebsiteByMap(params44);
+//        ss.commit();
+//        for (Website site: resultList) {
+//            System.out.println(site);
+//        }
+
+        // ② 使用注解传递参数
+//        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
+//        SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(config);
+//        SqlSession ss = ssf.openSession();
+//        WebsiteMapper33_2 wsmObj = ss.getMapper(WebsiteMapper33_2.class);
+        // a.insert
+//        String name = "我是谁22";
+//        String url = "www.google.com";
+//        int counter11 = wsmObj.addWebsiteByParam(name, url);
+//        ss.commit();
+//        System.out.println("共插入了 " + counter11 + " 条记录");
+        // b.update
+//        String name = "注解 方式更新字段";
+//        String url = "www.dnews.com";
+//        Integer id = 13;
+//        int counter22 = wsmObj.updateWebsiteByParam(name, url, id);
+//        ss.commit();
+//        System.out.println("共更新了 " + counter22 + " 条记录");
+        // c.delete
+//        String name = "编程版本";
+//        Integer id = 10;
+//        int counter33 = wsmObj.deleteWebsiteByParam(id, name);
+//        ss.commit();
+//        System.out.println("通过 @Param 注解传递参数，共删除了 " + counter33 + " 条记录");
+        // d.select
+//        String name = "我是谁";
+//        String url = "www";
+//        List<Website> resultList = wsmObj.selectWebsiteByParam(name, url);
+//        for (Website site: resultList) {
+//            System.out.println(site);
+//        }
+
+        // ③ 使用 JavaBean 传递参数
+//        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
+//        SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(config);
+//        SqlSession ss = ssf.openSession();
+//        WebsiteMapper33_3 wsmObj = ss.getMapper(WebsiteMapper33_3.class);
+        // a.insert
+//        // 创建 JavaBean 对象
+//        Website website = new Website();
+//        website.setName("我是谁333");
+//        website.setUrl("www.abc.com");
+//        int counter11 = wsmObj.addWebsiteByJavaBean(website);
+//        // 主键（自动递增）回填。  通过在 insert 标签中添加  keyProperty 和 useGeneratedKeys 属性，来实现该功能
+//        System.out.println("提前获得插入记录的主键ID " + website.getId());
+//        System.out.println("共插入了 " + counter11 + " 条记录");
+//        ss.commit();
+//        // 自定义主键   不实践了，只用在 oracle 里，应用场景不广泛
+        // b.update
+//        Website website22 = new Website();
+//        website22.setName("JavaBean 方式变更");
+//        website22.setUrl("www.twitter.com");
+//        website22.setId(12);
+//        int counter22 = wsmObj.updateWebsiteByJavaBean(website22);
+//        ss.commit();
+//        System.out.println("通过 JavaBean 传递参数，共更新了 " + counter22 + " 条记录");
+        // c.delete
+//        Website website33 = new Website();
+//        website33.setName("我是谁");
+//        website33.setUrl("");
+//        int counter33 = wsmObj.deleteWebsiteByJavaBean(website33);
+//        ss.commit();
+//        System.out.println("通过 JavaBean 传递参数，共删除了 " + counter33 + " 条记录");
+        // d.select
+//        Website website44 = new Website();
+//        website44.setName("我是谁");
+//        website44.setUrl("www");
+//        List<Website> resultList = wsmObj.selectWebsiteByJavaBean(website44);
+//        for (Website site: resultList) {
+//            System.out.println(site);
+//        }
+    }
+
+    /*
+    // 创建 spring项目，输出第一个 helloworld
+    // https://blog.csdn.net/qq_46631566/article/details/118114677
+    // http://c.biancheng.net/spring/first-spring.html
+
+    // 加载类路径 ClassPath 下指定的 XML 配置文件，并完成 ApplicationContext 的实例化工作
+    // ApplicationContext applicationContext = new ClassPathXmlApplicationContext(String configLocation);
+
+    // 加载指定的文件系统路径中指定的 XML 配置文件，并完成 ApplicationContext 的实例化工作
+    // ApplicationContext applicationContext = new FileSystemXmlApplicationContext(String configLocation);
+
+    // Spring Bean定义    <bean> 标签上的各种属性
+    // http://c.biancheng.net/spring/bean-definition.html
+    // 属性名称	    描述
+    // id	        Bean 的唯一标识符，Spring IoC 容器对 Bean 的配置和管理都通过该属性完成。id 的值必须以字母开始，可以使用字母、数字、下划线等符号。
+    // name	        该属性表示 Bean 的名称，我们可以通过 name 属性为同一个 Bean 同时指定多个名称，每个名称之间用逗号或分号隔开。Spring 容器可以通过 name 属性配置和管理容器中的 Bean。
+    // class	    该属性指定了 Bean 的具体实现类，它必须是一个完整的类名，即类的全限定名。
+    // list	        用于封装 List 或数组类型的属性注入。
+    // set	        用于封装 Set 类型的属性注入。
+    // map	        用于封装 Map 类型的属性注入。
+
+    // Spring Bean属性注入
+    // Bean 属性注入，简单点说就是将属性注入到 Bean 中的过程，而这属性既可以普通属性，也可以是一个对象（Bean）
+    //  构造函数注入
+    //  setter 注入
+    //  短命名空间注入
+    //        短命名空间	    简化的 XML 配置	                        说明
+    //        p 命名空间	    <bean> 元素中嵌套的 <property> 元素	    是 setter 方式属性注入的一种快捷实现方式
+    //        c 命名空间	    <bean> 元素中嵌套的 <constructor> 元素	    是构造函数属性注入的一种快捷实现方式
+    //
+    //        使用 p 命名空间注入依赖时，必须注意以下 3 点：
+    //            Java 类中必须有 setter 方法；
+    //            Java 类中必须有无参构造器（类中不包含任何带参构造函数的情况，无参构造函数默认存在）；
+    //            在使用 p 命名空间实现属性注入前，XML 配置的 <beans> 元素内必须先导入 p 命名空间的 XML 约束。
+
+    // Spring注入内部Bean
+
+    // Spring Bean作用域
+    //      singleton	  默认值，单例模式，表示在 Spring 容器中只有一个 Bean 实例
+    //      prototype	  原型模式，表示每次通过 Spring 容器获取 Bean 时，容器都会创建一个新的 Bean 实例。
+    //      request	      每次 HTTP 请求，容器都会创建一个 Bean 实例。该作用域只在当前 HTTP Request 内有效。
+    //      session	      同一个 HTTP Session 共享一个 Bean 实例，不同的 Session 使用不同的 Bean 实例。该作用域仅在当前 HTTP Session 内有效。
+    //      application	  同一个 Web 应用共享一个 Bean 实例，该作用域在当前 ServletContext 内有效。
+    //                    与 singleton 类似，但 singleton 表示每个 IoC 容器中仅有一个 Bean 实例，而一个 Web 应用中可能会存在多个 IoC 容器，但一个 Web 应用只会有一个 ServletContext，也可以说 application 才是 Web 应用中货真价实的单例模式。
+    //      websocket	  websocket 的作用域是 WebSocket ，即在整个 WebSocket 中有效。
+
+    // spring Bean 的生命周期
+    //   Bean 的实例化
+    //   Bean 属性赋值
+    //   Bean 的初始化
+    //   Bean 的使用
+    //   Bean 的销毁
+
+    // 对于 singleton 作用域的 Bean 来说，Spring IoC 容器能够精确地控制 Bean 何时被创建、何时初始化完成以及何时被销毁；
+    // 对于 prototype 作用域的 Bean 来说，Spring IoC 容器只负责创建，然后就将 Bean 的实例交给客户端代码管理，Spring IoC 容器将不再跟踪其生命周期。
+
+    // 3 种方式自定义 Bean 的生命周期回调方法
+    //    通过接口实现
+    //    通过 XML 配置实现
+    //    使用注解实现
+     */
+    public static void testSpring() {
         System.out.println("---创建一个测试Bean---");
         // 方法一，没成功
 //        ApplicationContext context = new FileSystemXmlApplicationContext("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/aaaa/src/Test.xml");
@@ -405,69 +642,44 @@ public class MainApp {
             System.out.print(bytes[j] + " ");
         }
     }
-
 }
 
+// Mybatis-Plus（简称 MP）是 Mybatis 的增强工具，在 Mybatis 的基础上只做增强不做改变，支持 Mybatis 所有原生的特性，为简化开发、提高效率而生。
+// MyBatis 是一个半自动化的持久层框架，Hibernate 是一个强大、复杂、全自动化的持久层框架。
+// Hibernate 和 MyBatis 都是目前业界中主流的对象关系映射（ORM）框架
 
-// 创建 spring项目，输出第一个 helloworld
-// https://blog.csdn.net/qq_46631566/article/details/118114677
-// http://c.biancheng.net/spring/first-spring.html
+// MyBatis 官网 http://mybatis.org/
+// github 地址：https://github.com/mybatis/mybatis-3/releases
 
-// 加载类路径 ClassPath 下指定的 XML 配置文件，并完成 ApplicationContext 的实例化工作
-// ApplicationContext applicationContext = new ClassPathXmlApplicationContext(String configLocation);
-
-// 加载指定的文件系统路径中指定的 XML 配置文件，并完成 ApplicationContext 的实例化工作
-// ApplicationContext applicationContext = new FileSystemXmlApplicationContext(String configLocation);
-
-// Spring Bean定义    <bean> 标签上的各种属性
-// http://c.biancheng.net/spring/bean-definition.html
-// 属性名称	    描述
-// id	        Bean 的唯一标识符，Spring IoC 容器对 Bean 的配置和管理都通过该属性完成。id 的值必须以字母开始，可以使用字母、数字、下划线等符号。
-// name	        该属性表示 Bean 的名称，我们可以通过 name 属性为同一个 Bean 同时指定多个名称，每个名称之间用逗号或分号隔开。Spring 容器可以通过 name 属性配置和管理容器中的 Bean。
-// class	    该属性指定了 Bean 的具体实现类，它必须是一个完整的类名，即类的全限定名。
-// list	        用于封装 List 或数组类型的属性注入。
-// set	        用于封装 Set 类型的属性注入。
-// map	        用于封装 Map 类型的属性注入。
-
-// Spring Bean属性注入
-// Bean 属性注入，简单点说就是将属性注入到 Bean 中的过程，而这属性既可以普通属性，也可以是一个对象（Bean）
-//  构造函数注入
-//  setter 注入
-//  短命名空间注入
-//        短命名空间	    简化的 XML 配置	                        说明
-//        p 命名空间	    <bean> 元素中嵌套的 <property> 元素	    是 setter 方式属性注入的一种快捷实现方式
-//        c 命名空间	    <bean> 元素中嵌套的 <constructor> 元素	    是构造函数属性注入的一种快捷实现方式
-//
-//        使用 p 命名空间注入依赖时，必须注意以下 3 点：
-//            Java 类中必须有 setter 方法；
-//            Java 类中必须有无参构造器（类中不包含任何带参构造函数的情况，无参构造函数默认存在）；
-//            在使用 p 命名空间实现属性注入前，XML 配置的 <beans> 元素内必须先导入 p 命名空间的 XML 约束。
-
-// Spring注入内部Bean
-
-// Spring Bean作用域
-//      singleton	  默认值，单例模式，表示在 Spring 容器中只有一个 Bean 实例
-//      prototype	  原型模式，表示每次通过 Spring 容器获取 Bean 时，容器都会创建一个新的 Bean 实例。
-//      request	      每次 HTTP 请求，容器都会创建一个 Bean 实例。该作用域只在当前 HTTP Request 内有效。
-//      session	      同一个 HTTP Session 共享一个 Bean 实例，不同的 Session 使用不同的 Bean 实例。该作用域仅在当前 HTTP Session 内有效。
-//      application	  同一个 Web 应用共享一个 Bean 实例，该作用域在当前 ServletContext 内有效。
-//                    与 singleton 类似，但 singleton 表示每个 IoC 容器中仅有一个 Bean 实例，而一个 Web 应用中可能会存在多个 IoC 容器，但一个 Web 应用只会有一个 ServletContext，也可以说 application 才是 Web 应用中货真价实的单例模式。
-//      websocket	  websocket 的作用域是 WebSocket ，即在整个 WebSocket 中有效。
-
-// spring Bean 的生命周期
-//   Bean 的实例化
-//   Bean 属性赋值
-//   Bean 的初始化
-//   Bean 的使用
-//   Bean 的销毁
-
-// 对于 singleton 作用域的 Bean 来说，Spring IoC 容器能够精确地控制 Bean 何时被创建、何时初始化完成以及何时被销毁；
-// 对于 prototype 作用域的 Bean 来说，Spring IoC 容器只负责创建，然后就将 Bean 的实例交给客户端代码管理，Spring IoC 容器将不再跟踪其生命周期。
+// 创建 MyBatis 的步骤如下
+// ① 利用 maven 在 pom.xml 里配置 mybatis，下载 mybatis 包
+// ② 创建实体类：          com/mb/po/Website.java
+// ③ 创建 sql 映射文件：   com/mb/mapper/WebsiteMapper.xml
+// ④ 创建配置文件：        src/main/resources/mybatis-config.xml
+// ⑤ 编写crud脚本去调用：   src/main/java/MainApp.java
 
 
-// 3 种方式自定义 Bean 的生命周期回调方法
-//    通过接口实现
-//    通过 XML 配置实现
-//    使用注解实现
+// MyBatis配置文件（mybatis-config.xml）
+//    <settings>
+//        <setting name="cacheEnabled" value="true"/>               // 常用配置项
+//        <setting name="lazyLoadingEnabled" value="true"/>         // 常用配置项
+//        <setting name="multipleResultSetsEnabled" value="true"/>
+//        <setting name="useColumnLabel" value="true"/>
+//        <setting name="useGeneratedKeys" value="false"/>
+//        <setting name="autoMappingBehavior" value="PARTIAL"/>     // 常用配置项
+//        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+//        <setting name="defaultExecutorType" value="SIMPLE"/>      // 常用配置项
+//        <setting name="defaultStatementTimeout" value="25"/>
+//        <setting name="defaultFetchSize" value="100"/>
+//        <setting name="safeRowBoundsEnabled" value="false"/>
+//        <setting name="mapUnderscoreToCamelCase" value="false"/>  // 常用配置项
+//        <setting name="localCacheScope" value="SESSION"/>
+//        <setting name="jdbcTypeForNull" value="OTHER"/>
+//        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+//    </settings>
+
+
+// MyBatis Mapper（映射器）
+
 
 

@@ -101,16 +101,16 @@ public class ZzzzApplication {
         // done
 
         /*********   make a summary (spring)   *********/
-        //
+        // done
 
         /*********   开始看框架 mybatis & ibatis  *********/
-        //
+        // 
 
         /*********   make a summary (mybatis)   *********/
-        //
         // 0、crud  postman实现
         // 1、登录 + curd + 页面展示
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
+        //
 
         /*********   回过头看最初的教程   *********/
         // 把之前没看的，没学的，都看一遍

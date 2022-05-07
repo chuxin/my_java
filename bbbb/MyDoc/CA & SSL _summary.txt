@@ -1,0 +1,45 @@
+问题描述：
+    make sure the "sslcafile" or "sslcapath" option are properly set for the
+解决办法：
+    https://www.modb.pro/db/324667
+    https://www.geek-share.com/detail/2675938938.html
+    https://forum.omeka.org/t/ssl-certificate-issue-with-connecting-to-other-sites/13006
+    https://stackoverflow.com/questions/23615548/trouble-with-authentication-in-vk-com-with-zend-oauth
+    https://stackoverflow.com/questions/24221104/ssl-error-in-curl-call-to-twitter-api
+结果：
+    上述待试验。
+    实际操作是，先查看服务器上证书有没有过期，没有就要更新服务器上的证书
+
+
+
+看到远端服务器证书信息和本地证书路径
+curl -vvl https://www.baidu.com
+输出：
+    CAfile: /etc/ssl/certs/ca-certificates.crt
+    CApath: /etc/ssl/certs
+    start date: Jun 11 00:00:00 2021 GMT
+    expire date: Jul 10 23:59:59 2022 GMT
+
+
+查看证书有没有过期
+# 格式
+openssl x509 -in <证书请求文件> -noout -dates
+# 本地
+openssl x509 -in /etc/ssl/certs/ca-certificates.crt -noout -dates
+
+
+概念：
+SSL证书是数字证书的一种，类似于驾驶证、护照和营业执照的电子副本。因为配置在服务器上，也称为SSL服务器证书。
+SSL 证书 [1]  就是遵守 SSL协议，由受信任的数字证书颁发机构CA，在验证服务器身份后颁发，具有服务器身份验证和数据传输加密功能。
+
+ssl 是什么
+ca 是什么
+两台服务器基于 ssl 通信，ca 扮演什么角色，中间做了哪些事情
+服务器上根证书，private.pem , public.pem   之间的关系是什么
+
+
+目前的错误是找不到 CAfile, capath 路径，那么 zendClient CAfile, capath 原本证书放的位置在哪里？
+
+
+
+
