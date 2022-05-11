@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mb.mapper.User33Mapper">
+    <!-- 分步查询 -->
+    <select id="selectUser33Order33ById" parameterType="Integer" resultMap="user33AndOrder33">
+        select * from user33 where id = #{id}
+    </select>
+    <resultMap id="user33AndOrder33" type="com.mb.po.User33">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="pwd" column="pwd"></result>
+        <collection property="order33List" ofType="com.mb.po.Order33"
+                    column="id" select="com.mb.mapper.Order33Mapper.selectOrder33ById"></collection>
+    </resultMap>
+
+    <!-- 单步查询 -->
+    <select id="selectUser33Order33ById22" parameterType="Integer" resultMap="user33AndOrder33_22">
+        select aa.*, bb.id as oId, bb.ordernum, bb.userId from user33 as aa, order33 as bb
+        where aa.id = #{id} and aa.id = bb.userId
+    </select>
+    <resultMap id="user33AndOrder33_22" type="com.mb.po.User33">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="pwd" column="pwd"></result>
+        <collection property="order33List" ofType="com.mb.po.Order33">
+            <id property="oId" column="oId"></id>
+            <result property="ordernum" column="ordernum"></result>
+        </collection>
+    </resultMap>
+</mapper>

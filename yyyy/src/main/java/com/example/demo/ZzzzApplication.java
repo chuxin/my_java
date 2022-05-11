@@ -103,22 +103,30 @@ public class ZzzzApplication {
         /*********   make a summary (spring)   *********/
         // done
 
-        /*********   开始看框架 mybatis & ibatis  *********/
+        /*********   开始看框架 mybatis & mybatisplus  *********/
         // 
 
         /*********   make a summary (mybatis)   *********/
+        //
+
+        /*********   开始看框架 spring cloud  *********/
+        //
+
+        /*********   make a summary (spring cloud)   *********/
+        //
+
+        /*********   springboot => practice       *********/
         // 0、crud  postman实现
         // 1、登录 + curd + 页面展示
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
-        //
+        //      https://blog.csdn.net/qq_41288095/article/details/89743041
 
-        /*********   回过头看最初的教程   *********/
+        /*********   回过头看最初的教程，基础最重要   *********/
         // 把之前没看的，没学的，都看一遍
         // https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610
 
         /*********   make a summary at second time (basic)   *********/
         //
-
 
 
     }

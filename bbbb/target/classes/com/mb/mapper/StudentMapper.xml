@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mb.mapper.StudentMapper">
+    <!-- 分步查询 -->
+    <select id="selectStuById11" parameterType="Integer" resultMap="cardAndStu11">
+        select * from student where id = #{id}
+    </select>
+    <!-- 一对一查询，根据id查询学生信息，顺带利用 association标签 和 cardId 再去查询另一张表 studentcard -->
+    <resultMap id="cardAndStu11" type="com.mb.po.Student">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="sex" column="sex"></result>
+        <!-- 一对一查询, association标签是 resultMap 特有的子标签, 主要在 一对一 查询中起作用 -->
+        <association property="studentCard" column="cardId"
+                     javaType="com.mb.po.StudentCard" select="com.mb.mapper.StudentCardMapper.selectStuCardById">
+        </association>
+    </resultMap>
+
+    <!-- 单步查询 -->
+    <select id="selectStuById22" parameterType="Integer" resultMap="cardAndStu22">
+        select s.*, sc.studentId, sc.startDate from student s, studentcard sc where s.id = #{#id} and s.cardId = sc.id
+    </select>
+    <resultMap id="cardAndStu22" type="com.mb.po.Student">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="sex" column="sex"></result>
+        <association property="studentCard" javaType="com.mb.po.StudentCard">
+            <id property="id" column="id"></id>
+            <result property="studentId" column="studentId"></result>
+            <result property="startDate" column="startDate"></result>
+            <result property="endDate" column="endDate"></result>
+        </association>
+    </resultMap>
+
+</mapper>

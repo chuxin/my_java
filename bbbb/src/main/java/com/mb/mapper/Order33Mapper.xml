@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mb.mapper.Order33Mapper">
+
+    <select id="selectOrder33ById" resultType="com.mb.po.Order33" parameterType="Integer">
+        select id as oId, ordernum, userId from order33 where userId = #{id}
+    </select>
+    
+</mapper>

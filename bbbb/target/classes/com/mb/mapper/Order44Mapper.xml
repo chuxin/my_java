@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mb.mapper.Order44Mapper">
+
+    <select id="selectAllOrder44AndProduct44ById" resultMap="order44AndProduct44" parameterType="Integer">
+        select order44.oid, order44.ordernum, order44.userId,
+                product44.pid, product44.name, product44.price
+        from order44
+            inner join orders_detail44 on order44.oid = orders_detail44.orderId
+            inner join product44 on product44.pid = orders_detail44.productId
+    </select>
+    <resultMap id="order44AndProduct44" type="com.mb.po.Order44">
+        <id property="oid" column="oid"></id>
+        <result property="ordernum" column="ordernum"></result>
+        <collection property="product44List" ofType="com.mb.po.Product44">
+            <id property="pid" column="pid"></id>
+            <result property="name" column="name"></result>
+            <result property="price" column="price"></result>
+        </collection>
+    </resultMap>
+</mapper>

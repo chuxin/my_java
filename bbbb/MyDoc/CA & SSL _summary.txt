@@ -11,7 +11,6 @@
     实际操作是，先查看服务器上证书有没有过期，没有就要更新服务器上的证书
 
 
-
 看到远端服务器证书信息和本地证书路径
 curl -vvl https://www.baidu.com
 输出：
@@ -20,26 +19,71 @@ curl -vvl https://www.baidu.com
     start date: Jun 11 00:00:00 2021 GMT
     expire date: Jul 10 23:59:59 2022 GMT
 
-
 查看证书有没有过期
-# 格式
-openssl x509 -in <证书请求文件> -noout -dates
-# 本地
 openssl x509 -in /etc/ssl/certs/ca-certificates.crt -noout -dates
+
+查看证书的完整信息
+
+
+
 
 
 概念：
 SSL证书是数字证书的一种，类似于驾驶证、护照和营业执照的电子副本。因为配置在服务器上，也称为SSL服务器证书。
-SSL 证书 [1]  就是遵守 SSL协议，由受信任的数字证书颁发机构CA，在验证服务器身份后颁发，具有服务器身份验证和数据传输加密功能。
+SSL证书就是遵守 SSL协议，由受信任的数字证书颁发机构CA，在验证服务器身份后颁发，具有服务器身份验证和数据传输加密功能。
+PEM和DER是不同的编码方式，PEM在 linux上常用，DER在 window 上常用，可以相互转换
+PEM是基于Base64编码的证书格式，扩展名包括PEM、CRT和CER。Linux系统使用CRT，Windows系统使用CER。PEM证书通常将根证书、中间证书和用户证书分开存放，主要用于Apache和Nginx。
+CRT应该是certificate的三个字母，其实还是证书的意思。常见于UNIX系统，有可能是 PEM 编码，也有可能是DER编码，大多数应该是PEM编码。
+根证书是未被签名的公钥证书或自签名的证书。从 CA 中心下载
+    证书其实包含三部分，用户的信息，用户的公钥，还有CA中心对该证书里面的信息的签名
+    CA中心验证对该证书信息的签名是否有效，需要用 CA 中心的公钥验证
+
+CACert.crt：是 CA（权威证书颁发机构）的根证书
+
+证书文件扩展名列表：
+    PEM：是证书。一般用在 Apache 和 UNIX 服务器
+        # 查看 PEM 格式证书，
+        openssl x509 -in certificate.pem -text -noout
+
+    DER：是证书。一般用在 Java 和 Windows 服务器
+        # 查看 DER 格式证书，
+        openssl x509 -in certificate.der -inform der -text -noout
+
+    CRT：是证书。常见于 UNIX 系统
+
+    CER：是证书。常见于 Windows 系统
+
+    KEY：不是证书。通常用来存放一个公钥或者私钥，并非 X.509 证书。
+        # 查看 KEY，pem格式
+        openssl rsa -in mykey.key -text -noout
+        # 查看 KEY，der格式
+        openssl rsa -in mykey.key -text -noout -inform der
+
+    CSR：不是证书。证书签名请求。是向权威证书颁发机构获得签名证书的申请，其核心内容是一个公钥
+        # 查看 pem 格式的 key
+        openssl req -noout -text -in my.csr
+
+    PFX：对 unix 服务器来说,一般 CRT 和 KEY 是分开存放在不同文件中的，但 Windows 的 IIS 则将它们存在一个 PFX 文件中
+参考博文：https://blog.csdn.net/itworld123/article/details/115553346
+
+
+
 
 ssl 是什么
 ca 是什么
 两台服务器基于 ssl 通信，ca 扮演什么角色，中间做了哪些事情
+    申请 ca，客户端和服务器通信时，如果是ssl通信，要先验证 ca 合不合法，合法就建立 ssl 通信
 服务器上根证书，private.pem , public.pem   之间的关系是什么
-
+    参考：
+        MyDoc/公钥、私钥和证书.txt
+        MyDoc/公钥和私钥与认证和签名.txt
 
 目前的错误是找不到 CAfile, capath 路径，那么 zendClient CAfile, capath 原本证书放的位置在哪里？
 
+openssl_get_cert_locations  跟 stream_socket_enable_crypto 什么关系
 
+PHP CAfile capath
 
+泛域名证书 单个域名证书
 
+/private/etc/ssl/openssl.cnf

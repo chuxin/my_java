@@ -27,5 +27,16 @@
         <mapper resource="com/mb/mapper/WebsiteMapper33_1.xml"></mapper>
         <mapper resource="com/mb/mapper/WebsiteMapper33_2.xml"></mapper>
         <mapper resource="com/mb/mapper/WebsiteMapper33_3.xml"></mapper>
+
+        <mapper resource="com/mb/mapper/StudentMapper.xml"></mapper>
+        <mapper resource="com/mb/mapper/StudentCardMapper.xml"></mapper>
+
+        <mapper resource="com/mb/mapper/User33Mapper.xml"></mapper>
+        <mapper resource="com/mb/mapper/Order33Mapper.xml"></mapper>
+
+        <mapper resource="com/mb/mapper/Order44Mapper.xml"></mapper>
+
+        <mapper resource="com/mb/mapper/DomainMapper.xml"></mapper>
+
     </mappers>
 </configuration>

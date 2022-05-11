@@ -21,4 +21,92 @@
         select * from website
     </select>
 
+    <!-- //////////////// 动态 sql ////////////////// -->
+    <select id="selectRecordsByCondition" resultMap="myResult">
+        select * from website where 1=1
+        <if test="name != null">
+            and name like #{name}
+        </if>
+        <if test="url != null">
+            and url like #{url}
+        </if>
+    </select>
+
+    <select id="selectRecordsByCondition22" resultMap="myResult">
+        select * from website where 1=1
+        <choose>
+            <when test="name != null and name != ''">
+                and name like concat("%", #{name}, "%")
+            </when>
+            <when test="url != null and url != ''">
+                and url like concat("%", #{url}, "%")
+            </when>
+            <otherwise>
+                and age is not null
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectRecordsByCondition33" resultMap="myResult">
+        select * from website
+        <where>
+            <if test="name != null">
+                and name like #{name}
+            </if>
+            <if test="url != null">
+                and url like #{url}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectRecordsByCondition44" resultMap="myResult">
+        select * from website
+        <trim prefix="where" prefixOverrides="and">
+            <if test="name != null and name != ''">
+                and name like #{name}
+            </if>
+            <if test="url != null and url != ''">
+                and url like #{url}
+            </if>
+        </trim>
+    </select>
+
+    <resultMap id="myResult" type="com.mb.po.Website">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <update id="updateWebsiteById" parameterType="com.mb.po.Website">
+        update website
+        <set>
+            <if test="name != null">name=#{name},</if>   <!-- 注意这里要加个逗号 -->
+            <if test="url != null">url=#{url}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectRecordsByCondition55" parameterType="com.mb.po.Website" resultType="com.mb.po.Website">
+        select * from website where age in
+        <foreach item="xxxx" index="yyyy" collection="list55" open="(" separator="," close=")">
+            #{xxxx}
+        </foreach>
+    </select>
+
+    <select id="selectRecordsByCondition66" resultMap="myResult">
+        <bind name="pattern_name" value="'%' + name + '%'"/>
+        <bind name="pattern_url" value="'%' + url + '%'"/>
+        select * from website where name like #{pattern_name} and url like #{pattern_url}
+    </select>
+
+    <select id="selectRecordsByCondition77" resultMap="myResult">
+        select * from website
+        <trim prefix="where" prefixOverrides="and">
+            <if test="name != null and name != ''">
+                and name like concat("%", #{name}, "%")
+            </if>
+            <if test="url != null and url != ''">
+                and url like concat("%", #{url}, "%")
+            </if>
+        </trim>
+        order by id desc limit #{currPage}, #{pageSize}
+    </select>
 </mapper>
