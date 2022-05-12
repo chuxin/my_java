@@ -20,6 +20,6 @@ public interface WebsiteMapper {
 
     public List<Website> selectRecordsByCondition66(@Param("name") String name, @Param("url")  String url);
 
-    public List<Website> selectRecordsByCondition77(@Param("name") String name, @Param("url") String url,
+    public List<Website> selectRecordsByCondition77(@Param("wsObj") Website wsObj77,
                                         @Param("currPage")  Integer currPage, @Param("pageSize") Integer pageSize);
 }

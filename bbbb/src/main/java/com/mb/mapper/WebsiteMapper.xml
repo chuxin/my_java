@@ -97,14 +97,15 @@
         select * from website where name like #{pattern_name} and url like #{pattern_url}
     </select>
 
-    <select id="selectRecordsByCondition77" resultMap="myResult">
+<!--    下面传入了 wsObj 对象，需要声明 parameterType="com.mb.po.Website"，否则无效 -->
+    <select id="selectRecordsByCondition77" parameterType="com.mb.po.Website" resultMap="myResult">
         select * from website
         <trim prefix="where" prefixOverrides="and">
-            <if test="name != null and name != ''">
-                and name like concat("%", #{name}, "%")
+            <if test="wsObj.name != null and wsObj.name != ''">
+                and name like concat("%", #{wsObj.name}, "%")
             </if>
-            <if test="url != null and url != ''">
-                and url like concat("%", #{url}, "%")
+            <if test="wsObj.url != null and wsObj.url != ''">
+                and url like concat("%", #{wsObj.url}, "%")
             </if>
         </trim>
         order by id desc limit #{currPage}, #{pageSize}
