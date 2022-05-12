@@ -74,15 +74,6 @@ public class MainApp {
 //        ss.commit();
 //        ss.close();
 
-
-        // MyBatis执行SQL的两种方式
-        // ① SqlSession发送SQL        没有例子，待试验 ？？？
-
-
-        // ② Mapper接口发送 SQL     主流    第一个MyBatis程序已实践过，可忽略
-
-
-
         // MyBatis 增删改查 三种方式
         // ① 使用 Map 传递参数
 //        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
@@ -317,98 +308,104 @@ public class MainApp {
 //            System.out.println(site);
 //        }
 
-        // MyBatis动态SQL
-        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
-        SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(config);
-        SqlSession ss = ssf.openSession();
-        WebsiteMapper wsmObj = ss.getMapper(WebsiteMapper.class);
-        // if标签：条件判断
-        System.out.println("==== if标签：条件判断 ====");
-//        String name = "jack";
-//        String url = null;
-        String name = null;
-        String url = "www.test.com";
-        List<Website> wsList = wsmObj.selectRecordsByCondition(name, url);
-        for (Website site : wsList) {
-            System.out.println(site);
-        }
-        // choose、when和otherwise标签
-        //   类似于  if ... elseif ... else 的效果
-        System.out.println("==== choose、when和otherwise标签 ====");
-        String name22 = "jack";
-        String url22 = "www.test.com";
-        List<Website> wsList22 = wsmObj.selectRecordsByCondition22(name22, url22);
-        for (Website site : wsList22) {
-            System.out.println(site);
-        }
-        // where标签
-        //   where 标签主要用来简化 SQL 语句中的条件判断，可以自动处理 AND/OR 条件
-        System.out.println("==== where标签 ====");
-        String name33 = "jack";
-        String url33 = "www.test.com";
-        List<Website> wsList33 = wsmObj.selectRecordsByCondition33(name33, url33);
-        for (Website site : wsList33) {
-            System.out.println(site);
-        }
-        // trim标签
-        //   trim 属性如下：
-        //      prefix	            给SQL语句拼接的前缀，为 trim 包含的内容加上前缀
-        //      suffix	            给SQL语句拼接的后缀，为 trim 包含的内容加上后缀
-        //      prefixOverrides	    去除 SQL 语句前面的关键字或字符，该关键字或者字符由 prefixOverrides 属性指定。
-        //      suffixOverrides	    去除 SQL 语句后面的关键字或者字符，该关键字或者字符由 suffixOverrides 属性指定。
-        System.out.println("==== trim标签 ====");
-        String name44 = "jack";
-        String url44 = "www.test.com";
-        List<Website> wsList44 = wsmObj.selectRecordsByCondition44(name44, url44);
-        for (Website site : wsList44) {
-            System.out.println(site);
-        }
-        // set标签
-        System.out.println("==== set标签 ====");
-        Website wsObj = new Website();
-        wsObj.setId(18);
-        wsObj.setName("xixixi");
-        wsObj.setUrl("www.google222.com");
-        Integer updRes = wsmObj.updateWebsiteById(wsObj);
-        ss.commit();
-        System.out.println(updRes);
-        // foreach标签
-        System.out.println("==== foreach标签 ====");
-        List<Integer> ageList = new ArrayList<>();
-        ageList.add(20);
-        ageList.add(21);
-        List<Website> wsList55 = wsmObj.selectRecordsByCondition55(ageList);
-        for (Website site : wsList55) {
-            System.out.println(site);
-        }
-        // bind标签
-        System.out.println("==== bind标签 ====");
-        String name66 = "ja";
-        String url66 = "www.";
-        List<Website> wsList66 = wsmObj.selectRecordsByCondition66(name66, url66);
-        for (Website site : wsList66) {
-            System.out.println(site);
-        }
-        // 分页功能
-        //    http://c.biancheng.net/mybatis/paging.html   xml 里传入对象失败了，#{site.name} 在 xml 里是 null ？？？？
-        System.out.println("==== 分页功能 ====");
-        Website wsObj77 = new Website();
-        String name77 = "j";
-        String url77 = "www.";
-        List<Website> wsList77 = wsmObj.selectRecordsByCondition77(name77, url77, 0, 2);
-        for (Website site : wsList77) {
-            System.out.println(site);
-        }
+//        // MyBatis动态SQL
+//        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
+//        SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(config);
+//        SqlSession ss = ssf.openSession();
+//        WebsiteMapper wsmObj = ss.getMapper(WebsiteMapper.class);
+//        // if标签：条件判断
+//        System.out.println("==== if标签：条件判断 ====");
+////        String name = "jack";
+////        String url = null;
+//        String name = null;
+//        String url = "www.test.com";
+//        List<Website> wsList = wsmObj.selectRecordsByCondition(name, url);
+//        for (Website site : wsList) {
+//            System.out.println(site);
+//        }
+//        // choose、when和otherwise标签
+//        //   类似于  if ... elseif ... else 的效果
+//        System.out.println("==== choose、when和otherwise标签 ====");
+//        String name22 = "jack";
+//        String url22 = "www.test.com";
+//        List<Website> wsList22 = wsmObj.selectRecordsByCondition22(name22, url22);
+//        for (Website site : wsList22) {
+//            System.out.println(site);
+//        }
+//        // where标签
+//        //   where 标签主要用来简化 SQL 语句中的条件判断，可以自动处理 AND/OR 条件
+//        System.out.println("==== where标签 ====");
+//        String name33 = "jack";
+//        String url33 = "www.test.com";
+//        List<Website> wsList33 = wsmObj.selectRecordsByCondition33(name33, url33);
+//        for (Website site : wsList33) {
+//            System.out.println(site);
+//        }
+//        // trim标签
+//        //   trim 属性如下：
+//        //      prefix	            给SQL语句拼接的前缀，为 trim 包含的内容加上前缀
+//        //      suffix	            给SQL语句拼接的后缀，为 trim 包含的内容加上后缀
+//        //      prefixOverrides	    去除 SQL 语句前面的关键字或字符，该关键字或者字符由 prefixOverrides 属性指定。
+//        //      suffixOverrides	    去除 SQL 语句后面的关键字或者字符，该关键字或者字符由 suffixOverrides 属性指定。
+//        System.out.println("==== trim标签 ====");
+//        String name44 = "jack";
+//        String url44 = "www.test.com";
+//        List<Website> wsList44 = wsmObj.selectRecordsByCondition44(name44, url44);
+//        for (Website site : wsList44) {
+//            System.out.println(site);
+//        }
+//        // set标签
+//        System.out.println("==== set标签 ====");
+//        Website wsObj = new Website();
+//        wsObj.setId(18);
+//        wsObj.setName("xixixi");
+//        wsObj.setUrl("www.google222.com");
+//        Integer updRes = wsmObj.updateWebsiteById(wsObj);
+//        ss.commit();
+//        System.out.println(updRes);
+//        // foreach标签
+//        System.out.println("==== foreach标签 ====");
+//        List<Integer> ageList = new ArrayList<>();
+//        ageList.add(20);
+//        ageList.add(21);
+//        List<Website> wsList55 = wsmObj.selectRecordsByCondition55(ageList);
+//        for (Website site : wsList55) {
+//            System.out.println(site);
+//        }
+//        // bind标签
+//        System.out.println("==== bind标签 ====");
+//        String name66 = "ja";
+//        String url66 = "www.";
+//        List<Website> wsList66 = wsmObj.selectRecordsByCondition66(name66, url66);
+//        for (Website site : wsList66) {
+//            System.out.println(site);
+//        }
+//        // 分页功能
+//        //    http://c.biancheng.net/mybatis/paging.html   xml 里传入对象失败了，#{site.name} 在 xml 里是 null ？？？？
+//        System.out.println("==== 分页功能 ====");
+//        Website wsObj77 = new Website();
+//        String name77 = "j";
+//        String url77 = "www.";
+//        List<Website> wsList77 = wsmObj.selectRecordsByCondition77(name77, url77, 0, 2);
+//        for (Website site : wsList77) {
+//            System.out.println(site);
+//        }
 
         // MyBatis缓存（一级缓存和二级缓存）
         // 对于 MyBatis 缓存仅作了解即可，因为面对一定规模的数据量，内置的 Cache 方式就派不上用场了，
         // 并且对查询结果集做缓存并不是 MyBatis 所擅长的，它专心做的应该是 SQL 映射。
         // 对于缓存，采用 OSCache、Memcached 等专门的缓存服务器来做更为合理
 
-        // 逆向工程  不实践了，有点复杂，另一方面，mybatis-plus 简化了 mybatis，那么这个脚手架应该会比较简单
+        // 逆向工程
+        // pom.xml 里增加两块配置：
+        //     ① dependencies 里增加 org.mybatis 和 org.mybatis.generator
+        //     ② plugins 里增加 mybatis-generator-maven-plugin 和 mysql-connector-java
+        // 编辑器里 Run -> edit configurations -> + 添加Maven -> command line：mybatis-generator:generate
+        // 参考博文：
+        //      https://blog.csdn.net/norang/article/details/118384456
+        //      https://blog.csdn.net/qq_30833275/article/details/85047202
 
     }
-
 
 }
 

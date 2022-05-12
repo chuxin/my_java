@@ -103,16 +103,10 @@ public class ZzzzApplication {
         /*********   make a summary (spring)   *********/
         // done
 
-        /*********   开始看框架 mybatis & mybatisplus  *********/
+        /*********   开始看框架 mybatis && mybatis-plus && tkmybatis *********/
         // 
 
         /*********   make a summary (mybatis)   *********/
-        //
-
-        /*********   开始看框架 spring cloud  *********/
-        //
-
-        /*********   make a summary (spring cloud)   *********/
         //
 
         /*********   springboot => practice       *********/
@@ -128,6 +122,11 @@ public class ZzzzApplication {
         /*********   make a summary at second time (basic)   *********/
         //
 
+        /*********   开始看框架 spring cloud   *********/
+        //
+
+        /*********   make a summary (spring cloud)   *********/
+        //
 
     }
 

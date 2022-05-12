@@ -26,3 +26,53 @@
     4、mapper.xml文件名和所写的mapper名称不相同。
         指定要执行的sql语句的标识。 sql映射文件中的namespace + “.” + 标签的id值 中sql映射文件的路径错误
         sql的xml文件的 id属性绑定的值与方法的ID不相同
+
+
+问题描述：
+    XML Parser Error on line 21: 对实体 "charactorEncoding" 的引用必须以 ';' 分隔符结尾。
+原因：
+    & 要转义
+解决办法：
+    修改前：jdbc:mysql://127.0.0.1:8889/springboot?serverTimezone=UTC&charactorEncoding=utf-8
+    修改后：jdbc:mysql://127.0.0.1:8889/springboot?serverTimezone=UTC&amp;charactorEncoding=utf-8
+
+
+问题描述：
+    org.mybatis.generator:mybatis-generator-maven-plugin:1.3.5:generate failed: Exception getting JDBC Driver
+原因：
+    Maven 利用 mybatis-generator 插件自动生成代码
+解决办法：
+    mybatis-generator插件生成代码的配置里增加
+        <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <scope>runtime</scope>
+                <version>8.0.15</version>
+            </dependency>
+        </dependencies>
+
+
+问题描述：
+    src/main/resources/generatorConfig.xml 里引入同目录下的 generator.properties 文件，报如下错误：
+    mybatis on project bbbb: <properties> resource resources/generator.properties does not exist
+原因：
+    pom.xml 里做了如下配置：
+          <resource>
+              <directory>src/main/java</directory>
+              <includes>
+                  <include>**/*.xml</include>
+              </includes>
+          </resource>
+    properties 会去 src/main/java 里找 generator.properties 文件，自然找不到了
+解决办法：
+    pom.xml 里再加一段路径搜索
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>**/*.xml</include>
+                <include>**/*.properties</include>
+                <include>**/*.txt</include>
+            </includes>
+        </resource>
+

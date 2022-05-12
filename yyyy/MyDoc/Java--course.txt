@@ -35,7 +35,18 @@ Java高级
 高阶
     springCloud
 
----
+----
+目前看了哪些 ？针对中高级java，还需要看哪些 ？
+技术趋势
+需要些什么技能
+
+中间件：https://blog.csdn.net/qq_15038189/article/details/120209333
+高并发
+数据库
+消息队列
+springDataJpa
+
+====
 
 list
 collection

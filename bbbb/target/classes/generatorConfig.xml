@@ -8,7 +8,8 @@
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <!-- Mysql数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        <classPathEntry location="${jdbc.driverLocation}"/>
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:8889/springboot" userId="root"
                         password="root" />
 
