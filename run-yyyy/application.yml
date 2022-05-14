@@ -1,8 +1,0 @@
-#JAR 包外默认配置
-server:
-  servlet:
-    context-path: /out-default
-#切换配置
-spring:
-  profiles:
-    active: prod #激活开发环境配置

@@ -26,6 +26,7 @@
             d、在 src/resources 目录下新建一个 Beans.xml 文件，添加代码
             e、运行主函数 MainApp.java
 
+
 2、Spring IoC（控制反转）
     概念：IoC 是 Inversion of Control 的简写。Spring 通过 IoC 容器来管理所有 Java 对象的实例化和初始化，控制对象与对象之间的依赖关系。
 
@@ -1074,6 +1075,29 @@
 8、日志
     概念：抽象层（例如slf4j-api-xx.jar）+ 中间层（例如slf4j-log4j12）+ 实现层（例如log4j）这三层都配置好才能保证SLF4J正常运行。
         中间层有的时候也可以去掉
+    安装：
+        pom.xml 里增加如下内容：
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.8.0-beta4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.8.0-beta4</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+    说明：
+        log4j-api-2.13.3.jar	    log4j到log4j2的桥接包
+        log4j-core-2.13.3.jar	    log4j到log4j2的桥接包
+        log4j-1.2.17.jar	        日志系统
+        slf4j-api-1.7.30.jar	    日志系统的封装，对外提供统一的API接口
+        slf4j-log4j12-1.7.30.jar	slf4j 对 log4j 的相应驱动，完成 slf4j 绑定 log4j
     例子：
         // src/main/resources/log4j.properties
         # Set root logger level to DEBUG and its only appender to console.
@@ -1132,3 +1156,5 @@
             // 103 111 111 100 32 106 111 98 -28 -72 -83 -27 -101 -67 Bean 将要被销毁
             System.out.print(bytes[j] + " ");
         }
+
+X、其它

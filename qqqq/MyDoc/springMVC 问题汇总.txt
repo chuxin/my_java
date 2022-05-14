@@ -1,0 +1,49 @@
+
+
+
+brew install tomcat
+安装在 /usr/local/Cellar/tomcat 目录
+
+创建 springMVC 项目
+① 创建 src/main/resources/applicationContext.xml  用来扫描代码目录
+② 创建 src/main/webapp/WEB-INF/web.xml 这是 springMVC 的框架配置文件
+③ 创建 渲染页面  src/main/webapp/index.jsp
+④ pom.xml 里把依赖包加上
+⑤ 测试代码文件 src/main/java/com/lvmenglou/action/HelloWorld.java
+⑥ 编辑器里 File -> project structure -> Artifacts -> qqqq:war exploded
+        -> 如果没有就要添加， WEB-INF/lib 添加 tomcat 执行依赖包
+        -> 如果没有就要添加，'qqqq' module:'web' facet resources
+⑦ 编辑器里 Run -> edit configurations -> + -> local tomcat
+        -> application server -> /usr/local/Cellar/tomcat/10.0.7/libexec
+        -> deployment -> + -> qqqq:war exploded -> application context 值设为 /
+    说明：
+        war模式：将WEB工程以包的形式上传到服务器 ；
+        war exploded模式：将WEB工程以当前文件夹的位置关系上传到服务器；
+
+参考博文： https://www.modb.pro/db/148930
+
+
+
+问题描述：
+    Artifact unnamed: Error during artifact deployment. See server log for details
+原因：
+    看看自己的项目中有没有lib包，idea中启动项目时不自带lib
+解决：
+    ⑥ 编辑器里 File -> project structure -> Artifacts -> qqqq:war exploded
+            -> 如果没有就要添加， WEB-INF/lib 添加 tomcat 执行依赖包
+            -> 如果没有就要添加，'qqqq' module:'web' facet resources
+
+问题描述：
+    tomcat报错：class org.springframework.web.servlet.DispatcherServlet cannot be cast to class
+原因：
+    tomcat 和 servlet-api 版本不兼容
+    tomcat7，pom.xml中<artifacId> servlet-api<artifacId>改为<artifacId> javax.servlet-api<artifacId>,版本号3.0.1
+    tomcat10，pom.xml中<artifacId>jakarta.servlet-api<artifacId>版本号 5.0.0
+解决：
+    把 tomcat 降为 7.0 版本。
+    命令：brew install tomcat@7
+参考博文：
+    https://blog.csdn.net/qq_21561111/article/details/108481160
+    https://blog.csdn.net/qq_43780850/article/details/123765358
+
+    

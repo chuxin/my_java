@@ -1,0 +1,63 @@
+JavaBean 相当于 Model，Servlet 相当于 Controller，JSP 相当于 View
+
+Spring MVC 是 Spring 提供的一个基于 MVC 设计模式的轻量级 Web 开发框架
+
+Spring MVC 依赖 JAR 包文件，包括 Spring 的核心 JAR 包和 commons-logging 的 JAR 包
+
+
+
+
+
+创建 springMVC 项目补充：
+        在 pom.xml 里增加包依赖：
+            <!--springframework-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>5.2.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>5.2.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>5.2.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>5.2.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>5.2.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.stefanbirkner</groupId>
+                <artifactId>system-rules</artifactId>
+                <version>1.16.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.8.9</version>
+            </dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

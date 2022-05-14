@@ -103,10 +103,16 @@ public class ZzzzApplication {
         /*********   make a summary (spring)   *********/
         // done
 
-        /*********   开始看框架 mybatis && mybatis-plus && tkmybatis *********/
-        // 
+        /*********   开始看框架 mybatis *********/
+        //
 
         /*********   make a summary (mybatis)   *********/
+        //
+
+        /*********   开始看框架 springMVC *********/
+        //
+
+        /*********   make a summary (springMVC)   *********/
         //
 
         /*********   springboot => practice       *********/
@@ -128,6 +134,9 @@ public class ZzzzApplication {
         /*********   make a summary (spring cloud)   *********/
         //
 
+        // 其它
+        //    mybatis-plus && tkmybatis
+        //    springDataJpa
     }
 
     public static double taxTotal(Income... arr) {

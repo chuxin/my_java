@@ -74,6 +74,7 @@ public class MainApp {
 //        ss.commit();
 //        ss.close();
 
+
         // MyBatis 增删改查 三种方式
         // ① 使用 Map 传递参数
 //        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
@@ -198,10 +199,10 @@ public class MainApp {
 //        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
 //        SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(config);
 //        SqlSession ss = ssf.openSession();
-//        // 单步查询
+//        // 分步查询
 //        Student stuObj = ss.getMapper(StudentMapper.class).selectStuById11(2);
 //        System.out.println(stuObj);
-//        // 分步查询
+//        // 单步查询
 //        Student stuObj22 = ss.getMapper(StudentMapper.class).selectStuById22(2);
 //        System.out.println(stuObj22);
 

@@ -1,11 +1,451 @@
-1、
+1、mybatis 介绍
+    官网地址：
+        MyBatis 官网：http://mybatis.org/
+        github 地址：https://github.com/mybatis/mybatis-3/releases
+
+    概念：MyBatis 是一个开源、轻量级的数据持久化框架，对象关系映射（ORM）框架，是 JDBC 和 Hibernate 的替代方案。
+         MyBatis 内部封装了 JDBC，简化了数据库操作，开发者只需要关注 SQL 语句本身。
+
+    Hibernate 和 MyBatis 对比：
+        ① sql 优化方面
+            Hibernate 使用 HQL 语句，独立于数据库。不需要编写大量的 SQL，但消耗性能。
+            MyBatis 需要手动编写 SQL，所以灵活多变。
+        ② 开发方面
+            MyBatis 是一个半自动映射的框架，需要手动匹配 POJO 和 SQL 的映射关系。
+            Hibernate 是一个全表映射的框架，只需提供 POJO 和映射关系即可。
+        ③ 应用场景
+            MyBatis 适合需求多变的互联网项目，对性能要求高、响应快、灵活的系统，例如电商项目、金融类型、旅游类、售票类项目等。
+            Hibernate 适合需求明确、业务固定的项目，对于性能要求不太苛刻的系统，例如 OA 项目、ERP 项目和 CRM 项目等。
+
+    安装：
+        在 pom.xml 里添加如下内容：
+            <dependencies>
+                <dependency>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                    <version>3.5.7</version>
+                </dependency>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>8.0.21</version>
+                </dependency>
+            </dependencies>
 
 
-2、
+2、MyBatis 使用
+    创建 MyBatis 的步骤：
+        ① 利用 maven 在 pom.xml 里配置 mybatis，下载 mybatis 包
+        ② 创建配置文件：src/main/resources/mybatis-config.xml
+        ③ 创建 POJO 实体类：com/mb/po/Website.java
+        ④ 创建 sql 映射文件：com/mb/mapper/WebsiteMapper.xml
+        ⑤ 编写 crud 脚本去调用：src/main/java/MainApp.java
+
+    MyBatis核心对象 及 作用域：
+        // 读取配置文件mybatis-config.xml
+        InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
+
+        // 根据配置文件构建 SqlSessionFactory 对象
+        // SqlSessionFactory 对象一旦创建，就会在整个应用程序过程中始终存在。作用域是 Application，即随着应用程序的生命周期一直存在
+        // SqlSessionFactoryBuilder 存在于方法体内，也就是局部变量。创建 SqlSessionFactory 对象之后，这个类就不存在了
+        SqlSessionFactory ssfObj = new SqlSessionFactoryBuilder().build(config);
+        
+        // 通过SqlSessionFactory 创建 SqlSession
+        // SqlSession 的作用域范围是 request 作用域或方法体作用域内。每次访问数据库时都需要创建 SqlSession 对象
+        SqlSession ssObj = ssfObj.openSession();
+
+    MyBatis配置文件 => mybatis-config.xml
+        配置格式如下：
+            <?xml version="1.0" encoding="utf-8"?>
+            <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-config.dtd">
+            <configuration>     <!-- 配置 -->
+                <properties />  <!-- 属性 -->
+                <settings />    <!-- 设置 -->
+                <typeAliases /> <!-- 类型命名 -->
+                <typeHandlers />    <!-- 类型处理器 -->
+                <objectFactory />   <!-- 对象工厂 -->
+                <plugins />     <!-- 插件 -->
+                <environments>                  <!-- 配置mybatis运行环境 -->
+                    <environment>               <!-- 环境变量 -->
+                        <transactionManager />  <!-- 事务管理器 -->
+                        <dataSource />          <!-- 数据源 -->
+                    </environment>
+                </environments>
+                <databaseIdProvider /><!-- 数据库厂商标识 -->
+                <mappers />                     <!-- 将mapper文件加入到配置文件中 -->
+            </configuration>
+
+        标签讲解：
+            properties标签：通过 resource 属性指定外部 properties 文件，也可以通过子元素 property 配置变量，然后在 environments 节点中引用这些变量
+            settings标签：用于配置 MyBatis 的运行时行为，影响 MyBatis 的底层运行，一般不需要大量配置，大部分情况下使用其默认值即可。
+            typeAliases标签：为了不在任何地方都指定类的全名，我们可以使用这个标签定义一个别名。
+            typeHandlers标签：将获取的值合理地转化为 Java 类型。在 typeHandlers 中分为 jdbcType 和 javaType，
+                其中 jdbcType 用于定义数据库类型，javaType 用于定义 Java 类型，typeHandler 的作用就是承担 jdbcType 和 javaType 之间的相互转换。
+            environments标签：可以配置 MyBatis 的多套运行环境，将 SQL 映射到多个不同的数据库上。
+                每一套环境可以指定运行环境 ID、事务管理、数据源配置等相关信息
+            transactionManager标签：支持两个事务管理器，即 JDBC 和 MANAGED。
+            dataSource标签：用于配置数据库的连接属性
+            mappers标签：用于指定 MyBatis SQL 映射文件的路径。
+
+    Mapper（映射器）
+        ① 通过 XML 方式实现：企业里比较流行，灵活方便，sql写在 xml 里
+        ② 通过注解的方式实现：sql 写在Mapper里。
+
+    执行SQL的两种方式
+        ① SqlSession发送SQL （学的时候，没有实际操作过，书写比较晦涩）
+            例子：
+                Website website = (Website)sqlSession.selectOne("net.biancheng.mapper.WebsiteMapper.getWebsite",1);
+        ② Mapper接口发送 SQL  （已经是主流）
+            例子：
+                WebsiteMapper websiteMapper = sqlSession.getMapper(WebsiteMapper.class);
+                Website website = websiteMapper.getWebsite(1);
 
 
-3、
+3、传参到 Mapper 的三种方式
+      ① Map 传递参数 - update
+          WebsiteMapper33_1 wsmObj = ss.getMapper(WebsiteMapper33_1.class);
+          Map<String, Object> params22 = new HashMap<>();
+          params22.put("id", 1);
+          params22.put("name", "map方式更新字段");
+          params22.put("url", "www.quora.com");
+          int counter33 = wsmObj.updateWebstieByMap(params22);
+          ss.commit();
+
+          public int updateWebstieByMap(Map<String, Object> params);
+
+          <update id="updateWebstieByMap" parameterType="map">
+              update website set name=#{name}, url=#{url} where id=#{id}
+          </update>
+
+      ② 注解传递参数 - update
+          WebsiteMapper33_2 wsmObj = ss.getMapper(WebsiteMapper33_2.class);
+          String name = "注解 方式更新字段";
+          String url = "www.dnews.com";
+          Integer id = 13;
+          int counter22 = wsmObj.updateWebsiteByParam(name, url, id);
+          ss.commit();
+
+          public int updateWebsiteByParam(@Param("name") String name, @Param("url") String url, @Param("id") Integer id);
+
+          <update id="updateWebsiteByParam">
+              update website set name = #{name}, url = #{url}
+              where id = #{id}
+          </update>
+
+      ③ JavaBean 传递参数 - update
+          WebsiteMapper33_3 wsmObj = ss.getMapper(WebsiteMapper33_3.class);
+          Website website22 = new Website();
+          website22.setName("JavaBean 方式变更");
+          website22.setUrl("www.twitter.com");
+          website22.setId(12);
+          int counter22 = wsmObj.updateWebsiteByJavaBean(website22);
+          ss.commit();
+
+          public int updateWebsiteByJavaBean(Website website);
+
+          <update id="updateWebsiteByJavaBean">
+              update website set name = #{name}, url = #{url} where id = #{id}
+          </update>
+
+
+4、XML 方式 - 增删改查
+    insert：
+        WebsiteMapper33_3 wsmObj = ss.getMapper(WebsiteMapper33_3.class);
+        // 创建 JavaBean 对象
+        Website website = new Website();
+        website.setName("我是谁333");
+        website.setUrl("www.abc.com");
+        int counter11 = wsmObj.addWebsiteByJavaBean(website);
+        // 主键（自动递增）回填。  通过在 insert 标签中添加  keyProperty 和 useGeneratedKeys 属性，来实现该功能
+        System.out.println("提前获得插入记录的主键ID " + website.getId());
+        System.out.println("共插入了 " + counter11 + " 条记录");
+        ss.commit();
+        // 自定义主键   不实践了，只用在 oracle 里，应用场景不广泛
+
+        public int addWebsiteByJavaBean(Website website);
+
+        <insert id="addWebsiteByJavaBean" keyProperty="id" useGeneratedKeys="true">
+            insert into website(name, url)
+            values(#{name}, #{url})
+        </insert>
+
+    update：
+        Website website22 = new Website();
+        website22.setName("JavaBean 方式变更");
+        website22.setUrl("www.twitter.com");
+        website22.setId(12);
+        int counter22 = wsmObj.updateWebsiteByJavaBean(website22);
+        ss.commit();
+        System.out.println("通过 JavaBean 传递参数，共更新了 " + counter22 + " 条记录");
+
+        public int updateWebsiteByJavaBean(Website website);
+
+        <update id="updateWebsiteByJavaBean">
+            update website set name = #{name}, url = #{url} where id = #{id}
+        </update>
+
+    delete：
+        Website website33 = new Website();
+        website33.setName("我是谁");
+        website33.setUrl("");
+        int counter33 = wsmObj.deleteWebsiteByJavaBean(website33);
+        ss.commit();
+
+        public int deleteWebsiteByJavaBean(Website website);
+
+        <delete id="deleteWebsiteByJavaBean">
+            delete from website where name = #{name} and url = #{url}
+        </delete>
+
+    select：
+        ① 一对一查询
+            // 单步查询
+            Student stuObj22 = ss.getMapper(StudentMapper.class).selectStuById22(2);
+
+            public Student selectStuById22(int id);
+
+            <select id="selectStuById22" parameterType="Integer" resultMap="cardAndStu22">
+                select s.*, sc.studentId, sc.startDate from student s, studentcard sc where s.id = #{#id} and s.cardId = sc.id
+            </select>
+            <resultMap id="cardAndStu22" type="com.mb.po.Student">
+                <id property="id" column="id"></id>
+                <result property="name" column="name"></result>
+                <result property="sex" column="sex"></result>
+                <association property="studentCard" javaType="com.mb.po.StudentCard">
+                    <id property="id" column="id"></id>
+                    <result property="studentId" column="studentId"></result>
+                    <result property="startDate" column="startDate"></result>
+                    <result property="endDate" column="endDate"></result>
+                </association>
+            </resultMap>
+
+            // 分步查询
+            Student stuObj = ss.getMapper(StudentMapper.class).selectStuById11(2);
+
+            public Student selectStuById11(int id);
+
+            <select id="selectStuById11" parameterType="Integer" resultMap="cardAndStu11">
+                select * from student where id = #{id}
+            </select>
+            <!-- 一对一查询，根据id查询学生信息，顺带利用 association标签 和 cardId 再去查询另一张表 studentcard -->
+            <resultMap id="cardAndStu11" type="com.mb.po.Student">
+                <id property="id" column="id"></id>
+                <result property="name" column="name"></result>
+                <result property="sex" column="sex"></result>
+                <!-- 一对一查询, association标签是 resultMap 特有的子标签, 主要在 一对一 查询中起作用 -->
+                <association property="studentCard" column="cardId"
+                             javaType="com.mb.po.StudentCard" select="com.mb.mapper.StudentCardMapper.selectStuCardById">
+                </association>
+            </resultMap>
+
+        ② 一对多查询
+            // 单步查询
+            // 注意点：这种查询方式，有个奇葩的规则，Order 中的 id 不能和 User 中的 id 重复，
+            // 所以修改了 Order 实体类的 id 为 oId, 顺带下面的分步查询也一并改了。实际上来说，下面的分步查询是不存在这种奇葩规则的
+            User33Mapper u33Obj = ss.getMapper(User33Mapper.class);
+            User33 uoResult = u33Obj.selectUser33Order33ById22(2);
+
+            public User33 selectUser33Order33ById22(int id);
+
+            <select id="selectUser33Order33ById22" parameterType="Integer" resultMap="user33AndOrder33_22">
+                select aa.*, bb.id as oId, bb.ordernum, bb.userId from user33 as aa, order33 as bb
+                where aa.id = #{id} and aa.id = bb.userId
+            </select>
+            <resultMap id="user33AndOrder33_22" type="com.mb.po.User33">
+                <id property="id" column="id"></id>
+                <result property="name" column="name"></result>
+                <result property="pwd" column="pwd"></result>
+                <collection property="order33List" ofType="com.mb.po.Order33">
+                    <id property="oId" column="oId"></id>
+                    <result property="ordernum" column="ordernum"></result>
+                </collection>
+            </resultMap>
+
+            // 分步查询
+            User33Mapper u33Obj22 = ss.getMapper(User33Mapper.class);
+            User33 uoResult22 = u33Obj22.selectUser33Order33ById(2);
+
+            public User33 selectUser33Order33ById(int id);
+
+            <select id="selectUser33Order33ById" parameterType="Integer" resultMap="user33AndOrder33">
+                select * from user33 where id = #{id}
+            </select>
+            <resultMap id="user33AndOrder33" type="com.mb.po.User33">
+                <id property="id" column="id"></id>
+                <result property="name" column="name"></result>
+                <result property="pwd" column="pwd"></result>
+                <collection property="order33List" ofType="com.mb.po.Order33"
+                            column="id" select="com.mb.mapper.Order33Mapper.selectOrder33ById"></collection>
+            </resultMap>
+
+        ③ 多对多查询
+            // 单步查询
+            Order44Mapper o44Obj = ss.getMapper(Order44Mapper.class);
+            List<Order44> opResult = o44Obj.selectAllOrder44AndProduct44ById();
+            for (Order44 o:opResult) {
+                System.out.println(o);
+            }
+
+            public List<Order44> selectAllOrder44AndProduct44ById();
+
+            <select id="selectAllOrder44AndProduct44ById" resultMap="order44AndProduct44" parameterType="Integer">
+                select order44.oid, order44.ordernum, order44.userId,
+                        product44.pid, product44.name, product44.price
+                from order44
+                    inner join orders_detail44 on order44.oid = orders_detail44.orderId
+                    inner join product44 on product44.pid = orders_detail44.productId
+            </select>
+            <resultMap id="order44AndProduct44" type="com.mb.po.Order44">
+                <id property="oid" column="oid"></id>
+                <result property="ordernum" column="ordernum"></result>
+                <collection property="product44List" ofType="com.mb.po.Product44">
+                    <id property="pid" column="pid"></id>
+                    <result property="name" column="name"></result>
+                    <result property="price" column="price"></result>
+                </collection>
+            </resultMap>
+
+            // 没有分步查询
+
+
+5、注解方式 - 增删改查
+    insert：
+        // 普通新增
+        WebsiteMapper22 wsmObj22 = ss.getMapper(WebsiteMapper22.class);
+        Website wsObj55 = new Website();
+        wsObj55.setName("jack");
+        wsObj55.setUrl("www.test.com");
+        wsObj55.setAge(19);
+        wsObj55.setCountry("pp");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date dt = sdf.parse("2021-05-19 11:22:33");
+            wsObj55.setCreatetime(dt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Integer resIns = wsmObj22.insert(wsObj55);
+        ss.commit();
+
+        @Insert("insert into website(name, url, age, country, createtime) values(#{name}, #{url}, #{age}, #{country}, #{createtime})")
+        public int insert(Website website);
+
+        // 新增后，获取插入记录的自增ID
+        Website wsObj55_2 = new Website();
+        wsObj55_2.setName("jack22");
+        wsObj55_2.setUrl("www.xxxxx.com");
+        Integer resIns_2 = wsmObj22.insert_2(wsObj55_2);
+        ss.commit();
+        System.out.println("插入一条数据后，获取到的自增 id 的值为：" + wsObj55_2.getId());
+        System.out.println("新插入了 " + resIns_2 + " 条");
+
+        @Insert("insert into website(id, name, url) values(#{id}, #{name}, #{url})")
+        @SelectKey(statement = "select last_insert_id()", keyProperty = "id", keyColumn = "id", resultType = Integer.class, before = false)
+        public int insert_2(Website website);
+
+    update：
+        Website wsObj66 = new Website();
+        wsObj66.setId(27);
+        wsObj66.setName("update new name");
+        wsObj66.setUrl("www.ggg.com");
+        Integer resUpd = wsmObj22.updateWebsiteById(wsObj66);
+        ss.commit();
+
+        @Update("update website set name= #{name}, url = #{url} where id = #{id}")
+        public int updateWebsiteById(Website website);
+
+    delete：
+        Integer resDel = wsmObj22.deleteById(19);
+        ss.commit();
+
+        @Delete("delete from website where id =#{id}")
+        public int deleteById(Integer id);
+
+    select：
+        // @Result、@Results、@ResultMap 是结果集映射的三大注解
+        List<Website> wsSel = wsmObj22.selectOne("jack", "ppp");
+        for (Website site:wsSel) {
+            System.out.println(site);
+        }
+
+        @Select("select id, name, url, age, country, createtime from website where name = #{name} and country = #{country}")
+        @Results(id="websiteMapXXXX", value={
+                @Result(id = true, column = "id", property = "id"),
+                @Result(column = "name", property = "url"),     // 这里故意整反了  name vs url
+                @Result(column = "url", property = "name"),     // 这里故意整反了  name vs url
+                @Result(column = "age", property = "age"),
+                @Result(column = "createtime", property = "createtime", jdbcType = JdbcType.DATE),
+        })
+        // @Param 中的 value 属性可省略，用于指定参数的别名
+        public List<Website> selectOne(@Param(value="name") String name22, @Param("country") String country22);
+
+        @Select("select id, name, url, age, country from website")
+        @ResultMap("websiteMapXXXX")
+        public List<Website> selectAll22();
+
+        ① 一对一查询
+            WebsiteMapper22 wsmObj22 = ss.getMapper(WebsiteMapper22.class);
+            List<Website> wsList = wsmObj22.getOneOfWebsiteAndDomain(12);
+            for (Website site: wsList) {
+                System.out.println(site);
+            }
+
+            @Select("select * from website where id = #{id}")
+            @Results(id = "userAndIdcardResultMap", value = {
+                    @Result(id=true, column = "id", property = "id"),
+                    @Result(column = "name", property = "name"),
+                    @Result(column = "url", property = "url"),
+                    @Result(column = "id", property = "domainObj", one=@One(select = "com.mb.mapper.DomainMapper.selectOneByWebId"))
+            })
+            public List<Website> getOneOfWebsiteAndDomain(Integer id);
+
+        DomainMapper
+            @Select("select * from domain where website_id = #{website_id}")
+            public Domain selectOneByWebId(Integer website_id);
+
+        ② 一对多查询
+            List<Website> wsList22 = wsmObj22.getManyPagesAndOneWebsite(1);
+            for (Website site: wsList22) {
+                System.out.println(site);
+            }
+
+            @Select("select * from website where id = #{id}")
+            @Results({
+                    @Result(id=true, column = "id", property = "id"),
+                    @Result(column = "id", property = "pagesList", many=@Many(select = "com.mb.mapper.WebsiteMapper22.selectManyByWebId"))
+            })
+            public List<Website> getManyPagesAndOneWebsite(Integer id);
+
+            @Select("select * from pages where website_id = #{xxx_id}")
+            public List<Pages> selectManyByWebId(@Param("xxx_id") Integer id);
+
+
+6、动态 sql
 
 
 
-tkmybatis   mybatis-plus
+7、逆向工程
+
+
+
+8、缓存
+
+
+
+
+========================================================================
+<!-- 若数据库不支持主键自动递增（例如 Oracle），需要自己递增主键 -->
+    <insert id="addWebsiteByJavaBean222">
+        <!-- 先使用selectKey标签定义主键，然后再定义SQL语句 -->
+        <selectKey keyProperty="id" resultType="Integer" order="BEFORE">
+            select if(max(id) is null,1,max(id)+1) as newId from Website
+        </selectKey>
+        insert into Website (id,name,url) values(#{id},#{name},#{url})
+    </insert>
+
+
+// MyBatis关联查询 的问题？？？
+        // 如果传入多个参数，那像 association, collection 的怎么处理， 属性 column 怎么解决 ？
+        // ofType, javaType 都是些什么东西 ？？？
+
