@@ -42,15 +42,13 @@
         ⑤ 编写 crud 脚本去调用：src/main/java/MainApp.java
 
     MyBatis核心对象 及 作用域：
-        // 读取配置文件mybatis-config.xml
+        // ① 读取配置文件mybatis-config.xml
         InputStream config = Resources.getResourceAsStream("mybatis-config.xml");
-
-        // 根据配置文件构建 SqlSessionFactory 对象
+        // ② 根据配置文件构建 SqlSessionFactory 对象
         // SqlSessionFactory 对象一旦创建，就会在整个应用程序过程中始终存在。作用域是 Application，即随着应用程序的生命周期一直存在
         // SqlSessionFactoryBuilder 存在于方法体内，也就是局部变量。创建 SqlSessionFactory 对象之后，这个类就不存在了
         SqlSessionFactory ssfObj = new SqlSessionFactoryBuilder().build(config);
-        
-        // 通过SqlSessionFactory 创建 SqlSession
+        // ③ 通过SqlSessionFactory 创建 SqlSession
         // SqlSession 的作用域范围是 request 作用域或方法体作用域内。每次访问数据库时都需要创建 SqlSession 对象
         SqlSession ssObj = ssfObj.openSession();
 
@@ -200,149 +198,149 @@
 
     select：
         ① 一对一查询
-            // 单步查询
-            Student stuObj22 = ss.getMapper(StudentMapper.class).selectStuById22(2);
+            单步查询：
+                Student stuObj22 = ss.getMapper(StudentMapper.class).selectStuById22(2);
 
-            public Student selectStuById22(int id);
+                public Student selectStuById22(int id);
 
-            <select id="selectStuById22" parameterType="Integer" resultMap="cardAndStu22">
-                select s.*, sc.studentId, sc.startDate from student s, studentcard sc where s.id = #{#id} and s.cardId = sc.id
-            </select>
-            <resultMap id="cardAndStu22" type="com.mb.po.Student">
-                <id property="id" column="id"></id>
-                <result property="name" column="name"></result>
-                <result property="sex" column="sex"></result>
-                <association property="studentCard" javaType="com.mb.po.StudentCard">
+                <select id="selectStuById22" parameterType="Integer" resultMap="cardAndStu22">
+                    select s.*, sc.studentId, sc.startDate from student s, studentcard sc where s.id = #{#id} and s.cardId = sc.id
+                </select>
+                <resultMap id="cardAndStu22" type="com.mb.po.Student">
                     <id property="id" column="id"></id>
-                    <result property="studentId" column="studentId"></result>
-                    <result property="startDate" column="startDate"></result>
-                    <result property="endDate" column="endDate"></result>
-                </association>
-            </resultMap>
+                    <result property="name" column="name"></result>
+                    <result property="sex" column="sex"></result>
+                    <association property="studentCard" javaType="com.mb.po.StudentCard">
+                        <id property="id" column="id"></id>
+                        <result property="studentId" column="studentId"></result>
+                        <result property="startDate" column="startDate"></result>
+                        <result property="endDate" column="endDate"></result>
+                    </association>
+                </resultMap>
 
-            // 分步查询
-            Student stuObj = ss.getMapper(StudentMapper.class).selectStuById11(2);
+            分步查询：
+                Student stuObj = ss.getMapper(StudentMapper.class).selectStuById11(2);
 
-            public Student selectStuById11(int id);
+                public Student selectStuById11(int id);
 
-            <select id="selectStuById11" parameterType="Integer" resultMap="cardAndStu11">
-                select * from student where id = #{id}
-            </select>
-            <!-- 一对一查询，根据id查询学生信息，顺带利用 association标签 和 cardId 再去查询另一张表 studentcard -->
-            <resultMap id="cardAndStu11" type="com.mb.po.Student">
-                <id property="id" column="id"></id>
-                <result property="name" column="name"></result>
-                <result property="sex" column="sex"></result>
-                <!-- 一对一查询, association标签是 resultMap 特有的子标签, 主要在 一对一 查询中起作用 -->
-                <association property="studentCard" column="cardId"
-                             javaType="com.mb.po.StudentCard" select="com.mb.mapper.StudentCardMapper.selectStuCardById">
-                </association>
-            </resultMap>
+                <select id="selectStuById11" parameterType="Integer" resultMap="cardAndStu11">
+                    select * from student where id = #{id}
+                </select>
+                <!-- 一对一查询，根据id查询学生信息，顺带利用 association标签 和 cardId 再去查询另一张表 studentcard -->
+                <resultMap id="cardAndStu11" type="com.mb.po.Student">
+                    <id property="id" column="id"></id>
+                    <result property="name" column="name"></result>
+                    <result property="sex" column="sex"></result>
+                    <!-- 一对一查询, association标签是 resultMap 特有的子标签, 主要在 一对一 查询中起作用 -->
+                    <association property="studentCard" column="cardId"
+                                 javaType="com.mb.po.StudentCard" select="com.mb.mapper.StudentCardMapper.selectStuCardById">
+                    </association>
+                </resultMap>
 
         ② 一对多查询
-            // 单步查询
-            // 注意点：这种查询方式，有个奇葩的规则，Order 中的 id 不能和 User 中的 id 重复，
-            // 所以修改了 Order 实体类的 id 为 oId, 顺带下面的分步查询也一并改了。实际上来说，下面的分步查询是不存在这种奇葩规则的
-            User33Mapper u33Obj = ss.getMapper(User33Mapper.class);
-            User33 uoResult = u33Obj.selectUser33Order33ById22(2);
+            单步查询：
+                // 注意点：这种查询方式，有个奇葩的规则，Order 中的 id 不能和 User 中的 id 重复，
+                // 所以修改了 Order 实体类的 id 为 oId, 顺带下面的分步查询也一并改了。实际上来说，下面的分步查询是不存在这种奇葩规则的
+                User33Mapper u33Obj = ss.getMapper(User33Mapper.class);
+                User33 uoResult = u33Obj.selectUser33Order33ById22(2);
 
-            public User33 selectUser33Order33ById22(int id);
+                public User33 selectUser33Order33ById22(int id);
 
-            <select id="selectUser33Order33ById22" parameterType="Integer" resultMap="user33AndOrder33_22">
-                select aa.*, bb.id as oId, bb.ordernum, bb.userId from user33 as aa, order33 as bb
-                where aa.id = #{id} and aa.id = bb.userId
-            </select>
-            <resultMap id="user33AndOrder33_22" type="com.mb.po.User33">
-                <id property="id" column="id"></id>
-                <result property="name" column="name"></result>
-                <result property="pwd" column="pwd"></result>
-                <collection property="order33List" ofType="com.mb.po.Order33">
-                    <id property="oId" column="oId"></id>
-                    <result property="ordernum" column="ordernum"></result>
-                </collection>
-            </resultMap>
+                <select id="selectUser33Order33ById22" parameterType="Integer" resultMap="user33AndOrder33_22">
+                    select aa.*, bb.id as oId, bb.ordernum, bb.userId from user33 as aa, order33 as bb
+                    where aa.id = #{id} and aa.id = bb.userId
+                </select>
+                <resultMap id="user33AndOrder33_22" type="com.mb.po.User33">
+                    <id property="id" column="id"></id>
+                    <result property="name" column="name"></result>
+                    <result property="pwd" column="pwd"></result>
+                    <collection property="order33List" ofType="com.mb.po.Order33">
+                        <id property="oId" column="oId"></id>
+                        <result property="ordernum" column="ordernum"></result>
+                    </collection>
+                </resultMap>
 
-            // 分步查询
-            User33Mapper u33Obj22 = ss.getMapper(User33Mapper.class);
-            User33 uoResult22 = u33Obj22.selectUser33Order33ById(2);
+            分步查询：
+                User33Mapper u33Obj22 = ss.getMapper(User33Mapper.class);
+                User33 uoResult22 = u33Obj22.selectUser33Order33ById(2);
 
-            public User33 selectUser33Order33ById(int id);
+                public User33 selectUser33Order33ById(int id);
 
-            <select id="selectUser33Order33ById" parameterType="Integer" resultMap="user33AndOrder33">
-                select * from user33 where id = #{id}
-            </select>
-            <resultMap id="user33AndOrder33" type="com.mb.po.User33">
-                <id property="id" column="id"></id>
-                <result property="name" column="name"></result>
-                <result property="pwd" column="pwd"></result>
-                <collection property="order33List" ofType="com.mb.po.Order33"
-                            column="id" select="com.mb.mapper.Order33Mapper.selectOrder33ById"></collection>
-            </resultMap>
+                <select id="selectUser33Order33ById" parameterType="Integer" resultMap="user33AndOrder33">
+                    select * from user33 where id = #{id}
+                </select>
+                <resultMap id="user33AndOrder33" type="com.mb.po.User33">
+                    <id property="id" column="id"></id>
+                    <result property="name" column="name"></result>
+                    <result property="pwd" column="pwd"></result>
+                    <collection property="order33List" ofType="com.mb.po.Order33"
+                                column="id" select="com.mb.mapper.Order33Mapper.selectOrder33ById"></collection>
+                </resultMap>
 
         ③ 多对多查询
-            // 单步查询
-            Order44Mapper o44Obj = ss.getMapper(Order44Mapper.class);
-            List<Order44> opResult = o44Obj.selectAllOrder44AndProduct44ById();
-            for (Order44 o:opResult) {
-                System.out.println(o);
-            }
+            单步查询：
+                Order44Mapper o44Obj = ss.getMapper(Order44Mapper.class);
+                List<Order44> opResult = o44Obj.selectAllOrder44AndProduct44ById();
+                for (Order44 o:opResult) {
+                    System.out.println(o);
+                }
 
-            public List<Order44> selectAllOrder44AndProduct44ById();
+                public List<Order44> selectAllOrder44AndProduct44ById();
 
-            <select id="selectAllOrder44AndProduct44ById" resultMap="order44AndProduct44" parameterType="Integer">
-                select order44.oid, order44.ordernum, order44.userId,
-                        product44.pid, product44.name, product44.price
-                from order44
-                    inner join orders_detail44 on order44.oid = orders_detail44.orderId
-                    inner join product44 on product44.pid = orders_detail44.productId
-            </select>
-            <resultMap id="order44AndProduct44" type="com.mb.po.Order44">
-                <id property="oid" column="oid"></id>
-                <result property="ordernum" column="ordernum"></result>
-                <collection property="product44List" ofType="com.mb.po.Product44">
-                    <id property="pid" column="pid"></id>
-                    <result property="name" column="name"></result>
-                    <result property="price" column="price"></result>
-                </collection>
-            </resultMap>
+                <select id="selectAllOrder44AndProduct44ById" resultMap="order44AndProduct44" parameterType="Integer">
+                    select order44.oid, order44.ordernum, order44.userId,
+                            product44.pid, product44.name, product44.price
+                    from order44
+                        inner join orders_detail44 on order44.oid = orders_detail44.orderId
+                        inner join product44 on product44.pid = orders_detail44.productId
+                </select>
+                <resultMap id="order44AndProduct44" type="com.mb.po.Order44">
+                    <id property="oid" column="oid"></id>
+                    <result property="ordernum" column="ordernum"></result>
+                    <collection property="product44List" ofType="com.mb.po.Product44">
+                        <id property="pid" column="pid"></id>
+                        <result property="name" column="name"></result>
+                        <result property="price" column="price"></result>
+                    </collection>
+                </resultMap>
 
-            // 没有分步查询
+            没有分步查询
 
 
 5、注解方式 - 增删改查
     insert：
-        // 普通新增
-        WebsiteMapper22 wsmObj22 = ss.getMapper(WebsiteMapper22.class);
-        Website wsObj55 = new Website();
-        wsObj55.setName("jack");
-        wsObj55.setUrl("www.test.com");
-        wsObj55.setAge(19);
-        wsObj55.setCountry("pp");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            Date dt = sdf.parse("2021-05-19 11:22:33");
-            wsObj55.setCreatetime(dt);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Integer resIns = wsmObj22.insert(wsObj55);
-        ss.commit();
+        普通新增记录：
+            WebsiteMapper22 wsmObj22 = ss.getMapper(WebsiteMapper22.class);
+            Website wsObj55 = new Website();
+            wsObj55.setName("jack");
+            wsObj55.setUrl("www.test.com");
+            wsObj55.setAge(19);
+            wsObj55.setCountry("pp");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date dt = sdf.parse("2021-05-19 11:22:33");
+                wsObj55.setCreatetime(dt);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Integer resIns = wsmObj22.insert(wsObj55);
+            ss.commit();
 
-        @Insert("insert into website(name, url, age, country, createtime) values(#{name}, #{url}, #{age}, #{country}, #{createtime})")
-        public int insert(Website website);
+            @Insert("insert into website(name, url, age, country, createtime) values(#{name}, #{url}, #{age}, #{country}, #{createtime})")
+            public int insert(Website website);
 
-        // 新增后，获取插入记录的自增ID
-        Website wsObj55_2 = new Website();
-        wsObj55_2.setName("jack22");
-        wsObj55_2.setUrl("www.xxxxx.com");
-        Integer resIns_2 = wsmObj22.insert_2(wsObj55_2);
-        ss.commit();
-        System.out.println("插入一条数据后，获取到的自增 id 的值为：" + wsObj55_2.getId());
-        System.out.println("新插入了 " + resIns_2 + " 条");
+        新增后获取插入记录的自增ID：
+            Website wsObj55_2 = new Website();
+            wsObj55_2.setName("jack22");
+            wsObj55_2.setUrl("www.xxxxx.com");
+            Integer resIns_2 = wsmObj22.insert_2(wsObj55_2);
+            ss.commit();
+            System.out.println("插入一条数据后，获取到的自增 id 的值为：" + wsObj55_2.getId());
+            System.out.println("新插入了 " + resIns_2 + " 条");
 
-        @Insert("insert into website(id, name, url) values(#{id}, #{name}, #{url})")
-        @SelectKey(statement = "select last_insert_id()", keyProperty = "id", keyColumn = "id", resultType = Integer.class, before = false)
-        public int insert_2(Website website);
+            @Insert("insert into website(id, name, url) values(#{id}, #{name}, #{url})")
+            @SelectKey(statement = "select last_insert_id()", keyProperty = "id", keyColumn = "id", resultType = Integer.class, before = false)
+            public int insert_2(Website website);
 
     update：
         Website wsObj66 = new Website();
@@ -363,28 +361,29 @@
         public int deleteById(Integer id);
 
     select：
-        // @Result、@Results、@ResultMap 是结果集映射的三大注解
-        List<Website> wsSel = wsmObj22.selectOne("jack", "ppp");
-        for (Website site:wsSel) {
-            System.out.println(site);
-        }
+        常规查询：
+            // @Result、@Results、@ResultMap 是结果集映射的三大注解
+            List<Website> wsSel = wsmObj22.selectOne("jack", "ppp");
+            for (Website site:wsSel) {
+                System.out.println(site);
+            }
 
-        @Select("select id, name, url, age, country, createtime from website where name = #{name} and country = #{country}")
-        @Results(id="websiteMapXXXX", value={
-                @Result(id = true, column = "id", property = "id"),
-                @Result(column = "name", property = "url"),     // 这里故意整反了  name vs url
-                @Result(column = "url", property = "name"),     // 这里故意整反了  name vs url
-                @Result(column = "age", property = "age"),
-                @Result(column = "createtime", property = "createtime", jdbcType = JdbcType.DATE),
-        })
-        // @Param 中的 value 属性可省略，用于指定参数的别名
-        public List<Website> selectOne(@Param(value="name") String name22, @Param("country") String country22);
+            @Select("select id, name, url, age, country, createtime from website where name = #{name} and country = #{country}")
+            @Results(id="websiteMapXXXX", value={
+                    @Result(id = true, column = "id", property = "id"),
+                    @Result(column = "name", property = "url"),     // 这里故意整反了  name vs url
+                    @Result(column = "url", property = "name"),     // 这里故意整反了  name vs url
+                    @Result(column = "age", property = "age"),
+                    @Result(column = "createtime", property = "createtime", jdbcType = JdbcType.DATE),
+            })
+            // @Param 中的 value 属性可省略，用于指定参数的别名
+            public List<Website> selectOne(@Param(value="name") String name22, @Param("country") String country22);
 
-        @Select("select id, name, url, age, country from website")
-        @ResultMap("websiteMapXXXX")
-        public List<Website> selectAll22();
+            @Select("select id, name, url, age, country from website")
+            @ResultMap("websiteMapXXXX")
+            public List<Website> selectAll22();
 
-        ① 一对一查询
+        一对一查询：
             WebsiteMapper22 wsmObj22 = ss.getMapper(WebsiteMapper22.class);
             List<Website> wsList = wsmObj22.getOneOfWebsiteAndDomain(12);
             for (Website site: wsList) {
@@ -404,7 +403,7 @@
             @Select("select * from domain where website_id = #{website_id}")
             public Domain selectOneByWebId(Integer website_id);
 
-        ② 一对多查询
+        一对多查询：
             List<Website> wsList22 = wsmObj22.getManyPagesAndOneWebsite(1);
             for (Website site: wsList22) {
                 System.out.println(site);
@@ -422,15 +421,198 @@
 
 
 6、动态 sql
+    if标签：
+        WebsiteMapper wsmObj = ss.getMapper(WebsiteMapper.class);
+        String name = null;
+        String url = "www.test.com";
+        List<Website> wsList = wsmObj.selectRecordsByCondition(name, url);
+        for (Website site : wsList) {
+            System.out.println(site);
+        }
 
+        public List<Website> selectRecordsByCondition(@Param("name") String name, @Param("url")  String url);
+
+        <select id="selectRecordsByCondition" resultMap="myResult">
+            select * from website where 1=1
+            <if test="name != null">
+                and name like #{name}
+            </if>
+            <if test="url != null">
+                and url like #{url}
+            </if>
+        </select>
+
+    choose、when、otherwise标签：
+        // 类似于  if ... elseif ... else 的效果
+        String name22 = "jack";
+        String url22 = "www.test.com";
+        List<Website> wsList22 = wsmObj.selectRecordsByCondition22(name22, url22);
+        for (Website site : wsList22) {
+            System.out.println(site);
+        }
+
+        public List<Website> selectRecordsByCondition22(@Param("name") String name, @Param("url")  String url);
+
+        <select id="selectRecordsByCondition22" resultMap="myResult">
+            select * from website where 1=1
+            <choose>
+                <when test="name != null and name != ''">
+                    and name like concat("%", #{name}, "%")
+                </when>
+                <when test="url != null and url != ''">
+                    and url like concat("%", #{url}, "%")
+                </when>
+                <otherwise>
+                    and age is not null
+                </otherwise>
+            </choose>
+        </select>
+
+    where标签：
+        // where 标签主要用来简化 SQL 语句中的条件判断，可以自动处理 AND/OR 条件
+        String name33 = "jack";
+        String url33 = "www.test.com";
+        List<Website> wsList33 = wsmObj.selectRecordsByCondition33(name33, url33);
+        for (Website site : wsList33) {
+            System.out.println(site);
+        }
+
+        public List<Website> selectRecordsByCondition33(@Param("name") String name, @Param("url")  String url);
+
+        <select id="selectRecordsByCondition33" resultMap="myResult">
+            select * from website
+            <where>
+                <if test="name != null">
+                    and name like #{name}
+                </if>
+                <if test="url != null">
+                    and url like #{url}
+                </if>
+            </where>
+        </select>
+
+    trim标签：
+        // trim 属性如下：
+        //    prefix	            给SQL语句拼接的前缀，为 trim 包含的内容加上前缀
+        //    suffix	            给SQL语句拼接的后缀，为 trim 包含的内容加上后缀
+        //    prefixOverrides	    去除 SQL 语句前面的关键字或字符，该关键字或者字符由 prefixOverrides 属性指定。
+        //    suffixOverrides	    去除 SQL 语句后面的关键字或者字符，该关键字或者字符由 suffixOverrides 属性指定。
+        String name44 = "jack";
+        String url44 = "www.test.com";
+        List<Website> wsList44 = wsmObj.selectRecordsByCondition44(name44, url44);
+        for (Website site : wsList44) {
+            System.out.println(site);
+        }
+
+        public List<Website> selectRecordsByCondition44(@Param("name") String name, @Param("url")  String url);
+
+        <select id="selectRecordsByCondition44" resultMap="myResult">
+            select * from website
+            <trim prefix="where" prefixOverrides="and">
+                <if test="name != null and name != ''">
+                    and name like #{name}
+                </if>
+                <if test="url != null and url != ''">
+                    and url like #{url}
+                </if>
+            </trim>
+        </select>
+
+    set标签：
+        Website wsObj = new Website();
+        wsObj.setId(18);
+        wsObj.setName("xixixi");
+        wsObj.setUrl("www.google222.com");
+        Integer updRes = wsmObj.updateWebsiteById(wsObj);
+        ss.commit();
+
+        public int updateWebsiteById(Website site);
+
+        <update id="updateWebsiteById" parameterType="com.mb.po.Website">
+            update website
+            <set>
+                <if test="name != null">name=#{name},</if>   <!-- 注意这里要加个逗号 -->
+                <if test="url != null">url=#{url}</if>
+            </set>
+            where id = #{id}
+        </update>
+
+    foreach标签：
+        List<Integer> ageList = new ArrayList<>();
+        ageList.add(20);
+        ageList.add(21);
+        List<Website> wsList55 = wsmObj.selectRecordsByCondition55(ageList);
+        for (Website site : wsList55) {
+            System.out.println(site);
+        }
+
+        public List<Website> selectRecordsByCondition55(@Param("list55") List<Integer> tttt);
+
+        <select id="selectRecordsByCondition55" parameterType="com.mb.po.Website" resultType="com.mb.po.Website">
+            select * from website where age in
+            <foreach item="xxxx" index="yyyy" collection="list55" open="(" separator="," close=")">
+                #{xxxx}
+            </foreach>
+        </select>
+
+    bind标签：
+        String name66 = "ja";
+        String url66 = "www.";
+        List<Website> wsList66 = wsmObj.selectRecordsByCondition66(name66, url66);
+        for (Website site : wsList66) {
+            System.out.println(site);
+        }
+
+        public List<Website> selectRecordsByCondition66(@Param("name") String name, @Param("url")  String url);
+
+        <select id="selectRecordsByCondition66" resultMap="myResult">
+            <bind name="pattern_name" value="'%' + name + '%'"/>
+            <bind name="pattern_url" value="'%' + url + '%'"/>
+            select * from website where name like #{pattern_name} and url like #{pattern_url}
+        </select>
+
+    分页功能：
+        Website wsObj77 = new Website();
+        wsObj77.setName("j");
+        wsObj77.setUrl("www.");
+        List<Website> wsList77 = wsmObj.selectRecordsByCondition77(wsObj77, 0, 2);
+        for (Website site : wsList77) {
+            System.out.println(site);
+        }
+
+        public List<Website> selectRecordsByCondition77(@Param("wsObj") Website wsObj77,
+                                            @Param("currPage")  Integer currPage, @Param("pageSize") Integer pageSize);
+
+        <!--    下面传入了 wsObj 对象，需要声明 parameterType="com.mb.po.Website"，否则无效 -->
+        <select id="selectRecordsByCondition77" parameterType="com.mb.po.Website" resultMap="myResult">
+            select * from website
+            <trim prefix="where" prefixOverrides="and">
+                <if test="wsObj.name != null and wsObj.name != ''">
+                    and name like concat("%", #{wsObj.name}, "%")
+                </if>
+                <if test="wsObj.url != null and wsObj.url != ''">
+                    and url like concat("%", #{wsObj.url}, "%")
+                </if>
+            </trim>
+            order by id desc limit #{currPage}, #{pageSize}
+        </select>
 
 
 7、逆向工程
-
+    操作步骤：
+        ① pom.xml 里增加两块配置：
+            a、dependencies 里增加 org.mybatis 和 org.mybatis.generator
+            b、plugins 里增加 mybatis-generator-maven-plugin 和 mysql-connector-java
+        ② 编辑器里 Run -> edit configurations -> + 添加Maven -> command line：mybatis-generator:generate
+        参考博文：
+             https://blog.csdn.net/norang/article/details/118384456
+             https://blog.csdn.net/qq_30833275/article/details/85047202
 
 
 8、缓存
-
+    概念：对于 MyBatis 缓存仅作了解即可，因为面对一定规模的数据量，内置的 Cache 方式就派不上用场了，
+         并且对查询结果集做缓存并不是 MyBatis 所擅长的，它专心做的应该是 SQL 映射。
+         对于缓存，采用 OSCache、Memcached 等专门的缓存服务器来做更为合理
 
 
 
