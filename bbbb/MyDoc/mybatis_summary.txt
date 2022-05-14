@@ -101,50 +101,55 @@
 
 
 3、传参到 Mapper 的三种方式
-      ① Map 传递参数 - update
-          WebsiteMapper33_1 wsmObj = ss.getMapper(WebsiteMapper33_1.class);
-          Map<String, Object> params22 = new HashMap<>();
-          params22.put("id", 1);
-          params22.put("name", "map方式更新字段");
-          params22.put("url", "www.quora.com");
-          int counter33 = wsmObj.updateWebstieByMap(params22);
-          ss.commit();
+    ① Map 传递参数 - update
+        WebsiteMapper33_1 wsmObj = ss.getMapper(WebsiteMapper33_1.class);
+        Map<String, Object> params22 = new HashMap<>();
+        params22.put("id", 1);
+        params22.put("name", "map方式更新字段");
+        params22.put("url", "www.quora.com");
+        int counter33 = wsmObj.updateWebstieByMap(params22);
+        ss.commit();
 
-          public int updateWebstieByMap(Map<String, Object> params);
+        public int updateWebstieByMap(Map<String, Object> params);
 
-          <update id="updateWebstieByMap" parameterType="map">
-              update website set name=#{name}, url=#{url} where id=#{id}
-          </update>
+        <update id="updateWebstieByMap" parameterType="map">
+          update website set name=#{name}, url=#{url} where id=#{id}
+        </update>
 
-      ② 注解传递参数 - update
-          WebsiteMapper33_2 wsmObj = ss.getMapper(WebsiteMapper33_2.class);
-          String name = "注解 方式更新字段";
-          String url = "www.dnews.com";
-          Integer id = 13;
-          int counter22 = wsmObj.updateWebsiteByParam(name, url, id);
-          ss.commit();
+    ② 注解传递参数 - update
+        WebsiteMapper33_2 wsmObj = ss.getMapper(WebsiteMapper33_2.class);
+        String name = "注解 方式更新字段";
+        String url = "www.dnews.com";
+        Integer id = 13;
+        int counter22 = wsmObj.updateWebsiteByParam(name, url, id);
+        ss.commit();
 
-          public int updateWebsiteByParam(@Param("name") String name, @Param("url") String url, @Param("id") Integer id);
+        public int updateWebsiteByParam(@Param("name") String name, @Param("url") String url, @Param("id") Integer id);
 
-          <update id="updateWebsiteByParam">
-              update website set name = #{name}, url = #{url}
-              where id = #{id}
-          </update>
+        <update id="updateWebsiteByParam">
+          update website set name = #{name}, url = #{url}
+          where id = #{id}
+        </update>
 
-      ③ JavaBean 传递参数 - update
-          WebsiteMapper33_3 wsmObj = ss.getMapper(WebsiteMapper33_3.class);
-          Website website22 = new Website();
-          website22.setName("JavaBean 方式变更");
-          website22.setUrl("www.twitter.com");
-          website22.setId(12);
-          int counter22 = wsmObj.updateWebsiteByJavaBean(website22);
-          ss.commit();
+    ③ JavaBean 传递参数 - update
+        WebsiteMapper33_3 wsmObj = ss.getMapper(WebsiteMapper33_3.class);
+        Website website22 = new Website();
+        website22.setName("JavaBean 方式变更");
+        website22.setUrl("www.twitter.com");
+        website22.setId(12);
+        int counter22 = wsmObj.updateWebsiteByJavaBean(website22);
+        ss.commit();
 
-          public int updateWebsiteByJavaBean(Website website);
+        public int updateWebsiteByJavaBean(Website website);
 
-          <update id="updateWebsiteByJavaBean">
-              update website set name = #{name}, url = #{url} where id = #{id}
-          </update>
+        <update id="updateWebsiteByJavaBean">
+          update website set name = #{name}, url = #{url} where id = #{id}
+        </update>
+
+    小结：
+    使用 Map 传递参数会导致业务可读性的丧失。
+    使用 @Param 注解传递参数会受到参数个数的影响。当 n≤5 是最佳的传参方式。
+    当参数个数大于 5 个时，建议使用 JavaBean 方式。
 
 
 4、XML 方式 - 增删改查
@@ -154,18 +159,28 @@
         Website website = new Website();
         website.setName("我是谁333");
         website.setUrl("www.abc.com");
+        // ① 常规新增
         int counter11 = wsmObj.addWebsiteByJavaBean(website);
-        // 主键（自动递增）回填。  通过在 insert 标签中添加  keyProperty 和 useGeneratedKeys 属性，来实现该功能
+        // ② 主键（自动递增）回填。  通过在 insert 标签中添加  keyProperty 和 useGeneratedKeys 属性，来实现该功能
         System.out.println("提前获得插入记录的主键ID " + website.getId());
         System.out.println("共插入了 " + counter11 + " 条记录");
         ss.commit();
-        // 自定义主键   不实践了，只用在 oracle 里，应用场景不广泛
 
         public int addWebsiteByJavaBean(Website website);
 
         <insert id="addWebsiteByJavaBean" keyProperty="id" useGeneratedKeys="true">
             insert into website(name, url)
             values(#{name}, #{url})
+        </insert>
+
+        // ③ 自定义主键   不实践了，只用在 oracle 里，应用场景不广泛
+        <!-- 若数据库不支持主键自动递增（例如 Oracle），需要自己递增主键 -->
+        <insert id="addWebsiteByJavaBean222">
+            <!-- 先使用selectKey标签定义主键，然后再定义SQL语句 -->
+            <selectKey keyProperty="id" resultType="Integer" order="BEFORE">
+                select if(max(id) is null,1,max(id)+1) as newId from Website
+            </selectKey>
+            insert into Website (id,name,url) values(#{id},#{name},#{url})
         </insert>
 
     update：
@@ -361,6 +376,40 @@
         public int deleteById(Integer id);
 
     select：
+        resultMap标签：
+            <resultMap id="" type="">
+                <constructor>           <!-- 类再实例化时用来注入结果到构造方法 -->
+                    <idArg/>    <!-- ID参数，结果为ID -->
+                    <arg/>      <!-- 注入到构造方法的一个普通结果 -->
+                </constructor>
+                <id/>                       <!-- 用于表示哪个列是主键 -->
+                <result/>                   <!-- 注入到字段或JavaBean属性的普通结果 -->
+                <association property=""/>  <!-- 用于一对一关联 -->
+                <collection property=""/>   <!-- 用于一对多、多对多关联 -->
+                <discriminator javaType=""> <!-- 使用结果值来决定使用哪个结果映射 -->
+                    <case value=""/>    <!-- 基于某些值的结果映射 -->
+                </discriminator>
+            </resultMap>
+
+            property属性：  映射到列结果的字段或属性。如果 POJO 的属性和 SQL 列名（column元素）是相同的，那么 MyBatis 就会映射到 POJO 上
+            column属性：	   对应 SQL 列
+            javaType属性：  配置 Java 类型。可以是特定的类完全限定名或 MyBatis 上下文的别名
+            jdbcType属性：  配置数据库类型。
+
+        resultType属性：
+            当返回类型是 resultType 时，MyBatis 会自动把对应的值赋给 resultType 所指定对象的属性
+            当返回类型是 resultMap 时，MyBatis 会将数据库中的列数据复制到对象的相应属性上，可用于复制查询。
+
+        association标签：
+            property属性： 指定映射到实体类的对象属性。
+            column属性：   指定表中对应的字段（即查询返回的列名）。
+            javaType属性： 指定映射到实体对象属性的类型。
+
+        collection标签：
+            property属性： 指定映射到实体类的对象属性。
+            column属性：   指定表中对应的字段（即查询返回的列名）。
+            javaType属性： 指定映射到实体对象属性的类型。
+
         常规查询：
             // @Result、@Results、@ResultMap 是结果集映射的三大注解
             List<Website> wsSel = wsmObj22.selectOne("jack", "ppp");
@@ -538,6 +587,7 @@
         </update>
 
     foreach标签：
+        // collection属性支持：array 数组，List，Map
         List<Integer> ageList = new ArrayList<>();
         ageList.add(20);
         ageList.add(21);
@@ -556,6 +606,7 @@
         </select>
 
     bind标签：
+        // bind 用于屏蔽不同数据库之间写法不一致，方便代码移植
         String name66 = "ja";
         String url66 = "www.";
         List<Website> wsList66 = wsmObj.selectRecordsByCondition66(name66, url66);
@@ -580,10 +631,13 @@
             System.out.println(site);
         }
 
+        // 注意这里传到 xml 里的是一个对象
         public List<Website> selectRecordsByCondition77(@Param("wsObj") Website wsObj77,
                                             @Param("currPage")  Integer currPage, @Param("pageSize") Integer pageSize);
 
         <!--    下面传入了 wsObj 对象，需要声明 parameterType="com.mb.po.Website"，否则无效 -->
+        <!--    order：该属性取值可以为 BEFORE 或 AFTER。BEFORE 表示先执行 <selectKey> 标签内的语句，再执行插入语句；
+            AFTER 表示先执行插入语句再执行 <selectKey> 标签内的语句。  -->
         <select id="selectRecordsByCondition77" parameterType="com.mb.po.Website" resultMap="myResult">
             select * from website
             <trim prefix="where" prefixOverrides="and">
@@ -599,6 +653,7 @@
 
 
 7、逆向工程
+    概念：根据数据表自动生成针对单表的 po 类、mapper 映射文件和 mapper 接口。
     操作步骤：
         ① pom.xml 里增加两块配置：
             a、dependencies 里增加 org.mybatis 和 org.mybatis.generator
@@ -617,14 +672,6 @@
 
 
 ========================================================================
-<!-- 若数据库不支持主键自动递增（例如 Oracle），需要自己递增主键 -->
-    <insert id="addWebsiteByJavaBean222">
-        <!-- 先使用selectKey标签定义主键，然后再定义SQL语句 -->
-        <selectKey keyProperty="id" resultType="Integer" order="BEFORE">
-            select if(max(id) is null,1,max(id)+1) as newId from Website
-        </selectKey>
-        insert into Website (id,name,url) values(#{id},#{name},#{url})
-    </insert>
 
 
 // MyBatis关联查询 的问题？？？
