@@ -11,7 +11,6 @@
     <title>$Title$</title>
 </head>
 <body>
-    <a href="${pageContext.request.contextPath}/hello/register">注册</a>
-    <a href="${pageContext.request.contextPath}/hello/login">登录</a>
+我是测试生生世世 ${pageContext.request.contextPath }
 </body>
 </html>

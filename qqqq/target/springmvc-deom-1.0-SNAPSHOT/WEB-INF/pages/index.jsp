@@ -1,16 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mac
-  Date: 2022/5/13
-  Time: 3:05 下午
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>$Title$</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>编程帮</title>
 </head>
 <body>
-我是测试生生世世
+${name } 998765
 </body>
 </html>

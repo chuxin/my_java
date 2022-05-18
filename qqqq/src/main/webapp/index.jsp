@@ -11,6 +11,7 @@
     <title>$Title$</title>
 </head>
 <body>
-$END$adsfasdfasdfs
+    <a href="${pageContext.request.contextPath}/hello/register">注册</a>
+    <a href="${pageContext.request.contextPath}/hello/login">登录</a>
 </body>
 </html>

@@ -87,3 +87,9 @@ PHP CAfile capath
 泛域名证书 单个域名证书
 
 /private/etc/ssl/openssl.cnf
+
+
+stream_socket_enable_crypto(): SSL operation failed with code 1 问题
+https://stackoverflow.com/questions/30556773/how-to-fix-stream-socket-enable-crypto-ssl-operation-failed-with-code-1
+
+
