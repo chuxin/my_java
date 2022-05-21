@@ -4,6 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<h3>入门测试成功</h3>
+<h3>成功页面</h3>
 </body>
 </html>

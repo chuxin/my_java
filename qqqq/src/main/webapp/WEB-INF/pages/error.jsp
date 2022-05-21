@@ -4,6 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<h3>成功页面</h3>
+<h3>发生算术运算异常，请重新输出数据！</h3>
 </body>
 </html>

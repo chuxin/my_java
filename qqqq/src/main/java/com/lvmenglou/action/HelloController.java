@@ -5,9 +5,7 @@ import com.lvmenglou.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -112,6 +110,51 @@ public class HelloController {
 //    }
 
 
+    // Spring MVC异常处理
+    @RequestMapping("/testExceptionHandle")
+    // http://localhost:8080/hello/testExceptionHandle?i=1
+    // http://localhost:8080/hello/testExceptionHandle?i=0
+    public String testExceptionHandle(@RequestParam("i") Integer i) {
+        System.out.println(10 / i);
+        return "success";
+    }
+
+    @ExceptionHandler({ArithmeticException.class})
+    public String testArithmeticException(Exception e) {
+        System.out.println("打印错误信息 ===> ArithmeticException:" + e);
+        return "error";
+    }
+
+
+    // Spring MVC REST风格
+    @RequestMapping("/torest")
+    public String torest() {
+        return "rest";
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public String hello(@PathVariable Integer id) {
+        System.out.println("test rest get: " + id);
+        return "success";
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
+    public String hello() {
+        System.out.println("test POST:");
+        return "success";
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    public String helloDelete(@PathVariable Integer id) {
+        System.out.println("test rest delete:" + id);
+        return "success";
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    public String helloPUt(@PathVariable Integer id) {
+        System.out.println("test rest put:" + id);
+        return "success";
+    }
 }
 
 /*
