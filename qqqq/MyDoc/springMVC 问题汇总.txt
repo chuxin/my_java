@@ -78,4 +78,11 @@ brew install tomcat
         </dependency>
 
 
+问题描述：
+    Could not initialize class org.hibernate.validator.internal.engine.ConfigurationImpl
+原因：
+    网上说依赖包版本有问题，那先不用这个包了，故在 pom.xml 里删掉配置项目，但是运行目录里还存在，所以报错
+解决办法：
+    mac@macdeMacBook-Pro my_java % rm -rf qqqq/target/springmvc-deom-1.0-SNAPSHOT/WEB-INF/lib/hibernate-validator-5.1.0.Final.jar
+    mac@macdeMacBook-Pro my_java % rm -rf qqqq/target/springmvc-deom-1.0-SNAPSHOT/WEB-INF/lib/validation-api-1.1.0.Final.jar
 

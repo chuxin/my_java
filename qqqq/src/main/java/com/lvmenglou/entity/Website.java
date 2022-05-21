@@ -1,20 +1,8 @@
 package com.lvmenglou.entity;
 
-public class User {
-    private Integer id;
+public class Website {
     private String name;
     private Integer age;
-    private String pwd;
-    private String password;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     private Double height;
 
     public Double getHeight() {
@@ -23,22 +11,6 @@ public class User {
 
     public void setHeight(Double height) {
         this.height = height;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
