@@ -104,15 +104,21 @@ public class ZzzzApplication {
         // done
 
         /*********   开始看框架 mybatis *********/
-        //
+        // done
 
         /*********   make a summary (mybatis)   *********/
-        //
+        // done
 
         /*********   开始看框架 springMVC *********/
-        //
+        // done
 
         /*********   make a summary (springMVC)   *********/
+        //
+
+        /*********   开始看框架 spring cloud （粗略看，做到心中有数即可）   *********/
+        //
+
+        /*********   make a summary (spring cloud)   *********/
         //
 
         /*********   springboot => practice       *********/
@@ -121,18 +127,9 @@ public class ZzzzApplication {
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
         //      https://blog.csdn.net/qq_41288095/article/details/89743041
 
-        /*********   回过头看最初的教程，基础最重要   *********/
-        // 把之前没看的，没学的，都看一遍
-        // https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610
-
         /*********   make a summary at second time (basic)   *********/
-        //
-
-        /*********   开始看框架 spring cloud   *********/
-        //
-
-        /*********   make a summary (spring cloud)   *********/
-        //
+        // 回过头看最初的教程，基础最重要。     把之前没看的，没学的，都看一遍
+        // https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610
 
         // 其它
         //    mybatis-plus && tkmybatis

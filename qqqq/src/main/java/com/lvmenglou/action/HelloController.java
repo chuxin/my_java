@@ -87,19 +87,9 @@ public class HelloController {
     // Spring MVC传递参数
     // 还没实践 ？？？？
 
-    // @ModelAttribute 没成功 ？？？
-    // 应用在方法上
-    // ① 方法无返回值
-//    @ModelAttribute
-//    public void myModel(@RequestParam(required = false) String test_name, Model model) {
-//        model.addAttribute("test_name", test_name);
-//    }
-//
-//    @RequestMapping(value="/test_model11")
-//    public String testModel11() {
-//        return "test_model11";
-//    }
-
+    // @ModelAttribute
+    // ① 应用在方法上
+    // a.方法无返回值
 //    @ModelAttribute
 //    public void myModel(@RequestParam(required = false) String name, Model model) {
 //        model.addAttribute("name", name);
@@ -108,6 +98,47 @@ public class HelloController {
 //    public String model() {
 //        return "index";
 //    }
+
+    // b.方法有返回值
+    @ModelAttribute
+    public String myModel(@RequestParam(required = false) String name) {
+        return name;
+    }
+    @RequestMapping(value = "/model")
+    public String model() {
+        return "index";
+    }
+
+    // ② 应用在方法的参数上 - 表单 和 实体进行绑定
+    // 写法一
+    @RequestMapping(value = "/model22")
+    public String model22(Model model) {
+        User user_xx = new User();
+        model.addAttribute("user_xx", user_xx);
+        return "model22";
+    }
+    // 写法二
+    @RequestMapping(value = "/model33")
+    public String model33(@ModelAttribute("user_xx") User user) {
+        return "model22";
+    }
+    @RequestMapping("/saveUser")
+    public String saveUser(User user) {
+        if ("louis".equals(user.getName()) && "123456".equals(user.getPwd())) {
+            return "success";
+        } else {
+            return "error";
+        }
+    }
+
+    // ③ ModelAttribute + RequestMapping
+    // 访问地址：http://localhost:8080/hello/model44?dddd=9999
+    // 模板路径，模板名 和 访问地址一模一样
+    @RequestMapping("/model44")
+    @ModelAttribute("dddd")
+    public String model44(@RequestParam(required = false) String dddd) {
+        return dddd;
+    }
 
 
     // Spring MVC异常处理

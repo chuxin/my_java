@@ -1,29 +1,4 @@
 
-
-
-brew install tomcat
-安装在 /usr/local/Cellar/tomcat 目录
-
-创建 springMVC 项目
-① 创建 src/main/resources/applicationContext.xml  用来扫描代码目录
-② 创建 src/main/webapp/WEB-INF/web.xml 这是 springMVC 的框架配置文件
-③ 创建 渲染页面  src/main/webapp/index.jsp
-④ pom.xml 里把依赖包加上
-⑤ 测试代码文件 src/main/java/com/lvmenglou/action/HelloWorld.java
-⑥ 编辑器里 File -> project structure -> Artifacts -> qqqq:war exploded
-        -> 如果没有就要添加， WEB-INF/lib 添加 tomcat 执行依赖包
-        -> 如果没有就要添加，'qqqq' module:'web' facet resources
-⑦ 编辑器里 Run -> edit configurations -> + -> local tomcat
-        -> application server -> /usr/local/Cellar/tomcat/10.0.7/libexec
-        -> deployment -> + -> qqqq:war exploded -> application context 值设为 /
-    说明：
-        war模式：将WEB工程以包的形式上传到服务器 ；
-        war exploded模式：将WEB工程以当前文件夹的位置关系上传到服务器；
-
-参考博文： https://www.modb.pro/db/148930
-
-
-
 问题描述：
     Artifact unnamed: Error during artifact deployment. See server log for details
 原因：
@@ -66,6 +41,7 @@ brew install tomcat
             <artifactId>spring-context-support</artifactId>
             <version>5.2.3.RELEASE</version>
         </dependency>
+
 
 问题描述：
     java.lang.NoClassDefFoundError: freemarker/template/TemplateHashModelEx
