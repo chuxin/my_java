@@ -24,6 +24,11 @@
             安装在 /usr/local/Cellar/tomcat 目录
         b.创建 springMVC 项目
             ① 创建 src/main/resources/applicationContext.xml  用来扫描代码目录
+                <!-- 在 src/main/resources/applicationContext.xml 中配置如下 -->
+                <!-- 使用context命名空间，通知spring扫描指定目录，进行注解的解析 -->
+                <context:component-scan base-package="com.lvmenglou"/>
+                <!-- 启用@Autowired等注解 -->
+                <context:annotation-config/>
             ② 创建 src/main/webapp/WEB-INF/web.xml 这是 springMVC 的框架配置文件
             ③ 创建 渲染页面  src/main/webapp/index.jsp
             ④ pom.xml 里把依赖包加上
@@ -38,36 +43,781 @@
                 说明：
                     war模式：将WEB工程以包的形式上传到服务器 ；
                     war exploded模式：将WEB工程以当前文件夹的位置关系上传到服务器；
-        参考博文： https://www.modb.pro/db/148930
+            参考博文： https://www.modb.pro/db/148930
+
+    配置介绍：
+        <context:annotation-config />
+            用于激活那些已经在spring容器里注册过的bean
+            比如：@Autowired 、@Resource 、@PostConstruct 、@PreDestroy 、@PersistenceContext 、@Required
+
+        <mvc:annotation-driven />
+            让SpringMVC跑起来所需要的注解
+            比如：@RequestMapping 、@Controller 、@RequestBody 、@Valid 、支持使用ConversionService实例对表单参数进行类型转换 、@NumberFormatannotation、@DateTimeFormat注解完成数据类型的格式化
+
 
 2、M - V - C 使用
-    V - 视图解析器
-        支持多种视图技术：JSP、FreeMarker、Tiles、iText 和 POI。Spring MVC 框架并不关心使用的视图技术，也不会强迫开发者只使用 JSP。
+    V - 视图解析器（ViewResolver）
+        概念：
+            支持多种视图技术，如 JSP、FreeMarker、Tiles、iText 和 POI。Spring MVC 框架并不关心使用的视图技术，也不会强迫开发者只使用 JSP。
+            Spring提供了13个基本的视图解析器，使用不同的解析器可以实现将视图解析成不同类型的内容展现，以下了解几个比较常用的：
+            	① FreeMarkerViewResolver：将视图解析为 FreeMarker 模板
+            	② InternalResourceViewResolver：将视图解析为Web应用的内部资源
+            	③ TilesViewResolver：将视图解析为 Apache Tile 定义，其中 tile ID 与视图名称相同。
+            	④ ThymeleafViewResolver：将逻辑视图名称解析为 Thymeleaf 模板视图
+
+        例子：
+            <!-- 在 src/main/resources/applicationContext.xml 中配置如下，可支持 jsp、ftl 模板解析，但貌似不能同时支持 -->
+            <!-- InternalResourceViewResolver 配置视图解析器 -->
+            <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                <property name="prefix" value="/WEB-INF/pages/" />
+                <property name="suffix" value=".jsp" />
+            </bean>
+            <!-- FreeMarkerViewResolver 配置视图解析器 -->
+            <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+                <property name="prefix" value="fm_"></property>
+                <property name="suffix" value=".ftl"></property>
+            </bean>
+            <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+                <property name="templateLoaderPath" value="/WEB-INF/ftl" />
+            </bean>
 
     C - 控制器
+        介绍：
+            @Controller注解
+                概念：用于声明某类的实例是一个控制器。
+
+            @RequestMapping注解
+                概念：负责将请求映射到对应的控制器方法上。完成映射需要4样东西：请求 URL、请求参数、请求方法和请求头
+                属性：
+                    value
+                        @RequestMapping(value="toUser")     http://localhost:8080/toUser
+                        @RequestMapping(value="toUser/*")   http://localhost:8080/toUser/hahaha
+                    path
+                        path 属性和 value 属性都用来作为映射使用
+                    name
+                        相当于方法的注释，使方法更易理解。
+                    method
+                        用于表示该方法支持哪些 HTTP 请求。如果省略 method 属性，则说明该方法支持全部的 HTTP 请求。
+                        @RequestMapping(value = "toUser",method = RequestMethod.GET) 表示该方法只支持 GET 请求。
+                        @RequestMapping(value = "toUser",method = {RequestMethod.GET,RequestMethod.POST})，说明该方法同时支持 GET 和 POST 请求。
+                    params
+                        用于指定请求中规定的参数
+                        @RequestMapping(value = "toUser",params = "type")  请求中必须包含 type 参数时才能执行该请求。即 http://localhost:8080/toUser?type=xxx
+                        @RequestMapping(value = "toUser",params = "type=1")  请求中必须包含 type 参数，且 type 参数为 1 时才能够执行该请求。即 http://localhost:8080/toUser?type=1
+                    header
+                        请求中必须包含某些指定的 header 值
+                    consumers
+                        指定处理请求的提交内容类型（Content-Type），例如：application/json、text/html
+                    produces
+                        指定返回的内容类型，返回的内容类型必须是 request 请求头（Accept）中所包含的类型。
+                        @RequestMapping(value = "toUser",produces = "application/json,charset=utf-8")，表示返回 utf-8 编码。
+
+        例子：
+            @Controller
+            @RequestMapping("/hello")
+            public class HelloController {
+                @RequestMapping(path = "/sayHello")
+                public String sayHello(){
+                    System.out.println("hello");
+                    return "success";
+                }
+            }
+
+    @Autowired 注解
+        概念：对类成员变量、方法及构造函数进行标注，完成自动装配的工作
+
+    @Service 注解
+        概念：将标注类自动注册到 Spring 容器中
+        注意：@Service 要加载 UserServiceImpl 上面，不能加在 UserService 上面，否则无效报错
+
+    @ModelAttribute注解
+        概念：用来将请求参数绑定到 Model 对象
+        例子：
+            ① 应用在方法上
+                // a.方法没有使用 @RequestMapping
+                //     模型对象要先于 controller 方法之前创建，所以被 @ModelAttribute 注解的方法会在 Controller 每个方法执行之前都执行.
+                // 方法无返回值情况
+                @ModelAttribute
+                public void myModel(@RequestParam(required = false) String name, Model model) {
+                    model.addAttribute("name", name);
+                }
+                @RequestMapping(value = "/model")
+                public String model() {
+                    return "index";
+                }
+                // 方法有返回值情况
+                @ModelAttribute
+                public String myModel(@RequestParam(required = false) String name) {
+                    return name;
+                }
+                @RequestMapping(value = "/model")
+                public String model() {
+                    return "index";
+                }
+
+                // b.方法使用了 @RequestMapping.  ModelAttribute + RequestMapping
+                // 访问地址：http://localhost:8080/hello/model44?dddd=9999
+                // 模板路径，模板名 和 访问地址一模一样
+                @RequestMapping("/model44")
+                @ModelAttribute("dddd")
+                public String model44(@RequestParam(required = false) String dddd) {
+                    return dddd;
+                }
+
+            ② 应用在方法的参数上
+                // 表单 和 实体进行绑定
+                // 写法一
+                @RequestMapping(value = "/model22")
+                public String model22(Model model) {
+                    User user_xx = new User();
+                    model.addAttribute("user_xx", user_xx);
+                    return "model22";
+                }
+                // 写法二
+                @RequestMapping(value = "/model33")
+                public String model33(@ModelAttribute("user_xx") User user) {
+                    return "model22";
+                }
+                @RequestMapping("/saveUser")
+                public String saveUser(User user) {
+                    if ("louis".equals(user.getName()) && "123456".equals(user.getPwd())) {
+                        return "success";
+                    } else {
+                        return "error";
+                    }
+                }
+
+                <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+                <%@ taglib prefix="fm" uri="http://www.springframework.org/tags/form" %>
+                <html>
+                    <body>
+                        <fm:form method="post" modelAttribute="user_xx" action="${pageContext.request.contextPath}/hello/saveUser">
+                            用户名：<fm:input path="name" /> <br />
+                            年龄：<fm:input path="age" /> <br />
+                            密码：<fm:input path="pwd" /> <br />
+                            <input type="submit" value="保存" />
+                        </fm:form>
+                    </body>
+                </html>
 
 
+3、框架常用功能
+    重定向和转发
+        区别：
+            ① 转发是将用户对当前处理的请求转发给另一个视图或处理请求，以前的 request 中存放的信息不会失效。
+               重定向是将用户从当前处理请求定向到另一个处理请求，以前 request 中存放的信息全部失效，并进入一个新的 request 作用域；
+            ② 转发是服务器行为，重定向是客户端行为
+            ③ 客户浏览器发送 http 请求，Web 服务器接受此请求，调用内部的一个方法在容器内部完成请求处理和转发动作，将目标资源发送给客户；
+                   在这里转发的路径必须是同一个 Web 容器下的 URL，其不能转向到其他的 Web 路径上，中间传递的是自己的容器内的 request。
+                   在客户浏览器的地址栏中显示的仍然是其第一次访问的路径，也就是说客户是感觉不到服务器做了转发的。转发行为是浏览器只做了一次访问请求。
+               客户浏览器发送 http 请求，Web 服务器接受后发送 302 状态码响应及对应新的 location 给客户浏览器，客户浏览器发现是 302 响应，
+                   则自动再发送一个新的 http 请求，请求 URL 是新的 location 地址，服务器根据此请求寻找资源并发送给客户。
+                   在这里 location 可以重定向到任意 URL，既然是浏览器重新发出了请求，那么就没有什么 request 传递的概念了。
+                   在客户浏览器的地址栏中显示的是其重定向的路径，客户可以观察到地址的变化。重定向行为是浏览器做了至少两次的访问请求。
 
-3、具体使用
+        例子：
+            @RequestMapping("/test_forward")
+            public String testForward() {
+                return "forward:/hello/sayHello";
+            }
 
+            @RequestMapping("/test_redirect")
+            public String testRedirect() {
+                return "redirect:/hello/sayHello";
+            }
 
+    类型转换器（Converter）
+        概念：Converter<S，T> 是一个可以将一种数据类型转换成另一种数据类型
+        例子：
+            // 创建自定义的类型转换器
+            public class User {
+                private Integer id;
+                private String name;
+                private Integer age;
+                private String pwd;
+                private String password;
+            }
 
+            @Controller
+            public class UserController {
+                @RequestMapping(value = "/addUser", method = RequestMethod.GET)
+                public String add(@ModelAttribute("user") User user) {
+                    return "addUser";
+                }
 
+                @RequestMapping(value = "/showuser", method = RequestMethod.POST)
+                public String showuser(User user, HttpSession session, HttpServletRequest request) {
+                    return "showUser";
+                }
 
+                @RequestMapping("/converter")
+                public String myConverter(@RequestParam("userinfo") User user, Model model) {
+                    model.addAttribute("user", user);
+                    return "showUser";
+                }
+            }
 
+            @Component
+            public class UserConverter implements Converter<String, User> {
+                @Override
+                public User convert(String source) {
+                    System.out.println("yyyyyyyyyyyyyyyy");
+                    User user = new User();
+                    String[] stringvalues = source.split(",");
+                    if (stringvalues != null && stringvalues.length == 3) {
+                        user.setName(stringvalues[0]);
+                        user.setAge(Integer.parseInt(stringvalues[1]));
+                        user.setHeight(Double.parseDouble(stringvalues[2]));
+                        return user;
+                    } else {
+                        throw new IllegalArgumentException(String.format("类型转换失败， 需要格式化为'中国,18,1.86'，但目前格式是[%s]", source));
+                    }
+                }
+            }
 
+            <!-- 注册类型转换器 UserConverter -->
+            <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+                <property name="converters">
+                    <list>
+                        <bean class="com.lvmenglou.converter.UserConverter" />
+                    </list>
+                </property>
+            </bean>
 
-存放在 /WEB-INF/ 目录下的内容不能直接通过 request 请求得到，所以为了安全性考虑，通常把 jsp 文件放在 WEB-INF 目录下
+            <form action="${pageContext.request.contextPath}/converter" method="post">
+                请输入用户信息（格式为编程帮, 18,1.85）: <br />
+                <input type="text" name="userinfo" /> <br />
+                <input type="submit" value="提交" />
+            </form>
 
+            用户名：${user.name}<br />
+            年龄：${user.age}<br />
+            身高：${user.height}<br />
 
-Spring提供了13个基本的视图解析器，能够将逻辑视图名转换为物理实现，此处我们只了解其中几个比较常用的视图解析器：
-	•	FreeMarkerViewResolver：将视图解析为 FreeMarker 模板
-	•	InternalResourceViewResolver：将视图解析为Web应用的内部资源
-	•	TilesViewResolver：将视图解析为 Apache Tile 定义，其中 tile ID 与视图名称相同。注意有两个不同的TilesViewResolver实现，分别对应于 Tiles 2.0 和Tiles 3.0
-	•	ThymeleafViewResolver： 将逻辑视图名称解析为 Thymeleaf 模板视图
-使用不同的解析器可以实现将视图解析成不同类型的内容展现
+    数据格式化（Formatter）
+        概念：Formatter<T> 与 Converter<S, T> 一样，将一种数据类型转换成另一种数据类型。
+             Formatter 的源类型必须是 String 类型，而 Converter 的源类型可以是任意数据类型。
+             Formatter 更适合 Web 层，而 Converter 可以在任意场景中。
 
+        例子：
+            public class Order {
+                private String name;
+                private Integer age;
+                private Double height;
+                private Date createDate;
+            }
 
+            @Controller
+            public class UserController {
+                @RequestMapping(value = "/addOrder", method = RequestMethod.GET)
+                public String addOrder(@ModelAttribute("order") Order order) {
+                    return "addOrder";
+                }
+
+                @RequestMapping("/formatter")
+                public String myFormatter(Order order, Model model) {
+                    System.out.println(order);
+                    model.addAttribute("order", order);
+                    return "showOrder";
+                }
+            }
+
+            @Component
+            public class MyFormatter implements Formatter<Date> {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                public String print(Date object, Locale arg1) {
+                    System.out.println("=======MyFormatter========");
+                    System.out.println(object);
+                    return dateFormat.format(object);
+                }
+
+                public Date parse(String source, Locale arg1) throws ParseException {
+                    System.out.println("-------MyFormatter--------");
+                    System.out.println(source);
+                    return dateFormat.parse(source);    // Formatter只能对字符串转换
+                }
+            }
+
+            <!-- 注册格式化转换器 MyFormatter -->
+            <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+                <property name="formatters">
+                    <set>
+                        <bean class="com.lvmenglou.converter.MyFormatter" />
+                    </set>
+                </property>
+            </bean>
+
+            <form action="${pageContext.request.contextPath}/formatter" modelAttribute="order" method="post">
+                用户名：<input type="text" name="name" />
+                <br>
+                年龄：<input type="text" name="age" />
+                <br>
+                身高：<input type="text" name="height" />
+                <br>
+                创建日期：<input type="text" name="createDate" />
+                <br>
+                <input type="submit" value="提交" />
+            </form>
+
+            用户名：${order.name }
+            年龄：${order.age }
+            身高：${order.height }
+            创建日期：${order.createDate }
+
+    表单标签库
+        概念：在进行 Spring MVC 项目开发时，一般会使用 EL 表达式和 JSTL 标签来完成页面视图的开发。
+             其实也可以通过 Spring 表单标签，很容易地将模型数据中的命令对象绑定到 HTML 表单元素中。
+
+        使用方式：和 JSTL 一样，必须在 JSP 页面开头处声明 taglib 指令 <%@ taglib prefix="fm" uri="http://www.springframework.org/tags/form"%>
+
+    拦截器（Interceptor）
+        概念：用于拦截用户的请求并做相应的处理，通常应用在权限验证、记录请求信息的日志、判断用户是否登录等功能上。
+
+        例子：
+            <!-- 配置拦截器 -->
+            <!-- 注意：<mvc:interceptor> 元素的子元素必须按照 <mvc:mapping.../>、<mvc:exclude-mapping.../>、<bean.../> 的顺序配置。-->
+            <mvc:interceptors>
+                <mvc:interceptor>
+                    <!-- 配置拦截器作用的路径 -->
+                    <mvc:mapping path="/**" />
+                    <bean class="com.lvmenglou.interceptor.LoginInterceptor"></bean>
+                </mvc:interceptor>
+            </mvc:interceptors>
+
+            @Controller
+            public class UserController {
+                // 登录页面初始化
+                @RequestMapping("/toLogin")
+                public String initLogin() {
+                    return "login22";
+                }
+
+                // 处理登录功能
+                @RequestMapping("/login22")
+                public String login(User user, Model model, HttpSession session) {
+                    System.out.println(user.getName());
+                    if ("louis".equals(user.getName()) && "123456".equals(user.getPwd())) {
+                        // 登录成功，将用户信息保存到session对象中
+                        session.setAttribute("user", user);
+                        // 重定向到主页面的跳转方法
+                        return "redirect:main";
+                    }
+                    model.addAttribute("msg", "用户名或密码错误，请重新登录！ ");
+                    return "login22";
+                }
+
+                // 跳转到主页面
+                @RequestMapping("/main")
+                public String toMain() {
+                    return "main";
+                }
+
+                // 退出登录
+                @RequestMapping("/logout")
+                public String logout(HttpSession session) {
+                    // 清除 session
+                    session.invalidate();
+                    return "login22";
+                }
+            }
+
+            public class LoginInterceptor implements HandlerInterceptor {
+                @Override
+                public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                    String url = request.getRequestURI();
+                    // 下面这两个 url 请求，不做拦截
+                    if (url.indexOf("/toLogin") >= 0 || url.indexOf("/login22") >= 0) {
+                        return true;
+                    }
+                    // 获取 session
+                    HttpSession session = request.getSession();
+                    Object obj = session.getAttribute("user");
+                    if (obj != null) {
+                        return true;
+                    }
+                    // 这里是其它情况，跳转到登陆页面，并给出提示
+                    request.setAttribute("msg", "还没登陆，请先登录");
+                    request.getRequestDispatcher("/WEB-INF/pages/login22.jsp").forward(request, response);
+                    return false;
+                }
+
+                @Override
+                public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3) throws Exception {
+                }
+
+                @Override
+                public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3) throws Exception {
+                }
+            }
+
+    数据校验 -- 没试验成功，略过 ？？？
+
+    JSON数据交互
+        介绍：
+            @RequestBody：用于将请求体中的数据绑定到方法的形参中，该注解应用在方法的形参上。
+            @ResponseBody：用于直接返回 return 对象，该注解应用在方法上。
+            市面上的json工具类：
+                开源的Jackson：对于复杂类型的 JSON 转换 Bean 会出现问题，一些集合 Map、List 的转换出现问题。
+                Google的Gson：可以将复杂类型的 JSON 到 Bean 或 Bean 到 JSON 的转换，在功能上面无可挑剔，但性能比 FastJson 有所差距。
+                阿里巴巴的FastJson：在复杂类型的 Bean 转换 JSON 上会出现一些问题，可能会出现引用的类型，导致 JSON 转换出错，需要制定引用。
+                结论： Gson 和 FastJson 两种并行使用
+
+        例子：
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.62</version>
+            </dependency>
+
+            <!-- json 相关配置 -->
+            <mvc:default-servlet-handler />
+            <bean id="fastJsonpResponseBodyAdvice"
+                  class="com.alibaba.fastjson.support.spring.FastJsonpResponseBodyAdvice">
+                <constructor-arg>
+                    <list>
+                        <value>callback</value>
+                        <value>jsonp</value>
+                    </list>
+                </constructor-arg>
+            </bean>
+            <mvc:annotation-driven conversion-service="conversionService">
+                <!--配置@ResponseBody由fastjson解析 -->
+                <mvc:message-converters>
+                    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                        <property name="defaultCharset" value="UTF-8" />
+                    </bean>
+                    <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4" />
+                </mvc:message-converters>
+            </mvc:annotation-driven>
+            <!-- **代表所有文件-->
+            <!-- 使用resources过滤掉不需要dispatcherservlet的资源（即静态资源，例如css、js、html、images）。
+                 在使用resources时必须使用annotation-driven，否则resources元素会阻止任意控制器被调用 -->
+            <!-- 允许js目录下的所有文件可见 -->
+            <mvc:resources location="/html/" mapping="/html/**"></mvc:resources>
+
+            @Controller
+            public class UserController {
+                @RequestMapping("/indexJson")
+                public String indexJson() {
+                    return "indexJson";
+                }
+
+                // 接收页面请求的JSON参数，并返回JSON格式的结果
+                @RequestMapping("/testJson")
+                @ResponseBody
+                // @RequestBody 注解用于将前端请求体中的 JSON 格式数据绑定到形参 user 上
+                // @ResponseBody 注解用于直接返回 Person 对象（当返回 POJO 对象时默认转换为 JSON 格式数据进行响应）
+                public User testJson(@RequestBody User user) {
+                    System.out.println("name = " + user.getName() + ",password=" + user.getPassword() + ",age=" + user.getAge());
+                    return user;
+                }
+            }
+
+            <form action="">
+                用户名：<input type="text" name="name" id="name" />
+                <br>
+                密码：<input type="password" name="password" id="password" />
+                <br>
+                年龄：<input type="text" name="age" id="age">
+                <br>
+                <input type="button" value="测试" onclick="testJson()" />
+            </form>
+            </body>
+            <script type="text/javaScript">
+                function testJson() {
+                    var name = $("#name").val();
+                    var password = $("#password").val();
+                    var age = $("#age").val();
+                    $.ajax({
+                        url : "${pageContext.request.contextPath}/testJson",
+                        type : "post",
+                        data : JSON.stringify({
+                            name : name,
+                            password : password,
+                            age : age
+                        }), // 定义发送请求的数据格式为JSON字符串
+                        contentType : "application/json;charset=utf-8",
+                        // 定义回调响应的数据格式为JSON字符串，该属性可以省略
+                        dataType : "json",
+                        success : function(data) {
+                            if (data != null) {
+                                alert("输入的用户名：" + data.name + "，密码：" + data.password
+                                        + "， 年龄：" + data.age);
+                            }
+                        }
+                    });
+                }
+            </script>
+
+    异常处理
+        概念：不管是操作底层数据库，还是业务层或控制层，都会不可避免地遇到各种可预知的、不可预知的异常。我们需要捕捉处理异常，才能保证程序不被终止。
+            框架有 3 种处理异常的方式：
+                ① 使用 Spring MVC 提供的简单异常处理器 SimpleMappingExceptionResolver。
+                ② 实现 Spring 的异常处理接口 HandlerExceptionResolver，自定义自己的异常处理器。
+                ③ 使用 @ExceptionHandler 注解实现异常处理
+
+        例子：
+            @RequestMapping("/testExceptionHandle")
+            // http://localhost:8080/hello/testExceptionHandle?i=1
+            // http://localhost:8080/hello/testExceptionHandle?i=0
+            public String testExceptionHandle(@RequestParam("i") Integer i) {
+                System.out.println(10 / i);
+                return "success";
+            }
+
+            // 同一个类中定义处理异常的方法
+            @ExceptionHandler({ArithmeticException.class})
+            public String testArithmeticException(Exception e) {
+                System.out.println("打印错误信息 ===> ArithmeticException:" + e);
+                return "error";
+            }
+
+    REST 接口
+        例子：
+            <!-- 由于 HTTP 不支持 PUT 和 DELETE 请求，所以需要将 DELETE 和 PUT 请求转换成 POST 请求，
+                 在 web.xml 中配置过滤器 HiddenHttpMethodFilter -->
+            <!-- HiddenHttpMethodFilter过滤器可以将POST请求转化为put请求和delete请求! -->
+            <filter>
+                <filter-name>hiddenHttpMethodFilter</filter-name>
+                <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+            </filter>
+            <filter-mapping>
+                <filter-name>hiddenHttpMethodFilter</filter-name>
+                <url-pattern>/*</url-pattern>
+            </filter-mapping>
+
+            <body>
+                <h4>发送GET请求</h4>
+                <a href=" user/1">GET</a>
+
+                <h4>发送POST请求</h4>
+                <form action="user/1" method="post">
+                    <input type="submit" value="POST" />
+                </form>
+
+                <!-- 发送PUT和DELETE请求时，需要添加一个隐藏域 -->
+                <h4>发送PUT请求</h4>
+                <form action=" user/1" method="post">
+                    <input type="hidden" name="_method" value="PUT"/>
+                    <input type="submit" value="PUT"/>
+                </form>
+
+                <h4>发送DELETE请求</h4>
+                <input type="hidden" name="_method" value="DELETE"/>
+                <form action=" user/1" method="post">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <input type="submit" value="DELETE"/>
+                </form>
+            </body>
+
+            @Controller
+            @RequestMapping("/hello")
+            public class HelloController {
+                @RequestMapping("/torest")
+                public String torest() {
+                    return "rest";
+                }
+
+                @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+                public String hello(@PathVariable Integer id) {
+                    System.out.println("test rest get: " + id);
+                    return "success";
+                }
+
+                @RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
+                public String hello() {
+                    System.out.println("test POST:");
+                    return "success";
+                }
+
+                @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+                public String helloDelete(@PathVariable Integer id) {
+                    System.out.println("test rest delete:" + id);
+                    return "success";
+                }
+
+                @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+                public String helloPUt(@PathVariable Integer id) {
+                    System.out.println("test rest put:" + id);
+                    return "success";
+                }
+            }
+
+    文件上传
+        概念：文件上传基于 commons-fileupload 组件，MultpartiResolver 用于处理上传请求，可以直接获取上传文件的数据
+        例子：
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+
+            <!-- 配置MultipartResolver，用于上传文件，使用spring的CommonsMultipartResolver -->
+            <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+                <property name="maxUploadSize" value="5000000"></property>
+                <!-- 注意：defaultEncoding 必须和 JSP 中的 pageEncoding 一致 -->
+                <property name="defaultEncoding" value="UTF-8"></property>
+            </bean>
+
+            <form action="${pageContext.request.contextPath }/fileupload"
+                method="post" enctype="multipart/form-data">
+                选择文件：<input type="file" name="myfile"><br>
+                文件描述：<input type="text" name="description"><br>
+                <input type="submit" value="提交">
+            </form>
+
+            public class FileDomain {
+                private String description;
+                private MultipartFile myfile;
+
+                public String getDescription() {
+                    return description;
+                }
+
+                public void setDescription(String description) {
+                    this.description = description;
+                }
+
+                public MultipartFile getMyfile() {
+                    return myfile;
+                }
+
+                public void setMyfile(MultipartFile myfile) {
+                    this.myfile = myfile;
+                }
+            }
+
+            @Controller
+            public class FileuploadController {
+                @RequestMapping("/getFileupload")
+                public String getFileUpload() {
+                    return "fileupload";
+                }
+
+                @RequestMapping("/fileupload")
+                public String oneFileUpload(@ModelAttribute FileDomain fileDomain, HttpServletRequest request) {
+                    // 文件上传到服务器的位置“/uploadfiles”
+                    String realpath = request.getServletContext().getRealPath("uploadfiles");
+                    String filename = fileDomain.getMyfile().getOriginalFilename();
+                    File targetFile = new File(realpath, filename);
+                    if (!targetFile.exists()) {
+                        targetFile.mkdirs();
+                    }
+                    // 上传
+                    try {
+                        fileDomain.getMyfile().transferTo(targetFile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    return "showFile";
+                }
+            }
+
+            文件描述：${fileDomain.description }
+            <!-- fileDomain.getMyfile().getOriginalFilename()-->
+            文件名称：${fileDomain.myfile.originalFilename }
+
+    文件下载
+        实现方式：
+            ① 通过超链接实现。实现简单，但暴露了下载文件的真实位置，并且只能下载 Web 应用程序所在目录下的文件，WEB-INF 目录除外
+            ② 利用程序编码实现。增强安全访问控制，可以下载除 Web 应用程序所在目录以外的文件，也可以将文件保存到数据库中。
+                需要设置以下两个报头：Content-Type 和 Content-Disposition
+
+        例子：
+            @Controller
+            public class FileDownController {
+                private static final Log logger = LogFactory.getLog(FileDownController.class);
+
+                @RequestMapping("showDownFiles")
+                public String show(HttpServletRequest request, Model model) {
+                    String realpath = request.getServletContext().getRealPath("uploadfiles");
+                    File dir = new File(realpath);
+                    // 获取目录下所有文件
+                    File files[] = dir.listFiles();
+                    ArrayList<String> fileName = new ArrayList<>();
+                    for (int i = 0; i < files.length; i++) {
+                        fileName.add(files[i].getName());
+                    }
+                    model.addAttribute("files", fileName);
+                    return "showDownFiles";
+                }
+
+                @RequestMapping("down")
+                public String down(@RequestParam String filename,
+                                   HttpServletRequest request, HttpServletResponse response) {
+                    // 文件路径
+                    String aFilePath = null;
+                    // 输入流
+                    FileInputStream in = null;
+                    // 输出流
+                    ServletOutputStream out = null;
+                    try {
+                        aFilePath = request.getServletContext().getRealPath("uploadfiles");
+                        // 设置文件头
+                        response.setHeader("Content-Type", "application/x-msdownload");
+                        response.setHeader("Content-Disposition", "attachment; filename=" + toUTF8String(filename));
+                        // 读入文件
+                        in = new FileInputStream(aFilePath + "/" + filename);
+                        // 得到响应对象的输出流，用于向客户端输出二进制数据
+                        out = response.getOutputStream();
+                        out.flush();
+                        int aRead = 0;
+                        byte b[] = new byte[1024];
+                        while ((aRead = in.read(b)) != -1 && in != null) {
+                            out.write(b, 0, aRead);
+                        }
+                        out.flush();
+                        in.close();
+                        out.close();
+                    } catch (Throwable e) {
+                        e.printStackTrace();
+                    }
+                    logger.info("下载成功");
+                    return null;
+                }
+            }
+
+            <table>
+                <tr><td>被下载的文件名</td></tr>
+                <!--遍历 model中的 files-->
+                <c:forEach items="${files}" var="filename">
+                    <tr><td>
+                        <a href="${pageContext.request.contextPath }/down?filename=${filename}">${filename}</a>
+                    </td></tr>
+                </c:forEach>
+            </table>
+
+    传递参数
+        实现方式：
+            ① 通过 @RequestParam 接收请求参数
+            ② 通过 @ModelAttribute 接收请求参数。  上面 ModelAttribute + RequestMapping 方式
+            ③ 通过 @PathVariable 接收 URL 中的请求参数
+            ④ 通过 HttpServletRequest 接收请求参数。  request.getRequestURI() 、 request.getSession()
+            ⑤ 通过实体 Bean 接收请求参数  未实践 ？？
+                直接把表单参数写在控制器类相应方法的形参中，即形参名称与请求参数名称完全相同
+            ⑥ 通过处理方法的形参接收请求参数  未实践 ？？
+                需要注意 Bean 的属性名称必须与请求参数名称相同
+
+    访问静态资源
+        概念：存放在 /WEB-INF/ 目录下的内容不能直接通过 request 请求得到，所以为了安全性考虑，通常把 jsp 文件放在 WEB-INF 目录下
+        例子：
+            http://localhost:8080/html/my.html
+
+            <mvc:annotation-driven />
+            <!-- location:指location指定的目录不要拦截，直接请求，这里指在根目录下的resources文件下的所有文件 -->
+            <!-- mapping:指在resources目录下的所有文件(**代表所有文件) -->
+            <!-- 所有意思就是在根目录下resources的所有文件不会被DispatcherServlet拦截，直接访问，当做静态资源交个Servlet处理 -->
+            <mvc:resources location="/html/" mapping="/html/**"></mvc:resources>
+
+    ModelView 未实践 ？？？
 
 
 X、非常在理的话
