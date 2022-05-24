@@ -134,9 +134,13 @@ public class ZzzzApplication {
         // 回过头看最初的教程，基础最重要。     把之前没看的，没学的，都看一遍
         // https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610
 
-        // 其它
+        //  其它
         //    mybatis-plus && tkmybatis
         //    springDataJpa
+        //  中间件：https://blog.csdn.net/qq_15038189/article/details/120209333
+        //  高并发
+        //  数据库
+        //  消息队列
     }
 
     public static double taxTotal(Income... arr) {
