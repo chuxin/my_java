@@ -30,3 +30,22 @@ Dubbo：由阿里巴巴开源的分布式服务治理框架。
 Spring Cloud 包括 Spring Cloud Gateway、Spring Cloud Config、Spring Cloud Bus 等近 20 个服务组件，这些组件提供了服务治理、服务网关、智能路由、负载均衡、熔断器、监控跟踪、分布式消息队列、配置管理等领域的解决方案。
 
 
+常见的 API 网关实现方案主要有以下 5 种：
+Spring Cloud Gateway
+Spring Cloud Netflix Zuul
+Kong
+Nginx+Lua
+Traefik
+
+
+Spring Cloud 两代实现的组件对比情况
+Spring Cloud 第一代实现（Netflix）	状态	                                    Spring Cloud 第二代实现（Alibaba）	        状态
+Ereka	                        2.0 孵化失败	                            Nacos Discovery	                        性能更好，感知力更强
+Ribbon	                        停更进维	                                Spring Cloud Loadbalancer	            Spring Cloud 原生组件，用于代替 Ribbon
+Hystrix	                        停更进维	                                Sentinel	                            可视化配置，上手简单
+Zuul	                        停更进维	                                Spring Cloud Gateway	                性能为 Zuul 的 1.6 倍
+Spring Cloud Config	            搭建过程复杂，约定过多，无可视化界面，上手难点大	Nacos Config	                        搭建过程简单，有可视化界面，配置管理更简单，容易上手
+
+
+
+

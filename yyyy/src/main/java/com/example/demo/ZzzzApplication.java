@@ -117,11 +117,12 @@ public class ZzzzApplication {
 
         /*********   穿插一件事   *********/
         // back up the files in recent one year
+        // done
 
         /*********   开始看框架 spring cloud （粗略看，做到心中有数即可）   *********/
-        // 
+        // done
 
-        /*********   make a summary (spring cloud)   *********/
+        /*********   make a brief summary (spring cloud)   *********/
         //
 
         /*********   springboot => practice       *********/
