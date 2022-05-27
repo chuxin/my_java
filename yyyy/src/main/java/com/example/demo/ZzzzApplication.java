@@ -125,18 +125,32 @@ public class ZzzzApplication {
         /*********   make a brief summary (spring cloud)   *********/
         //
 
+        /*********   make a summary at second time (basic)   *********/
+        // 回过头看最初的教程，基础最重要。     把之前没看的，没学的，都看一遍
+        //
+        // 复习 basic_summary.txt
+        // xml 与 json
+        // 日期与时间
+        // 函数式编程
+        // IO
+        // 正则表达式
+        // Maven基础
+        // 多线程
+        // 单元测试
+        // 反射
+        // mybatis-plus
+        //
+        // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
+        //     找夏亮解答：  线程同步，  文件files   lambda（匿名函数）   使用stream-java 8 新特性   mybatis-plus
+
         /*********   springboot => practice       *********/
         // 0、crud  postman实现
         // 1、登录 + curd + 页面展示
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
         //      https://blog.csdn.net/qq_41288095/article/details/89743041
 
-        /*********   make a summary at second time (basic)   *********/
-        // 回过头看最初的教程，基础最重要。     把之前没看的，没学的，都看一遍
-        // https://www.liaoxuefeng.com/wiki/1252599548343744/1309301146648610
-
         //  其它
-        //    mybatis-plus && tkmybatis
+        //    tkmybatis
         //    springDataJpa
         //  中间件：https://blog.csdn.net/qq_15038189/article/details/120209333
         //  高并发

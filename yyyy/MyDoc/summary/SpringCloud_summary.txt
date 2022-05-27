@@ -1,50 +1,74 @@
-Spring Cloud 是分布式微服务架构的一站式解决方案，将市面上成熟的、经过验证的微服务框架整合起来并通过 Spring Boot 的思想进行再封装，屏蔽调其中复杂的配置和实现原理，最终为开发人员提供了一套简单易懂、易部署和易维护的分布式系统开发工具包
-Spring Cloud 是一套微服务规范，共有两代实现。
-Spring Cloud Netflix 是 Spring Cloud 的第一代实现，主要由 Eureka、Ribbon、Feign、Hystrix 等组件组成。
-Spring Cloud Alibaba 是 Spring Cloud 的第二代实现，主要由 Nacos、Sentinel、Seata 等组件组成。
+0、微服务
+    概念：将一个单一的应用程序拆分成多个小型服务，这些小型服务都在各自独立的进程中运行，服务之间使用轻量级通信机制（通常是 HTTP RESTFUL API）进行通讯
 
-Spring Cloud 是基于 Spring Boot 实现的。Spring Cloud 也为提供了一系列 Starter，
-这些 Starter 是 Spring Cloud 使用 Spring Boot 思想对各个微服务框架进行再封装的产物。
-它们屏蔽了这些微服务框架中复杂的配置和实现原理，使开发人员能够快速、方便地使用 Spring Cloud 搭建一套分布式微服务系统。
+    特点：
+        ① 单个应用拆分为多个独立的服务，每个微服务都可以单独开发、部署和维护。所需的团队规模小，成本小。
+        ② 不同的微服务可以使用不同的数据存储方式，例如有的用 Redis，有的使用 MySQL。
+        ③ 不同模块可以使用不同的技术或语言进行开发，开发模式更加灵活。
+        ④ 在微服务架构中，故障被隔离在单个服务中，避免系统的整体崩溃。
 
-虽然 Spring Boot 能够用于开发单个微服务，但它并不具备管理和协调微服务的能力，因此它只能算是一个微服务快速开发框架，而非微服务框架。
+    微服务框架：
+        ① Spring Cloud：它能够基于 REST 服务来构建服务，帮助架构师构建出一套完整的微服务技术生态链。
+        ② Dropwizard：用于开发高性能和 Restful 的 Web 服务，对配置、应用程序指标、日志记录和操作工具都提供了开箱即用的支持。
+        ③ Restlet：该框架遵循 RST 架构风格，可以帮助 Java 开发人员构建微服务。
+        ④ Spark：最好的 Java 微服务框架之一，该框架支持通过 Java 8 和 Kotlin 创建微服务架构的应用程序。
+        ⑤ Dubbo：由阿里巴巴开源的分布式服务治理框架。
 
-==================
+    Spring Cloud：
+        概念：Spring Cloud 是分布式微服务架构，基于 Spring Boot 进行再封装实现。
+             Spring Cloud 提供了一系列 Starter，这些 Starter 是 Spring Cloud 使用 Spring Boot 思想对各个微服务框架进行再封装的产物。
+             虽然 Spring Boot 能够用于开发单个微服务，但它并不具备管理和协调微服务的能力，因此它只能算是一个微服务快速开发框架，而非微服务框架。
+             Spring Cloud 包括 Spring Cloud Gateway、Spring Cloud Config、Spring Cloud Bus 等近 20 个服务组件，
+                这些组件提供了服务治理、服务网关、智能路由、负载均衡、熔断器、监控跟踪、分布式消息队列、配置管理等领域的解决方案。
 
-市面上的 Java 微服务框架主要有以下 5 种：
-Spring Cloud：它能够基于 REST 服务来构建服务，帮助架构师构建出一套完整的微服务技术生态链。
-Dropwizard：用于开发高性能和 Restful 的 Web 服务，对配置、应用程序指标、日志记录和操作工具都提供了开箱即用的支持。
-Restlet： 该框架遵循 RST 架构风格，可以帮助 Java 开发人员构建微服务。
-Spark：最好的 Java 微服务框架之一，该框架支持通过 Java 8 和 Kotlin 创建微服务架构的应用程序。
-Dubbo：由阿里巴巴开源的分布式服务治理框架。
+        版本：
+            Spring Cloud Netflix 是 Spring Cloud 的第一代实现，主要由 Eureka、Ribbon、Feign、Hystrix 等组件组成。
+            Spring Cloud Alibaba 是 Spring Cloud 的第二代实现，主要由 Nacos、Sentinel、Seata 等组件组成。
 
-微服务架构
-    团队规模：单个应用拆分为多个独立的服务，每个微服务都可以单独开发、部署和维护。所需的团队规模小，成本小。
-    数据存储方式：不同的微服务可以使用不同的数据存储方式，例如有的用 Redis，有的使用 MySQL。
-    部署方式：微服务架构中每个服务都可以独立部署，也可以独立于其他服务进行扩展。
-    开发模式：不同模块可以使用不同的技术或语言进行开发，开发模式更加灵活。
-    故障隔离：在微服务架构中，故障被隔离在单个服务中，避免系统的整体崩溃。
-
-=================
-
-Spring Cloud 包括 Spring Cloud Gateway、Spring Cloud Config、Spring Cloud Bus 等近 20 个服务组件，这些组件提供了服务治理、服务网关、智能路由、负载均衡、熔断器、监控跟踪、分布式消息队列、配置管理等领域的解决方案。
-
-
-常见的 API 网关实现方案主要有以下 5 种：
-Spring Cloud Gateway
-Spring Cloud Netflix Zuul
-Kong
-Nginx+Lua
-Traefik
+        两个版本的组件对比
+            第一代实现（Netflix	    状态	                          第二代实现（Alibaba）	    状态
+            Ereka	                2.0 孵化失败	                  Nacos Discovery	        性能更好，感知力更强
+            Ribbon	                停更进维	                      Spring Cloud Loadbalancer	用于代替 Ribbon
+            Hystrix	                停更进维	                      Sentinel	                可视化配置，上手简单
+            Zuul	                停更进维	                      Spring Cloud Gateway	    性能为 Zuul 的 1.6 倍
+            Spring Cloud Config	    搭建复杂，无可视化界面，上手难点大   Nacos Config	            搭建过程简单，有可视化界面，容易上手
 
 
-Spring Cloud 两代实现的组件对比情况
-Spring Cloud 第一代实现（Netflix）	状态	                                    Spring Cloud 第二代实现（Alibaba）	        状态
-Ereka	                        2.0 孵化失败	                            Nacos Discovery	                        性能更好，感知力更强
-Ribbon	                        停更进维	                                Spring Cloud Loadbalancer	            Spring Cloud 原生组件，用于代替 Ribbon
-Hystrix	                        停更进维	                                Sentinel	                            可视化配置，上手简单
-Zuul	                        停更进维	                                Spring Cloud Gateway	                性能为 Zuul 的 1.6 倍
-Spring Cloud Config	            搭建过程复杂，约定过多，无可视化界面，上手难点大	Nacos Config	                        搭建过程简单，有可视化界面，配置管理更简单，容易上手
+1、Spring Cloud OpenFeign
+    概念：一个搭建在客户端和微服务之间的服务，我们可以在 API 网关中处理一些非业务功能的逻辑，例如权限验证、监控、缓存、请求路由等
+
+
+
+
+2、Spring Cloud Gateway
+
+    网关实现方案：
+        ① Spring Cloud Gateway
+        ② Spring Cloud Netflix Zuul
+        ③ Kong
+        ④ Nginx+Lua
+        ⑤ Traefik
+
+
+
+3、Spring Cloud Config
+
+
+
+
+
+4、Spring Cloud Alibaba Nacos
+
+
+
+
+
+
+
+
+
+
+
 
 
 

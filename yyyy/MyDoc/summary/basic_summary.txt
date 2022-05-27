@@ -1296,7 +1296,7 @@
              @override 让编译器检查该方法是否正确地实现了覆写
 
 
-5、Lambda
+7、Lambda
     定义：表达式简化了Java的函数式编程
     例子：
         String[] arr = new String[]{"Apple", "Orange", "Banana", "Lemon"};
@@ -1319,7 +1319,7 @@
         System.out.println(persons2);
 
 
-6、
+8、
 
 
 
