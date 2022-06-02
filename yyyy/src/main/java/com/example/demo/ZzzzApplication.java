@@ -1,5 +1,13 @@
 package com.example.demo;
 
+import com.example.demo.bean.Book;
+import com.example.demo.bean.Book22;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.sun.tools.javac.Main;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -29,7 +37,13 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 import com.example.demo.coreClass.MyCounter;
@@ -51,6 +65,16 @@ import com.example.demo.testCollections.User;
 
 import com.example.demo.testFunctionalProgramming.Person;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import com.example.demo.mypackages.MyHandler;
 
 // 方法①  @ImportResource 导入 Spring 配置文件  不推荐
 //@ImportResource(locations = {"classpath:/beans.xml"})
@@ -123,7 +147,7 @@ public class ZzzzApplication {
         // done
 
         /*********   make a brief summary (spring cloud)   *********/
-        //
+        // done
 
         /*********   make a summary at second time (basic)   *********/
         // 回过头看最初的教程，基础最重要。     把之前没看的，没学的，都看一遍
@@ -135,13 +159,20 @@ public class ZzzzApplication {
         // IO
         // 正则表达式
         // Maven基础
-        // 多线程
         // 单元测试
+        // 
+        // 多线程
         // 反射
         // mybatis-plus
+        //    基于解答的额外内容：线程同步，  文件files   lambda（匿名函数）   使用stream-java 8 新特性   mybatis-plus
+        // kafka
         //
         // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
-        //     找夏亮解答：  线程同步，  文件files   lambda（匿名函数）   使用stream-java 8 新特性   mybatis-plus
+        // 集合里先把 List 和 map 练熟再说，最最常用
+        //
+
+        testBasicSecond();
+
 
         /*********   springboot => practice       *********/
         // 0、crud  postman实现
@@ -401,7 +432,7 @@ public class ZzzzApplication {
         }
         // ② 从jar包中读取的资源流：  没试验成功 ？？？
         ZzzzApplication zzzz = new ZzzzApplication();
-        System.out.println(zzzz.getClass().getResourceAsStream("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/11.properties"));
+        System.out.println(zzzz.getClass().getClassLoader().getResourceAsStream("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/src/11.properties"));
         // ③ 从内存读取一个字节流
         try {
             String settings = "# test\n" + "course=Java\n" + "last_date=2019-08-07T12:35:01";
@@ -1168,4 +1199,217 @@ public class ZzzzApplication {
 
         // super 通配符  暂时先忽略，不学
     }
+
+    public static void testBasicSecond() {
+        // xml 与 json
+        // ① DOM：一次性读取XML，并在内存中表示为树形结构；
+        InputStream input = Main.class.getClassLoader().getResourceAsStream("book.xml");
+//        System.out.println(input);
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(input);
+            printNode(doc, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // ② SAX：以流的形式读取XML，使用事件回调。
+        InputStream input22 = Main.class.getClassLoader().getResourceAsStream("book.xml");
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        try {
+            SAXParser saxParserObj = spf.newSAXParser();
+            saxParserObj.parse(input22, new MyHandler());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // ③ 使用Jackson
+        InputStream input33 = Main.class.getClassLoader().getResourceAsStream("book.xml");
+        JacksonXmlModule module = new JacksonXmlModule();
+        XmlMapper mapper = new XmlMapper(module);
+        try {
+            Book book = mapper.readValue(input33, Book.class);
+            System.out.println(book.id);
+            System.out.println(book.name);
+            System.out.println(book.author);
+            System.out.println(book.isbn);
+            System.out.println(book.tags);
+            System.out.println(book.pubDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // json
+        // JSON只允许使用UTF-8编码，不存在编码问题
+        // 仅支持以下几种数据类型
+        //     键值对：{"key": value}
+        //     数组：[1, 2, 3]
+        //     字符串："abc"
+        //     数值（整数和浮点数）：12.34
+        //     布尔值：true或false
+        //     空值：null
+        InputStream input44 = Main.class.getClassLoader().getResourceAsStream("book.json");
+//        ObjectMapper mapper44 = new ObjectMapper();
+        // 要把JSON的某些值解析为特定的Java对象，例如LocalDate，需要 JavaTimeModule()
+        ObjectMapper mapper44 = new ObjectMapper().registerModule(new JavaTimeModule());
+        // 反序列化时忽略不存在的 javabean 属性
+        mapper44.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try {
+            Book22 book44 = mapper44.readValue(input44, Book22.class);
+            System.out.println(book44.id);
+            System.out.println(book44.name);
+            System.out.println(book44.author);
+            System.out.println(book44.isbn);
+            System.out.println(book44.tags);
+            System.out.println(book44.pubDate);
+            // 序列化为JSON
+            String json = mapper44.writeValueAsString(book44);
+            System.out.println(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 日期与时间
+        // Java有两套日期和时间的API：
+        //    旧的 Date、Calendar、TimeZone、SimpleDateFormat
+        //    新的 LocalDateTime、ZonedDateTime、ZoneId、DateTimeFormatter
+        // date
+        // 获取当前时间
+        Date date = new Date();
+        System.out.println(date.getYear() + 1900);
+        System.out.println(date.getMonth() + 1);
+        System.out.println(date.getDate());
+        // 转换为String
+        System.out.println(date.toString());
+        // 转换为GMT时区
+        System.out.println(date.toGMTString());
+        // 转换为本地时区
+        System.out.println(date.toLocaleString());
+        var sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(date));
+        // Calendar和Date比，主要多了一个可以做简单的日期和时间运算的功能
+        Calendar c = Calendar.getInstance();
+        int y = c.get(Calendar.YEAR);
+        int m = 1 + c.get(Calendar.MONTH);
+        int d = c.get(Calendar.DAY_OF_MONTH);
+        int w = c.get(Calendar.DAY_OF_WEEK);    // 1~7分别表示周日，周一，……，周六
+        int hh = c.get(Calendar.HOUR_OF_DAY);
+        int mm = c.get(Calendar.MINUTE);
+        int ss = c.get(Calendar.SECOND);
+        int ms = c.get(Calendar.MILLISECOND);
+        System.out.println(c.getTime());
+        System.out.println(y + "-" + m + "-" + d + " " + w + " " + hh + ":" + mm + ":" + ss + "." + ms);
+        c.set(Calendar.YEAR, 2020);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));
+        // 清除所有:
+        c.clear();
+        c.set(Calendar.YEAR, 2019);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));
+        // TimeZone 时区
+        TimeZone tzDefault = TimeZone.getDefault();
+        TimeZone tzGMT7  = TimeZone.getTimeZone("GMT+07:00");
+        System.out.println(tzDefault);
+        System.out.println(tzGMT7);
+        c.clear();
+        // 设置年月日时分秒
+        c.set(2019, 10, 20, 1, 15, 0);
+        var sdf22 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf22.setTimeZone(TimeZone.getTimeZone("GMT+11:00"));
+        System.out.println(sdf22.format(c.getTime()));
+
+        // LocalDateTime
+        // 当前日期
+        LocalDate d2 = LocalDate.now();
+        // 当前时间
+        LocalTime t2 = LocalTime.now();
+        // 当前日期和时间
+        LocalDateTime ldt2 = LocalDateTime.now();
+        System.out.println(d2 + " ==== " + t2 + " ==== " + ldt2);
+        // 指定日期和时间
+        LocalDate d3 = LocalDate.of(2019, 11, 30);
+        LocalTime t3 = LocalTime.of(15, 16, 17);
+        LocalDateTime ldt3 = LocalDateTime.of(2019, 11, 30, 15, 16, 17);
+        System.out.println(d3 + " ==== " + t3 + " ==== " + ldt3);
+        // 解析日期
+        LocalDateTime ldt4 = LocalDateTime.parse("2019-11-19T15:16:17");
+        LocalDate d4 = LocalDate.parse("2019-11-19");
+        LocalTime t4 = LocalTime.parse("15:16:17");
+        System.out.println(ldt4 + " ==== " + d4 + " ==== " + t4);
+
+        // DateTimeFormatter
+        DateTimeFormatter dft5 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        System.out.println(dft5.format(LocalDateTime.now()));
+        LocalDateTime ldt5 = LocalDateTime.parse("2019/11/29 13:12:11", dft5);
+        System.out.println(ldt5);
+        // 日期加减
+        LocalDateTime ldt6 = LocalDateTime.of(2019, 10, 26, 20, 30, 59);
+        LocalDateTime ldt611 = ldt6.plusDays(6).minusHours(3);
+        System.out.println(ldt611);
+        LocalDateTime ldt622 = ldt6.minusMonths(1);
+        System.out.println(ldt622);
+        // 重置日期
+        //     调整年：withYear()
+        //     调整月：withMonth()
+        //     调整日：withDayOfMonth()
+        //     调整时：withHour()
+        //     调整分：withMinute()
+        //     调整秒：withSecond()
+        LocalDateTime ldt7 = LocalDateTime.of(2019, 10, 26, 20, 30, 59);
+        LocalDateTime ldt711 = ldt7.withDayOfMonth(31);
+        System.out.println(ldt711);
+        // 本月第一天0:00
+        LocalDateTime firstDay = LocalDate.now().withDayOfMonth(1).atStartOfDay();
+        System.out.println(firstDay);
+        // 本月最后1天
+        LocalDate lastDay = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println(lastDay);
+        // 下月第1天
+        LocalDate nextMonthFristDay = LocalDate.now().with(TemporalAdjusters.firstDayOfNextMonth());
+        System.out.println(nextMonthFristDay);
+        // 本月第1个周一
+        LocalDate firstWeekday = LocalDate.now().with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+        System.out.println(firstWeekday);
+
+        // 日期比较
+        LocalDateTime target = LocalDateTime.of(2019, 11, 19, 8, 15, 0);
+        System.out.println(LocalDateTime.now().isBefore(target));
+        System.out.println(LocalDateTime.now().isAfter(target));
+
+        // 时区计算 ZonedDateTime
+        // 简单地把ZonedDateTime理解成LocalDateTime加ZoneId
+    }
+
+    // 这是一个递归
+    static void printNode(Node n, int indent) {
+        for (int i = 0; i < indent; i++) {
+            System.out.print(" ");
+        }
+        switch (n.getNodeType()) {
+            case Node.DOCUMENT_NODE:    // Document节点
+                System.out.println(indent + " Document: " + n.getNodeName());
+                break;
+            case Node.ELEMENT_NODE:     // 元素节点
+                System.out.println(indent + " Element: " + n.getNodeName());
+                break;
+            case Node.TEXT_NODE:    // 文本
+                System.out.println(indent + " Text: " + n.getNodeName() + " = " + n.getNodeValue());
+                break;
+            case Node.ATTRIBUTE_NODE:   // 属性
+                System.out.println(indent + " Attribute: " + n.getNodeName() + " = " + n.getNodeValue());
+                break;
+            case Node.CDATA_SECTION_NODE:
+                System.out.println(indent + " CDATA: " + n.getNodeName() + " = " + n.getNodeValue());
+                break;
+            case Node.COMMENT_NODE:
+                System.out.println(indent + " Comment: " + n.getNodeName() + " = " + n.getNodeValue());
+                break;
+            default:
+                System.out.println(indent + " NodeType: " + n.getNodeType() + ", NodeValue: " + n.getNodeValue());
+        }
+        for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
+            printNode(child, indent + 1);
+        }
+    }
+
 }
