@@ -12,7 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.mypackages.OOPknowledge;
-import com.example.demo.mypackages.BasicKnowledge;
 import com.example.demo.mypackages.FirstChild;
 import com.example.demo.mypackages.SecondChid;
 import com.example.demo.mypackages.ThirdChild;
@@ -22,7 +21,6 @@ import com.example.demo.polymorphic.Salary;
 import com.example.demo.polymorphic.Allowance;
 import com.example.demo.polymorphic.TestFinal;
 
-import com.example.demo.testInterface.Student;
 import com.example.demo.testStatic.MyStatic;
 import com.example.demo.testStatic.StaticInterface;
 import com.example.demo.testStatic.MyScope;
@@ -38,10 +36,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
@@ -64,8 +59,6 @@ import com.example.demo.testCollections.HisStudent;
 import com.example.demo.testCollections.User;
 
 import com.example.demo.testFunctionalProgramming.Person;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -160,16 +153,20 @@ public class ZzzzApplication {
         // 正则表达式
         // Maven基础
         // 单元测试
-        // 
-        // 多线程
-        // 反射
+        // EJB 概念整理  https://blog.csdn.net/soulofball/article/details/110206188
+        //
+        // 多线程   粗略看   线程同步
+        // 反射     粗略看
         // mybatis-plus
-        //    基于解答的额外内容：线程同步，  文件files   lambda（匿名函数）   使用stream-java 8 新特性   mybatis-plus
+        //
         // kafka
+        // rabbitMQ
         //
         // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
+        //     什么是简单的项目？本地能跑起来的，能进行调试的项目
         // 集合里先把 List 和 map 练熟再说，最最常用
-        //
+        //     看看其它 java 教程，会有新的感悟
+        // 
 
         testBasicSecond();
 
@@ -180,6 +177,8 @@ public class ZzzzApplication {
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
         //      https://blog.csdn.net/qq_41288095/article/details/89743041
 
+        //  抽空背背 java 面试题
+        //
         //  其它
         //    tkmybatis
         //    springDataJpa
@@ -1378,6 +1377,87 @@ public class ZzzzApplication {
 
         // 时区计算 ZonedDateTime
         // 简单地把ZonedDateTime理解成LocalDateTime加ZoneId
+        // 默认时区
+        ZonedDateTime zbj = ZonedDateTime.now();
+        // 用指定时区获取当前时间
+        ZonedDateTime zny = ZonedDateTime.now(ZoneId.of("America/New_York"));
+        System.out.println(zbj + " " + zny);
+
+        LocalDateTime ldt = LocalDateTime.of(2019, 9, 15, 15, 16, 17);
+        ZonedDateTime zbj22 = ldt.atZone(ZoneId.systemDefault());
+        ZonedDateTime zny22 = ldt.atZone(ZoneId.of("America/New_York"));
+        System.out.println(zbj22 + " " + zny22);
+
+        // Instant 获取时间戳
+        Instant now = Instant.now();
+        // 秒
+        System.out.println(now.getEpochSecond());
+        // 到毫秒
+        System.out.println(now.toEpochMilli());
+        // 时间戳转换时区时间
+        Instant ins = Instant.ofEpochSecond(1654401791);
+        ZonedDateTime zdt3 = ins.atZone(ZoneId.systemDefault());
+        System.out.println(zdt3);
+
+        // 使用Stream
+
+
+
+        // 补充
+//        // 创建一个 HashMap
+//        HashMap<Integer, String> sites = new HashMap<>();
+//
+//        // 往 HashMap 添加一些元素
+//        sites.put(1, "Google");
+//        sites.put(2, "Runoob");
+//        sites.put(3, "Taobao");
+//        System.out.println("sites HashMap: " + sites);
+//        // 创建另一个 HashMap
+//        HashMap<Integer, String> sites2 = new HashMap<>();
+//        sites2.put(1, "Weibo");  // 已存在会被替换
+//        sites2.put(4, "Wiki");
+//
+//        // 将所有的映射关系从 sites 添加到 sites2
+//        sites2.putAll(sites);
+//        System.out.println("sites2 HashMap: " + sites2);
+
+        // lambda 表达式
+        // https://www.runoob.com/java/java8-lambda-expressions.html
+
+        // IO
+        // IO流以byte（字节）为最小单位，因此也称为字节流
+        // InputStream代表输入字节流，OuputStream代表输出字节流，这是最基本的两种IO流
+        // 按照char来读写显然更方便，这种流称为字符流
+        // Reader和Writer表示字符流，字符流传输的最小数据单位是char
+        //     究竟使用Reader还是InputStream，要取决于具体的使用场景。如果数据源不是文本，就只能使用InputStream，如果数据源是文本，使用Reader更方便一些。
+        //     Reader和Writer本质上是一个能自动编解码的InputStream和OutputStream
+
+        // 创建一个FileInputStream对象:
+        try {
+            File f = new File("..");
+            System.out.println(f.getPath());
+            System.out.println(f.getAbsolutePath());
+            System.out.println(f.getCanonicalPath());
+
+            InputStream input99 = new FileInputStream("readme.txt");
+            for (; ; ) {
+                int n = input99.read(); // 反复调用read()方法，直到返回-1
+                if (n == -1) {
+                    break;
+                }
+                // 输出的是 ascii 码值
+                System.out.println(n); // 打印byte的值
+            }
+            input99.close(); // 关闭流
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 在classpath中的资源文件，路径总是以／开头，我们先获取当前的Class对象，然后调用getResourceAsStream()就可以直接从classpath读取任意的资源文件
+
+        // Files提供的读写方法，受内存限制，只能读写小文件，例如配置文件等，不可一次读入几个G的大文件。读写大型文件仍然要使用文件流，每次只读写一部分文件内容
+
+
     }
 
     // 这是一个递归
