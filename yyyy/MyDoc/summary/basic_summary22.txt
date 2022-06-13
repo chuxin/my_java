@@ -21,3 +21,13 @@
     zh_CN：2016-11-30
     en_US：11/30/2016
     其它参考：https://blog.51cto.com/u_3631118/3153174
+
+
+查看端口#
+终端输入：lsof -i tcp:port 将port换成被占用的端口(如：8080)
+
+kill进程#
+找到进程的PID,使用kill命令：kill PID（进程的PID，如50684）
+
+
+

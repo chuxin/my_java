@@ -33,6 +33,8 @@ import java.beans.PropertyDescriptor;
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
@@ -48,7 +50,9 @@ import com.example.demo.coreClass.Weekday;
 import java.math.BigDecimal;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Supplier;
+import java.util.regex.Pattern;
+import java.util.stream.*;
 
 import com.example.demo.testT.PersonT;
 import com.example.demo.testT.Pair;
@@ -158,7 +162,7 @@ public class ZzzzApplication {
         // 多线程   粗略看   线程同步
         // 反射     粗略看
         // mybatis-plus
-        //
+        // 
         // kafka
         // rabbitMQ
         //
@@ -166,7 +170,7 @@ public class ZzzzApplication {
         //     什么是简单的项目？本地能跑起来的，能进行调试的项目
         // 集合里先把 List 和 map 练熟再说，最最常用
         //     看看其它 java 教程，会有新的感悟
-        // 
+        //
 
         testBasicSecond();
 
@@ -1399,7 +1403,324 @@ public class ZzzzApplication {
         ZonedDateTime zdt3 = ins.atZone(ZoneId.systemDefault());
         System.out.println(zdt3);
 
-        // 使用Stream
+        // 函数式编程
+        // Stream
+        // 创建 stream
+        System.out.println("创建 stream");
+        Stream<String> stream11 = Stream.of("A", "B", "C", "D");
+        Stream<String> stream22 = Arrays.stream(new String[] {"A", "B", "C"});
+        Stream<String> stream33 = List.of("X", "Y", "Z").stream();
+        stream11.forEach(System.out::print);
+        stream22.forEach(System.out::print);
+        stream33.forEach(System.out::print);
+
+        System.out.println();
+        Stream<Integer> natural = Stream.generate(new NaturalSupplier());
+        natural.limit(20).forEach(System.out::print);
+
+        System.out.println();
+        Pattern p = Pattern.compile("\\s+");
+        Stream<String> s = p.splitAsStream("His hair had a natural curl");
+        s.forEach(System.out::print);
+
+        System.out.println();
+        IntStream is = Arrays.stream(new int[] {1, 2, 3});
+        LongStream ls = List.of("1", "3", "5").stream().mapToLong(Long::parseLong);
+        is.forEach(System.out::print);
+        ls.forEach(System.out::print);
+
+        // map
+        System.out.println();
+        System.out.println("map");
+        List.of(" Apple ", " pEar", " orAnge ", "  bAnana   ").stream().map(String::trim).map(String::toLowerCase).forEach(System.out::print);
+
+        // filter
+        System.out.println();
+        System.out.println("filter");
+        Stream.generate(new LocalDateSupplier()).limit(31)
+                .filter(ldt22 -> ldt22.getDayOfWeek() == DayOfWeek.SATURDAY || ldt22.getDayOfWeek() == DayOfWeek.SUNDAY)
+                .forEach(System.out::print);
+
+        // reduce
+        System.out.println();
+        System.out.println("reduce");
+        int sum = Stream.of(1, 2, 3, 4, 5, 6, 7, 8).reduce(0, (acc, n) -> acc + n);
+        System.out.println(sum);
+        // 按行读取文件
+        List<String> props = List.of("profile=native", "debug=true", "logging=warn", "interval=500");
+        Map<String, String> map110 = props.stream().map(kv -> {
+            String[] ss110 = kv.split("\\=", 2);
+            return Map.of(ss110[0], ss110[1]);
+        }).reduce(new HashMap<String, String>(), (m110, kv) -> {
+            m110.putAll(kv);
+            return m110;
+        });
+        map110.forEach((k, v) -> {
+            System.out.println(k + " = " + v);
+        });
+
+        // 输出集合
+        System.out.println();
+        System.out.println("输出集合");
+        // 输出为List
+        Stream<String> stream44 = Stream.of("Apple", "", null, "Pear", "  ", "Orange");
+        List<String> list44 = stream44.filter(s44 -> s44 != null && !s44.isBlank()).collect(Collectors.toList());
+        System.out.println(list44);
+        // 输出为数组
+        List<String> list55 = List.of("Apple", "Banana", "Orange");
+        String[] array55 = list55.stream().toArray(String[]::new);
+        for(String arr:array55) {
+            System.out.println(arr);
+        }
+        // 输出为Map
+        Stream<String> stream66 = Stream.of("appL:apple", "msft1:microsoft");
+        Map<String, String> map66 = stream66.collect(Collectors.toMap(
+                s6 -> s6.substring(0, s6.indexOf(":")), s6 -> s6.substring(s6.indexOf(":")+1)
+        ));
+        System.out.println(map66);
+        // 分组输出
+        List<String> list77 = List.of("Apple", "Banana", "Blackberry", "Coconut", "Avocado", "Cherry", "Apricots");
+        Map<String, List<String>> groups = list77.stream().collect(Collectors.groupingBy(
+                s77 -> s77.substring(0, 1), Collectors.toList()
+        ));
+        System.out.println(groups);
+
+        // 其它操作
+        System.out.println();
+        System.out.println("综合");
+        ArrayList<Integer> l = new ArrayList<Integer>();
+        for (int i = 1; i < 1000; i++) {
+            l.add(i);
+        }
+        Stream<Integer> naturals = l.stream().filter(n -> n % 2 == 0).map(n -> n - 1).limit(10);
+        naturals.forEach(System.out::print);
+        // 排序
+        List<String> list88 = List.of("Orange", "apple", "Banana").stream().sorted().collect(Collectors.toList());
+        System.out.println(list88);
+        // 去重
+        List<String> list99 = List.of("A", "B", "A", "C", "B", "D").stream().distinct().collect(Collectors.toList());
+        System.out.println(list99);
+        // 截取
+        List<String> list100 = List.of("A", "B", "C", "D", "E", "F").stream().skip(2).limit(3).collect(Collectors.toList());
+        System.out.println(list100);
+        // 合并
+        Stream<String> s110 = List.of("A", "B", "C").stream();
+        Stream<String> s111 = List.of("A", "Y", "X").stream();
+        Stream<String> s112 = Stream.concat(s110, s111);
+        System.out.println(s112.collect(Collectors.toList()));
+        // flatMap
+        Stream<List<Integer>> s120 = Stream.of(
+                Arrays.asList(1, 2, 3),
+                Arrays.asList(4, 5, 6),
+                Arrays.asList(7, 8, 9)
+        );
+        Stream<Integer> i120 = s120.flatMap(list -> list.stream());
+        i120.forEach(System.out::print);
+        System.out.println();
+        // 转换操作：map()，filter()，sorted()，distinct()；
+        // 合并操作：concat()，flatMap()；
+        // 并行处理：parallel()；
+        // 聚合操作：reduce()，collect()，count()，max()，min()，sum()，average()；
+        // 其他操作：allMatch(), anyMatch(), forEach()
+
+
+        // IO   File 对象， InputStream， 读取 classpath， Reader， 使用Files
+        // IO流以byte（字节）为最小单位，因此也称为字节流
+        // InputStream代表输入字节流，OuputStream代表输出字节流，这是最基本的两种IO流
+        // 按照char来读写显然更方便，这种流称为字符流
+        // Reader和Writer表示字符流，字符流传输的最小数据单位是char
+        //     究竟使用Reader还是InputStream，要取决于具体的使用场景。如果数据源不是文本，就只能使用InputStream，如果数据源是文本，使用Reader更方便一些。
+        //     Reader和Writer本质上是一个能自动编解码的InputStream和OutputStream
+
+        System.out.println();
+        System.out.println("IO");
+        System.out.println(File.separator);
+        // Windows平台。  假设当前目录是C:\Docs
+        // .表示当前目录，  ..表示上级目录
+        File f1 = new File("sub\\javac");   // 绝对路径是C:\Docs\sub\javac
+        File f2 = new File(".\\sub\\javac"); // 绝对路径是C:\Docs\sub\javac
+        File f3 = new File("..\\sub\\javac"); // 绝对路径是C:\sub\javac
+        try {
+            File f4 = new File("..");
+            System.out.println(f4.getPath());
+            System.out.println(f4.getAbsolutePath());
+            System.out.println(f4.getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File f5 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java");
+        File f6 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/pom.xml");
+        System.out.println(f5.isFile());
+        System.out.println(f5.isDirectory());
+        System.out.println(f6.isFile());
+        System.out.println(f6.isDirectory());
+        // boolean canRead()：是否可读；
+        // boolean canWrite()：是否可写；
+        // boolean canExecute()：是否可执行；
+        // long length()：文件字节大小
+
+        File f7 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/mmm.txt");
+        try {
+            // 创建、删除文件
+            if (f7.createNewFile()) {
+                System.out.println("创建文件成功");
+                if (f7.delete()) {
+                    System.out.println("删除文件成功");
+                }
+            }
+            // 创建临时文件
+            File f8 = File.createTempFile("tmp-", ".txt");
+            f8.deleteOnExit(); // JVM退出时自动删除
+            System.out.println(f8.isFile());
+            System.out.println(f8.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 遍历文件和目录
+        File f9 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy");
+        File[] fs1 = f9.listFiles();
+        printFiles(fs1);
+        File[] fs2 = f9.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".xml");
+            }
+        });
+        printFiles(fs2);
+        // boolean mkdir()：创建当前File对象表示的目录；
+        // boolean mkdirs()：创建当前File对象表示的目录，并在必要时将不存在的父目录也创建出来；
+        // boolean delete()：删除当前File对象表示的目录，当前目录必须为空才能删除成功。
+
+        // InputStream
+        // 写法一
+        InputStream input10 = null;
+        try {
+            input10 = new FileInputStream("testFiles/ttt.txt");
+            for(;;) {
+                int n = input10.read();
+                // 反复调用read()方法，直到返回-1
+                if (n == -1) {
+                    break;
+                }
+                // 输出的是 ascii 码值
+                // 打印byte的值
+//                System.out.println(n);
+            }
+            input10.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 写法二
+        // try(resource)的语法，只需要编写try语句，让编译器自动为我们关闭资源。
+        try (InputStream input11 = new FileInputStream("testFiles/ttt.txt")) {
+            int n;
+            while ((n = input11.read()) != -1) {
+                System.out.println(n);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 利用缓冲区一次读取多个字节
+        try (InputStream input12 = new FileInputStream("testFiles/ttt22.txt")) {
+            byte[] buffer = new byte[1000];
+            int n;
+            while ((n = input12.read(buffer)) != -1) {
+                System.out.println("read " + n + " bytes....");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String s13;
+        try (InputStream input13 = new FileInputStream("testFiles/ttt22.txt")) {
+            int n;
+            StringBuilder sb13 = new StringBuilder();
+            while ((n = input13.read()) != -1) {
+                sb13.append((char) n);
+            }
+            s13 = sb13.toString();
+            System.out.println(s13);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // FileOutputStream
+        try {
+            OutputStream output11 = new FileOutputStream("testFiles/ttt33.txt");
+            output11.write(72); // h
+            output11.write(101); // e
+            output11.write(108); // l
+            output11.write(108); // l
+            output11.write(111); // o
+            output11.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 一次性写入多个字节
+        try (OutputStream output12 = new FileOutputStream("testFiles/ttt44.txt")) {
+            output12.write("Hello121212".getBytes("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Reader
+        // InputStream是一个字节流，即以byte为单位读取，而Reader是一个字符流，即以char为单位读取
+        try (Reader reader = new FileReader("testFiles/ttt22.txt", StandardCharsets.UTF_8)) {
+            for (;;) {
+                int n = reader.read();
+                if (n == -1) {
+                    break;
+                }
+                System.out.print((char)n);
+            }
+//            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 一次性读取若干字符
+        try (Reader reader = new FileReader("testFiles/ttt22.txt", StandardCharsets.UTF_8)) {
+            char[] buffer = new char[500];
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                System.out.println("read " + n + " chars.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Writer
+        try (Writer writer = new FileWriter("testFiles/ttt55.txt", StandardCharsets.UTF_8)) {
+            writer.write("H");
+            writer.write("Job".toCharArray()); // 写入char[]
+            writer.write(" candidate=");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 使用Files
+        // 注意：Files提供的读写方法，受内存限制，只能读写小文件，例如配置文件等，不可一次读入几个G的大文件。
+        // 读写大型文件仍然要使用文件流，每次只读写一部分文件内容
+        try {
+            // 读
+            byte[] data13 = Files.readAllBytes(Path.of("testFiles/ttt66.txt"));
+            System.out.println(data13[0]);
+            String content13 = Files.readString(Path.of("testFiles/ttt66.txt"), StandardCharsets.UTF_8);
+            System.out.println(content13);
+            List<String> lines = Files.readAllLines(Path.of("testFiles/ttt66.txt"));
+            System.out.println(lines.get(0));
+            // 写
+            byte[] data14 = {56, 57, 98};
+            Files.write(Path.of("testFiles/ttt77_1.txt"), data14);
+            Files.writeString(Path.of("testFiles/ttt77_2.txt"), "文档内容 lalaa", StandardCharsets.UTF_8);
+            List<String> lines14 = List.of("咯咯咯咯", "upset");
+            Files.write(Path.of("testFiles/ttt77_3.txt"), lines14);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
 
 
@@ -1424,38 +1745,16 @@ public class ZzzzApplication {
         // lambda 表达式
         // https://www.runoob.com/java/java8-lambda-expressions.html
 
-        // IO
-        // IO流以byte（字节）为最小单位，因此也称为字节流
-        // InputStream代表输入字节流，OuputStream代表输出字节流，这是最基本的两种IO流
-        // 按照char来读写显然更方便，这种流称为字符流
-        // Reader和Writer表示字符流，字符流传输的最小数据单位是char
-        //     究竟使用Reader还是InputStream，要取决于具体的使用场景。如果数据源不是文本，就只能使用InputStream，如果数据源是文本，使用Reader更方便一些。
-        //     Reader和Writer本质上是一个能自动编解码的InputStream和OutputStream
 
-        // 创建一个FileInputStream对象:
-        try {
-            File f = new File("..");
-            System.out.println(f.getPath());
-            System.out.println(f.getAbsolutePath());
-            System.out.println(f.getCanonicalPath());
-
-            InputStream input99 = new FileInputStream("readme.txt");
-            for (; ; ) {
-                int n = input99.read(); // 反复调用read()方法，直到返回-1
-                if (n == -1) {
-                    break;
-                }
-                // 输出的是 ascii 码值
-                System.out.println(n); // 打印byte的值
-            }
-            input99.close(); // 关闭流
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
 
         // 在classpath中的资源文件，路径总是以／开头，我们先获取当前的Class对象，然后调用getResourceAsStream()就可以直接从classpath读取任意的资源文件
 
         // Files提供的读写方法，受内存限制，只能读写小文件，例如配置文件等，不可一次读入几个G的大文件。读写大型文件仍然要使用文件流，每次只读写一部分文件内容
+
+
+
+        // 测试驱动开发，是指先编写接口，紧接着编写测试。编写完测试后，我们才开始真正编写实现代码。在编写实现代码的过程中，一边写，一边测，什么时候测试全部通过了，那就表示编写的实现完成了
+        // 编写测试前准备、测试后清理的固定代码，我们称之为Fixture
 
 
     }
@@ -1492,4 +1791,32 @@ public class ZzzzApplication {
         }
     }
 
+    static void printFiles(File[] files) {
+        System.out.println("================");
+        if (files != null) {
+            for (File f : files) {
+                System.out.println(f);
+            }
+        }
+        System.out.println("================");
+    }
+}
+
+class NaturalSupplier implements Supplier {
+    int n = 0;
+
+    public Integer get() {
+        n++;
+        return n;
+    }
+}
+
+class LocalDateSupplier implements Supplier<LocalDate> {
+    LocalDate start = LocalDate.of(2022, 6, 2);
+    int n = -1;
+
+    public LocalDate get() {
+        n++;
+        return start.plusDays(n);
+    }
 }
