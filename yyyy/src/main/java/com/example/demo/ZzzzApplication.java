@@ -51,6 +51,7 @@ import java.math.BigDecimal;
 
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.*;
 
@@ -1720,6 +1721,94 @@ public class ZzzzApplication {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        // 正则表达式    文档整理会多一些
+        // 基础匹配
+        String regex11 = "20\\d\\d";
+        System.out.println("2019".matches(regex11) + " " + "2100".matches(regex11));
+        String regex22 = "abc";
+        System.out.println("abc".matches(regex22) + " " + "Abc".matches(regex22) + " " + "abcd".matches(regex22));
+
+        // 对应的正则是a\&c
+        String regex33 = "a\\&c";
+        System.out.println("a&c".matches(regex33) + " " + "a-c".matches(regex33) + " " + "a&&c".matches(regex33));
+        String regex44 = "java\\d";
+        System.out.println("java9".matches(regex44) + " " + "java10".matches(regex44) + " " + "javac".matches(regex44));
+        String regex55 = "java\\D";
+        System.out.println("javax".matches(regex55) + " " + "java#".matches(regex55) + " " + "java5".matches(regex55));
+
+        // 复杂匹配
+        String regex66 = "java|php";
+        System.out.println("java".matches(regex66) + " " + "php".matches(regex66) + " " + "go".matches(regex66));
+        String regex77 = "learn\\s(java|php|go)";
+        System.out.println("learn java".matches(regex77) + " " + "learn php".matches(regex77) + " " + "learn Java".matches(regex77));
+
+        // 分组匹配
+        Pattern pat11 = Pattern.compile("(\\d{3,4})\\-(\\d{7,8})");
+        Matcher mat11 = pat11.matcher("010-12345678");
+        if (mat11.matches()) {
+            String g0 = mat11.group(0);
+            String g1 = mat11.group(1);
+            String g2 = mat11.group(2);
+            System.out.println(g0 + " | " + g1 + " | " + g2);
+        } else {
+            System.out.println("匹配失败");
+        }
+        Matcher mat11_22 = pat11.matcher("021-123456");
+        System.out.println(mat11_22.matches());
+        Matcher mat11_33 = pat11.matcher("022#1234567");
+        System.out.println(mat11_33.matches());
+
+        // 非贪婪匹配
+        Pattern pat22 = Pattern.compile("(\\d+)(0*)");
+        Matcher mat22 = pat22.matcher("1230000");
+        if (mat22.matches()) {
+            System.out.println("group1=" + mat22.group(1));
+            System.out.println("group2=" + mat22.group(2));
+        }
+        Pattern pat33 = Pattern.compile("(\\d+?)(0*)");
+        Matcher mat33 = pat33.matcher("1230000");
+        if (mat33.matches()) {
+            System.out.println("group1=" + mat33.group(1));
+            System.out.println("group2=" + mat33.group(2));
+        }
+
+        // 搜索和替换
+        // 分割字符串
+        String[] arr44 = "a b c".split("\\s");
+        for(String val44:arr44) {
+            System.out.println("arr44: " + val44);
+        }
+        String[] arr55 = "a b  c".split("\\s");
+        for(String val55:arr55) {
+            System.out.println("arr55: " + val55);
+        }
+        String[] arr66 = "a, b ;; c".split("[\\,\\;\\s]+");
+        for(String val66:arr66) {
+            System.out.println("arr66: " + val66);
+        }
+        // 搜索字符串
+        String str77 = "the quick brown fox jumps over the lazy dog.";
+        Pattern pat77 = Pattern.compile("\\wo\\w");
+        Matcher mat77 = pat77.matcher(str77);
+        while(mat77.find()) {
+            String sub = str77.substring(mat77.start(), mat77.end());
+            System.out.println(mat77.start() + " " + mat77.end() + " " + sub);
+        }
+        // 替换字符串
+        String str88 = "The     quick\\t\\t     brown   fox  jumps   over the  lazy dog.";
+        String r88 = str88.replaceAll("\\s+", " ");
+        System.out.println(r88);
+        // 反向引用
+        String str99 = "the quick brown fox jumps over the lazy dog.";
+        String r99 = str99.replaceAll("\\s([a-z]{4})\\s", " <b>$1</b> ");
+        System.out.println(r99);
+
+        // Maven基础      文档整理会多一些
+        // Maven使用groupId，artifactId和version唯一定位一个依赖
+
+        //
 
 
 
