@@ -1,33 +1,380 @@
+1、XML 与 JSON
+    Xml介绍：XML的这些相关技术实现起来非常复杂，在实际应用中很少用到，通常了解一下就可以了。
+    例子：
+        ① DOM：一次性读取XML，并在内存中表示为树形结构；
+            InputStream input = Main.class.getClassLoader().getResourceAsStream("book.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            try {
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                Document doc = db.parse(input);
+                printNode(doc, 0);
+                // 0 Document: #document
+                //  1 Element: book
+                //   2 Text: #text =
+                //
+                //   2 Element: name
+                //    3 Text: #text = Java核心技术
+                //   2 Text: #text =
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // 这是一个递归
+            static void printNode(Node n, int indent) {
+                for (int i = 0; i < indent; i++) {
+                    System.out.print(" ");
+                }
+                switch (n.getNodeType()) {
+                    case Node.DOCUMENT_NODE:    // Document节点
+                        System.out.println(indent + " Document: " + n.getNodeName());
+                        break;
+                    case Node.ELEMENT_NODE:     // 元素节点
+                        System.out.println(indent + " Element: " + n.getNodeName());
+                        break;
+                    case Node.TEXT_NODE:    // 文本
+                        System.out.println(indent + " Text: " + n.getNodeName() + " = " + n.getNodeValue());
+                        break;
+                    case Node.ATTRIBUTE_NODE:   // 属性
+                        System.out.println(indent + " Attribute: " + n.getNodeName() + " = " + n.getNodeValue());
+                        break;
+                    case Node.CDATA_SECTION_NODE:
+                        System.out.println(indent + " CDATA: " + n.getNodeName() + " = " + n.getNodeValue());
+                        break;
+                    case Node.COMMENT_NODE:
+                        System.out.println(indent + " Comment: " + n.getNodeName() + " = " + n.getNodeValue());
+                        break;
+                    default:
+                        System.out.println(indent + " NodeType: " + n.getNodeType() + ", NodeValue: " + n.getNodeValue());
+                }
+                for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
+                    printNode(child, indent + 1);
+                }
+            }
+
+        ② SAX：以流的形式读取XML，使用事件回调。
+            InputStream input22 = Main.class.getClassLoader().getResourceAsStream("book.xml");
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            try {
+                SAXParser saxParserObj = spf.newSAXParser();
+                saxParserObj.parse(input22, new MyHandler());
+                // start document
+                // start element:  book
+                // characters:
+                //
+                // start element:  name
+                // characters: Java核心技术
+                // end element:  name
+                // characters:
+                //
+                // end element:  book
+                // end document
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        ③ 使用Jackson
+            InputStream input33 = Main.class.getClassLoader().getResourceAsStream("book.xml");
+            JacksonXmlModule module = new JacksonXmlModule();
+            XmlMapper mapper = new XmlMapper(module);
+            try {
+                Book book = mapper.readValue(input33, Book.class);
+                System.out.println(book.id);
+                System.out.println(book.name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+    Json介绍：
+        ① JSON只允许使用UTF-8编码，不存在编码问题
+        ② 仅支持的数据类型：键值对：{"key": value}  ， 数组：[1, 2, 3]  ， 字符串："abc"  ，
+                         数值（整数和浮点数）：12.34  ， 布尔值：true或false  ， 空值：null
+    例子：
+        // 反序列化操作!!
+        InputStream input44 = Main.class.getClassLoader().getResourceAsStream("book.json");
+        // ObjectMapper mapper44 = new ObjectMapper();
+        // 要把JSON的某些值解析为特定的Java对象，例如LocalDate，需要 JavaTimeModule()
+        ObjectMapper mapper44 = new ObjectMapper().registerModule(new JavaTimeModule());
+        // 反序列化时忽略不存在的 javabean 属性
+        mapper44.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try {
+            Book22 book44 = mapper44.readValue(input44, Book22.class);
+            System.out.println(book44.id);
+            System.out.println(book44.name);
+            // 序列化操作!!
+            String json = mapper44.writeValueAsString(book44);
+            System.out.println(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
+2、日期与时间
+    Java有两套日期和时间的API
+        旧的API：Date、Calendar、TimeZone、SimpleDateFormat
+        新的API：LocalDateTime、ZonedDateTime、ZoneId、DateTimeFormatter
+        区别：新API严格区分了时刻、本地日期、本地时间和带时区的日期时间，并且，对日期和时间进行运算更加方便
+
+    Date
+        例子：
+            // 获取当前时间
+            Date date = new Date();
+            System.out.println(date.getYear() + 1900);  // 2022
+            System.out.println(date.getMonth() + 1);    // 6
+            System.out.println(date.getDate());         // 16
+            // 转换为String
+            System.out.println(date.toString());        // Thu Jun 16 21:32:05 CST 2022
+            // 转换为GMT时区
+            System.out.println(date.toGMTString());     // 16 Jun 2022 13:32:05 GMT
+            // 转换为本地时区
+            System.out.println(date.toLocaleString());  // 2022年6月16日下午9:32:05
+            // 日期格式化
+            var sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            System.out.println(sdf.format(date));       // 2022-06-16 21:32:05
+
+    Calendar
+        概念：Calendar 和 Date 比，主要多了一个可以做简单的日期和时间运算的功能，提供了时区转换的功能，时区用TimeZone对象表示。
+        例子：
+            // 获取当前时间
+            Calendar c = Calendar.getInstance();
+            int y = c.get(Calendar.YEAR);           // 年
+            int m = 1 + c.get(Calendar.MONTH);      // 月
+            int d = c.get(Calendar.DAY_OF_MONTH);   // 天
+            int w = c.get(Calendar.DAY_OF_WEEK);    // 周  1~7 分别表示周日，周一 ... 周六
+            int hh = c.get(Calendar.HOUR_OF_DAY);   // 小时
+            int mm = c.get(Calendar.MINUTE);        // 分钟
+            int ss = c.get(Calendar.SECOND);        // 秒
+            int ms = c.get(Calendar.MILLISECOND);   // 毫秒
+            System.out.println(c.getTime());        // Calendar对象转换成Date对象， Thu Jun 16 21:32:05 CST 2022
+            System.out.println(y + "-" + m + "-" + d + " " + w + " " + hh + ":" + mm + ":" + ss + "." + ms);  // 2022-6-16 5 21:32:5.734
+            c.set(Calendar.YEAR, 2020);             // 设置时间
+            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));  // 2020-06-16 21:32:05
+            // 重置时间到最初值
+            c.clear();
+            c.set(Calendar.YEAR, 2019);
+            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));  // 2019-01-01 00:00:00
+
+            // 用 TimeZone 对象来对 Calender 对象进行转换
+            TimeZone tzDefault = TimeZone.getDefault();
+            TimeZone tzGMT7 = TimeZone.getTimeZone("GMT+07:00");
+            System.out.println(tzDefault); // sun.util.calendar.ZoneInfo[id="Asia/Shanghai",offset=28800000,dstSavings=0,useDaylight=false,transitions=31,lastRule=null]
+            System.out.println(tzGMT7);    // sun.util.calendar.ZoneInfo[id="GMT+07:00",offset=25200000,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+            c.clear();
+            // 设置年月日时分秒
+            c.set(2019, 10, 20, 1, 15, 0);
+            // 格式化时间
+            var sdf22 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            sdf22.setTimeZone(TimeZone.getTimeZone("GMT+11:00"));
+            System.out.println(sdf22.format(c.getTime()));  // 2019-11-20 04:15:00
+
+    LocalDateTime
+        概念：可以表示一个本地时间
+        例子：
+            // 当前日期
+            LocalDate d2 = LocalDate.now();
+            // 当前时间
+            LocalTime t2 = LocalTime.now();
+            // 当前日期和时间
+            LocalDateTime ldt2 = LocalDateTime.now();
+            System.out.println(d2 + " ==== " + t2 + " ==== " + ldt2);   // 2022-06-16 ==== 21:32:05.740769 ==== 2022-06-16T21:32:05.740786
+            // 显示指定的日期和时间
+            LocalDate d3 = LocalDate.of(2019, 11, 30);
+            LocalTime t3 = LocalTime.of(15, 16, 17);
+            LocalDateTime ldt3 = LocalDateTime.of(2019, 11, 30, 15, 16, 17);
+            System.out.println(d3 + " ==== " + t3 + " ==== " + ldt3);   // 2019-11-30 ==== 15:16:17 ==== 2019-11-30T15:16:17
+            // 解析日期
+            LocalDateTime ldt4 = LocalDateTime.parse("2019-11-19T15:16:17");
+            LocalDate d4 = LocalDate.parse("2019-11-19");
+            LocalTime t4 = LocalTime.parse("15:16:17");
+            System.out.println(ldt4 + " ==== " + d4 + " ==== " + t4);   // 2019-11-19T15:16:17 ==== 2019-11-19 ==== 15:16:17
+
+    ZonedDateTime
+        概念：时区计算
+        例子：
+            // 简单地把 ZonedDateTime 理解成 LocalDateTime 加 ZoneId
+            // 获取默认时区时间
+            ZonedDateTime zbj = ZonedDateTime.now();
+            System.out.println(zbj);    // 2022-06-16T21:32:05.743941+08:00[Asia/Shanghai]
+            // 将时间转换到指定时区
+            ZonedDateTime zny = ZonedDateTime.now(ZoneId.of("America/New_York"));
+            System.out.println(zny);    // 2022-06-16T09:32:05.744843-04:00[America/New_York]
+            // 显示指定时区下的指定时间
+            LocalDateTime ldt = LocalDateTime.of(2019, 9, 15, 15, 16, 17);
+            ZonedDateTime zbj22 = ldt.atZone(ZoneId.systemDefault());
+            System.out.println(zbj22); // 2019-09-15T15:16:17+08:00[Asia/Shanghai]
+            ZonedDateTime zny22 = ldt.atZone(ZoneId.of("America/New_York"));
+            System.out.println(zny22); // 2019-09-15T15:16:17-04:00[America/New_York]
+
+    DateTimeFormatter
+        概念：格式化时间
+        例子：
+            DateTimeFormatter dft5 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            System.out.println(dft5.format(LocalDateTime.now()));       // 2022/06/16 21:32:05
+            LocalDateTime ldt5 = LocalDateTime.parse("2019/11/29 13:12:11", dft5);
+            System.out.println(ldt5);           // 2019-11-29T13:12:11
+            // 日期加减
+            LocalDateTime ldt6 = LocalDateTime.of(2019, 10, 26, 20, 30, 59);
+            LocalDateTime ldt611 = ldt6.plusDays(6).minusHours(3);
+            System.out.println(ldt611);         // 2019-11-01T17:30:59
+            LocalDateTime ldt622 = ldt6.minusMonths(1);
+            System.out.println(ldt622);         // 2019-09-26T20:30:59
+            // 重置日期
+            //     调整年：withYear()   调整月：withMonth()     调整日：withDayOfMonth()
+            //     调整时：withHour()   调整分：withMinute()    调整秒：withSecond()
+            LocalDateTime ldt7 = LocalDateTime.of(2019, 10, 26, 20, 30, 59);
+            LocalDateTime ldt711 = ldt7.withDayOfMonth(31);
+            System.out.println(ldt711);             // 2019-10-31T20:30:59
+            // 本月第一天0:00
+            LocalDateTime firstDay = LocalDate.now().withDayOfMonth(1).atStartOfDay();
+            System.out.println(firstDay);           // 2022-06-01T00:00
+            // 本月最后1天
+            LocalDate lastDay = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+            System.out.println(lastDay);            // 2022-06-30
+            // 下月第1天
+            LocalDate nextMonthFristDay = LocalDate.now().with(TemporalAdjusters.firstDayOfNextMonth());
+            System.out.println(nextMonthFristDay);  // 2022-07-01
+            // 本月第1个周一
+            LocalDate firstWeekday = LocalDate.now().with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+            System.out.println(firstWeekday);       // 2022-06-06
+            // 日期比较
+            LocalDateTime target = LocalDateTime.of(2019, 11, 19, 8, 15, 0);
+            System.out.println(LocalDateTime.now().isBefore(target));   // false
+            System.out.println(LocalDateTime.now().isAfter(target));    // true
+
+    Instant
+        概念：获取时间戳
+        例子：
+            Instant now = Instant.now();
+            // 显示秒
+            System.out.println(now.getEpochSecond());   // 1655386325
+            // 显示秒和毫秒
+            System.out.println(now.toEpochMilli());     // 1655386325745
+            // 时间戳转换时区时间
+            Instant ins = Instant.ofEpochSecond(1654401791);
+            ZonedDateTime zdt3 = ins.atZone(ZoneId.systemDefault());
+            System.out.println(zdt3);       // 2022-06-05T12:03:11+08:00[Asia/Shanghai]
 
 
+3、使用 Stream
+    概念：Stream 代表的是任意Java对象的序列
+         Stream 输出的元素并没有预先存储在内存中，而是实时计算出来的。
+         Stream 类似于一个泛型
+    例子：
+        // 创建 stream
+        // 基于数组或Collection
+        Stream<String> stream11 = Stream.of("A", "B", "C", "D");
+        Stream<String> stream22 = Arrays.stream(new String[] {"A", "B", "C"});
+        Stream<String> stream33 = List.of("X", "Y", "Z").stream();
+        stream11.forEach(System.out::print);    // ABCD
+        stream22.forEach(System.out::print);    // ABC
+        stream33.forEach(System.out::print);    // XYZ
+        // 基于Supplier 不断产生下一个元素
+        Stream<Integer> natural = Stream.generate(new NaturalSupplier());
+        natural.limit(8).forEach(System.out::print);   // 1 2 3 4 5 6 7 8
+        class NaturalSupplier implements Supplier {
+            int n = 0;
+            public Integer get() {
+                n++;
+                return n;
+            }
+        }
+        // 把字符串分割成Stream序列而不是数组
+        Pattern p = Pattern.compile("\\s+");
+        Stream<String> s = p.splitAsStream("His hair had a natural curl");
+        s.forEach(System.out::print);   // Hishairhadanaturalcurl
+        // Java的范型不支持基本类型，所以我们无法用Stream<int>这样的类型，所以用 IntStream LongStream 等等
+        IntStream is = Arrays.stream(new int[] {1, 2, 3});
+        LongStream ls = List.of("1", "3", "5").stream().mapToLong(Long::parseLong);
+        is.forEach(System.out::print);  // 123
+        ls.forEach(System.out::print);  // 135
+
+        // map  将一个Stream的每个元素转换成另一个元素
+        List.of(" Apple ", " pEar", " orAnge ", "  bAnana   ").stream().map(String::trim).map(String::toLowerCase).forEach(System.out::print);  // applepearorangebanana
+
+        // filter  过滤元素
+        Stream.generate(new LocalDateSupplier()).limit(31)
+                .filter(ldt22 -> ldt22.getDayOfWeek() == DayOfWeek.SATURDAY || ldt22.getDayOfWeek() == DayOfWeek.SUNDAY)
+                .forEach(System.out::print); // 2022-06-04 2022-06-05 2022-06-11 2022-06-12 2022-06-18 2022-06-19 2022-06-25 2022-06-26 2022-07-02
+
+        // reduce  把一个Stream的所有元素按照聚合函数聚合成一个结果
+        System.out.println();
+        System.out.println("reduce");
+        int sum = Stream.of(1, 2, 3, 4, 5, 6, 7, 8).reduce(0, (acc, n) -> acc + n);  // 36
+        System.out.println(sum);
+        // 按行读取文件
+        List<String> props = List.of("profile=native", "debug=true", "logging=warn", "interval=500");
+        Map<String, String> map110 = props.stream().map(kv -> {
+            String[] ss110 = kv.split("\\=", 2);
+            return Map.of(ss110[0], ss110[1]);
+        }).reduce(new HashMap<String, String>(), (m110, kv) -> {
+            m110.putAll(kv);
+            return m110;
+        });
+        map110.forEach((k, v) -> {
+            System.out.println(k + " = " + v);  // logging = warn  interval = 500  debug = true  profile = native
+        });
+
+        // 输出集合
+        // 输出为List
+        Stream<String> stream44 = Stream.of("Apple", "", null, "Pear", "  ", "Orange");
+        List<String> list44 = stream44.filter(s44 -> s44 != null && !s44.isBlank()).collect(Collectors.toList());
+        System.out.println(list44);     // [Apple, Pear, Orange]
+        // 输出为数组
+        List<String> list55 = List.of("Apple", "Banana", "Orange");
+        String[] array55 = list55.stream().toArray(String[]::new);
+        for(String arr:array55) {
+            System.out.println(arr);    // Apple  Banana  Orange
+        }
+        // 输出为Map
+        Stream<String> stream66 = Stream.of("appL:apple", "msft1:microsoft");
+        Map<String, String> map66 = stream66.collect(Collectors.toMap(
+                s6 -> s6.substring(0, s6.indexOf(":")), s6 -> s6.substring(s6.indexOf(":")+1)
+        ));
+        System.out.println(map66);  // {appL=apple, msft1=microsoft}
+        // 分组输出
+        List<String> list77 = List.of("Apple", "Banana", "Blackberry", "Coconut", "Avocado", "Cherry", "Apricots");
+        Map<String, List<String>> groups = list77.stream().collect(Collectors.groupingBy(
+                s77 -> s77.substring(0, 1), Collectors.toList()
+        ));
+        System.out.println(groups); // {A=[Apple, Avocado, Apricots], B=[Banana, Blackberry], C=[Coconut, Cherry]}
+
+        // 其它操作
+        // 综合使用
+        ArrayList<Integer> l = new ArrayList<Integer>();
+        for (int i = 1; i < 1000; i++) {
+            l.add(i);
+        }
+        Stream<Integer> naturals = l.stream().filter(n -> n % 2 == 0).map(n -> n - 1).limit(10);
+        naturals.forEach(System.out::print);    // 1 3 5 7 9 11 13 15 17 19
+        // 排序
+        List<String> list88 = List.of("Orange", "apple", "Banana").stream().sorted().collect(Collectors.toList());
+        System.out.println(list88); // [Banana, Orange, apple]
+        // 去重
+        List<String> list99 = List.of("A", "B", "A", "C", "B", "D").stream().distinct().collect(Collectors.toList());
+        System.out.println(list99); // [A, B, C, D]
+        // 截取
+        List<String> list100 = List.of("A", "B", "C", "D", "E", "F").stream().skip(2).limit(3).collect(Collectors.toList());
+        System.out.println(list100); // [C, D, E]
+        // 合并
+        Stream<String> s110 = List.of("A", "B", "C").stream();
+        Stream<String> s111 = List.of("A", "Y", "X").stream();
+        Stream<String> s112 = Stream.concat(s110, s111);
+        System.out.println(s112.collect(Collectors.toList()));  // [A, B, C, A, Y, X]
+        // flatMap  把Stream的每个元素（下面的例子是List）映射为Stream，然后合并成一个新的Stream
+        Stream<List<Integer>> s120 = Stream.of(
+                Arrays.asList(1, 2, 3),
+                Arrays.asList(4, 5, 6),
+                Arrays.asList(7, 8, 9)
+        );
+        Stream<Integer> i120 = s120.flatMap(list -> list.stream());
+        i120.forEach(System.out::print);    // 123456789
+
+        // 转换操作：map()，filter()，sorted()，distinct()；
+        // 合并操作：concat()，flatMap()；
+        // 并行处理：parallel()；
+        // 聚合操作：reduce()，collect()，count()，max()，min()，sum()，average()；
+        // 其他操作：allMatch(), anyMatch(), forEach()
 
 
-
-
-
-
-
-下面的东西整理到 印象笔记 - 英语 模块中！！！！
-时区有好几种表示方式：
-    一种是以GMT或者UTC加时区偏移表示，例如：GMT+08:00或者UTC+08:00表示东八区。
-        GMT和UTC可以认为基本是等价的，只是UTC使用更精确的原子钟计时，每隔几年会有一个闰秒，我们在开发程序的时候可以忽略两者的误差，因为计算机的时钟在联网的时候会自动与时间服务器同步时间。
-    另一种是缩写，例如，CST表示China Standard Time，也就是中国标准时间。但是CST也可以表示美国中部时间Central Standard Time USA，因此，缩写容易产生混淆，我们尽量不要使用缩写。
-    最后一种是以洲／城市表示，例如，Asia/Shanghai，表示上海所在地的时区。特别注意城市名称不是任意的城市，而是由国际标准组织规定的城市。
-
-在计算机中，通常使用Locale表示一个国家或地区的日期、时间、数字、货币等格式。Locale由语言_国家的字母缩写构成，例如，zh_CN表示中文+中国，en_US表示英文+美国。语言使用小写，国家使用大写。
-    对于日期来说，不同的Locale，例如，中国和美国的表示方式如下：
-    zh_CN：2016-11-30
-    en_US：11/30/2016
-    其它参考：https://blog.51cto.com/u_3631118/3153174
-
-
-查看端口#
-终端输入：lsof -i tcp:port 将port换成被占用的端口(如：8080)
-
-kill进程#
-找到进程的PID,使用kill命令：kill PID（进程的PID，如50684）
-
+4、
 
 

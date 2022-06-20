@@ -1268,7 +1268,7 @@ public class ZzzzApplication {
             System.out.println(book44.tags);
             System.out.println(book44.pubDate);
             // 序列化为JSON
-            String json = mapper44.writeValueAsString(book44);
+            String json = mapper44.writeValueAsString(book44);  // {"id":1,"name":"Java核心技术","author":"Cay S. Horstmann","isbn":9787111547426,"tags":["Java","Network"],"pubDate":[2016,9,1],"price":119.5}
             System.out.println(json);
         } catch (Exception e) {
             e.printStackTrace();
@@ -1281,17 +1281,17 @@ public class ZzzzApplication {
         // date
         // 获取当前时间
         Date date = new Date();
-        System.out.println(date.getYear() + 1900);
-        System.out.println(date.getMonth() + 1);
-        System.out.println(date.getDate());
+        System.out.println(date.getYear() + 1900);  // 2022
+        System.out.println(date.getMonth() + 1);    // 6
+        System.out.println(date.getDate());         // 16
         // 转换为String
-        System.out.println(date.toString());
+        System.out.println(date.toString());        // Thu Jun 16 21:32:05 CST 2022
         // 转换为GMT时区
-        System.out.println(date.toGMTString());
+        System.out.println(date.toGMTString());     // 16 Jun 2022 13:32:05 GMT
         // 转换为本地时区
-        System.out.println(date.toLocaleString());
+        System.out.println(date.toLocaleString());  // 2022年6月16日下午9:32:05
         var sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(sdf.format(date));
+        System.out.println(sdf.format(date));       // 2022-06-16 21:32:05
         // Calendar和Date比，主要多了一个可以做简单的日期和时间运算的功能
         Calendar c = Calendar.getInstance();
         int y = c.get(Calendar.YEAR);
@@ -1302,25 +1302,25 @@ public class ZzzzApplication {
         int mm = c.get(Calendar.MINUTE);
         int ss = c.get(Calendar.SECOND);
         int ms = c.get(Calendar.MILLISECOND);
-        System.out.println(c.getTime());
-        System.out.println(y + "-" + m + "-" + d + " " + w + " " + hh + ":" + mm + ":" + ss + "." + ms);
+        System.out.println(c.getTime());    // Thu Jun 16 21:32:05 CST 2022
+        System.out.println(y + "-" + m + "-" + d + " " + w + " " + hh + ":" + mm + ":" + ss + "." + ms);    // 2022-6-16 5 21:32:5.734
         c.set(Calendar.YEAR, 2020);
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));  // 2020-06-16 21:32:05
         // 清除所有:
         c.clear();
         c.set(Calendar.YEAR, 2019);
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime()));    // 2019-01-01 00:00:00
         // TimeZone 时区
         TimeZone tzDefault = TimeZone.getDefault();
         TimeZone tzGMT7  = TimeZone.getTimeZone("GMT+07:00");
-        System.out.println(tzDefault);
-        System.out.println(tzGMT7);
+        System.out.println(tzDefault); // sun.util.calendar.ZoneInfo[id="Asia/Shanghai",offset=28800000,dstSavings=0,useDaylight=false,transitions=31,lastRule=null]
+        System.out.println(tzGMT7);    // sun.util.calendar.ZoneInfo[id="GMT+07:00",offset=25200000,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
         c.clear();
         // 设置年月日时分秒
         c.set(2019, 10, 20, 1, 15, 0);
         var sdf22 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf22.setTimeZone(TimeZone.getTimeZone("GMT+11:00"));
-        System.out.println(sdf22.format(c.getTime()));
+        System.out.println(sdf22.format(c.getTime()));  // 2019-11-20 04:15:00
 
         // LocalDateTime
         // 当前日期
@@ -1329,29 +1329,29 @@ public class ZzzzApplication {
         LocalTime t2 = LocalTime.now();
         // 当前日期和时间
         LocalDateTime ldt2 = LocalDateTime.now();
-        System.out.println(d2 + " ==== " + t2 + " ==== " + ldt2);
+        System.out.println(d2 + " ==== " + t2 + " ==== " + ldt2);   // 2022-06-16 ==== 21:32:05.740769 ==== 2022-06-16T21:32:05.740786
         // 指定日期和时间
         LocalDate d3 = LocalDate.of(2019, 11, 30);
         LocalTime t3 = LocalTime.of(15, 16, 17);
         LocalDateTime ldt3 = LocalDateTime.of(2019, 11, 30, 15, 16, 17);
-        System.out.println(d3 + " ==== " + t3 + " ==== " + ldt3);
+        System.out.println(d3 + " ==== " + t3 + " ==== " + ldt3);   // 2019-11-30 ==== 15:16:17 ==== 2019-11-30T15:16:17
         // 解析日期
         LocalDateTime ldt4 = LocalDateTime.parse("2019-11-19T15:16:17");
         LocalDate d4 = LocalDate.parse("2019-11-19");
         LocalTime t4 = LocalTime.parse("15:16:17");
-        System.out.println(ldt4 + " ==== " + d4 + " ==== " + t4);
+        System.out.println(ldt4 + " ==== " + d4 + " ==== " + t4);   // 2019-11-19T15:16:17 ==== 2019-11-19 ==== 15:16:17
 
         // DateTimeFormatter
         DateTimeFormatter dft5 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        System.out.println(dft5.format(LocalDateTime.now()));
+        System.out.println(dft5.format(LocalDateTime.now()));   // 2022/06/16 21:32:05
         LocalDateTime ldt5 = LocalDateTime.parse("2019/11/29 13:12:11", dft5);
-        System.out.println(ldt5);
+        System.out.println(ldt5);   // 2019-11-29T13:12:11
         // 日期加减
         LocalDateTime ldt6 = LocalDateTime.of(2019, 10, 26, 20, 30, 59);
         LocalDateTime ldt611 = ldt6.plusDays(6).minusHours(3);
-        System.out.println(ldt611);
+        System.out.println(ldt611); // 2019-11-01T17:30:59
         LocalDateTime ldt622 = ldt6.minusMonths(1);
-        System.out.println(ldt622);
+        System.out.println(ldt622); // 2019-09-26T20:30:59
         // 重置日期
         //     调整年：withYear()
         //     调整月：withMonth()
@@ -1361,24 +1361,24 @@ public class ZzzzApplication {
         //     调整秒：withSecond()
         LocalDateTime ldt7 = LocalDateTime.of(2019, 10, 26, 20, 30, 59);
         LocalDateTime ldt711 = ldt7.withDayOfMonth(31);
-        System.out.println(ldt711);
+        System.out.println(ldt711); // 2019-10-31T20:30:59
         // 本月第一天0:00
         LocalDateTime firstDay = LocalDate.now().withDayOfMonth(1).atStartOfDay();
-        System.out.println(firstDay);
+        System.out.println(firstDay);   // 2022-06-01T00:00
         // 本月最后1天
         LocalDate lastDay = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
-        System.out.println(lastDay);
+        System.out.println(lastDay);    // 2022-06-30
         // 下月第1天
         LocalDate nextMonthFristDay = LocalDate.now().with(TemporalAdjusters.firstDayOfNextMonth());
-        System.out.println(nextMonthFristDay);
+        System.out.println(nextMonthFristDay);  // 2022-07-01
         // 本月第1个周一
         LocalDate firstWeekday = LocalDate.now().with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
-        System.out.println(firstWeekday);
+        System.out.println(firstWeekday);   // 2022-06-06
 
         // 日期比较
         LocalDateTime target = LocalDateTime.of(2019, 11, 19, 8, 15, 0);
-        System.out.println(LocalDateTime.now().isBefore(target));
-        System.out.println(LocalDateTime.now().isAfter(target));
+        System.out.println(LocalDateTime.now().isBefore(target));   // false
+        System.out.println(LocalDateTime.now().isAfter(target));    // true
 
         // 时区计算 ZonedDateTime
         // 简单地把ZonedDateTime理解成LocalDateTime加ZoneId
@@ -1386,23 +1386,24 @@ public class ZzzzApplication {
         ZonedDateTime zbj = ZonedDateTime.now();
         // 用指定时区获取当前时间
         ZonedDateTime zny = ZonedDateTime.now(ZoneId.of("America/New_York"));
-        System.out.println(zbj + " " + zny);
+        System.out.println(zbj + " " + zny);    // 2022-06-16T21:32:05.743941+08:00[Asia/Shanghai] 2022-06-16T09:32:05.744843-04:00[America/New_York]
 
         LocalDateTime ldt = LocalDateTime.of(2019, 9, 15, 15, 16, 17);
         ZonedDateTime zbj22 = ldt.atZone(ZoneId.systemDefault());
         ZonedDateTime zny22 = ldt.atZone(ZoneId.of("America/New_York"));
-        System.out.println(zbj22 + " " + zny22);
+        System.out.println(zbj22 + " " + zny22); // 2019-09-15T15:16:17+08:00[Asia/Shanghai] 2019-09-15T15:16:17-04:00[America/New_York]
 
         // Instant 获取时间戳
         Instant now = Instant.now();
         // 秒
-        System.out.println(now.getEpochSecond());
+        System.out.println(now.getEpochSecond());   // 1655386325
         // 到毫秒
-        System.out.println(now.toEpochMilli());
+        System.out.println(now.toEpochMilli());     // 1655386325745
         // 时间戳转换时区时间
         Instant ins = Instant.ofEpochSecond(1654401791);
         ZonedDateTime zdt3 = ins.atZone(ZoneId.systemDefault());
-        System.out.println(zdt3);
+        System.out.println(zdt3);       // 2022-06-05T12:03:11+08:00[Asia/Shanghai]
+
 
         // 函数式编程
         // Stream
@@ -1411,41 +1412,41 @@ public class ZzzzApplication {
         Stream<String> stream11 = Stream.of("A", "B", "C", "D");
         Stream<String> stream22 = Arrays.stream(new String[] {"A", "B", "C"});
         Stream<String> stream33 = List.of("X", "Y", "Z").stream();
-        stream11.forEach(System.out::print);
-        stream22.forEach(System.out::print);
-        stream33.forEach(System.out::print);
+        stream11.forEach(System.out::print);    // ABCD
+        stream22.forEach(System.out::print);    // ABC
+        stream33.forEach(System.out::print);    // XYZ
 
         System.out.println();
         Stream<Integer> natural = Stream.generate(new NaturalSupplier());
-        natural.limit(20).forEach(System.out::print);
+        natural.limit(20).forEach(System.out::print);   // 1234567891011121314151617181920
 
         System.out.println();
         Pattern p = Pattern.compile("\\s+");
         Stream<String> s = p.splitAsStream("His hair had a natural curl");
-        s.forEach(System.out::print);
+        s.forEach(System.out::print);   // Hishairhadanaturalcurl
 
         System.out.println();
         IntStream is = Arrays.stream(new int[] {1, 2, 3});
         LongStream ls = List.of("1", "3", "5").stream().mapToLong(Long::parseLong);
-        is.forEach(System.out::print);
-        ls.forEach(System.out::print);
+        is.forEach(System.out::print);  // 123
+        ls.forEach(System.out::print);  // 135
 
         // map
         System.out.println();
         System.out.println("map");
-        List.of(" Apple ", " pEar", " orAnge ", "  bAnana   ").stream().map(String::trim).map(String::toLowerCase).forEach(System.out::print);
+        List.of(" Apple ", " pEar", " orAnge ", "  bAnana   ").stream().map(String::trim).map(String::toLowerCase).forEach(System.out::print);  // applepearorangebanana
 
         // filter
         System.out.println();
         System.out.println("filter");
         Stream.generate(new LocalDateSupplier()).limit(31)
                 .filter(ldt22 -> ldt22.getDayOfWeek() == DayOfWeek.SATURDAY || ldt22.getDayOfWeek() == DayOfWeek.SUNDAY)
-                .forEach(System.out::print);
+                .forEach(System.out::print); // 2022-06-04 2022-06-05 2022-06-11 2022-06-12 2022-06-18 2022-06-19 2022-06-25 2022-06-26 2022-07-02
 
         // reduce
         System.out.println();
         System.out.println("reduce");
-        int sum = Stream.of(1, 2, 3, 4, 5, 6, 7, 8).reduce(0, (acc, n) -> acc + n);
+        int sum = Stream.of(1, 2, 3, 4, 5, 6, 7, 8).reduce(0, (acc, n) -> acc + n); // 36
         System.out.println(sum);
         // 按行读取文件
         List<String> props = List.of("profile=native", "debug=true", "logging=warn", "interval=500");
@@ -1457,7 +1458,7 @@ public class ZzzzApplication {
             return m110;
         });
         map110.forEach((k, v) -> {
-            System.out.println(k + " = " + v);
+            System.out.println(k + " = " + v); // logging = warn  interval = 500  debug = true  profile = native
         });
 
         // 输出集合
@@ -1466,25 +1467,25 @@ public class ZzzzApplication {
         // 输出为List
         Stream<String> stream44 = Stream.of("Apple", "", null, "Pear", "  ", "Orange");
         List<String> list44 = stream44.filter(s44 -> s44 != null && !s44.isBlank()).collect(Collectors.toList());
-        System.out.println(list44);
+        System.out.println(list44);     // [Apple, Pear, Orange]
         // 输出为数组
         List<String> list55 = List.of("Apple", "Banana", "Orange");
         String[] array55 = list55.stream().toArray(String[]::new);
         for(String arr:array55) {
-            System.out.println(arr);
+            System.out.println(arr);    // Apple  Banana  Orange
         }
         // 输出为Map
         Stream<String> stream66 = Stream.of("appL:apple", "msft1:microsoft");
         Map<String, String> map66 = stream66.collect(Collectors.toMap(
                 s6 -> s6.substring(0, s6.indexOf(":")), s6 -> s6.substring(s6.indexOf(":")+1)
         ));
-        System.out.println(map66);
+        System.out.println(map66);  // {appL=apple, msft1=microsoft}
         // 分组输出
         List<String> list77 = List.of("Apple", "Banana", "Blackberry", "Coconut", "Avocado", "Cherry", "Apricots");
         Map<String, List<String>> groups = list77.stream().collect(Collectors.groupingBy(
                 s77 -> s77.substring(0, 1), Collectors.toList()
         ));
-        System.out.println(groups);
+        System.out.println(groups); // {A=[Apple, Avocado, Apricots], B=[Banana, Blackberry], C=[Coconut, Cherry]}
 
         // 其它操作
         System.out.println();
@@ -1494,21 +1495,21 @@ public class ZzzzApplication {
             l.add(i);
         }
         Stream<Integer> naturals = l.stream().filter(n -> n % 2 == 0).map(n -> n - 1).limit(10);
-        naturals.forEach(System.out::print);
+        naturals.forEach(System.out::print);    // 1 3 5 7 9 11 13 15 17 19
         // 排序
         List<String> list88 = List.of("Orange", "apple", "Banana").stream().sorted().collect(Collectors.toList());
-        System.out.println(list88);
+        System.out.println(list88); // [Banana, Orange, apple]
         // 去重
         List<String> list99 = List.of("A", "B", "A", "C", "B", "D").stream().distinct().collect(Collectors.toList());
-        System.out.println(list99);
+        System.out.println(list99); // [A, B, C, D]
         // 截取
         List<String> list100 = List.of("A", "B", "C", "D", "E", "F").stream().skip(2).limit(3).collect(Collectors.toList());
-        System.out.println(list100);
+        System.out.println(list100); // [C, D, E]
         // 合并
         Stream<String> s110 = List.of("A", "B", "C").stream();
         Stream<String> s111 = List.of("A", "Y", "X").stream();
         Stream<String> s112 = Stream.concat(s110, s111);
-        System.out.println(s112.collect(Collectors.toList()));
+        System.out.println(s112.collect(Collectors.toList()));  // [A, B, C, A, Y, X]
         // flatMap
         Stream<List<Integer>> s120 = Stream.of(
                 Arrays.asList(1, 2, 3),
@@ -1516,7 +1517,7 @@ public class ZzzzApplication {
                 Arrays.asList(7, 8, 9)
         );
         Stream<Integer> i120 = s120.flatMap(list -> list.stream());
-        i120.forEach(System.out::print);
+        i120.forEach(System.out::print);    // 123456789
         System.out.println();
         // 转换操作：map()，filter()，sorted()，distinct()；
         // 合并操作：concat()，flatMap()；
@@ -1535,7 +1536,7 @@ public class ZzzzApplication {
 
         System.out.println();
         System.out.println("IO");
-        System.out.println(File.separator);
+        System.out.println(File.separator);     // /
         // Windows平台。  假设当前目录是C:\Docs
         // .表示当前目录，  ..表示上级目录
         File f1 = new File("sub\\javac");   // 绝对路径是C:\Docs\sub\javac
@@ -1543,18 +1544,18 @@ public class ZzzzApplication {
         File f3 = new File("..\\sub\\javac"); // 绝对路径是C:\sub\javac
         try {
             File f4 = new File("..");
-            System.out.println(f4.getPath());
-            System.out.println(f4.getAbsolutePath());
-            System.out.println(f4.getCanonicalPath());
+            System.out.println(f4.getPath());   // ..
+            System.out.println(f4.getAbsolutePath());  //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/..
+            System.out.println(f4.getCanonicalPath()); //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java
         } catch (IOException e) {
             e.printStackTrace();
         }
         File f5 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java");
         File f6 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/pom.xml");
-        System.out.println(f5.isFile());
-        System.out.println(f5.isDirectory());
-        System.out.println(f6.isFile());
-        System.out.println(f6.isDirectory());
+        System.out.println(f5.isFile());    // false
+        System.out.println(f5.isDirectory());   // true
+        System.out.println(f6.isFile());    // true
+        System.out.println(f6.isDirectory());   // false
         // boolean canRead()：是否可读；
         // boolean canWrite()：是否可写；
         // boolean canExecute()：是否可执行；
@@ -1564,16 +1565,16 @@ public class ZzzzApplication {
         try {
             // 创建、删除文件
             if (f7.createNewFile()) {
-                System.out.println("创建文件成功");
+                System.out.println("创建文件成功");   // 创建文件成功
                 if (f7.delete()) {
-                    System.out.println("删除文件成功");
+                    System.out.println("删除文件成功");   // 删除文件成功
                 }
             }
             // 创建临时文件
             File f8 = File.createTempFile("tmp-", ".txt");
             f8.deleteOnExit(); // JVM退出时自动删除
-            System.out.println(f8.isFile());
-            System.out.println(f8.getAbsolutePath());
+            System.out.println(f8.isFile());        // true
+            System.out.println(f8.getAbsolutePath());   // /var/folders/c1/rwz_lt052_bgfn7zx4yr14q40000gn/T/tmp-14969864616872664021.txt
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1582,13 +1583,17 @@ public class ZzzzApplication {
         File f9 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy");
         File[] fs1 = f9.listFiles();
         printFiles(fs1);
+        //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/testFiles
+        //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/mvnw.cmd
+        //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/config
+        //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target
         File[] fs2 = f9.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith(".xml");
             }
         });
-        printFiles(fs2);
+        printFiles(fs2);   //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/pom.xml
         // boolean mkdir()：创建当前File对象表示的目录；
         // boolean mkdirs()：创建当前File对象表示的目录，并在必要时将不存在的父目录也创建出来；
         // boolean delete()：删除当前File对象表示的目录，当前目录必须为空才能删除成功。
@@ -1618,6 +1623,7 @@ public class ZzzzApplication {
         try (InputStream input11 = new FileInputStream("testFiles/ttt.txt")) {
             int n;
             while ((n = input11.read()) != -1) {
+                // 输出的是 ascii 码值
                 System.out.println(n);
             }
         } catch (IOException e) {
@@ -1630,6 +1636,9 @@ public class ZzzzApplication {
             int n;
             while ((n = input12.read(buffer)) != -1) {
                 System.out.println("read " + n + " bytes....");
+                // read 1000 bytes....
+                // read 1000 bytes....
+                // read 483 bytes....
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -1643,7 +1652,7 @@ public class ZzzzApplication {
                 sb13.append((char) n);
             }
             s13 = sb13.toString();
-            System.out.println(s13);
+            System.out.println(s13);    // 输入 txt 内容，但是中文是乱码 ？？？
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1651,7 +1660,7 @@ public class ZzzzApplication {
         // FileOutputStream
         try {
             OutputStream output11 = new FileOutputStream("testFiles/ttt33.txt");
-            output11.write(72); // h
+            output11.write(72);  // h
             output11.write(101); // e
             output11.write(108); // l
             output11.write(108); // l
@@ -1675,7 +1684,7 @@ public class ZzzzApplication {
                 if (n == -1) {
                     break;
                 }
-                System.out.print((char)n);
+                System.out.print((char)n);  // 输出 txt 内容，无中文乱码
             }
 //            reader.close();
         } catch (IOException e) {
@@ -1687,6 +1696,9 @@ public class ZzzzApplication {
             int n;
             while ((n = reader.read(buffer)) != -1) {
                 System.out.println("read " + n + " chars.");
+                // read 500 chars.
+                // read 500 chars.
+                // read 175 chars.
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -1707,17 +1719,20 @@ public class ZzzzApplication {
         try {
             // 读
             byte[] data13 = Files.readAllBytes(Path.of("testFiles/ttt66.txt"));
-            System.out.println(data13[0]);
+            System.out.println(data13[0]); // ASCII码 116
+            System.out.println("-----------");
             String content13 = Files.readString(Path.of("testFiles/ttt66.txt"), StandardCharsets.UTF_8);
-            System.out.println(content13);
+            System.out.println(content13); // 输入全部 txt 内容，没有中文乱码
+            System.out.println("-----------");
             List<String> lines = Files.readAllLines(Path.of("testFiles/ttt66.txt"));
-            System.out.println(lines.get(0));
+            System.out.println(lines.get(0)); // 输入 txt 内容的第一行
+            System.out.println("-----------");
             // 写
             byte[] data14 = {56, 57, 98};
-            Files.write(Path.of("testFiles/ttt77_1.txt"), data14);
+            Files.write(Path.of("testFiles/ttt77_1.txt"), data14);  // 将 ASCII 码转换为字符
             Files.writeString(Path.of("testFiles/ttt77_2.txt"), "文档内容 lalaa", StandardCharsets.UTF_8);
-            List<String> lines14 = List.of("咯咯咯咯", "upset");
-            Files.write(Path.of("testFiles/ttt77_3.txt"), lines14);
+            List<String> lines14 = List.of("咯咯咯咯", "upset");    // 输入中英文，无乱码
+            Files.write(Path.of("testFiles/ttt77_3.txt"), lines14);     // 输入中英文，无乱码
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1726,23 +1741,23 @@ public class ZzzzApplication {
         // 正则表达式    文档整理会多一些
         // 基础匹配
         String regex11 = "20\\d\\d";
-        System.out.println("2019".matches(regex11) + " " + "2100".matches(regex11));
+        System.out.println("2019".matches(regex11) + " " + "2100".matches(regex11));  // true false
         String regex22 = "abc";
-        System.out.println("abc".matches(regex22) + " " + "Abc".matches(regex22) + " " + "abcd".matches(regex22));
+        System.out.println("abc".matches(regex22) + " " + "Abc".matches(regex22) + " " + "abcd".matches(regex22));  // true false false
 
         // 对应的正则是a\&c
         String regex33 = "a\\&c";
-        System.out.println("a&c".matches(regex33) + " " + "a-c".matches(regex33) + " " + "a&&c".matches(regex33));
+        System.out.println("a&c".matches(regex33) + " " + "a-c".matches(regex33) + " " + "a&&c".matches(regex33)); // true false false
         String regex44 = "java\\d";
-        System.out.println("java9".matches(regex44) + " " + "java10".matches(regex44) + " " + "javac".matches(regex44));
+        System.out.println("java9".matches(regex44) + " " + "java10".matches(regex44) + " " + "javac".matches(regex44)); // true false false
         String regex55 = "java\\D";
-        System.out.println("javax".matches(regex55) + " " + "java#".matches(regex55) + " " + "java5".matches(regex55));
+        System.out.println("javax".matches(regex55) + " " + "java#".matches(regex55) + " " + "java5".matches(regex55)); // true true false
 
         // 复杂匹配
         String regex66 = "java|php";
-        System.out.println("java".matches(regex66) + " " + "php".matches(regex66) + " " + "go".matches(regex66));
+        System.out.println("java".matches(regex66) + " " + "php".matches(regex66) + " " + "go".matches(regex66));  // true true false
         String regex77 = "learn\\s(java|php|go)";
-        System.out.println("learn java".matches(regex77) + " " + "learn php".matches(regex77) + " " + "learn Java".matches(regex77));
+        System.out.println("learn java".matches(regex77) + " " + "learn php".matches(regex77) + " " + "learn Java".matches(regex77));  // true true false
 
         // 分组匹配
         Pattern pat11 = Pattern.compile("(\\d{3,4})\\-(\\d{7,8})");
@@ -1751,27 +1766,27 @@ public class ZzzzApplication {
             String g0 = mat11.group(0);
             String g1 = mat11.group(1);
             String g2 = mat11.group(2);
-            System.out.println(g0 + " | " + g1 + " | " + g2);
+            System.out.println(g0 + " | " + g1 + " | " + g2);   // 010-12345678 | 010 | 12345678
         } else {
             System.out.println("匹配失败");
         }
         Matcher mat11_22 = pat11.matcher("021-123456");
-        System.out.println(mat11_22.matches());
+        System.out.println(mat11_22.matches());  // false
         Matcher mat11_33 = pat11.matcher("022#1234567");
-        System.out.println(mat11_33.matches());
+        System.out.println(mat11_33.matches());  // false
 
         // 非贪婪匹配
         Pattern pat22 = Pattern.compile("(\\d+)(0*)");
         Matcher mat22 = pat22.matcher("1230000");
         if (mat22.matches()) {
-            System.out.println("group1=" + mat22.group(1));
-            System.out.println("group2=" + mat22.group(2));
+            System.out.println("group1=" + mat22.group(1));     // group1=1230000
+            System.out.println("group2=" + mat22.group(2));     // group2=
         }
         Pattern pat33 = Pattern.compile("(\\d+?)(0*)");
         Matcher mat33 = pat33.matcher("1230000");
         if (mat33.matches()) {
-            System.out.println("group1=" + mat33.group(1));
-            System.out.println("group2=" + mat33.group(2));
+            System.out.println("group1=" + mat33.group(1));     // group1=123
+            System.out.println("group2=" + mat33.group(2));     // group2=0000
         }
 
         // 搜索和替换
@@ -1779,14 +1794,24 @@ public class ZzzzApplication {
         String[] arr44 = "a b c".split("\\s");
         for(String val44:arr44) {
             System.out.println("arr44: " + val44);
+            // arr44: a
+            // arr44: b
+            // arr44: c
         }
         String[] arr55 = "a b  c".split("\\s");
         for(String val55:arr55) {
             System.out.println("arr55: " + val55);
+            // arr55: a
+            // arr55: b
+            // arr55:
+            // arr55: c
         }
         String[] arr66 = "a, b ;; c".split("[\\,\\;\\s]+");
         for(String val66:arr66) {
             System.out.println("arr66: " + val66);
+            // arr66: a
+            // arr66: b
+            // arr66: c
         }
         // 搜索字符串
         String str77 = "the quick brown fox jumps over the lazy dog.";
@@ -1795,15 +1820,18 @@ public class ZzzzApplication {
         while(mat77.find()) {
             String sub = str77.substring(mat77.start(), mat77.end());
             System.out.println(mat77.start() + " " + mat77.end() + " " + sub);
+            // 11 14 row
+            // 16 19 fox
+            // 40 43 dog
         }
         // 替换字符串
         String str88 = "The     quick\\t\\t     brown   fox  jumps   over the  lazy dog.";
         String r88 = str88.replaceAll("\\s+", " ");
-        System.out.println(r88);
+        System.out.println(r88);  // The quick\t\t brown fox jumps over the lazy dog.
         // 反向引用
         String str99 = "the quick brown fox jumps over the lazy dog.";
         String r99 = str99.replaceAll("\\s([a-z]{4})\\s", " <b>$1</b> ");
-        System.out.println(r99);
+        System.out.println(r99);  // the quick brown fox jumps <b>over</b> the <b>lazy</b> dog.
 
         // Maven基础      文档整理会多一些
         // Maven使用groupId，artifactId和version唯一定位一个依赖
