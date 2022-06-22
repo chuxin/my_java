@@ -81,3 +81,5 @@ Identify and stop the process that's listening on port 9988 or configure this ap
 2022-06-20 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
 2022-06-20 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
 2022-06-20 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.529 seconds (JVM running for 8.237)
+2022-06-20 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-06-20 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.

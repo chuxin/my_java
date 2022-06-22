@@ -375,6 +375,250 @@
         // 其他操作：allMatch(), anyMatch(), forEach()
 
 
-4、
+4、IO
+    File 对象
+        例子：
+            System.out.println(File.separator);     // /
+            // Windows平台。  假设当前目录是C:\Docs
+            // .表示当前目录，  ..表示上级目录
+            File f1 = new File("sub\\javac");     // 绝对路径是C:\Docs\sub\javac
+            File f2 = new File(".\\sub\\javac");  // 绝对路径是C:\Docs\sub\javac
+            File f3 = new File("..\\sub\\javac"); // 绝对路径是C:\sub\javac
+            try {
+                File f4 = new File("..");
+                System.out.println(f4.getPath());   // ..
+                System.out.println(f4.getAbsolutePath());  //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/..
+                System.out.println(f4.getCanonicalPath()); //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            File f5 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java");
+            File f6 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/pom.xml");
+            System.out.println(f5.isFile());        // false
+            System.out.println(f5.isDirectory());   // true
+            System.out.println(f6.isFile());        // true
+            System.out.println(f6.isDirectory());   // false
+            // boolean  canRead()：是否可读；
+            // boolean  canWrite()：是否可写；
+            // boolean  canExecute()：是否可执行；
+            // long     length()：文件字节大小
+
+            File f7 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/mmm.txt");
+            try {
+                // 创建、删除文件
+                if (f7.createNewFile()) {
+                    System.out.println("创建文件成功");   // 创建文件成功
+                    if (f7.delete()) {
+                        System.out.println("删除文件成功");   // 删除文件成功
+                    }
+                }
+                // 创建临时文件
+                File f8 = File.createTempFile("tmp-", ".txt");
+                f8.deleteOnExit();      // JVM退出时自动删除
+                System.out.println(f8.isFile());           // true
+                System.out.println(f8.getAbsolutePath());  // /var/folders/c1/rwz_lt052_bgfn7zx4yr14q40000gn/T/tmp-14969864616872664021.txt
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // 遍历文件和目录
+            static void printFiles(File[] files) {
+                if (files != null) {
+                    for (File f : files) {
+                        System.out.println(f);
+                    }
+                }
+            }
+            File f9 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy");
+            File[] fs1 = f9.listFiles();
+            printFiles(fs1);
+            //   /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/testFiles
+            //   /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/mvnw.cmd
+            //   /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/config
+            //   /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target
+            // 过滤文件和目录
+            File[] fs2 = f9.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name.endsWith(".xml");
+                }
+            });
+            printFiles(fs2);   //  /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/pom.xml
+            // boolean mkdir()：   File对象如果表示一个目录，创建目录；
+            // boolean mkdirs()：  File对象如果表示一个目录，将不存在的父目录也创建出来；
+            // boolean delete()：  File对象如果表示一个目录，删除当前目录，但当前目录必须为空。
+
+    InputStream & OutputStream
+        概念：IO流以byte（字节）为最小单位，因此也称为字节流
+             InputStream代表输入字节流，OuputStream代表输出字节流，这是最基本的两种IO流
+        例子：
+            // InputStream
+            // 写法一
+            InputStream input10 = null;
+            try {
+                input10 = new FileInputStream("testFiles/ttt.txt");
+                for(;;) {
+                    int n = input10.read();
+                    // 反复调用read()方法，直到返回-1
+                    if (n == -1) {
+                        break;
+                    }
+                    // 输出的是 ascii 码值
+                    // System.out.println(n);
+                }
+                input10.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // 写法二
+            // try(resource)的语法，只需要编写try语句，让编译器自动为我们关闭资源。
+            try (InputStream input11 = new FileInputStream("testFiles/ttt.txt")) {
+                int n;
+                while ((n = input11.read()) != -1) {
+                    // 输出的是 ascii 码值
+                    System.out.println(n);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // 利用缓冲区一次读取多个字节
+            try (InputStream input12 = new FileInputStream("testFiles/ttt22.txt")) {
+                byte[] buffer = new byte[1000];
+                int n;
+                while ((n = input12.read(buffer)) != -1) {
+                    System.out.println("read " + n + " bytes....");
+                    // read 1000 bytes....
+                    // read 1000 bytes....
+                    // read 483 bytes....
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String s13;
+            try (InputStream input13 = new FileInputStream("testFiles/ttt22.txt")) {
+                int n;
+                StringBuilder sb13 = new StringBuilder();
+                while ((n = input13.read()) != -1) {
+                    sb13.append((char) n);
+                }
+                s13 = sb13.toString();
+                System.out.println(s13);    // 输入 txt 内容，但是中文是乱码 ？？？
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // FileOutputStream
+            try {
+                OutputStream output11 = new FileOutputStream("testFiles/ttt33.txt");
+                output11.write(72);  // h
+                output11.write(101); // e
+                output11.write(108); // l
+                output11.write(108); // l
+                output11.write(111); // o
+                output11.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // 一次性写入多个字节
+            try (OutputStream output12 = new FileOutputStream("testFiles/ttt44.txt")) {
+                output12.write("Hello121212".getBytes("UTF-8"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    Reader & Writer
+        概念：按照char来读写显然更方便，这种流称为字符流
+             Reader和Writer表示字符流，字符流传输的最小数据单位是char
+             究竟使用Reader还是InputStream，要取决于具体的使用场景。如果数据源不是文本，就只能使用InputStream，
+                如果数据源是文本，使用Reader更方便一些。Reader和Writer本质上是一个能自动编解码的InputStream和OutputStream
+        例子：
+            // Reader
+            // InputStream是一个字节流，即以byte为单位读取，而Reader是一个字符流，即以char为单位读取
+            try (Reader reader = new FileReader("testFiles/ttt22.txt", StandardCharsets.UTF_8)) {
+                for (;;) {
+                    int n = reader.read();
+                    if (n == -1) {
+                        break;
+                    }
+                    System.out.print((char)n);  // 输出 txt 内容，无中文乱码
+                }
+                // reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // 一次性读取若干字符
+            try (Reader reader = new FileReader("testFiles/ttt22.txt", StandardCharsets.UTF_8)) {
+                char[] buffer = new char[500];
+                int n;
+                while ((n = reader.read(buffer)) != -1) {
+                    System.out.println("read " + n + " chars.");
+                    // read 500 chars.
+                    // read 500 chars.
+                    // read 175 chars.
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // Writer
+            try (Writer writer = new FileWriter("testFiles/ttt55.txt", StandardCharsets.UTF_8)) {
+                writer.write("H");
+                writer.write("Job".toCharArray()); // 写入char[]
+                writer.write(" candidate=");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    使用Files
+        概念：Files 封装了很多读写文件的方法，简化了读写操作。
+        注意：Files提供的读写方法，受内存限制，只能读写小文件，例如配置文件等，不可一次读入几个G的大文件。
+        例子：
+            // 读写大型文件仍然要使用文件流，每次只读写一部分文件内容
+            try {
+                // 读
+                byte[] data13 = Files.readAllBytes(Path.of("testFiles/ttt66.txt"));
+                System.out.println(data13[0]);    // ASCII码 116
+                System.out.println("-----------");
+                String content13 = Files.readString(Path.of("testFiles/ttt66.txt"), StandardCharsets.UTF_8);
+                System.out.println(content13);    // 输入全部 txt 内容，没有中文乱码
+                System.out.println("-----------");
+                List<String> lines = Files.readAllLines(Path.of("testFiles/ttt66.txt"));
+                System.out.println(lines.get(0)); // 输入 txt 内容的第一行
+                System.out.println("-----------");
+                // 写
+                byte[] data14 = {56, 57, 98};
+                Files.write(Path.of("testFiles/ttt77_1.txt"), data14);  // 将 ASCII 码转换为字符
+                Files.writeString(Path.of("testFiles/ttt77_2.txt"), "文档内容 lalaa", StandardCharsets.UTF_8);
+                List<String> lines14 = List.of("咯咯咯咯", "upset");    // 输入中英文，无乱码
+                Files.write(Path.of("testFiles/ttt77_3.txt"), lines14);     // 输入中英文，无乱码
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+5、正则表达式
+    基础匹配
+        概念：
+        例子：
+            String regex11 = "20\\d\\d";
+            System.out.println("2019".matches(regex11) + " " + "2100".matches(regex11));  // true false
+            String regex22 = "abc";
+            System.out.println("abc".matches(regex22) + " " + "Abc".matches(regex22) + " " + "abcd".matches(regex22));  // true false false
+
+    复杂匹配
+
+
+    分组匹配
+
+
+    非贪婪匹配
+
+
+
+    搜索和替换
+
 
 
