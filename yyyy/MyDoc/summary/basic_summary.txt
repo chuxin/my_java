@@ -929,6 +929,22 @@
                 MyStudent msObj3 = map2.get("louisYY");
                 System.out.println(msObj3);             // null
 
+                // 创建一个 HashMap
+                HashMap<Integer, String> sites = new HashMap<>();
+                // 往 HashMap 添加一些元素
+                sites.put(1, "Google");
+                sites.put(2, "Runoob");
+                sites.put(3, "Taobao");
+                System.out.println("sites HashMap: " + sites);
+
+                // 创建另一个 HashMap
+                HashMap<Integer, String> sites2 = new HashMap<>();
+                sites2.put(1, "Weibo");  // 已存在会被替换
+                sites2.put(4, "Wiki");
+                // 将所有的映射关系从 sites 添加到 sites2
+                sites2.putAll(sites);
+                System.out.println("sites2 HashMap: " + sites2);
+
                 // 遍历 map
                 // 注意：键值对输出顺序随机
                 // 方法①

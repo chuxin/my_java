@@ -158,12 +158,12 @@ public class ZzzzApplication {
         // 正则表达式
         // Maven基础
         // 单元测试
+        // lambda 表达式   https://www.runoob.com/java/java8-lambda-expressions.html
         // EJB 概念整理  https://blog.csdn.net/soulofball/article/details/110206188
         //
         // 多线程   粗略看   线程同步
         // 反射     粗略看
         // mybatis-plus
-        // 
         // kafka
         // rabbitMQ
         //
@@ -1838,37 +1838,7 @@ public class ZzzzApplication {
         // Maven使用groupId，artifactId和version唯一定位一个依赖
 
 
-        // 补充
-//        // 创建一个 HashMap
-//        HashMap<Integer, String> sites = new HashMap<>();
-//
-//        // 往 HashMap 添加一些元素
-//        sites.put(1, "Google");
-//        sites.put(2, "Runoob");
-//        sites.put(3, "Taobao");
-//        System.out.println("sites HashMap: " + sites);
-//        // 创建另一个 HashMap
-//        HashMap<Integer, String> sites2 = new HashMap<>();
-//        sites2.put(1, "Weibo");  // 已存在会被替换
-//        sites2.put(4, "Wiki");
-//
-//        // 将所有的映射关系从 sites 添加到 sites2
-//        sites2.putAll(sites);
-//        System.out.println("sites2 HashMap: " + sites2);
 
-        // lambda 表达式
-        // https://www.runoob.com/java/java8-lambda-expressions.html
-
-
-
-        // 在classpath中的资源文件，路径总是以／开头，我们先获取当前的Class对象，然后调用getResourceAsStream()就可以直接从classpath读取任意的资源文件
-
-        // Files提供的读写方法，受内存限制，只能读写小文件，例如配置文件等，不可一次读入几个G的大文件。读写大型文件仍然要使用文件流，每次只读写一部分文件内容
-
-
-
-        // 测试驱动开发，是指先编写接口，紧接着编写测试。编写完测试后，我们才开始真正编写实现代码。在编写实现代码的过程中，一边写，一边测，什么时候测试全部通过了，那就表示编写的实现完成了
-        // 编写测试前准备、测试后清理的固定代码，我们称之为Fixture
 
 
     }

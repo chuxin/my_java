@@ -2,6 +2,8 @@
     Xml介绍：XML的这些相关技术实现起来非常复杂，在实际应用中很少用到，通常了解一下就可以了。
     例子：
         ① DOM：一次性读取XML，并在内存中表示为树形结构；
+            // 在classpath中的资源文件，路径总是以／开头，我们先获取当前的Class对象，
+            //   然后调用getResourceAsStream()就可以直接从classpath读取任意的资源文件
             InputStream input = Main.class.getClassLoader().getResourceAsStream("book.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             try {
@@ -601,24 +603,323 @@
 
 5、正则表达式
     基础匹配
-        概念：
+        基础用法：
+            匹配特殊字符，用 \ 转义。  例如：a\&c 匹配 a&c
+            匹配一个任意字符，用 .
+            匹配 0 ~ 9 这样的单个数字，用 \d 。
+            匹配一个字母、数字或下划线，用 \w 。   但 \w 不能匹配#、空格等字符
+            匹配一个空格字符、tab字符（在Java中用\t表示），用 \s
+            匹配一个非数字，用 \D。   \W  \S 也是以此类推
+            匹配任意个字符，包括0个、1个、多个字符，用 *。  例如：\d*
+            匹配至少一个字符，用 + 。      例如：\d+
+            匹配0个或一个字符，用 ? 。
+            精确匹配指定个字符，用 {n}, {m, n}, {n,}
+            指定Unicode字符 \u548c，匹配汉字 "和"
         例子：
             String regex11 = "20\\d\\d";
             System.out.println("2019".matches(regex11) + " " + "2100".matches(regex11));  // true false
             String regex22 = "abc";
             System.out.println("abc".matches(regex22) + " " + "Abc".matches(regex22) + " " + "abcd".matches(regex22));  // true false false
+            // 对应的正则是a\&c
+            String regex33 = "a\\&c";
+            System.out.println("a&c".matches(regex33) + " " + "a-c".matches(regex33) + " " + "a&&c".matches(regex33)); // true false false
+            String regex44 = "java\\d";
+            System.out.println("java9".matches(regex44) + " " + "java10".matches(regex44) + " " + "javac".matches(regex44)); // true false false
+            String regex55 = "java\\D";
+            System.out.println("javax".matches(regex55) + " " + "java#".matches(regex55) + " " + "java5".matches(regex55)); // true true false
 
     复杂匹配
+        基础用法：
+            ^表示匹配开头，$表示匹配结尾。
+            匹配指定范围，用 []。 例如：[0-9a-fA-F]
+            规则匹配，用 | 。 例如： AB|CD
+            使用括号把公共部分提取出来，用 learn\\s(java|php|go)，等同于 learn\sjava|learn\sphp|learn\sgo
+            匹配指定范围外的任意字符，用 [^]。 例如：[^A-F]
+        例子：
+            // 复杂匹配
+            String regex66 = "java|php";
+            System.out.println("java".matches(regex66) + " " + "php".matches(regex66) + " " + "go".matches(regex66));  // true true false
+            String regex77 = "learn\\s(java|php|go)";
+            System.out.println("learn java".matches(regex77) + " " + "learn php".matches(regex77) + " " + "learn Java".matches(regex77));  // true true false
 
-
-    分组匹配
-
+    分组匹配&提取
+        高级用法：
+            匹配 区号-电话号码，用 \d{3,4}\-\d{6,8}。 如果要提取号码，用 (\d{3,4})\-(\d{6,8})
+        例子：
+            // 分组匹配&提取
+            Pattern pat11 = Pattern.compile("(\\d{3,4})\\-(\\d{7,8})");
+            Matcher mat11 = pat11.matcher("010-12345678");
+            if (mat11.matches()) {
+                String g0 = mat11.group(0);
+                String g1 = mat11.group(1);
+                String g2 = mat11.group(2);
+                System.out.println(g0 + " | " + g1 + " | " + g2);   // 010-12345678 | 010 | 12345678
+            } else {
+                System.out.println("匹配失败");
+            }
+            Matcher mat11_22 = pat11.matcher("021-123456");
+            System.out.println(mat11_22.matches());  // false
+            Matcher mat11_33 = pat11.matcher("022#1234567");
+            System.out.println(mat11_33.matches());  // false
 
     非贪婪匹配
-
-
+        高级用法：
+            正则表达式默认使用贪婪匹配：任何一个规则，它总是尽可能多地向后匹配。
+            在规则后面加个?即可表示非贪婪匹配，比如： \d+?
+        例子：
+            // 非贪婪匹配
+            Pattern pat22 = Pattern.compile("(\\d+)(0*)");
+            Matcher mat22 = pat22.matcher("1230000");
+            if (mat22.matches()) {
+                System.out.println("group1=" + mat22.group(1));     // group1=1230000
+                System.out.println("group2=" + mat22.group(2));     // group2=
+            }
+            Pattern pat33 = Pattern.compile("(\\d+?)(0*)");
+            Matcher mat33 = pat33.matcher("1230000");
+            if (mat33.matches()) {
+                System.out.println("group1=" + mat33.group(1));     // group1=123
+                System.out.println("group2=" + mat33.group(2));     // group2=0000
+            }
 
     搜索和替换
+        例子：
+            // 分割字符串
+            String[] arr44 = "a b c".split("\\s");
+            for(String val44:arr44) {
+                System.out.println("arr44: " + val44);
+                // arr44: a
+                // arr44: b
+                // arr44: c
+            }
+            String[] arr55 = "a b  c".split("\\s");
+            for(String val55:arr55) {
+                System.out.println("arr55: " + val55);
+                // arr55: a
+                // arr55: b
+                // arr55:
+                // arr55: c
+            }
+            String[] arr66 = "a, b ;; c".split("[\\,\\;\\s]+");
+            for(String val66:arr66) {
+                System.out.println("arr66: " + val66);
+                // arr66: a
+                // arr66: b
+                // arr66: c
+            }
+            // 搜索字符串
+            String str77 = "the quick brown fox jumps over the lazy dog.";
+            Pattern pat77 = Pattern.compile("\\wo\\w");
+            Matcher mat77 = pat77.matcher(str77);
+            while(mat77.find()) {
+                String sub = str77.substring(mat77.start(), mat77.end());
+                System.out.println(mat77.start() + " " + mat77.end() + " " + sub);
+                // 11 14 row
+                // 16 19 fox
+                // 40 43 dog
+            }
+            // 替换字符串
+            String str88 = "The     quick\\t\\t     brown   fox  jumps   over the  lazy dog.";
+            String r88 = str88.replaceAll("\\s+", " ");
+            System.out.println(r88);  // The quick\t\t brown fox jumps over the lazy dog.
+            // 反向引用
+            String str99 = "the quick brown fox jumps over the lazy dog.";
+            String r99 = str99.replaceAll("\\s([a-z]{4})\\s", " <b>$1</b> ");
+            System.out.println(r99);  // the quick brown fox jumps <b>over</b> the <b>lazy</b> dog.
 
 
+6、Maven基础
+    概念：Maven 是专门为Java项目打造的管理和构建工具
+         Maven Wrapper 就是给一个项目A提供一个独立的，指定版本的Maven，供A使用。
+            另一个作用是把项目的mvnw、mvnw.cmd和.mvn提交到版本库中，可以使所有开发人员使用统一的Maven版本
+
+    Maven标准目录介绍：
+        ① 项目描述文件pom.xml
+            格式如下：
+                <project ...>
+                    <modelVersion>4.0.0</modelVersion>
+                    <groupId>com.itranswarp.learnjava</groupId>
+                    <artifactId>hello</artifactId>
+                    <version>1.0</version>
+                    <packaging>jar</packaging>
+                    <properties>
+                        ...
+                    </properties>
+                    <dependencies>
+                        <dependency>
+                            <groupId>commons-logging</groupId>
+                            <artifactId>commons-logging</artifactId>
+                            <version>1.2</version>
+                            <scope>compile</scope>
+                        </dependency>
+                    </dependencies>
+                </project>
+
+            标签介绍：
+                groupId类似于Java的包名，通常是公司或组织名称
+                artifactId类似于Java的类名，通常是项目名称
+                一个Maven工程就是由groupId，artifactId，version作为唯一标识。引用第三方库时，就是通过这3个变量来确定
+                scope 依赖关系
+                    compile：默认的也是最常用的，Maven会把这种类型的依赖直接放入classpath。比如，commons-logging
+                    test：依赖表示仅在测试时使用，正常运行时并不需要。最常用的test依赖就是JUnit
+                    runtime：编译时不需要，但运行时需要。最典型的runtime依赖是JDBC驱动
+                    provided：编译时需要，但运行时不需要。最典型的provided依赖是Servlet API，编译的时候需要，但是运行时，Servlet服务器内置了相关的jar，所以运行期不需要
+
+        ② 存放Java源码的目录是 src/main/java
+        ③ 存放资源文件的目录是 src/main/resources
+        ④ 存放测试源码的目录是 src/test/java
+        ⑤ 存放测试资源的目录是 src/test/resources
+        ⑥ 所有编译、打包生成的文件都放在 target 目录里
+
+    命令：
+        mvn -version    // 查看Maven的版本信息
+
+    Maven镜像：
+        在用户主目录下进入.m2目录，创建一个settings.xml配置文件
+        不希望把源码和jar包放到公网上，那么可以搭建私有仓库，在本地的 家目录/.m2/settings.xml中配置好
+        <settings>
+            <mirrors>
+                <mirror>
+                    <id>aliyun</id>
+                    <name>aliyun</name>
+                    <mirrorOf>central</mirrorOf>
+                    <!-- 国内推荐阿里云的Maven镜像 -->
+                    <url>https://maven.aliyun.com/repository/central</url>
+                </mirror>
+            </mirrors>
+        </settings>
+
+
+7、单元测试
+    基础JUnit
+        // 精度问题，浮点数无法精确地进行比较
+        @Test
+        void testFact() {
+            assertEquals(1, ZzzzApplicationTests.fact(1));
+            assertEquals(2, ZzzzApplicationTests.fact(2));
+            assertEquals(6, ZzzzApplicationTests.fact(3));
+            // 浮点数无法精确地进行比较，因此我们需要调用 assertEquals 这个重载方法，指定一个误差值
+            assertEquals(0.1, Math.abs(1 - 9/10.0), 0.0000001);
+        }
+
+    使用Fixture
+        概念：JUnit提供了编写测试前准备、测试后清理的固定代码，我们称之为Fixture
+             编写测试前准备、测试后清理的固定代码，我们称之为Fixture
+        例子：
+            public class Calculator {
+                private long n = 0;
+
+                public long add(long x) {
+                    n = n + x;
+                    return n;
+                }
+            }
+
+            public class CalculatorTest {
+                Calculator calculator;
+
+                @BeforeEach
+                public void setUp() {
+                    this.calculator = new Calculator();
+                }
+
+                @AfterEach
+                public void tearDown() {
+                    this.calculator = null;
+                }
+
+                @Test
+                void testAdd() {
+                    assertEquals(100, this.calculator.add(100));
+                }
+            }
+
+    异常测试
+        public class Factorial {
+            public static long fact22(long n) {
+                if (n < 0) {
+                    throw new IllegalArgumentException();
+                }
+                long r = 1;
+                for (long i = 1; i <= n; i++) {
+                    r = r * i;
+                }
+                return r;
+            }
+        }
+
+        @Test
+        void testNegative() {
+            // 写法一
+            assertThrows(IllegalArgumentException.class, new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    Factorial.fact22(-1);
+                }
+            });
+
+            // 写法二
+            assertThrows(IllegalArgumentException.class, () -> {
+                Factorial.fact22(-2);
+            });
+        }
+
+    条件测试
+        概念：JUnit根据不同的条件注解，决定是否运行当前的@Test方法，类似@Disabled这种注解就称为条件测试
+        例子：
+            // 条件测试
+            @Test
+            @Disabled("my_operation")
+            void testOperation() {
+                //  TODO: this test is disabled for bug fixing
+            }
+
+            @Test
+            @EnabledOnOs(OS.WINDOWS)
+            void testWindows() {
+                assertEquals("C:\\test.ini", "C:\test.ini");
+            }
+
+            @Test
+            @EnabledOnOs({OS.LINUX, OS.MAC})
+            void testLiunxAndMac() {
+                assertEquals("/usr/test.ini", "/usr/test.ini");
+            }
+
+    参数化测试
+        概念：使用参数化测试，可以提供一组输入和输出的测试数据，对一个测试方法反复测试。
+        例子：
+            @ParameterizedTest
+            @ValueSource(ints = {0, 1, 5, 100})
+            void testAbs(int x) {
+                assertEquals(x, Math.abs(x));
+            }
+
+            @ParameterizedTest
+            @MethodSource
+            void testCapitalize(String input, String result) {
+                assertEquals(result, StringUtils.capitalize(input));
+            }
+
+            static List<Arguments> testCapitalize() {
+                return List.of(
+                        Arguments.of("abc", "Abc"),
+                        Arguments.of("APPLE", "Apple"),
+                        Arguments.of("gooD", "Good")
+                );
+            }
+
+            @ParameterizedTest
+            @CsvSource({"abc, Abc", "APPLE, Apple", "gooD, Good"})
+            void testCapitalize22(String input, String result) {
+                assertEquals(result, StringUtils.capitalize(input));
+            }
+
+            @ParameterizedTest
+            @CsvFileSource(resources = {"/test-capitalize.csv"})
+            void testCapitalize33(String input, String result) {
+                assertEquals(result, StringUtils.capitalize(input));
+            }
+
+
+8、EJB
 
