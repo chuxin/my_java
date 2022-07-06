@@ -50,6 +50,10 @@ import com.example.demo.coreClass.Weekday;
 import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,6 +68,7 @@ import com.example.demo.testCollections.HisStudent;
 import com.example.demo.testCollections.User;
 
 import com.example.demo.testFunctionalProgramming.Person;
+import org.springframework.cglib.core.Converter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -78,6 +83,8 @@ import com.example.demo.mypackages.MyHandler;
 //@ImportResource(locations = {"classpath:/beans.xml"})
 @SpringBootApplication
 public class ZzzzApplication {
+    final static String salutation = "that's the truth";
+    static Random random18 = new Random(0);
 
     public static void main(String[] args) {
         SpringApplication.run(ZzzzApplication.class, args);
@@ -158,14 +165,20 @@ public class ZzzzApplication {
         // 正则表达式
         // Maven基础
         // 单元测试
-        // lambda 表达式   https://www.runoob.com/java/java8-lambda-expressions.html
-        // EJB 概念整理  https://blog.csdn.net/soulofball/article/details/110206188
         //
+        // 反射     粗略看   xx
+        // EJB 概念整理  https://blog.csdn.net/soulofball/article/details/110206188
+        // lambda 表达式   https://www.runoob.com/java/java8-lambda-expressions.html
         // 多线程   粗略看   线程同步
-        // 反射     粗略看
-        // mybatis-plus
         // kafka
+        //    https://juejin.cn/post/6844903919328428040  简单教程，已看完
+        //    https://juejin.cn/post/6844903495670169607#heading-4  详细教程，还没全部看完
+        //
+        // 泛型学习扩展
+        //      https://blog.csdn.net/m0_49508485/article/details/123070574
+        //      https://www.cnblogs.com/zwcmt/p/15018421.html
         // rabbitMQ
+        // mybatis-plus
         //
         // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
         //     什么是简单的项目？本地能跑起来的，能进行调试的项目
@@ -173,7 +186,8 @@ public class ZzzzApplication {
         //     看看其它 java 教程，会有新的感悟
         //
 
-        testBasicSecond();
+//        testBasicSecond();
+        testBasicThird();
 
 
         /*********   springboot => practice       *********/
@@ -1884,6 +1898,460 @@ public class ZzzzApplication {
         }
         System.out.println("================");
     }
+
+    public static void testBasicThird() {
+        // 反射是为了解决在运行期，对某个实例一无所知的情况下，如何调用其方法。
+        // 通过Class实例获取class信息的方法称为反射（Reflection）
+
+        System.out.println(OffsetDateTime.of(LocalDate.of(2022, 7, 1),
+                LocalTime.of(23, 59, 59, 900000000),
+                ZoneOffset.ofHours(8)));
+
+        // lambda 表达式
+        ZzzzApplication tester = new ZzzzApplication();
+        // ① 类型声明
+        MathOperation addition = (int a, int b) -> a + b;
+        // ② 无类型声明
+        MathOperation subtraction = (a, b) -> a - b;
+        // ③ 用括号返回语句
+        MathOperation multiplication = (int a, int b) -> {return a * b;};
+        System.out.println("a+b= " + tester.operate(10, 5, addition));
+        System.out.println("a-b= " + tester.operate(10, 5, subtraction));
+        System.out.println("a*b= " + tester.operate(10, 5, multiplication));
+        // ④ 不用括号
+        GreetingService gs1 = message -> System.out.println("hello " + message);
+        gs1.sayMessage("baidu");
+
+        // lambda 变量作用域
+        // 引用标记了 final 的外层局部变量
+        GreetingService gs2 = message -> System.out.println("people " + salutation + message);
+        gs2.sayMessage(" louis");
+
+        // lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）
+        // 在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量
+        final int num = 1;
+        int num22 = 2;
+        Converter<Integer, String> conRes = (param) -> System.out.println(String.valueOf(param + num + num22));
+        conRes.convert(2);
+
+        // Arrays.copyOf 方法      把一个数组的区间值完全赋给另一个数组， 区间的开始和结束位置遵循 左闭右开原则
+        int a[] = {4, 3, 6, 5, 1, 2};
+        int b[] = Arrays.copyOf(a, 4);
+        int c[] = Arrays.copyOfRange(a, 2, 5);
+        System.out.println(Arrays.toString(b));
+        System.out.println(Arrays.toString(c));
+
+        // 多线程
+        // 创建新线程
+        // 最简单的多线程。这个线程启动后实际上什么也不做就立刻结束了
+        Thread t = new Thread();
+        t.start();
+        // ① 从Thread派生一个自定义类
+        Thread t2 = new MyThread22();
+        t2.start();
+        // 注意：直接调用 run 方法不会启动新线程
+        t2.run();
+        // ② 创建Thread实例时，传入一个Runnable实例
+        Thread t3 = new Thread(new MyRunnable());
+        t3.start();
+        // ③ 用 lambda 语法进一步简化
+        Thread t4 = new Thread(() -> {
+            System.out.println("start fourth new thread");
+        });
+        t4.start();
+
+        // 线程的状态
+        //   New：新创建的线程，尚未执行；
+        //   Runnable：运行中的线程，正在执行run()方法的Java代码；
+        //   Blocked：运行中的线程，因为某些操作被阻塞而挂起；
+        //   Waiting：运行中的线程，因为某些操作在等待中；
+        //   Timed Waiting：运行中的线程，因为执行sleep()方法正在计时等待；
+        //   Terminated：线程已终止，因为run()方法执行完毕。
+        //  new -> Runnable、Blocked、Waiting、Timed Waiting 线程在四种状态间来回切换 -> Terminated
+
+        // 通过t.join()等待t线程结束后再继续运行
+        Thread t5 = new Thread(() -> {
+            System.out.println("hello join");
+        });
+        t5.start();
+        try {
+            t5.join();
+        } catch (InterruptedException e) {}
+        System.out.println("55 main end");
+
+        // 中断线程
+        // 最常见的功能就是下载，用户下载了一个 10G 的文件，网络太慢，用户等得不耐烦，下载过程中点 取消 按钮
+        Thread t6 = new MyThread66();
+        t6.start();
+        try {
+            Thread.sleep(1);    // 暂停1毫秒
+            t6.interrupt();     // 中断t6线程
+            t6.join();      // 等待t6线程结束
+        } catch (InterruptedException e) {}
+        System.out.println("66 main end");
+
+        // interrupt 终止 join 的等待
+        Thread t7 = new MyThread77();
+        t7.start();
+        try {
+            Thread.sleep(1000);
+            t7.interrupt();
+            t7.join();
+        } catch (InterruptedException e) {}
+        System.out.println("77 main end");
+
+        // 线程间共享变量需要使用volatile关键字
+        // volatile关键字的目的是告诉虚拟机：
+        //      每次访问变量时，总是获取主内存的最新值；
+        //      每次修改变量后，立刻回写到主内存。
+        HelloThread88 t8 = new HelloThread88();
+        t8.start();
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {}
+        t8.running = false;
+
+        // 守护线程(Daemon Thread)
+        Thread t9 = new TimerThread();
+        t9.setDaemon(true);
+//        t9.start();
+
+        // 线程同步
+        // 例子一，没有 synchronized
+        var add10 = new AddThread10();
+        var dec10 = new DecThread10();
+        try {
+            add10.start();
+            dec10.start();
+            add10.join();
+            dec10.join();
+        } catch (InterruptedException e) {}
+        System.out.println(Counter.count);  // 每次打印的数字都不是 0，因为加减过程中读取count变量存在脏读
+
+        // 例子二，有 synchronized
+        Counter.count = 0;
+        var add11 = new AddThread11();
+        var dec11 = new DecThread11();
+        try {
+            add11.start();
+            dec11.start();
+            add11.join();
+            dec11.join();
+        } catch (InterruptedException e) {}
+        System.out.println(Counter.count);
+
+        // 同步方法
+        var counter12_AA = new Counter12();
+        var counter12_BB = new Counter12();
+        Thread t12_add = new Thread(() -> {
+            int tmp1 = 1;
+            while (tmp1 <= 2000) {
+                tmp1++;
+                counter12_AA.add12(2);
+                counter12_BB.add12(4);
+            }
+        });
+        Thread t12_dec = new Thread(() -> {
+            int tmp2 = 1;
+            while (tmp2 <= 2000) {
+                tmp2++;
+                counter12_AA.dec12(1);
+                counter12_BB.dec12(2);
+            }
+        });
+        try {
+            t12_add.start();
+            t12_add.join();
+            t12_dec.start();
+            t12_dec.join();
+        } catch (InterruptedException e) {}
+        System.out.println(counter12_AA.get());
+        System.out.println(counter12_BB.get());
+
+        // 使用wait和notify
+        // synchronized解决了多线程竞争的问题，使用wait和notify 解决多线程协调的问题
+        // 下面的例子，创建一个线程把10条数据放入 队列，创建 5 个线程，消费队列。 等待 100 毫秒，中断 5 个消费线程
+        var q13 = new TaskQueue13();
+        var arrT13 = new ArrayList<Thread>();
+        for (int i = 0; i < 5; i++) {
+            var t13 = new Thread() {
+                public void run() {
+                    // 执行 task
+                    while(true) {
+                        try {
+                            String doS13 = q13.doTask();
+                            System.out.println("execute task: " + doS13);
+                        } catch (InterruptedException e) {
+                            return ;
+                        }
+                    }
+                }
+            };
+            t13.start();
+            arrT13.add(t13);
+        }
+        var add13 = new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                // 放入 task
+                String addS13 = "t13-" + Math.random();
+                System.out.println("add task: " + addS13);
+                q13.addTask(addS13);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {}
+            }
+        });
+        add13.start();
+        try {
+            add13.join();
+            Thread.sleep(100);
+        } catch (InterruptedException e) {}
+        for (var tmp13:arrT13) {
+            tmp13.interrupt();
+        }
+
+        // 使用ReentrantLock
+        // synchronized关键字用于加锁，但这种锁一是很重，二是获取时必须一直等待，没有额外的尝试机制，不需要考虑异常
+        // ReentrantLock是Java代码实现的锁，必须先获取锁，然后在finally中正确释放锁，ReentrantLock可以尝试获取锁，synchronized不行
+        // 使用ReentrantLock比直接使用synchronized更安全，可以替代synchronized进行线程同步
+
+        // 使用Condition
+        // 使用Condition对象来实现wait和notify的功能
+        // 例子同上面的 t13
+        System.out.println("==========");
+        var q14 = new TaskQueue14();
+        var arrT14 = new ArrayList<Thread>();
+        for (int i = 0; i < 5; i++) {
+            var t14 = new Thread() {
+                public void run() {
+                    // 执行 task
+                    while(true) {
+                        String doS14 = q14.doTask();
+                        System.out.println("execute task: " + doS14);
+                    }
+                }
+            };
+            t14.start();
+            arrT14.add(t14);
+        }
+        var add14 = new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                // 放入 task
+                String addS14 = "t14-" + Math.random();
+                System.out.println("add task: " + addS14);
+                q14.addTask(addS14);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {}
+            }
+        });
+        add14.start();
+        try {
+            add14.join();
+            Thread.sleep(100);
+        } catch (InterruptedException e) {}
+        for (var tmp14:arrT14) {
+            tmp14.interrupt();
+        }
+
+        // 使用ReadWriteLock
+        // 解决一些特殊场景: 解决多线程同时读，但只有一个线程能写的问题
+        //          只允许一个线程写入（其他线程既不能写入也不能读取）；
+        //          没有写入时，多个线程允许同时读（提高性能）
+        //          适合读多写少的场景
+        //  一个论坛的帖子，回复可以看做写入操作，它是不频繁的，但是，浏览可以看做读取操作，是非常频繁的，这种情况就可以使用ReadWriteLock。
+        //  它有个潜在的问题：如果有线程正在读，写线程需要等待读线程释放锁后才能获取写锁，即读的过程中不允许写，这是一种悲观的读锁。
+
+        // 使用StampedLock
+        // 乐观锁的意思就是乐观地估计读的过程中大概率不会有写入，因此被称为乐观锁。乐观锁的并发效率更高，但一旦有小概率的写入导致读取的数据不一致，需要能检测出来，再读一遍就行。
+        // 悲观锁则是读的过程中拒绝有写入，也就是写入必须等待。
+
+        // 使用Concurrent
+        // 并发集合类，大大简化多线程编程
+        // ReentrantLock和Condition实现了一个BlockingQueue
+        //      interface	non-thread-safe	                thread-safe
+        //      List	    ArrayList	                    CopyOnWriteArrayList
+        //      Map	        HashMap	                        ConcurrentHashMap
+        //      Set	        HashSet / TreeSet	            CopyOnWriteArraySet
+        //      Queue	    ArrayDeque / LinkedList	        ArrayBlockingQueue / LinkedBlockingQueue
+        //      Deque	    ArrayDeque / LinkedList	        LinkedBlockingDeque
+
+        // 使用Atomic
+        // 提供了一组原子操作的封装类
+
+        // 使用线程池
+        //   线程池内部维护了若干个线程，没有任务的时候，这些线程都处于等待状态。如果有新任务，就分配一个空闲线程执行。
+        //   如果所有线程都处于忙碌状态，新任务要么放入队列等待，要么增加一个新线程进行处理。
+        // 创建一个固定大小的线程池
+        ExecutorService es = Executors.newFixedThreadPool(4);
+        for (int i = 0; i < 6; i++) {
+            es.submit(new Task15(" " + i));
+        }
+        // 关闭线程池
+        es.shutdown();
+
+        // 使用Future
+        // ExecutorService.submit()方法，会返回一个Future类型，Future类型代表一个未来能获取结果的对象：
+
+        // 使用CompletableFuture
+        // Future获得异步执行结果时，要么调用阻塞方法get()，要么轮询看isDone()是否为true，这两种方法都不是很好，因为主线程也会被迫等待。
+        // CompletableFuture 针对Future做了改进，可以传入回调对象，当异步任务完成或者发生异常时，自动调用回调对象的回调方法。
+        // 创建异步执行任务:
+        CompletableFuture<Double> cf16 = CompletableFuture.supplyAsync(ZzzzApplication::fetchPrice16);
+        // 如果执行成功:
+        cf16.thenAccept((result) -> {
+            System.out.println("price16: " + result);
+        });
+        // 如果执行异常:
+        cf16.exceptionally((e) -> {
+            e.printStackTrace();
+            return null;
+        });
+        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {}
+
+        // CompletableFuture 可以串行执行
+        // 第一个任务:
+        CompletableFuture<String> cfQuery17 = CompletableFuture.supplyAsync(() -> {
+            return queryCode17("中国石油", "");
+        });
+        // cfQuery成功后，执行第二个任务:
+        CompletableFuture<Double> cfFetch17 = cfQuery17.thenApplyAsync((code) -> {
+            return fetchPrice17(code, "");
+        });
+        cfFetch17.thenAccept((result) -> {
+            System.out.println("price17: " + result);
+        });
+        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {}
+
+        // 多个CompletableFuture可以并行执行
+        // 两个CompletableFuture执行异步查询:
+        CompletableFuture<String> cfQueryFromSina = CompletableFuture.supplyAsync(() -> {
+            return queryCode17("中国石油", "https://finance.sina.com.cn/code/");
+        });
+        CompletableFuture<String> cfQueryFrom163 = CompletableFuture.supplyAsync(() -> {
+            return queryCode17("中国石油", "https://money.163.com/code/");
+        });
+        // 用anyOf合并为一个新的CompletableFuture:
+        CompletableFuture<Object> cfQuery17_2 = CompletableFuture.anyOf(cfQueryFromSina, cfQueryFrom163);
+        // 两个CompletableFuture执行异步查询:
+        CompletableFuture<Double> cfFetchFromSina = cfQuery17_2.thenApplyAsync((code) -> {
+            return fetchPrice17((String) code, "https://finance.sina.com.cn/price/");
+        });
+        CompletableFuture<Double> cfFetchFrom163 = cfQueryFrom163.thenApplyAsync((code) -> {
+            return fetchPrice17((String) code, "https://money.163.com/price/");
+        });
+        // 用anyOf合并为一个新的CompletableFuture:
+        CompletableFuture<Object> cfFetch17_2 = CompletableFuture.anyOf(cfFetchFromSina, cfFetchFrom163);
+        // 最终结果:
+        cfFetch17_2.thenAccept((result) -> {
+            System.out.println("price17_2: " + result);
+        });
+        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {}
+
+        // 使用ForkJoin
+        // Fork/Join线程池，把一个大任务拆成多个小任务并行执行。
+        // 创建2000个随机数组成的数组:
+        long[] array18 = new long[2000];
+        long expectedSum = 0;
+        // 最笨的办法直接循环汇总结果
+        for (int i = 0; i < array18.length; i++) {
+            array18[i] = MyRandom();
+            expectedSum += array18[i];
+        }
+        System.out.println("Expected sum:" + expectedSum);
+        // 引入 fork/join 线程池 汇总结果:
+        ForkJoinTask<Long> task18 = new SumTask18(array18, 0, array18.length);
+        // 获取当前系统毫秒数
+        Long startTime = System.currentTimeMillis();
+        Long result = ForkJoinPool.commonPool().invoke(task18);
+        Long endTime = System.currentTimeMillis();
+        System.out.println("Fork/join sum: " + result + " in " + (endTime - startTime) + " ms.");
+
+        // 使用ThreadLocal
+        // 获取当前线程的信息
+        LogHere("start logHere...");
+        new Thread(() -> {
+            LogHere("run task19 ...");
+        }).start();
+        new Thread(() -> {
+            LogHere("print task19 ...");
+        }).start();
+        LogHere("end logHere...");
+
+        // 如何在一个线程内传递状态？ ThreadLocal，它可以在一个线程中传递同一个对象
+        // 在一个线程中，横跨若干方法调用，需要传递的对象，我们通常称之为上下文（Context），它是一种状态，可以是用户身份、任务信息等
+        ExecutorService es20 = Executors.newFixedThreadPool(3);
+        String[] users20 = new String[] {"Bob", "Alice", "Tim", "Mike", "Lily", "Jack", "Bush"};
+        for (String user : users20) {
+            es20.submit(new Task20(user));
+        }
+        try {
+            es20.awaitTermination(3, TimeUnit.SECONDS);
+            es20.shutdown();
+        } catch (InterruptedException e) {}
+
+        // java 操作 kafka
+        
+    }
+
+    interface MathOperation {
+        int operation(int a, int b);
+    }
+
+    private int operate(int a, int b, MathOperation mathOperation) {
+        return mathOperation.operation(a, b);
+    }
+
+    interface GreetingService {
+        void sayMessage(String message);
+    }
+
+    public interface Converter<T1, T2> {
+        void convert(int i);
+    }
+
+    static Double fetchPrice16() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+
+        }
+        if (Math.random() < 0.3) {
+            throw new RuntimeException("fetch price16 failed");
+        }
+        return 5 + Math.random() * 100;
+    }
+
+    static String queryCode17(String name, String address) {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {}
+        return "601857";
+    }
+
+    static Double fetchPrice17(String code, String addr) {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {}
+        return 5 + Math.random() * 10;
+    }
+
+    static long MyRandom() {
+        return random18.nextInt(10000);
+    }
+
+    static void LogHere(String s) {
+        System.out.println(Thread.currentThread().getName() + " 线程: " + s);
+    }
 }
 
 class NaturalSupplier implements Supplier {
@@ -1904,3 +2372,351 @@ class LocalDateSupplier implements Supplier<LocalDate> {
         return start.plusDays(n);
     }
 }
+
+class MyThread22 extends Thread {
+    @Override
+    public void run() {
+        System.out.println("start second new thread");
+    }
+}
+
+class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {}
+        System.out.println("start third new thread");
+    }
+}
+
+class MyThread66 extends Thread {
+    @Override
+    public void run() {
+        int n = 0;
+        while (! isInterrupted()) {
+            n++;
+            System.out.println(n + " Thread66");
+        }
+    }
+}
+
+class MyThread77 extends Thread {
+    public void run() {
+        Thread hello = new HelloThread();
+        hello.start();
+        try {
+            hello.join();
+        } catch (InterruptedException e) {
+            System.out.println("MyThread77 interrupted!");
+        }
+        hello.interrupt();
+    }
+}
+
+class HelloThread extends Thread {
+    public void run() {
+        int n = 0;
+        while(!isInterrupted()) {
+            n++;
+            System.out.println(n + " helloThread");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
+    }
+}
+
+class HelloThread88 extends Thread {
+    public volatile boolean running = true;
+    public void run() {
+        int n = 0;
+        while(running) {
+            n++;
+            System.out.println(n + " HelloThread88");
+        }
+        System.out.println("HelloThread88 end");
+    }
+}
+
+class TimerThread extends Thread {
+    @Override
+    public void run() {
+        while(true) {
+            System.out.println("守护进程：" + LocalTime.now());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
+    }
+}
+
+class Counter {
+    public static final Object lock = new Object();
+    public static int count = 0;
+}
+
+class AddThread10 extends Thread {
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            Counter.count += 1;
+        }
+    }
+}
+
+class DecThread10 extends Thread {
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            Counter.count -= 1;
+        }
+    }
+}
+
+class AddThread11 extends Thread {
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            synchronized (Counter.lock) {
+                Counter.count += 1;
+            }
+        }
+    }
+}
+
+class DecThread11 extends Thread {
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            synchronized (Counter.lock) {
+                Counter.count -= 1;
+            }
+        }
+    }
+}
+
+class Counter12 {
+    private int count12 = 0;
+
+    // synchronized 加锁，写法一
+    public void add12(int n) {
+        synchronized(this) {
+            count12 += n;
+        }
+    }
+
+    // synchronized 加锁，写法二
+    public synchronized void dec12(int n) {
+        count12 -= n;
+    }
+
+    public int get() {
+        return count12;
+    }
+}
+
+class TaskQueue13 {
+    Queue<String> queue = new LinkedList<>();
+
+    public synchronized void addTask(String s) {
+        this.queue.add(s);
+        this.notifyAll();
+    }
+
+    public synchronized String doTask() throws InterruptedException {
+        while (queue.isEmpty()) {
+            this.wait();
+        }
+        return queue.remove();
+    }
+}
+
+class TaskQueue14 {
+    private final Lock lock = new ReentrantLock();
+    private final Condition condition = lock.newCondition();
+    private Queue<String> queue = new LinkedList<>();
+
+    public void addTask(String s) {
+        lock.lock();
+        try {
+            queue.add(s);
+            condition.signalAll();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public String doTask() {
+        lock.lock();
+        try {
+            while (queue.isEmpty()) {
+                try {
+                    condition.await();
+                } catch (InterruptedException e) {}
+            }
+            return queue.remove();
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+class Task15 implements Runnable {
+    private final String name;
+
+    public Task15(String name) {
+        this.name = name;
+    }
+
+    public void run() {
+        System.out.println("start task15 " + name);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+
+        }
+        System.out.println("end task15 " + name);
+    }
+}
+
+class SumTask18 extends RecursiveTask<Long> {
+    static final int THRESHOLD = 500;
+    long[] array;
+    int start;
+    int end;
+
+    SumTask18(long[] array, int start, int end) {
+        this.array = array;
+        this.start = start;
+        this.end = end;
+    }
+
+    @Override
+    protected Long compute() {
+        if (end - start <= THRESHOLD) {
+            // 如果任务足够小,直接计算:
+            long sum = 0;
+            for (int i = start; i < end; i++) {
+                sum += this.array[i];
+                // 故意放慢计算速度:
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {}
+            }
+            return sum;
+        }
+        // 任务太大，一分为二
+        int middle = (end + start) / 2;
+        System.out.println(String.format("split %d - %d ==> %d - %d, %d - %d", start, end, start, middle, middle, end));
+        SumTask18 subTask1 = new SumTask18(this.array, start, middle);
+        SumTask18 subTask2 = new SumTask18(this.array, middle, end);
+        // invokeAll会并行运行两个子任务:
+        invokeAll(subTask1, subTask2);
+        // 获得子任务的结果:
+        Long subResult1 = subTask1.join();
+        Long subResult2 = subTask2.join();
+        // 汇总结果:
+        Long result = subResult1 + subResult2;
+        System.out.println("result = " + subResult1 + " + " + subResult2 + " ===> " + result);
+        return result;
+    }
+
+}
+
+class Task20 implements Runnable {
+    final String username;
+
+    public Task20(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public void run() {
+        try (var ctx = new UserContext(this.username)) {
+            new Task1().process();
+            new Task2().process();
+            new Task3().process();
+        }
+    }
+}
+
+class UserContext implements AutoCloseable {
+    private static final ThreadLocal<String> userThreadLocal = new ThreadLocal<>();
+
+    public UserContext(String name) {
+        userThreadLocal.set(name);
+        System.out.printf("[%s]① init user %s...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+    }
+
+    public static String getCurrentUser() {
+        return userThreadLocal.get();
+    }
+
+    @Override
+    public void close() {
+        System.out.printf("[%s]⑤ cleanup for user %s...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+        userThreadLocal.remove();
+    }
+}
+
+class Task1 {
+    public void process() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) { }
+        System.out.printf("[%s]② check user %s...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+    }
+}
+
+class Task2 {
+    public void process() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) { }
+        System.out.printf("[%s]③ %s registered ok...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+    }
+}
+
+class Task3 {
+    public void process() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) { }
+        System.out.printf("[%s]④ %s\'s work has done...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
