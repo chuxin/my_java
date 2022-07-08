@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.bean.Book;
 import com.example.demo.bean.Book22;
+import com.example.demo.myQueue.KafkaProducerTest;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
@@ -170,6 +171,7 @@ public class ZzzzApplication {
         // EJB 概念整理  https://blog.csdn.net/soulofball/article/details/110206188
         // lambda 表达式   https://www.runoob.com/java/java8-lambda-expressions.html
         // 多线程   粗略看   线程同步
+        //
         // kafka
         //    https://juejin.cn/post/6844903919328428040  简单教程，已看完
         //    https://juejin.cn/post/6844903495670169607#heading-4  详细教程，还没全部看完
@@ -1905,7 +1907,7 @@ public class ZzzzApplication {
 
         System.out.println(OffsetDateTime.of(LocalDate.of(2022, 7, 1),
                 LocalTime.of(23, 59, 59, 900000000),
-                ZoneOffset.ofHours(8)));
+                ZoneOffset.ofHours(8)));        // 2022-07-01T23:59:59.900+08:00
 
         // lambda 表达式
         ZzzzApplication tester = new ZzzzApplication();
@@ -1915,31 +1917,31 @@ public class ZzzzApplication {
         MathOperation subtraction = (a, b) -> a - b;
         // ③ 用括号返回语句
         MathOperation multiplication = (int a, int b) -> {return a * b;};
-        System.out.println("a+b= " + tester.operate(10, 5, addition));
-        System.out.println("a-b= " + tester.operate(10, 5, subtraction));
-        System.out.println("a*b= " + tester.operate(10, 5, multiplication));
+        System.out.println("a+b= " + tester.operate(10, 5, addition));  // a+b= 15
+        System.out.println("a-b= " + tester.operate(10, 5, subtraction));   // a-b= 5
+        System.out.println("a*b= " + tester.operate(10, 5, multiplication));    // a*b= 50
         // ④ 不用括号
         GreetingService gs1 = message -> System.out.println("hello " + message);
-        gs1.sayMessage("baidu");
+        gs1.sayMessage("baidu");    // hello baidu
 
         // lambda 变量作用域
         // 引用标记了 final 的外层局部变量
         GreetingService gs2 = message -> System.out.println("people " + salutation + message);
-        gs2.sayMessage(" louis");
+        gs2.sayMessage(" louis");  // people that's the truth louis
 
         // lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）
         // 在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量
         final int num = 1;
         int num22 = 2;
         Converter<Integer, String> conRes = (param) -> System.out.println(String.valueOf(param + num + num22));
-        conRes.convert(2);
+        conRes.convert(2);  // 5
 
         // Arrays.copyOf 方法      把一个数组的区间值完全赋给另一个数组， 区间的开始和结束位置遵循 左闭右开原则
         int a[] = {4, 3, 6, 5, 1, 2};
         int b[] = Arrays.copyOf(a, 4);
         int c[] = Arrays.copyOfRange(a, 2, 5);
-        System.out.println(Arrays.toString(b));
-        System.out.println(Arrays.toString(c));
+        System.out.println(Arrays.toString(b));     // [4, 3, 6, 5]
+        System.out.println(Arrays.toString(c));     // [6, 5, 1]
 
         // 多线程
         // 创建新线程
@@ -1948,17 +1950,17 @@ public class ZzzzApplication {
         t.start();
         // ① 从Thread派生一个自定义类
         Thread t2 = new MyThread22();
-        t2.start();
+        t2.start();     // start second new thread
         // 注意：直接调用 run 方法不会启动新线程
-        t2.run();
+        t2.run();       // start second new thread
         // ② 创建Thread实例时，传入一个Runnable实例
         Thread t3 = new Thread(new MyRunnable());
-        t3.start();
+        t3.start();     // start third new thread
         // ③ 用 lambda 语法进一步简化
         Thread t4 = new Thread(() -> {
             System.out.println("start fourth new thread");
         });
-        t4.start();
+        t4.start();     // start fourth new thread
 
         // 线程的状态
         //   New：新创建的线程，尚未执行；
@@ -1973,22 +1975,26 @@ public class ZzzzApplication {
         Thread t5 = new Thread(() -> {
             System.out.println("hello join");
         });
-        t5.start();
+        t5.start();     // hello join
         try {
             t5.join();
         } catch (InterruptedException e) {}
-        System.out.println("55 main end");
+        System.out.println("55 main end");  // 55 main end
 
         // 中断线程
         // 最常见的功能就是下载，用户下载了一个 10G 的文件，网络太慢，用户等得不耐烦，下载过程中点 取消 按钮
         Thread t6 = new MyThread66();
         t6.start();
+        // 1 Thread66
+        // 2 Thread66
+        // ...
+        // 117 Thread66
         try {
             Thread.sleep(1);    // 暂停1毫秒
             t6.interrupt();     // 中断t6线程
             t6.join();      // 等待t6线程结束
         } catch (InterruptedException e) {}
-        System.out.println("66 main end");
+        System.out.println("66 main end");  // 66 main end
 
         // interrupt 终止 join 的等待
         Thread t7 = new MyThread77();
@@ -1998,7 +2004,7 @@ public class ZzzzApplication {
             t7.interrupt();
             t7.join();
         } catch (InterruptedException e) {}
-        System.out.println("77 main end");
+        System.out.println("77 main end");  // 77 main end
 
         // 线程间共享变量需要使用volatile关键字
         // volatile关键字的目的是告诉虚拟机：
@@ -2006,6 +2012,11 @@ public class ZzzzApplication {
         //      每次修改变量后，立刻回写到主内存。
         HelloThread88 t8 = new HelloThread88();
         t8.start();
+        // 1 HelloThread88
+        // 2 HelloThread88
+        // ...
+        // 129 HelloThread88
+        // HelloThread88 end
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {}
@@ -2015,6 +2026,9 @@ public class ZzzzApplication {
         Thread t9 = new TimerThread();
         t9.setDaemon(true);
 //        t9.start();
+        // 守护进程：11:16:47.479045
+        // 守护进程：11:16:48.483682
+        // ...
 
         // 线程同步
         // 例子一，没有 synchronized
@@ -2026,7 +2040,7 @@ public class ZzzzApplication {
             add10.join();
             dec10.join();
         } catch (InterruptedException e) {}
-        System.out.println(Counter.count);  // 每次打印的数字都不是 0，因为加减过程中读取count变量存在脏读
+        System.out.println(Counter.count);  // -7528 每次打印的数字都不是 0，因为加减过程中读取count变量存在脏读
 
         // 例子二，有 synchronized
         Counter.count = 0;
@@ -2038,7 +2052,7 @@ public class ZzzzApplication {
             add11.join();
             dec11.join();
         } catch (InterruptedException e) {}
-        System.out.println(Counter.count);
+        System.out.println(Counter.count);   // 0
 
         // 同步方法
         var counter12_AA = new Counter12();
@@ -2065,12 +2079,12 @@ public class ZzzzApplication {
             t12_dec.start();
             t12_dec.join();
         } catch (InterruptedException e) {}
-        System.out.println(counter12_AA.get());
-        System.out.println(counter12_BB.get());
+        System.out.println(counter12_AA.get());     // 2000
+        System.out.println(counter12_BB.get());     // 4000
 
         // 使用wait和notify
         // synchronized解决了多线程竞争的问题，使用wait和notify 解决多线程协调的问题
-        // 下面的例子，创建一个线程把10条数据放入 队列，创建 5 个线程，消费队列。 等待 100 毫秒，中断 5 个消费线程
+        // 下面的例子，创建一个线程把10条数据放入 队列，创建 5 个消费线程，用来消费队列。 等待 100 毫秒，中断这 5 个消费线程
         var q13 = new TaskQueue13();
         var arrT13 = new ArrayList<Thread>();
         for (int i = 0; i < 5; i++) {
@@ -2087,7 +2101,7 @@ public class ZzzzApplication {
                     }
                 }
             };
-            t13.start();
+            t13.start();    // execute task: t13-0.5130567154490466
             arrT13.add(t13);
         }
         var add13 = new Thread(() -> {
@@ -2101,7 +2115,7 @@ public class ZzzzApplication {
                 } catch (InterruptedException e) {}
             }
         });
-        add13.start();
+        add13.start();  // add task: t13-0.5130567154490466
         try {
             add13.join();
             Thread.sleep(100);
@@ -2131,7 +2145,7 @@ public class ZzzzApplication {
                     }
                 }
             };
-            t14.start();
+            t14.start();    // execute task: t14-0.41502147849420756
             arrT14.add(t14);
         }
         var add14 = new Thread(() -> {
@@ -2145,7 +2159,7 @@ public class ZzzzApplication {
                 } catch (InterruptedException e) {}
             }
         });
-        add14.start();
+        add14.start();  // add task: t14-0.41502147849420756
         try {
             add14.join();
             Thread.sleep(100);
@@ -2186,6 +2200,13 @@ public class ZzzzApplication {
         ExecutorService es = Executors.newFixedThreadPool(4);
         for (int i = 0; i < 6; i++) {
             es.submit(new Task15(" " + i));
+            // start task15  1
+            // start task15  0
+            // start task15  2
+            // end task15  2
+            // end task15  1
+            // end task15  0
+            // ...
         }
         // 关闭线程池
         es.shutdown();
@@ -2200,7 +2221,7 @@ public class ZzzzApplication {
         CompletableFuture<Double> cf16 = CompletableFuture.supplyAsync(ZzzzApplication::fetchPrice16);
         // 如果执行成功:
         cf16.thenAccept((result) -> {
-            System.out.println("price16: " + result);
+            System.out.println("price16: " + result);   // price16: 17.597618167576652
         });
         // 如果执行异常:
         cf16.exceptionally((e) -> {
@@ -2222,7 +2243,7 @@ public class ZzzzApplication {
             return fetchPrice17(code, "");
         });
         cfFetch17.thenAccept((result) -> {
-            System.out.println("price17: " + result);
+            System.out.println("price17: " + result);   // price17: 7.974464468713185
         });
         // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
         try {
@@ -2250,7 +2271,7 @@ public class ZzzzApplication {
         CompletableFuture<Object> cfFetch17_2 = CompletableFuture.anyOf(cfFetchFromSina, cfFetchFrom163);
         // 最终结果:
         cfFetch17_2.thenAccept((result) -> {
-            System.out.println("price17_2: " + result);
+            System.out.println("price17_2: " + result);  // price17_2: 13.023957920342694
         });
         // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
         try {
@@ -2267,7 +2288,7 @@ public class ZzzzApplication {
             array18[i] = MyRandom();
             expectedSum += array18[i];
         }
-        System.out.println("Expected sum:" + expectedSum);
+        System.out.println("Expected sum:" + expectedSum);  // Expected sum:9788366
         // 引入 fork/join 线程池 汇总结果:
         ForkJoinTask<Long> task18 = new SumTask18(array18, 0, array18.length);
         // 获取当前系统毫秒数
@@ -2275,6 +2296,7 @@ public class ZzzzApplication {
         Long result = ForkJoinPool.commonPool().invoke(task18);
         Long endTime = System.currentTimeMillis();
         System.out.println("Fork/join sum: " + result + " in " + (endTime - startTime) + " ms.");
+        // Fork/join sum: 9788366 in 599 ms.
 
         // 使用ThreadLocal
         // 获取当前线程的信息
@@ -2286,6 +2308,10 @@ public class ZzzzApplication {
             LogHere("print task19 ...");
         }).start();
         LogHere("end logHere...");
+        // main 线程: start logHere...
+        // Thread-29 线程: run task19 ...
+        // main 线程: end logHere...
+        // Thread-30 线程: print task19 ...
 
         // 如何在一个线程内传递状态？ ThreadLocal，它可以在一个线程中传递同一个对象
         // 在一个线程中，横跨若干方法调用，需要传递的对象，我们通常称之为上下文（Context），它是一种状态，可以是用户身份、任务信息等
@@ -2293,6 +2319,18 @@ public class ZzzzApplication {
         String[] users20 = new String[] {"Bob", "Alice", "Tim", "Mike", "Lily", "Jack", "Bush"};
         for (String user : users20) {
             es20.submit(new Task20(user));
+            // [pool-2-thread-1]① init user Bob...
+            // [pool-2-thread-2]① init user Alice...
+            // [pool-2-thread-2]② check user Alice...
+            // [pool-2-thread-1]② check user Bob...
+            // [pool-2-thread-2]③ Alice registered ok...
+            // [pool-2-thread-1]③ Bob registered ok...
+            // [pool-2-thread-3]① init user Mike...
+            // [pool-2-thread-2]④ Alice's work has done...
+            // [pool-2-thread-1]④ Bob's work has done...
+            // [pool-2-thread-1]⑤ cleanup for user Bob...
+            // [pool-2-thread-2]⑤ cleanup for user Alice...
+            // [pool-2-thread-1]① init user Lily...
         }
         try {
             es20.awaitTermination(3, TimeUnit.SECONDS);
@@ -2300,7 +2338,9 @@ public class ZzzzApplication {
         } catch (InterruptedException e) {}
 
         // java 操作 kafka
-        
+        KafkaProducerTest kpt = new KafkaProducerTest("kafka_test001");
+        Thread thread21 = new Thread(kpt);
+        thread21.start();
     }
 
     interface MathOperation {
@@ -2405,10 +2445,14 @@ class MyThread77 extends Thread {
     public void run() {
         Thread hello = new HelloThread();
         hello.start();
+        // 1 helloThread
+        // 2 helloThread
+        // ...
+        // 10 helloThread
         try {
             hello.join();
         } catch (InterruptedException e) {
-            System.out.println("MyThread77 interrupted!");
+            System.out.println("MyThread77 interrupted!");  // MyThread77 interrupted!
         }
         hello.interrupt();
     }
@@ -2526,8 +2570,11 @@ class TaskQueue13 {
 
     public synchronized String doTask() throws InterruptedException {
         while (queue.isEmpty()) {
+            System.out.println("当前的线程 -- " + Thread.currentThread().getName() + " AAA");
             this.wait();
+            System.out.println("当前的线程 -- " + Thread.currentThread().getName() + " BBB");
         }
+        System.out.println("当前的线程 -- " + Thread.currentThread().getName() + " CCC");
         return queue.remove();
     }
 }
@@ -2609,6 +2656,9 @@ class SumTask18 extends RecursiveTask<Long> {
         // 任务太大，一分为二
         int middle = (end + start) / 2;
         System.out.println(String.format("split %d - %d ==> %d - %d, %d - %d", start, end, start, middle, middle, end));
+        // split 0 - 2000 ==> 0 - 1000, 1000 - 2000
+        // split 0 - 1000 ==> 0 - 500, 500 - 1000
+        // split 1000 - 2000 ==> 1000 - 1500, 1500 - 2000
         SumTask18 subTask1 = new SumTask18(this.array, start, middle);
         SumTask18 subTask2 = new SumTask18(this.array, middle, end);
         // invokeAll会并行运行两个子任务:
@@ -2619,6 +2669,9 @@ class SumTask18 extends RecursiveTask<Long> {
         // 汇总结果:
         Long result = subResult1 + subResult2;
         System.out.println("result = " + subResult1 + " + " + subResult2 + " ===> " + result);
+        // result = 2485485 + 2491717 ===> 4977202
+        // result = 2391591 + 2419573 ===> 4811164
+        // result = 4811164 + 4977202 ===> 9788366
         return result;
     }
 

@@ -105,6 +105,19 @@
             Arrays.sort(ttArr);
             System.out.println("ttArr数组排序后的内容：" + Arrays.toString(ttArr));  // ttArr数组排序后的内容：[1, 4, 5, 6, 7, 8]
             System.out.println(Arrays.toString(ttArr).equals("[1, 4, 5, 6, 7, 8]"));    // true
+            String[] arr = new String[]{"Apple", "Orange", "Banana", "Lemon"};
+            Arrays.sort(arr, (s1, s2) -> {
+                return s1.compareTo(s2);
+            });
+            Arrays.sort(arr);
+            System.out.println(Arrays.toString(arr));   // [Apple, Banana, Lemon, Orange]
+            // 数组浅拷贝
+            // Arrays.copyOf  把一个数组的区间值完全赋给另一个数组， 区间的开始和结束位置遵循 左闭右开原则
+            int a[] = {4, 3, 6, 5, 1, 2};
+            int b[] = Arrays.copyOf(a, 4);
+            int c[] = Arrays.copyOfRange(a, 2, 5);
+            System.out.println(Arrays.toString(b));     // [4, 3, 6, 5]
+            System.out.println(Arrays.toString(c));     // [6, 5, 1]
             // 二维数组
             int[][] twoDimenArr = {
                     {15, 6, 7, 8},
@@ -1313,26 +1326,50 @@
 
 
 7、Lambda
-    定义：表达式简化了Java的函数式编程
+    定义：Lambda 表达式，也可称为闭包，简化了Java的函数式编程
     例子：
-        String[] arr = new String[]{"Apple", "Orange", "Banana", "Lemon"};
-        // Arrays.sort(arr, (s1, s2) -> {
-        //     return s1.compareTo(s2);
-        // });
-        Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
-
-        // 把一个List<String>转换为List<Person>
-        // 方法①
-        List<String> names = List.of("ee", "ff", "gg");
-        List<Person> persons = new ArrayList<>();
-        for (String name: names) {
-            persons.add(new Person(name));
+        public class ZzzzApplication {
+            final static String salutation = "that's the truth";
+            interface MathOperation {
+                int operation(int a, int b);
+            }
+            private int operate(int a, int b, MathOperation mathOperation) {
+                return mathOperation.operation(a, b);
+            }
+            interface GreetingService {
+                void sayMessage(String message);
+            }
+            public interface Converter<T1, T2> {
+                void convert(int i);
+            }
         }
-        System.out.println(persons);
-        // 方法②  看不懂， map, Person::new
-        List<Person> persons2 = names.stream().map(Person::new).collect(Collectors.toList());
-        System.out.println(persons2);
+        // lambda 表达式写法
+        ZzzzApplication tester = new ZzzzApplication();
+        // ① 类型声明
+        MathOperation addition = (int a, int b) -> a + b;
+        // ② 无类型声明
+        MathOperation subtraction = (a, b) -> a - b;
+        // ③ 用括号返回语句
+        MathOperation multiplication = (int a, int b) -> {return a * b;};
+        System.out.println("a+b= " + tester.operate(10, 5, addition));  // a+b= 15
+        System.out.println("a-b= " + tester.operate(10, 5, subtraction));   // a-b= 5
+        System.out.println("a*b= " + tester.operate(10, 5, multiplication));    // a*b= 50
+        // ④ 不用括号
+        GreetingService gs1 = message -> System.out.println("hello " + message);
+        gs1.sayMessage("baidu");    // hello baidu
+
+        // lambda 变量作用域
+        // 引用标记了 final 的外层局部变量
+        GreetingService gs2 = message -> System.out.println("people " + salutation + message);
+        gs2.sayMessage(" louis");  // people that's the truth louis
+        // lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）
+        // 在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量，否则报错
+        final int num = 1;
+        int num22 = 2;
+        Converter<Integer, String> conRes = (param) -> System.out.println(String.valueOf(param + num + num22));
+        conRes.convert(2);  // 5
+
+
 
 
 8、

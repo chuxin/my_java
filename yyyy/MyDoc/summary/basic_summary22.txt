@@ -255,6 +255,10 @@
             ZonedDateTime zdt3 = ins.atZone(ZoneId.systemDefault());
             System.out.println(zdt3);       // 2022-06-05T12:03:11+08:00[Asia/Shanghai]
 
+    其它
+        // 2022-07-01T23:59:59.900+08:00
+        System.out.println(OffsetDateTime.of(LocalDate.of(2022, 7, 1), LocalTime.of(23, 59, 59, 900000000), ZoneOffset.ofHours(8)));
+
 
 3、使用 Stream
     概念：Stream 代表的是任意Java对象的序列
@@ -294,7 +298,7 @@
 
         // filter  过滤元素
         Stream.generate(new LocalDateSupplier()).limit(31)
-                .filter(ldt22 -> ldt22.getDayOfWeek() == DayOfWeek.SATURDAY || ldt22.getDayOfWeek() == DayOfWeek.SUNDAY)
+                .filter(ldt22 -> ldt22.getDayOprovidedfWeek() == DayOfWeek.SATURDAY || ldt22.getDayOfWeek() == DayOfWeek.SUNDAY)
                 .forEach(System.out::print); // 2022-06-04 2022-06-05 2022-06-11 2022-06-12 2022-06-18 2022-06-19 2022-06-25 2022-06-26 2022-07-02
 
         // reduce  把一个Stream的所有元素按照聚合函数聚合成一个结果
@@ -320,18 +324,41 @@
         Stream<String> stream44 = Stream.of("Apple", "", null, "Pear", "  ", "Orange");
         List<String> list44 = stream44.filter(s44 -> s44 != null && !s44.isBlank()).collect(Collectors.toList());
         System.out.println(list44);     // [Apple, Pear, Orange]
+
+        public class Person {
+            String name;
+            public Person(String name) {
+                this.name = name;
+            }
+            public String toString() {
+                return "Person:" + this.name;
+            }
+        }
+        // 方法①  把一个List<String>转换为List<Person>
+        List<String> names = List.of("ee", "ff", "gg");
+        List<Person> persons = new ArrayList<>();
+        for (String name: names) {
+            persons.add(new Person(name));
+        }
+        System.out.println(persons);
+        // 方法②  把一个List<String>转换为List<Person>
+        List<Person> persons2 = names.stream().map(Person::new).collect(Collectors.toList());
+        System.out.println(persons2);
+
         // 输出为数组
         List<String> list55 = List.of("Apple", "Banana", "Orange");
         String[] array55 = list55.stream().toArray(String[]::new);
         for(String arr:array55) {
             System.out.println(arr);    // Apple  Banana  Orange
         }
+
         // 输出为Map
         Stream<String> stream66 = Stream.of("appL:apple", "msft1:microsoft");
         Map<String, String> map66 = stream66.collect(Collectors.toMap(
                 s6 -> s6.substring(0, s6.indexOf(":")), s6 -> s6.substring(s6.indexOf(":")+1)
         ));
         System.out.println(map66);  // {appL=apple, msft1=microsoft}
+
         // 分组输出
         List<String> list77 = List.of("Apple", "Banana", "Blackberry", "Coconut", "Avocado", "Cherry", "Apricots");
         Map<String, List<String>> groups = list77.stream().collect(Collectors.groupingBy(
@@ -921,5 +948,512 @@
             }
 
 
-8、EJB
+8、EJB（Enterprise JavaBean）
+    概念：将业务逻辑从客户端软件中抽取出来，封装在一个组件中。
+         这个组件运行在一个独立的服务器上，
+         客户端软件通过网络调用组件提供的服务以实现业务逻辑，而客户端软件的功能单纯到只负责发送调用请求和显示处理结果。
+         这个运行在一个独立的服务器上，并封装了业务逻辑的组件就是EJB组件
+
+    大白话解释：把你编写的软件中那些需要执行制定的任务的类，不放到客户端软件上了，而是给他打成包放到一个服务器上了
+
+    实现技术：客户端是通过 远程对象调用的技术RMI 调用 运行在独立服务器上的EJB组件。
+            在RMI之下的网络细节，如：TCP 和Socket 等等无需关注
+
+    服务器集群：通过RMI的通信，连接不同功能模块的服务器，以实现一个完整的功能。
+
+
+9、反射（Reflection）
+    概念：反射是为了解决在运行期，对某个实例一无所知的情况下，如何调用其方法。
+         通过Class实例获取class信息的方法称为反射。
+
+
+10、多线程
+    概念：多线程是Java最基本的一种并发模型
+         一个Java程序实际上是一个JVM进程，JVM进程用一个主线程来执行main()方法，在main()方法内部，我们又可以启动多个线程。
+             此外，JVM还有负责垃圾回收的其他工作线程等
+
+    多线程编程特点：
+        多线程经常需要读写共享数据
+        线程需要同步
+        复杂度高，调试困难
+
+    实现多任务的方法：
+        ① 多进程模式（每个进程只有一个线程）
+        ② 多线程模式（一个进程有多个线程）
+        ③ 多进程＋多线程模式（复杂度最高）
+
+    进程 vs 线程
+        多进程的优点：
+            多进程稳定性比多线程高，因为在多进程的情况下，一个进程崩溃不会影响其他进程，而在多线程的情况下，任何一个线程崩溃会直接导致整个进程崩溃
+        多进程的缺点：
+            创建进程比创建线程开销大，尤其是在Windows系统上；
+            进程间通信比线程间通信要慢，因为线程间通信就是读写同一个变量，速度很快。
+
+
+    创建线程
+        注意：
+            一个线程对象只能调用一次start()方法；
+            线程的执行代码写在run()方法中；
+            线程调度由操作系统决定，程序本身无法决定哪个线程先执行完，哪个后执行完；
+        例子：
+            // 最简单的多线程。这个线程启动后实际上什么也不做就立刻结束了
+            Thread t = new Thread();
+            t.start();
+
+            // 方法① 从Thread派生一个自定义类
+            class MyThread22 extends Thread {
+                @Override
+                public void run() {
+                    System.out.println("start second new thread");
+                }
+            }
+            Thread t2 = new MyThread22();
+            // 注意：直接调用 run 方法不会启动新线程
+            t2.start();     // start second new thread
+
+            // 方法② 创建Thread实例时，传入一个Runnable实例
+            Thread t3 = new Thread(new MyRunnable());
+            t3.start();     // start third new thread
+
+            // 方法③ 用 lambda 语法进一步简化
+            Thread t4 = new Thread(() -> {
+                System.out.println("start fourth new thread");
+            });
+            t4.start();     // start fourth new thread
+
+    线程的状态
+        状态清单：
+            New：新创建的线程，尚未执行；
+            Runnable：运行中的线程，正在执行run()方法的Java代码；
+            Blocked：运行中的线程，因为某些操作被阻塞而挂起；
+            Waiting：运行中的线程，因为某些操作在等待中；
+            Timed Waiting：运行中的线程，因为执行sleep()方法正在计时等待；
+            Terminated：线程已终止，因为run()方法执行完毕。
+
+        状态流转顺序：new -> Runnable、Blocked、Waiting、Timed Waiting 线程在四种状态间来回切换 -> Terminated
+
+        线程终止的原因
+            线程正常终止：run()方法执行到return语句返回；
+            线程意外终止：run()方法因为未捕获的异常导致线程终止；
+            对某个线程的Thread实例调用stop()方法强制终止（强烈不推荐使用）
+
+        例子：
+            // 通过t5.join()等待t5线程结束后再继续运行，此时 t5.join()会让main线程进入等待状态
+            Thread t5 = new Thread(() -> {
+                System.out.println("hello join");
+            });
+            t5.start();     // hello join
+            try {
+                t5.join();
+            } catch (InterruptedException e) {}
+            System.out.println("55 main end");  // 55 main end
+
+            // 中断线程
+            // 最常见的功能就是下载，用户下载了一个 10G 的文件，网络太慢，用户等得不耐烦，下载过程中点 取消 按钮
+            // ① 使用 interrupt
+            // 例子一
+            class MyThread66 extends Thread {
+                @Override
+                public void run() {
+                    int n = 0;
+                    // 调用interrupt()方法可以请求中断一个线程
+                    // 通过 isInterrupted() 检测自身是否需要中断
+                    while (! isInterrupted()) {
+                        n++;
+                        System.out.println(n + " Thread66");
+                    }
+                }
+            }
+            Thread t6 = new MyThread66();
+            t6.start();
+            // 1 Thread66
+            // 2 Thread66
+            // ...
+            // 117 Thread66
+            try {
+                Thread.sleep(1);    // 暂停1毫秒
+                t6.interrupt();     // 中断t6线程
+                t6.join();          // 等待t6线程结束
+            } catch (InterruptedException e) {}
+            System.out.println("66 main end");  // 66 main end
+
+            // 例子二
+            // interrupt 终止 join 的等待，让 join 中的线程立马结束运行
+            class MyThread77 extends Thread {
+                public void run() {
+                    Thread hello = new HelloThread();
+                    hello.start();
+                    // 1 helloThread
+                    // 2 helloThread
+                    // ...
+                    // 10 helloThread
+                    try {
+                        // t7.interrupt() 让这里做了捕获，并结束 MyThread77 线程
+                        hello.join();
+                    } catch (InterruptedException e) {
+                        System.out.println("MyThread77 interrupted!");  // MyThread77 interrupted!
+                    }
+                    // 如果去掉这一行代码，可以发现hello线程仍然会继续运行，且JVM不会退出
+                    // 所以这里也要手动的结束 HelloThread 线程
+                    hello.interrupt();
+                }
+            }
+            Thread t7 = new MyThread77();
+            t7.start();
+            try {
+                Thread.sleep(1000);
+                t7.interrupt();
+                t7.join();
+            } catch (InterruptedException e) {}
+            System.out.println("77 main end");  // 77 main end
+
+            // ② 使用 running 标志位来作判断
+            class HelloThread88 extends Thread {
+                // volatile 关键字请看下面一节的解释
+                public volatile boolean running = true;
+                public void run() {
+                    int n = 0;
+                    while(running) {
+                        n++;
+                        System.out.println(n + " HelloThread88");
+                    }
+                    System.out.println("HelloThread88 end");
+                }
+            }
+            HelloThread88 t8 = new HelloThread88();
+            t8.start();
+            // 1 HelloThread88
+            // 2 HelloThread88
+            // ...
+            // 129 HelloThread88
+            // HelloThread88 end
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {}
+            t8.running = false;
+
+    Java的内存模型
+        概念：在Java虚拟机中，变量的值保存在主内存中，但是，当线程访问变量时，它会先获取一个副本，并保存在自己的工作内存中。
+             如果线程修改了变量的值，虚拟机会在某个时刻把修改后的值回写到主内存，但是，这个时间是不确定的！
+             这会导致如果一个线程更新了某个变量，另一个线程读取的值可能还是更新前的。这就造成了多线程之间共享的变量不一致。
+
+         解决办法：
+            volatile关键字的目的是告诉虚拟机：① 每次访问变量时，总是获取主内存的最新值；② 每次修改变量后，立刻回写到主内存。
+            volatile关键字让变量在线程间及时共享最新值
+
+    守护线程(Daemon Thread)
+        概念：守护线程是指为其他线程服务的线程。在JVM中，所有非守护线程都执行完毕后，无论有没有守护线程，虚拟机都会自动退出。
+             守护线程的目的就是无限循环，类似于一个定时触发任务的线程。
+        注意：守护线程不能持有任何需要关闭的资源，例如打开文件等，因为虚拟机退出时，守护线程没有任何机会来关闭文件，这会导致数据丢失。
+
+        例子：
+            class TimerThread extends Thread {
+                @Override
+                public void run() {
+                    while(true) {
+                        System.out.println("守护进程：" + LocalTime.now());
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            break;
+                        }
+                    }
+                }
+            }
+            Thread t9 = new TimerThread();
+            t9.setDaemon(true);
+            // t9.start();
+            // 守护进程：11:16:47.479045
+            // 守护进程：11:16:48.483682
+            // ...
+
+    线程同步
+        概念：多线程同时读写共享变量时，会造成脏读，因此需要通过synchronized同步
+             同步的本质就是给指定对象加锁，加锁后才能继续执行后续代码；
+
+        线程安全(thread-safe):
+            如果一个类被设计为允许多线程正确访问，我们就说这个类就是“线程安全”的，比如：java.lang.StringBuffer
+            还有一些不变类，例如String，Integer，LocalDate，它们的所有成员变量都是final，多线程同时访问时只能读不能写，这些不变类也是线程安全的。
+            类似Math这些只提供静态方法，没有成员变量的类，也是线程安全的。
+
+        非线程安全：大部分类，例如ArrayList，都是非线程安全的。
+
+        例子：
+            // 例子一，没有 synchronized
+            class AddThread10 extends Thread {
+                public void run() {
+                    for (int i = 0; i < 10000; i++) {
+                        Counter.count += 1;
+                    }
+                }
+            }
+            class DecThread10 extends Thread {
+                public void run() {
+                    for (int i = 0; i < 10000; i++) {
+                        Counter.count -= 1;
+                    }
+                }
+            }
+            var add10 = new AddThread10();
+            var dec10 = new DecThread10();
+            try {
+                add10.start();
+                dec10.start();
+                add10.join();
+                dec10.join();
+            } catch (InterruptedException e) {}
+            System.out.println(Counter.count);  // -7528 每次打印的数字都不是 0，因为加减过程中读取count变量存在脏读
+
+            // 例子二，有 synchronized
+            class Counter12 {
+                private int count12 = 0;
+
+                // synchronized 加锁，写法一
+                public void add12(int n) {
+                    synchronized(this) {
+                        count12 += n;
+                    }
+                }
+
+                // synchronized 加锁，写法二
+                public synchronized void dec12(int n) {
+                    count12 -= n;
+                }
+
+                public int get() {
+                    return count12;
+                }
+            }
+            var counter12_AA = new Counter12();
+            var counter12_BB = new Counter12();
+            Thread t12_add = new Thread(() -> {
+                int tmp1 = 1;
+                while (tmp1 <= 2000) {
+                    tmp1++;
+                    counter12_AA.add12(2);
+                    counter12_BB.add12(4);
+                }
+            });
+            Thread t12_dec = new Thread(() -> {
+                int tmp2 = 1;
+                while (tmp2 <= 2000) {
+                    tmp2++;
+                    counter12_AA.dec12(1);
+                    counter12_BB.dec12(2);
+                }
+            });
+            try {
+                t12_add.start();
+                t12_add.join();
+                t12_dec.start();
+                t12_dec.join();
+            } catch (InterruptedException e) {}
+            System.out.println(counter12_AA.get());     // 2000
+            System.out.println(counter12_BB.get());     // 4000
+
+    可重入的锁
+        概念：JVM允许同一个线程重复获取同一个锁，这种能被同一个线程反复获取的锁，就叫做可重入锁。
+             获取锁的时候，不但要判断是否是第一次获取，还要记录这是第几次获取。
+                 每获取一次锁，记录+1，每退出synchronized块，记录-1，减到0的时候，才会真正释放锁。
+
+    死锁
+        概念：死锁产生的条件是多线程各自持有不同的锁，并互相试图获取对方已持有的锁，导致无限等待；
+             避免死锁的方法是多线程获取锁的顺序要一致。
+
+    多线程协调
+        概念：多个线程间如何协调的运行。
+             synchronized解决了多线程竞争的问题，使用wait和notify 解决多线程协调的问题
+        原则：当条件不满足时，线程进入等待状态；当条件满足时，线程被唤醒，继续执行任务。
+
+        例子：
+            // 下面的例子，创建一个线程把10条数据放入 队列，创建 5 个消费线程，用来消费队列。 等待 100 毫秒，中断这 5 个消费线程
+            class TaskQueue13 {
+                Queue<String> queue = new LinkedList<>();
+
+                public synchronized void addTask(String s) {
+                    this.queue.add(s);
+                    // 使用notifyAll()一次性全部唤醒所有当前正在this锁等待的线程
+                    // 唤醒后，首先要等待执行addTask()的线程结束此方法后，才能释放this锁，随后，这3个线程中只能有一个获取到this锁，剩下两个将继续等待。
+                    this.notifyAll();
+                }
+
+                public synchronized String doTask() throws InterruptedException {
+                    while (queue.isEmpty()) {
+                        // wait()方法必须在当前获取的锁对象上调用(即在synchronized方法中被调用)，这里获取的是this锁，因此调用this.wait()
+                        // 调用wait()方法后，线程进入等待状态，wait()方法不会返回，直到被其他线程唤醒后，wait()方法才会返回，然后继续执行下一条语句。
+                        // 当一个线程在this.wait()等待时，它就会释放this锁，从而使得其他线程能够在addTask()方法获得this锁
+                        // await()会释放当前锁，进入等待状态；
+                        this.wait();
+                    }
+                    // 用 while 不用 if 的原因
+                    // 其中一个线程拿到了锁顺利执行，剩下的线程如果获取this锁后执行queue.remove()，此刻队列可能已经没有任何元素了。
+                    return queue.remove();
+                }
+            }
+            var q13 = new TaskQueue13();
+            var arrT13 = new ArrayList<Thread>();
+            for (int i = 0; i < 5; i++) {
+                var t13 = new Thread() {
+                    public void run() {
+                        // 执行 task
+                        while(true) {
+                            try {
+                                String doS13 = q13.doTask();
+                                System.out.println("execute task: " + doS13);
+                            } catch (InterruptedException e) {
+                                return ;
+                            }
+                        }
+                    }
+                };
+                t13.start();    // execute task: t13-0.5130567154490466
+                arrT13.add(t13);
+            }
+            var add13 = new Thread(() -> {
+                for (int i = 0; i < 10; i++) {
+                    // 放入 task
+                    String addS13 = "t13-" + Math.random();
+                    System.out.println("add task: " + addS13);
+                    q13.addTask(addS13);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {}
+                }
+            });
+            add13.start();  // add task: t13-0.5130567154490466
+            try {
+                add13.join();
+                Thread.sleep(100);
+            } catch (InterruptedException e) {}
+            for (var tmp13:arrT13) {
+                tmp13.interrupt();
+            }
+
+    另一套多线程编码
+        ReentrantLock：ReentrantLock用于替代synchronized加锁，另外有尝试机制。
+                       ReentrantLock可以替代synchronized进行同步
+                       java.util.concurrent包简化多线程程序的编写
+
+        Condition：使用Condition对象来实现wait和notify的功能
+
+        例子：
+            class TaskQueue14 {
+                private final Lock lock = new ReentrantLock();
+                private final Condition condition = lock.newCondition();
+                private Queue<String> queue = new LinkedList<>();
+
+                public void addTask(String s) {
+                    lock.lock();
+                    try {
+                        queue.add(s);
+                        condition.signalAll();
+                    } finally {
+                        lock.unlock();
+                    }
+                }
+
+                public String doTask() {
+                    lock.lock();
+                    try {
+                        while (queue.isEmpty()) {
+                            try {
+                                condition.await();
+                            } catch (InterruptedException e) {}
+                        }
+                        return queue.remove();
+                    } finally {
+                        lock.unlock();
+                    }
+                }
+            }
+            var q14 = new TaskQueue14();
+            var arrT14 = new ArrayList<Thread>();
+            for (int i = 0; i < 5; i++) {
+                var t14 = new Thread() {
+                    public void run() {
+                        // 执行 task
+                        while(true) {
+                            String doS14 = q14.doTask();
+                            System.out.println("execute task: " + doS14);
+                        }
+                    }
+                };
+                t14.start();    // execute task: t14-0.41502147849420756
+                arrT14.add(t14);
+            }
+            var add14 = new Thread(() -> {
+                for (int i = 0; i < 10; i++) {
+                    // 放入 task
+                    String addS14 = "t14-" + Math.random();
+                    System.out.println("add task: " + addS14);
+                    q14.addTask(addS14);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {}
+                }
+            });
+            add14.start();  // add task: t14-0.41502147849420756
+            try {
+                add14.join();
+                Thread.sleep(100);
+            } catch (InterruptedException e) {}
+            for (var tmp14:arrT14) {
+                tmp14.interrupt();
+            }
+
+    ReadWriteLock
+        概念：用于解决一个特殊场景，只允许一个线程写入，允许多个线程在没有写入时同时读取，适合读多写少的场景。
+        场景：一个论坛的帖子，回复可以看做写入操作，它是不频繁的，但是，浏览可以看做读取操作，是非常频繁的，这种情况就可以使用 ReadWriteLock。
+        技术实现：ReadWriteLock
+        缺点：如果有线程正在读，写线程需要等待读线程释放锁后才能获取写锁，即读的过程中不允许写，这是一种悲观的读锁。
+
+    乐观锁
+        概念：乐观锁就是乐观地估计读的过程中大概率不会有写入，因此被称为乐观锁。
+               乐观锁的并发效率更高，但一旦有小概率的写入导致读取的数据不一致，需要能检测出来，再读一遍就行。
+        技术实现：StampedLock提供了乐观读锁，可取代ReadWriteLock以进一步提升并发性能
+
+    悲观锁
+        概念：读的过程中拒绝有写入，也就是写入必须等待。
+
+
+    Concurrent集合/java现成的并发包
+        BlockingQueue概念：当一个线程调用这个TaskQueue的getTask()方法时，该方法内部可能会让线程变成等待状态，直到队列条件满足不为空，
+                            线程被唤醒后，getTask()方法才会返回。 上面的例子里 ReentrantLock和Condition 实现了一个BlockingQueue
+                          并发集合类，大大简化多线程编程，避免自己编写多线程同步代码！！！
+
+        并发集合类 concurrent 清单：
+            interface	non-thread-safe	                thread-safe
+            List	    ArrayList	                    CopyOnWriteArrayList
+            Map	        HashMap	                        ConcurrentHashMap
+            Set	        HashSet / TreeSet	            CopyOnWriteArraySet
+            Queue	    ArrayDeque / LinkedList	        ArrayBlockingQueue / LinkedBlockingQueue
+            Deque	    ArrayDeque / LinkedList	        LinkedBlockingDeque
+
+    Atomic
+        概念：提供了一组原子操作的封装类
+
+    线程池
+        概念：线程池内部维护了若干个线程，没有任务的时候，这些线程都处于等待状态。如果有新任务，就分配一个空闲线程执行。
+                   //   如果所有线程都处于忙碌状态，新任务要么放入队列等待，要么增加一个新线程进行处理。
+                   // 创建一个固定大小的线程池
+
+        例子：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
