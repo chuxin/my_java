@@ -1401,7 +1401,7 @@
                 tmp14.interrupt();
             }
 
-    ReadWriteLock
+    ReadWriteLock(特殊场景)
         概念：用于解决一个特殊场景，只允许一个线程写入，允许多个线程在没有写入时同时读取，适合读多写少的场景。
         场景：一个论坛的帖子，回复可以看做写入操作，它是不频繁的，但是，浏览可以看做读取操作，是非常频繁的，这种情况就可以使用 ReadWriteLock。
         技术实现：ReadWriteLock
@@ -1414,7 +1414,6 @@
 
     悲观锁
         概念：读的过程中拒绝有写入，也就是写入必须等待。
-
 
     Concurrent集合/java现成的并发包
         BlockingQueue概念：当一个线程调用这个TaskQueue的getTask()方法时，该方法内部可能会让线程变成等待状态，直到队列条件满足不为空，
@@ -1434,21 +1433,307 @@
 
     线程池
         概念：线程池内部维护了若干个线程，没有任务的时候，这些线程都处于等待状态。如果有新任务，就分配一个空闲线程执行。
-                   //   如果所有线程都处于忙碌状态，新任务要么放入队列等待，要么增加一个新线程进行处理。
-                   // 创建一个固定大小的线程池
+               如果所有线程都处于忙碌状态，新任务要么放入队列等待，要么增加一个新线程进行处理。
+
+        实现类：
+            FixedThreadPool：线程数固定的线程池
+            CachedThreadPool：线程数根据任务动态调整的线程池
+            SingleThreadExecutor：仅单线程执行的线程池。
+            ScheduledThreadPool：有一种任务，需要定期反复执行，例如，每秒刷新证券价格。可以使用ScheduledThreadPool。
+                                 同时我们完全可以用ScheduledThreadPool取代旧的Timer。
 
         例子：
+            class Task15 implements Runnable {
+                private final String name;
+
+                public Task15(String name) {
+                    this.name = name;
+                }
+
+                public void run() {
+                    System.out.println("start task15 " + name);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+
+                    }
+                    System.out.println("end task15 " + name);
+                }
+            }
+            // ExecutorService接口表示线程池
+            // 创建一个固定大小的线程池:
+            ExecutorService es = Executors.newFixedThreadPool(4);
+            for (int i = 0; i < 6; i++) {
+                es.submit(new Task15(" " + i));
+                // start task15  1
+                // start task15  0
+                // start task15  2
+                // end task15  2
+                // end task15  1
+                // end task15  0
+                // ...
+            }
+            // 关闭线程池
+            es.shutdown();
+
+    ForkJoin(特殊场景)
+        概念：一种新的线程池，它可以执行一种特殊的任务：把一个大任务拆成多个小任务并行执行
+             Fork/Join是一种基于“分治”的算法：通过分解任务，并行执行，最后合并结果得到最终结果。
+
+        例子：
+            class SumTask18 extends RecursiveTask<Long> {
+                static final int THRESHOLD = 500;
+                long[] array;
+                int start;
+                int end;
+
+                SumTask18(long[] array, int start, int end) {
+                    this.array = array;
+                    this.start = start;
+                    this.end = end;
+                }
+
+                @Override
+                protected Long compute() {
+                    if (end - start <= THRESHOLD) {
+                        // 如果任务足够小,直接计算:
+                        long sum = 0;
+                        for (int i = start; i < end; i++) {
+                            sum += this.array[i];
+                            // 故意放慢计算速度:
+                            try {
+                                Thread.sleep(1);
+                            } catch (InterruptedException e) {}
+                        }
+                        return sum;
+                    }
+                    // 任务太大，一分为二
+                    int middle = (end + start) / 2;
+                    System.out.println(String.format("split %d - %d ==> %d - %d, %d - %d", start, end, start, middle, middle, end));
+                    // split 0 - 2000 ==> 0 - 1000, 1000 - 2000
+                    // split 0 - 1000 ==> 0 - 500, 500 - 1000
+                    // split 1000 - 2000 ==> 1000 - 1500, 1500 - 2000
+                    SumTask18 subTask1 = new SumTask18(this.array, start, middle);
+                    SumTask18 subTask2 = new SumTask18(this.array, middle, end);
+                    // invokeAll会并行运行两个子任务:
+                    invokeAll(subTask1, subTask2);
+                    // 获得子任务的结果:
+                    Long subResult1 = subTask1.join();
+                    Long subResult2 = subTask2.join();
+                    // 汇总结果:
+                    Long result = subResult1 + subResult2;
+                    System.out.println("result = " + subResult1 + " + " + subResult2 + " ===> " + result);
+                    // result = 2485485 + 2491717 ===> 4977202
+                    // result = 2391591 + 2419573 ===> 4811164
+                    // result = 4811164 + 4977202 ===> 9788366
+                    return result;
+                }
+            }
+            // 创建2000个随机数组成的数组:
+            long[] array18 = new long[2000];
+            long expectedSum = 0;
+            // 最笨的办法直接循环汇总结果
+            for (int i = 0; i < array18.length; i++) {
+                array18[i] = MyRandom();
+                expectedSum += array18[i];
+            }
+            System.out.println("Expected sum:" + expectedSum);  // Expected sum:9788366
+            // 引入 fork/join 线程池 汇总结果:
+            ForkJoinTask<Long> task18 = new SumTask18(array18, 0, array18.length);
+            // 获取当前系统毫秒数
+            Long startTime = System.currentTimeMillis();
+            Long result = ForkJoinPool.commonPool().invoke(task18);
+            Long endTime = System.currentTimeMillis();
+            System.out.println("Fork/join sum: " + result + " in " + (endTime - startTime) + " ms.");
+            // Fork/join sum: 9788366 in 599 ms.
+
+     CompletableFuture
+        Future概念：ExecutorService.submit()方法，会返回一个Future类型，Future类型代表一个未来能获取结果的对象。
+                   Future获得异步执行结果时，要么调用阻塞方法get()，要么轮询看isDone()是否为true，这两种方法会让主线程被迫等待。
+        CompletableFuture概念：① 对Future做了改进，实现异步回调机制。可以传入回调对象，当异步任务完成或者发生异常时，自动调用回调对象的回调方法。
+                              ② 多个CompletableFuture可以串行执行，可以并行执行。
+
+        Callable接口: 比Runnable接口多了一个返回值，Callable接口是一个泛型接口，可以返回指定类型的结果
+
+        例子：
+            // 例子一，简单使用
+            static Double fetchPrice16() {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+
+                }
+                if (Math.random() < 0.3) {
+                    throw new RuntimeException("fetch price16 failed");
+                }
+                return 5 + Math.random() * 100;
+            }
+            // 创建异步执行任务:
+            CompletableFuture<Double> cf16 = CompletableFuture.supplyAsync(ZzzzApplication::fetchPrice16);
+            // 如果执行成功:
+            cf16.thenAccept((result) -> {
+                System.out.println("price16: " + result);   // price16: 17.597618167576652
+            });
+            // 如果执行异常:
+            cf16.exceptionally((e) -> {
+                e.printStackTrace();
+                return null;
+            });
+            // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {}
+
+            // 例子二，多个CompletableFuture并行执行
+            static String queryCode17(String name, String address) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {}
+                return "601857";
+            }
+
+            static Double fetchPrice17(String code, String addr) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {}
+                return 5 + Math.random() * 10;
+            }
+            // 两个CompletableFuture执行异步查询:
+            CompletableFuture<String> cfQueryFromSina = CompletableFuture.supplyAsync(() -> {
+                return queryCode17("中国石油", "https://finance.sina.com.cn/code/");
+            });
+            CompletableFuture<String> cfQueryFrom163 = CompletableFuture.supplyAsync(() -> {
+                return queryCode17("中国石油", "https://money.163.com/code/");
+            });
+            // 用anyOf合并为一个新的CompletableFuture:
+            CompletableFuture<Object> cfQuery17_2 = CompletableFuture.anyOf(cfQueryFromSina, cfQueryFrom163);
+            // 两个CompletableFuture执行异步查询:
+            CompletableFuture<Double> cfFetchFromSina = cfQuery17_2.thenApplyAsync((code) -> {
+                return fetchPrice17((String) code, "https://finance.sina.com.cn/price/");
+            });
+            CompletableFuture<Double> cfFetchFrom163 = cfQueryFrom163.thenApplyAsync((code) -> {
+                return fetchPrice17((String) code, "https://money.163.com/price/");
+            });
+            // 用anyOf合并为一个新的CompletableFuture:
+            CompletableFuture<Object> cfFetch17_2 = CompletableFuture.anyOf(cfFetchFromSina, cfFetchFrom163);
+            // 最终结果:
+            cfFetch17_2.thenAccept((result) -> {
+                System.out.println("price17_2: " + result);  // price17_2: 13.023957920342694
+            });
+            // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {}
+
+    ThreadLocal
+        概念：如何在一个线程内传递状态？ ThreadLocal，它可以在一个线程中传递同一个对象
+             ThreadLocal相当于给每个线程都开辟了一个独立的存储空间，各个线程的ThreadLocal关联的实例互不干扰
+        注意：ThreadLocal一定要在finally中清除。因为当前线程执行完后，会被重新放入线程池中，如果没被清除，下次再执行次线程时，会把上一次的状态带进去。
+
+        上下文（Context）：在一个线程中，横跨若干方法调用，需要传递的对象，我们通常称之为上下文（Context），它是一种状态，可以是用户身份、任务信息等
+
+        例子：
+            // 例子一，Thread.currentThread().getName()
+            static void LogHere(String s) {
+                System.out.println(Thread.currentThread().getName() + " 线程: " + s);
+            }
+            // 获取当前线程的信息
+            LogHere("start logHere...");
+            new Thread(() -> {
+                LogHere("run task19 ...");
+            }).start();
+            new Thread(() -> {
+                LogHere("print task19 ...");
+            }).start();
+            LogHere("end logHere...");
+            // main 线程: start logHere...
+            // Thread-29 线程: run task19 ...
+            // main 线程: end logHere...
+            // Thread-30 线程: print task19 ...
+
+            // 例子二，ThreadLocal
+            class Task20 implements Runnable {
+                final String username;
+
+                public Task20(String username) {
+                    this.username = username;
+                }
+
+                @Override
+                public void run() {
+                    try (var ctx = new UserContext(this.username)) {
+                        new Task1().process();
+                        new Task2().process();
+                        new Task3().process();
+                    }
+                }
+            }
+            class UserContext implements AutoCloseable {
+                private static final ThreadLocal<String> userThreadLocal = new ThreadLocal<>();
+
+                public UserContext(String name) {
+                    userThreadLocal.set(name);
+                    System.out.printf("[%s]① init user %s...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+                }
+
+                public static String getCurrentUser() {
+                    return userThreadLocal.get();
+                }
+
+                @Override
+                public void close() {
+                    System.out.printf("[%s]⑤ cleanup for user %s...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+                    userThreadLocal.remove();
+                }
+            }
+            class Task1 {
+                public void process() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) { }
+                    System.out.printf("[%s]② check user %s...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+                }
+            }
+            class Task2 {
+                public void process() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) { }
+                    System.out.printf("[%s]③ %s registered ok...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+                }
+            }
+            class Task3 {
+                public void process() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) { }
+                    System.out.printf("[%s]④ %s\'s work has done...\n", Thread.currentThread().getName(), UserContext.getCurrentUser());
+                }
+            }
+            ExecutorService es20 = Executors.newFixedThreadPool(3);
+            String[] users20 = new String[] {"Bob", "Alice", "Tim", "Mike", "Lily", "Jack", "Bush"};
+            for (String user : users20) {
+                es20.submit(new Task20(user));
+                // [pool-2-thread-1]① init user Bob...
+                // [pool-2-thread-2]① init user Alice...
+                // [pool-2-thread-2]② check user Alice...
+                // [pool-2-thread-1]② check user Bob...
+                // [pool-2-thread-2]③ Alice registered ok...
+                // [pool-2-thread-1]③ Bob registered ok...
+                // [pool-2-thread-3]① init user Mike...
+                // [pool-2-thread-2]④ Alice's work has done...
+                // [pool-2-thread-1]④ Bob's work has done...
+                // [pool-2-thread-1]⑤ cleanup for user Bob...
+                // [pool-2-thread-2]⑤ cleanup for user Alice...
+                // [pool-2-thread-1]① init user Lily...
+            }
+            try {
+                es20.awaitTermination(3, TimeUnit.SECONDS);
+                es20.shutdown();
+            } catch (InterruptedException e) {}
 
 
-
-
-
-
-
-
-
-
-
+11、
 
 
 
