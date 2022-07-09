@@ -1,0 +1,43 @@
+
+    下载 kafka 集成包，不要源码包
+    https://kafka.apache.org/downloads
+
+    mkdir /opt/kafka_2.12-3.2.0
+
+    cd /opt/kafka_2.12-3.2.0
+    vim config/server.properties
+        listeners = PLAINTEXT://127.0.0.1:9092
+        log.dirs=/opt/kafka_2.12-3.2.0/kafka-logs # 可以选择不改
+        zookeeper.connect=127.0.0.1:2181
+
+    # 启动 zookeeper
+    ./bin/zookeeper-server-start.sh config/zookeeper.properties
+
+    # 启动 kafka
+    ./bin/kafka-server-start.sh -daemon ./config/server.properties
+
+    # 验证kafka是否启动成功
+    # 方法一
+    ps ef | grep kakfa
+    # 方法二
+    jps
+
+    # 创建 topic
+    ./bin/kafka-topics.sh --create  --bootstrap-server 127.0.0.1:9092   --topic louisTest44
+
+    # 查看当前服务器下 kafka 的 topic 列表
+    ./bin/kafka-topics.sh  --bootstrap-server 127.0.0.1:9092 --list
+
+    # 查看某个 topic 详情
+    ./bin/kafka-topics.sh  --bootstrap-server 127.0.0.1:9092 --describe --topic louisTest44
+
+    # 创建kafka生产者
+    bin/kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic louisTest33
+
+    # 创建kafka消费者
+    # --from-beginning 是从头开始消费
+    bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic louisTest33 --from-beginning
+
+    安装参考文档：https://blog.csdn.net/u013416034/article/details/123875299
+
+    kafka官网：https://kafka.apache.org/intro

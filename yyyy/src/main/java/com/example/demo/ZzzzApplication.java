@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.bean.Book;
 import com.example.demo.bean.Book22;
+import com.example.demo.myQueue.KafkaConsumerTest;
 import com.example.demo.myQueue.KafkaProducerTest;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -189,7 +190,8 @@ public class ZzzzApplication {
         //
 
 //        testBasicSecond();
-        testBasicThird();
+//        testBasicThird();
+        testTopicKafka();
 
 
         /*********   springboot => practice       *********/
@@ -207,6 +209,16 @@ public class ZzzzApplication {
         //  高并发
         //  数据库
         //  消息队列
+    }
+
+    public static void testTopicKafka() {
+        // java 操作 kafka
+//        KafkaProducerTest kpt = new KafkaProducerTest("louisTest55");
+//        Thread thread21 = new Thread(kpt);
+//        thread21.start();
+        KafkaConsumerTest kct = new KafkaConsumerTest("louisTest55");
+        Thread thread22 = new Thread(kct);
+        thread22.start();
     }
 
     public static double taxTotal(Income... arr) {
@@ -2337,10 +2349,6 @@ public class ZzzzApplication {
             es20.shutdown();
         } catch (InterruptedException e) {}
 
-        // java 操作 kafka
-        KafkaProducerTest kpt = new KafkaProducerTest("kafka_test001");
-        Thread thread21 = new Thread(kpt);
-        thread21.start();
     }
 
     interface MathOperation {

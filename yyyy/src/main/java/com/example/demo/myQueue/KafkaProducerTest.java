@@ -12,7 +12,7 @@ public class KafkaProducerTest implements Runnable {
 
     public KafkaProducerTest(String topicName) {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "192.168.1.9:9092");
+        props.put("bootstrap.servers", "127.0.0.1:9092");
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
@@ -29,7 +29,7 @@ public class KafkaProducerTest implements Runnable {
             for(;;) {
                 String messageStr = "你好，这是第" + messageNo + "条数据";
                 // 往 kafka 里推数据
-                producer.send(new ProducerRecord<String, String>(topic, "Message", messageStr));
+                producer.send(new ProducerRecord<String, String>(topic, "MyMessage", messageStr));
                 if (messageNo % 100 == 0) {
                     System.out.println("发送的消息：" + messageStr);
                 }

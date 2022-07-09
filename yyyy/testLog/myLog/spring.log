@@ -1,22 +1,22 @@
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 2590 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-08 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
-2022-07-08 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-08 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-08 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1256 ms
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.619 seconds (JVM running for 8.203)
-2022-07-08 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 16147 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1001 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 2.09 seconds (JVM running for 7.59)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
 	acks = all
 	batch.size = 16384
-	bootstrap.servers = [192.168.1.9:9092]
+	bootstrap.servers = [127.0.0.1:9092]
 	buffer.memory = 33554432
 	client.id = 
 	compression.type = none
@@ -68,38 +68,314 @@
 	transactional.id = null
 	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
 
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 3510 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-08 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 17 ms. Found 0 JDBC repository interfaces.
-2022-07-08 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-08 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-08 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1331 ms
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.672 seconds (JVM running for 8.222)
-2022-07-08 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 1 : {louisTest=LEADER_NOT_AVAILABLE}
+2022-07-09 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 3 : {louisTest=LEADER_NOT_AVAILABLE}
+2022-07-09 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 4 : {louisTest=LEADER_NOT_AVAILABLE}
+2022-07-09 === [Thread-1] === INFO  === org.apache.kafka.clients.producer.KafkaProducer === - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19595 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1149 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === WARN  === o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext === - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 9988 is already in use
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Stopping service [Tomcat]
+2022-07-09 === [main] === INFO  === o.s.b.a.l.ConditionEvaluationReportLoggingListener === - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-07-09 === [main] === ERROR === o.s.b.diagnostics.LoggingFailureAnalysisReporter === - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9988 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9988 or configure this application to listen on another port.
+
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19637 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 18 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1130 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.574 seconds (JVM running for 8.026)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
+	interceptor.classes = null
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 305000
+	retry.backoff.ms = 100
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Successfully joined group with generation 1
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Setting newly assigned partitions [louisTest-0]
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19725 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1144 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.344 seconds (JVM running for 7.739)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
+	interceptor.classes = null
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 305000
+	retry.backoff.ms = 100
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Successfully joined group with generation 2
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Setting newly assigned partitions [louisTest-0]
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19804 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1090 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.286 seconds (JVM running for 7.664)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
+	interceptor.classes = null
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 305000
+	retry.backoff.ms = 100
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Successfully joined group with generation 4
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Setting newly assigned partitions [louisTest-0]
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19872 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1066 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.272 seconds (JVM running for 7.681)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
 	acks = all
 	batch.size = 16384
-	bootstrap.servers = [192.168.1.9:9092]
+	bootstrap.servers = [127.0.0.1:9092]
 	buffer.memory = 33554432
 	client.id = 
 	compression.type = none
@@ -151,29 +427,277 @@
 	transactional.id = null
 	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
 
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 9382 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-08 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
-2022-07-08 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-08 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-08 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1187 ms
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.441 seconds (JVM running for 7.935)
-2022-07-08 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === org.apache.kafka.clients.producer.KafkaProducer === - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19923 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1183 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.418 seconds (JVM running for 7.857)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
+	interceptor.classes = null
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 305000
+	retry.backoff.ms = 100
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Successfully joined group with generation 6
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Setting newly assigned partitions [louisTest-0]
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19956 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1123 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.362 seconds (JVM running for 7.837)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
+	interceptor.classes = null
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 305000
+	retry.backoff.ms = 100
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19989 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1142 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.293 seconds (JVM running for 7.684)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
+	interceptor.classes = null
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 305000
+	retry.backoff.ms = 100
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Consumer clientId=consumer-1, groupId=groupA] Error while fetching metadata with correlation id 2 : {louisTest22=LEADER_NOT_AVAILABLE}
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [Thread-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Consumer clientId=consumer-1, groupId=groupA] Error while fetching metadata with correlation id 6 : {louisTest22=LEADER_NOT_AVAILABLE}
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 25623 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1135 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.376 seconds (JVM running for 7.792)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
 	acks = all
 	batch.size = 16384
-	bootstrap.servers = [192.168.1.9:9092]
+	bootstrap.servers = [127.0.0.1:9092]
 	buffer.memory = 33554432
 	client.id = 
 	compression.type = none
@@ -225,33 +749,115 @@
 	transactional.id = null
 	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
 
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 9667 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-08 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
-2022-07-08 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-08 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-08 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1112 ms
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.65 seconds (JVM running for 8.43)
-2022-07-08 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 1 : {louisTest55=LEADER_NOT_AVAILABLE}
+2022-07-09 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 3 : {louisTest55=LEADER_NOT_AVAILABLE}
+2022-07-09 === [Thread-1] === INFO  === org.apache.kafka.clients.producer.KafkaProducer === - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 26311 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1099 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.887 seconds (JVM running for 8.326)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
+	interceptor.classes = null
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 305000
+	retry.backoff.ms = 100
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Successfully joined group with generation 10
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Setting newly assigned partitions [louisTest55-0]
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 26796 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1112 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.302 seconds (JVM running for 7.705)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
 	acks = all
 	batch.size = 16384
-	bootstrap.servers = [192.168.1.9:9092]
+	bootstrap.servers = [127.0.0.1:9092]
 	buffer.memory = 33554432
 	client.id = 
 	compression.type = none
@@ -303,203 +909,57 @@
 	transactional.id = null
 	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
 
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m11s856ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m11s919ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m16s961ms).
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m11s910ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m11s878ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m11s878ms).
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m42s943ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m11s932ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=37m29s927ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 22022 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-08 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
-2022-07-08 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-08 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-08 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1113 ms
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.594 seconds (JVM running for 8.562)
-2022-07-08 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
-	acks = all
-	batch.size = 16384
-	bootstrap.servers = [192.168.1.9:9092]
-	buffer.memory = 33554432
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === org.apache.kafka.clients.producer.KafkaProducer === - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 26820 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-09 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-09 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2022-07-09 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-09 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-09 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-09 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1012 ms
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-09 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-09 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-09 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.184 seconds (JVM running for 7.586)
+2022-07-09 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [127.0.0.1:9092]
+	check.crcs = true
 	client.id = 
-	compression.type = none
 	connections.max.idle.ms = 540000
-	enable.idempotence = false
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupA
+	heartbeat.interval.ms = 3000
 	interceptor.classes = null
-	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
-	linger.ms = 0
-	max.block.ms = 60000
-	max.in.flight.requests.per.connection = 5
-	max.request.size = 1048576
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
 	metadata.max.age.ms = 300000
 	metric.reporters = []
 	metrics.num.samples = 2
 	metrics.recording.level = INFO
 	metrics.sample.window.ms = 30000
-	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
-	receive.buffer.bytes = 32768
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
 	reconnect.backoff.max.ms = 1000
 	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retries = 0
+	request.timeout.ms = 305000
 	retry.backoff.ms = 100
 	sasl.jaas.config = null
 	sasl.kerberos.kinit.cmd = /usr/bin/kinit
@@ -510,6 +970,7 @@
 	sasl.mechanism = GSSAPI
 	security.protocol = PLAINTEXT
 	send.buffer.bytes = 131072
+	session.timeout.ms = 30000
 	ssl.cipher.suites = null
 	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
 	ssl.endpoint.identification.algorithm = null
@@ -525,179 +986,16 @@
 	ssl.truststore.location = null
 	ssl.truststore.password = null
 	ssl.truststore.type = JKS
-	transaction.timeout.ms = 60000
-	transactional.id = null
-	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
 
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
-2022-07-08 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 22065 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-08 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-08 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 12 ms. Found 0 JDBC repository interfaces.
-2022-07-08 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9988 (http)
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-08 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-08 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-08 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1055 ms
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-08 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-08 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9988 (http) with context path '/aaa'
-2022-07-08 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.908 seconds (JVM running for 8.374)
-2022-07-08 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
-	acks = all
-	batch.size = 16384
-	bootstrap.servers = [192.168.1.9:9092]
-	buffer.memory = 33554432
-	client.id = 
-	compression.type = none
-	connections.max.idle.ms = 540000
-	enable.idempotence = false
-	interceptor.classes = null
-	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
-	linger.ms = 0
-	max.block.ms = 60000
-	max.in.flight.requests.per.connection = 5
-	max.request.size = 1048576
-	metadata.max.age.ms = 300000
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
-	receive.buffer.bytes = 32768
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retries = 0
-	retry.backoff.ms = 100
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.mechanism = GSSAPI
-	security.protocol = PLAINTEXT
-	send.buffer.bytes = 131072
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
-	ssl.endpoint.identification.algorithm = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLS
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	transaction.timeout.ms = 60000
-	transactional.id = null
-	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
-
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-08 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m11s928ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [HikariPool-1 housekeeper] === WARN  === com.zaxxer.hikari.pool.HikariPool === - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h40m8s108ms).
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-08 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
+2022-07-09 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Successfully joined group with generation 12
+2022-07-09 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Setting newly assigned partitions [louisTest55-0]
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-09 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
