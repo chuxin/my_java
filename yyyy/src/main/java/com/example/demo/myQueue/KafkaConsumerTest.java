@@ -23,8 +23,10 @@ public class KafkaConsumerTest implements Runnable {
         props.put("auto.offset.reset", "earliest");
         props.put("key.deserializer", StringDeserializer.class.getName());
         props.put("value.deserializer", StringDeserializer.class.getName());
+        // 创建消费者
         this.consumer = new KafkaConsumer<String, String>(props);
         this.topic = topicName;
+        // 订阅主题
         this.consumer.subscribe(Arrays.asList(topic));
     }
 

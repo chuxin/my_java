@@ -213,9 +213,10 @@ public class ZzzzApplication {
 
     public static void testTopicKafka() {
         // java 操作 kafka
-//        KafkaProducerTest kpt = new KafkaProducerTest("louisTest55");
-//        Thread thread21 = new Thread(kpt);
-//        thread21.start();
+        // topic: 消息队列的名称，可以先行在kafka服务中进行创建。如果kafka中并未创建该topic，那么便会自动创建！
+        KafkaProducerTest kpt = new KafkaProducerTest("louisTest55");
+        Thread thread21 = new Thread(kpt);
+        thread21.start();
         KafkaConsumerTest kct = new KafkaConsumerTest("louisTest55");
         Thread thread22 = new Thread(kct);
         thread22.start();
