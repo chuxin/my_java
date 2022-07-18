@@ -46,6 +46,12 @@
     概念：是一个分布式的，支持多分区、多副本，基于 Zookeeper 的分布式消息流平台，基于发布订阅模式的消息引擎系统。
          简言之就是一个消息中间件。
 
+    架构图：参考 MyDoc/summary/Kafka 系统架构.jpg
+
+    参考文档：
+        https://juejin.cn/post/6844903919328428040  教程简单，通俗易懂，如果看不懂下面讲的概念，可以参考这里面的例子
+        https://juejin.cn/post/6844903495670169607#heading-4  详细教程
+
     Kafka 涉及术语
         Broker：Kafka集群包含一个或多个服务器，这种服务器被称为broker。
         Topic：每条发布到Kafka集群的消息都有一个类别，这个类别被称为Topic。

@@ -191,7 +191,8 @@ public class ZzzzApplication {
 
 //        testBasicSecond();
 //        testBasicThird();
-        testTopicKafka();
+//        testTopicKafka();
+        testRabbitMQ();
 
 
         /*********   springboot => practice       *********/
@@ -209,6 +210,10 @@ public class ZzzzApplication {
         //  高并发
         //  数据库
         //  消息队列
+    }
+
+    public static void testRabbitMQ() {
+
     }
 
     public static void testTopicKafka() {
