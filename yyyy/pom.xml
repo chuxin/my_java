@@ -85,6 +85,13 @@
             <artifactId>kafka-streams</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <!-- 使用 rabbitmq -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.7.2</version>
+        </dependency>
     </dependencies>
 
     <build>

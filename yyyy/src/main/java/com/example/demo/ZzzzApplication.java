@@ -4,6 +4,8 @@ import com.example.demo.bean.Book;
 import com.example.demo.bean.Book22;
 import com.example.demo.myQueue.KafkaConsumerTest;
 import com.example.demo.myQueue.KafkaProducerTest;
+import com.example.demo.myQueue.RabbitConsumerTest;
+import com.example.demo.myQueue.RabbitProducerTest;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
@@ -181,7 +183,9 @@ public class ZzzzApplication {
         //      https://blog.csdn.net/m0_49508485/article/details/123070574
         //      https://www.cnblogs.com/zwcmt/p/15018421.html
         // rabbitMQ
-        // mybatis-plus
+        //
+        // 把目前的 summary 复习一遍
+        // 抽空背背 java 面试题
         //
         // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
         //     什么是简单的项目？本地能跑起来的，能进行调试的项目
@@ -201,9 +205,9 @@ public class ZzzzApplication {
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
         //      https://blog.csdn.net/qq_41288095/article/details/89743041
 
-        //  抽空背背 java 面试题
         //
         //  其它
+        //    mybatis-plus
         //    tkmybatis
         //    springDataJpa
         //  中间件：https://blog.csdn.net/qq_15038189/article/details/120209333
@@ -213,7 +217,19 @@ public class ZzzzApplication {
     }
 
     public static void testRabbitMQ() {
+//        RabbitProducerTest rpt = new RabbitProducerTest();
+//        try {
+//            rpt.sendMessage();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
+        RabbitConsumerTest rct = new RabbitConsumerTest();
+        try {
+            rct.receiveMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void testTopicKafka() {

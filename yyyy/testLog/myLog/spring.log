@@ -1,219 +1,954 @@
-2022-07-10 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 10249 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-10 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-10 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-10 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-10 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
-2022-07-10 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-10 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
-2022-07-10 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-10 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-10 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-10 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1144 ms
-2022-07-10 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-10 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-10 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
-2022-07-10 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.122 seconds (JVM running for 8.841)
-2022-07-10 === [main] === INFO  === org.apache.kafka.clients.producer.ProducerConfig === - ProducerConfig values: 
-	acks = all
-	batch.size = 16384
-	bootstrap.servers = [127.0.0.1:9092]
-	buffer.memory = 33554432
-	client.id = 
-	compression.type = none
-	connections.max.idle.ms = 540000
-	enable.idempotence = false
-	interceptor.classes = null
-	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
-	linger.ms = 0
-	max.block.ms = 60000
-	max.in.flight.requests.per.connection = 5
-	max.request.size = 1048576
-	metadata.max.age.ms = 300000
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
-	receive.buffer.bytes = 32768
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retries = 0
-	retry.backoff.ms = 100
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.mechanism = GSSAPI
-	security.protocol = PLAINTEXT
-	send.buffer.bytes = 131072
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
-	ssl.endpoint.identification.algorithm = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLS
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	transaction.timeout.ms = 60000
-	transactional.id = null
-	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
-
-2022-07-10 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-10 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Connection to node -1 could not be established. Broker may not be available.
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 1 : {louisTest55=LEADER_NOT_AVAILABLE}
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 3 : {louisTest55=LEADER_NOT_AVAILABLE}
-2022-07-10 === [kafka-producer-network-thread | producer-1] === WARN  === org.apache.kafka.clients.NetworkClient === - [Producer clientId=producer-1] Error while fetching metadata with correlation id 4 : {louisTest55=LEADER_NOT_AVAILABLE}
-2022-07-10 === [Thread-1] === INFO  === org.apache.kafka.clients.producer.KafkaProducer === - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
-2022-07-10 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
-2022-07-10 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
-2022-07-10 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 10679 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
-2022-07-10 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
-2022-07-10 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
-2022-07-10 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2022-07-10 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
-2022-07-10 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
-2022-07-10 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
-2022-07-10 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
-2022-07-10 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
-2022-07-10 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
-2022-07-10 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1106 ms
-2022-07-10 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
-2022-07-10 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
-2022-07-10 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
-2022-07-10 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.449 seconds (JVM running for 7.936)
-2022-07-10 === [main] === INFO  === org.apache.kafka.clients.consumer.ConsumerConfig === - ConsumerConfig values: 
-	auto.commit.interval.ms = 5000
-	auto.offset.reset = earliest
-	bootstrap.servers = [127.0.0.1:9092]
-	check.crcs = true
-	client.id = 
-	connections.max.idle.ms = 540000
-	enable.auto.commit = true
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = groupA
-	heartbeat.interval.ms = 3000
-	interceptor.classes = null
-	internal.leave.group.on.close = true
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
-	receive.buffer.bytes = 65536
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 305000
-	retry.backoff.ms = 100
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.mechanism = GSSAPI
-	security.protocol = PLAINTEXT
-	send.buffer.bytes = 131072
-	session.timeout.ms = 30000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
-	ssl.endpoint.identification.algorithm = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLS
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
-
-2022-07-10 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka version : 1.0.0
-2022-07-10 === [main] === INFO  === org.apache.kafka.common.utils.AppInfoParser === - Kafka commitId : aaa7af6d4a11b29d
-2022-07-10 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Discovered coordinator 127.0.0.1:9092 (id: 2147483647 rack: null)
-2022-07-10 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Revoking previously assigned partitions []
-2022-07-10 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] (Re-)joining group
-2022-07-10 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.AbstractCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Successfully joined group with generation 1
-2022-07-10 === [Thread-1] === INFO  === o.a.k.c.consumer.internals.ConsumerCoordinator === - [Consumer clientId=consumer-1, groupId=groupA] Setting newly assigned partitions [louisTest55-0]
-2022-07-10 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
-2022-07-10 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 17819 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 17 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1314 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.773 seconds (JVM running for 8.479)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 19654 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1246 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.506 seconds (JVM running for 7.979)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 23844 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1218 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.393 seconds (JVM running for 7.814)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 24619 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 18 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1227 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.475 seconds (JVM running for 7.883)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 25180 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1148 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.363 seconds (JVM running for 7.793)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 34389 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 23 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1617 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.533 seconds (JVM running for 9.401)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 34988 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 26 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1563 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.268 seconds (JVM running for 8.761)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 37872 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1121 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.347 seconds (JVM running for 7.794)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 38065 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1113 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.336 seconds (JVM running for 7.696)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 38134 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 934 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.038 seconds (JVM running for 7.473)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 39907 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1215 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.889 seconds (JVM running for 8.482)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 40510 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1208 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.632 seconds (JVM running for 8.082)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 42282 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 18 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1233 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.48 seconds (JVM running for 8.958)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 43191 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1130 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.493 seconds (JVM running for 7.913)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 43428 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1147 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.31 seconds (JVM running for 7.716)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 44400 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1148 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.32 seconds (JVM running for 7.735)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 45273 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1198 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.949 seconds (JVM running for 8.601)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 46127 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1167 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.282 seconds (JVM running for 8.815)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 50389 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 21 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1456 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.38 seconds (JVM running for 9.104)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 50811 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 19 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1310 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.668 seconds (JVM running for 8.139)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 51665 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1124 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.478 seconds (JVM running for 8.013)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 52104 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1223 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.445 seconds (JVM running for 7.854)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 52226 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 18 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1149 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.029 seconds (JVM running for 8.515)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 52577 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1110 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.312 seconds (JVM running for 7.77)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 53035 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1134 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.306 seconds (JVM running for 7.699)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 53962 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1169 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.575 seconds (JVM running for 8.012)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 54444 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1133 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.779 seconds (JVM running for 8.575)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 58832 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1119 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.42 seconds (JVM running for 7.931)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 59033 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1115 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.313 seconds (JVM running for 7.698)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 59515 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 19 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1219 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.55 seconds (JVM running for 8.015)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 59817 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1178 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.438 seconds (JVM running for 7.813)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 60072 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1160 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.406 seconds (JVM running for 7.811)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 60559 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 19 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1322 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.748 seconds (JVM running for 8.23)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 62890 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1170 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.4 seconds (JVM running for 7.79)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 63022 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1229 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.493 seconds (JVM running for 7.998)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 63152 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1250 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.446 seconds (JVM running for 7.909)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 63336 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1140 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.381 seconds (JVM running for 7.797)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 63713 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1221 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.536 seconds (JVM running for 7.947)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 64262 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1121 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.348 seconds (JVM running for 7.742)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 64434 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 18 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1149 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.415 seconds (JVM running for 7.874)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 64675 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1174 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.153 seconds (JVM running for 8.58)
+2022-07-19 === [AMQP Connection 127.0.0.1:5672] === WARN  === com.rabbitmq.client.impl.ForgivingExceptionHandler === - An unexpected connection driver error occured (Exception message: Socket closed)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 64831 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 17 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1204 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.459 seconds (JVM running for 7.84)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 64938 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1151 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.421 seconds (JVM running for 7.851)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 65101 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1089 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.043 seconds (JVM running for 8.709)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 65698 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1090 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.976 seconds (JVM running for 8.406)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 65976 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1089 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.997 seconds (JVM running for 8.472)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 66441 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1140 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.54 seconds (JVM running for 7.949)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 66655 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1260 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.485 seconds (JVM running for 7.884)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 66765 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1138 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.309 seconds (JVM running for 7.684)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 66844 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1073 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.191 seconds (JVM running for 7.56)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 67080 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 17 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1281 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.529 seconds (JVM running for 8.016)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 68782 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1123 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.416 seconds (JVM running for 8.394)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 69041 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1099 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.245 seconds (JVM running for 7.646)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 75018 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 20 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 1296 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 8.026 seconds (JVM running for 8.762)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 75120 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2022-07-19 === [main] === DEBUG === com.example.demo.ZzzzApplication === - Running with Spring Boot v2.6.5, Spring v5.3.17
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - The following 1 profile is active: "prod"
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-19 === [main] === INFO  === o.s.d.r.config.RepositoryConfigurationDelegate === - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+2022-07-19 === [main] === WARN  === org.mybatis.spring.mapper.ClassPathMapperScanner === - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat initialized with port(s): 9987 (http)
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardService === - Starting service [Tomcat]
+2022-07-19 === [main] === INFO  === org.apache.catalina.core.StandardEngine === - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-07-19 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] === - Initializing Spring embedded WebApplicationContext
+2022-07-19 === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext === - Root WebApplicationContext: initialization completed in 918 ms
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Starting...
+2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
+2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.175 seconds (JVM running for 7.627)

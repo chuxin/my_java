@@ -135,6 +135,25 @@
 
 3、代码示例
     第一个例子：
+        pom.xml 配置
+            <!-- 使用 kafka -->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.12</artifactId>
+                <version>1.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-streams</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
         public static void testTopicKafka() {
             // topic: 消息队列的名称，可以先行在kafka服务中进行创建。如果kafka中并未创建该topic，那么便会自动创建！
             KafkaProducerTest kpt = new KafkaProducerTest("louisTest55");
