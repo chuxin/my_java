@@ -952,3 +952,5 @@
 2022-07-19 === [main] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Start completed.
 2022-07-19 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer === - Tomcat started on port(s): 9987 (http) with context path '/aaa'
 2022-07-19 === [main] === INFO  === com.example.demo.ZzzzApplication === - Started ZzzzApplication in 7.175 seconds (JVM running for 7.627)
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown initiated...
+2022-07-19 === [SpringApplicationShutdownHook] === INFO  === com.zaxxer.hikari.HikariDataSource === - HikariPool-1 - Shutdown completed.

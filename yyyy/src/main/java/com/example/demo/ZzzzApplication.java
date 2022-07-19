@@ -217,12 +217,12 @@ public class ZzzzApplication {
     }
 
     public static void testRabbitMQ() {
-//        RabbitProducerTest rpt = new RabbitProducerTest();
-//        try {
-//            rpt.sendMessage();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        RabbitProducerTest rpt = new RabbitProducerTest();
+        try {
+            rpt.sendMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         RabbitConsumerTest rct = new RabbitConsumerTest();
         try {
