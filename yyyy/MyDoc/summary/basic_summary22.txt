@@ -759,6 +759,15 @@
          Maven Wrapper 就是给一个项目A提供一个独立的，指定版本的Maven，供A使用。
             另一个作用是把项目的mvnw、mvnw.cmd和.mvn提交到版本库中，可以使所有开发人员使用统一的Maven版本
 
+    MAC 安装 mvn
+        brew install mvn
+        mvn --version
+        mvn clean package   # 将项目打包
+        # Maven 对项目进行打包时，位于项目根目录下的配置文件是无法被打包进项目的 JAR 包的，因此位于根目录下的默认配置文件无法在 JAR 中生效
+
+    命令：
+        mvn -version    // 查看Maven的版本信息
+
     Maven标准目录介绍：
         ① 项目描述文件pom.xml
             格式如下：
@@ -796,9 +805,6 @@
         ④ 存放测试源码的目录是 src/test/java
         ⑤ 存放测试资源的目录是 src/test/resources
         ⑥ 所有编译、打包生成的文件都放在 target 目录里
-
-    命令：
-        mvn -version    // 查看Maven的版本信息
 
     Maven镜像：
         在用户主目录下进入.m2目录，创建一个settings.xml配置文件

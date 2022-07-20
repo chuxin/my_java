@@ -179,13 +179,13 @@ public class ZzzzApplication {
         //    https://juejin.cn/post/6844903919328428040  简单教程，已看完
         //    https://juejin.cn/post/6844903495670169607#heading-4  详细教程，还没全部看完
         //
+        // rabbitMQ
         // 泛型学习扩展
         //      https://blog.csdn.net/m0_49508485/article/details/123070574
         //      https://www.cnblogs.com/zwcmt/p/15018421.html
-        // rabbitMQ
         //
-        // 把目前的 summary 复习一遍
-        // 抽空背背 java 面试题
+        // 把目前的 summary 复习一遍    周末看一下
+        // 抽空背背 java 面试题        周末预热一下
         //
         // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
         //     什么是简单的项目？本地能跑起来的，能进行调试的项目
@@ -196,8 +196,7 @@ public class ZzzzApplication {
 //        testBasicSecond();
 //        testBasicThird();
 //        testTopicKafka();
-        testRabbitMQ();
-
+//        testRabbitMQ();
 
         /*********   springboot => practice       *********/
         // 0、crud  postman实现

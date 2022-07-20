@@ -13,6 +13,10 @@
     # 查询服务器状态
     ./sbin/rabbitmqctl status
 
+    # 本地界面访问地址
+    http://127.0.0.1:15672/#/queues
+    管理员账号： guest / guest
+
 
 2、rabbitMQ 介绍
     消息队列(Message Queue) ：
