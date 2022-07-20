@@ -45,6 +45,7 @@ public class RabbitProducerTest {
     }
 
     public void test() throws IOException, TimeoutException {
+        // 试验成功的
         // 创建连接工厂
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("mybbbb");

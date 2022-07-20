@@ -40,43 +40,44 @@ public class RabbitConsumerTest {
     }
 
     public void test() throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setUsername("mybbbb");
-        factory.setPassword("mybbbb");
-        factory.setHost("localhost");
-        factory.setPort(5672);
-        factory.setVirtualHost("/");
-        // 建立到代理服务器到连接
-        Connection conn = factory.newConnection();
-        // 获得信道
-        final Channel channel = conn.createChannel();
-        // 声明交换机
-        String exchangeName = "hello-exchange-louis";
-        channel.exchangeDeclare(exchangeName, "direct", true);
-        // 声明队列
-        String queueName = channel.queueDeclare().getQueue();
-        String routingKey = "lu-you-key";
-        // 绑定队列，通过键 lu-you-key 将队列和交换器绑定起来
-        channel.queueBind(queueName, exchangeName, routingKey);
-
-        while (true) {
-            // 消费消息
-            boolean autoAck = false;
-            String consumerTag = "";
-            channel.basicConsume(queueName, autoAck, consumerTag, new DefaultConsumer(channel) {
-                @Override
-                public void handleDelivery(String consumerTag, Envelope envelope,
-                                           AMQP.BasicProperties properties, byte[] body) throws IOException {
-                    String routingKey = envelope.getRoutingKey();
-                    String contentType = properties.getContentType();
-                    System.out.println("消费的路由键：" + routingKey);
-                    System.out.println("消费的内容类型：" + contentType);
-                    long deliveryTag = envelope.getDeliveryTag();
-                    // 确认消息
-                    channel.basicAck(deliveryTag, false);
-                    System.out.println("消息的内容为：" + new String(body, "UTF-8"));
-                }
-            });
-        }
+        // 试验不成功
+//        ConnectionFactory factory = new ConnectionFactory();
+//        factory.setUsername("mybbbb");
+//        factory.setPassword("mybbbb");
+//        factory.setHost("localhost");
+//        factory.setPort(5672);
+//        factory.setVirtualHost("/");
+//        // 建立到代理服务器到连接
+//        Connection conn = factory.newConnection();
+//        // 获得信道
+//        final Channel channel = conn.createChannel();
+//        // 声明交换机
+//        String exchangeName = "hello-exchange-louis";
+//        channel.exchangeDeclare(exchangeName, "direct", true);
+//        // 声明队列
+//        String queueName = channel.queueDeclare().getQueue();
+//        String routingKey = "lu-you-key";
+//        // 绑定队列，通过键 lu-you-key 将队列和交换器绑定起来
+//        channel.queueBind(queueName, exchangeName, routingKey);
+//
+//        while (true) {
+//            // 消费消息
+//            boolean autoAck = false;
+//            String consumerTag = "";
+//            channel.basicConsume(queueName, autoAck, consumerTag, new DefaultConsumer(channel) {
+//                @Override
+//                public void handleDelivery(String consumerTag, Envelope envelope,
+//                                           AMQP.BasicProperties properties, byte[] body) throws IOException {
+//                    String routingKey = envelope.getRoutingKey();
+//                    String contentType = properties.getContentType();
+//                    System.out.println("消费的路由键：" + routingKey);
+//                    System.out.println("消费的内容类型：" + contentType);
+//                    long deliveryTag = envelope.getDeliveryTag();
+//                    // 确认消息
+//                    channel.basicAck(deliveryTag, false);
+//                    System.out.println("消息的内容为：" + new String(body, "UTF-8"));
+//                }
+//            });
+//        }
     }
 }
