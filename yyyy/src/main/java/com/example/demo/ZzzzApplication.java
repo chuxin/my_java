@@ -6,6 +6,7 @@ import com.example.demo.myQueue.KafkaConsumerTest;
 import com.example.demo.myQueue.KafkaProducerTest;
 import com.example.demo.myQueue.RabbitConsumerTest;
 import com.example.demo.myQueue.RabbitProducerTest;
+import com.example.demo.testT.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
@@ -63,9 +64,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.*;
 
-import com.example.demo.testT.PersonT;
-import com.example.demo.testT.Pair;
-
 import com.example.demo.testCollections.MyStudent;
 import com.example.demo.testCollections.Students;
 import com.example.demo.testCollections.HisStudent;
@@ -109,7 +107,7 @@ public class ZzzzApplication {
 //        testAnnotationHaHa();
 
         /*********   泛型  *********/
-//        testGenericity();
+        testGenericity();
 
         /*********   集合  *********/
 //        testCollection();
@@ -181,8 +179,7 @@ public class ZzzzApplication {
         //
         // rabbitMQ
         // 泛型学习扩展
-        //      https://blog.csdn.net/m0_49508485/article/details/123070574
-        //      https://www.cnblogs.com/zwcmt/p/15018421.html
+        //      https://blog.csdn.net/m0_49508485/article/details/123070574   文章写得不错，可以再看看他写的其它文章
         //
         // 把目前的 summary 复习一遍    周末看一下
         // 抽空背背 java 面试题        周末预热一下
@@ -1251,6 +1248,106 @@ public class ZzzzApplication {
         // extends 通配符  暂时先忽略，不学
 
         // super 通配符  暂时先忽略，不学
+
+        // 二次学习
+        // 一提到泛型，相信大家用到最多的就是在集合中，其实，在实际的编程过程中，自己可以使用泛型去简化开发，且能很好的保证代码质量。
+        // 泛型的本质是为了参数化类型（在不创建新的类型的情况下，通过泛型指定的不同类型来控制形参具体限制的类型）。也就是说在泛型使用过程中，操作的数据类型被指定为一个参数，这种参数类型可以用在类、接口和方法中，分别被称为泛型类、泛型接口、泛型方法。
+
+        // 泛型标记符号：
+        //     E - Element (在集合中使用，因为集合中存放的是元素)
+        //     T - Type（Java 类）
+        //     K - Key（键）
+        //     V - Value（值）
+        //     N - Number（数值类型）
+        //     ？ - 表示不确定的 java 类型
+
+        Random rand = new Random();
+        System.out.println(rand.nextInt(3));    // 输出 0 - 2
+
+        // 泛型只在编译阶段有效，在编译之后程序会采取去泛型化的措施。在编译过程中，正确检验泛型结果后，会将泛型的相关信息擦出，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法。
+
+        // 泛型类
+        // 泛型的类型参数只能是类类型（包括自定义类），不能是简单的基本类型
+        Generic<Integer> generic11 = new Generic<Integer>(123456);
+        Generic<String> generic22 = new Generic<String>("key_value");
+        Generic<Boolean> generic33 = new Generic<Boolean>(false);
+        System.out.println(generic11.getKey());
+        System.out.println(generic22.getKey());
+        System.out.println(generic33.getKey());
+
+        // 泛型接口
+        // 实现泛型接口，未传入泛型实参       下面是泛型类
+        Generator<Integer> gg = new FruitGenerator<Integer>();
+        System.out.println(gg.next());
+        // 实现泛型接口，传入泛型实参    下面不是泛型类
+        Generator<String> gg2 = new FruitGenerator22();
+        System.out.println(gg2.next());
+
+        // 泛型方法
+        // 泛型类定义时的 T 与泛型类方法中的泛型方法定义的 T 是不一样的，两者没毛线关系
+        GenericMethod33 gg5 = new GenericMethod33();
+        gg5.xxxx();
+        // 泛型方法与可变参数
+        ZzzzApplication zzzzObj = new ZzzzApplication();
+        zzzzObj.printMsg("111", "222", "aaaa", "232.44", 66.66);
+
+        // 泛型通配符
+        Generic<Integer> gg3 = new Generic<>(123);
+        Generic<Number> gg4 = new Generic<>(456);
+        zzzzObj.showKeyValue(gg3);
+        zzzzObj.showKeyValue(gg4);
+
+        // 泛型上下边界
+        List<String> name = new ArrayList<String>();
+        List<Integer> age = new ArrayList<Integer>();
+        List<Number> number = new ArrayList<Number>();
+        name.add("icon");
+        age.add(18);
+        number.add(314);
+//        getMyNumber(name);  // 不兼容的类型: java.util.List<java.lang.String>无法转换为java.util.List<? extends java.lang.Number>
+        getMyNumber(age);
+        getMyNumber(number);
+
+        // 这行代码会报错，因为String不是Number的子类
+//        Generic22<String> gg55 = new Generic22<String>("1111");
+        Generic22<Integer> gg66 = new Generic22<Integer>(2222);
+        Generic22<Float> gg77 = new Generic22<Float>(2.4f);
+        Generic22<Double> gg88 = new Generic22<Double>(2.56);
+
+//        zzzzObj.showKeyValue22(gg55);
+        zzzzObj.showKeyValue22(gg66);
+        zzzzObj.showKeyValue22(gg77);
+        zzzzObj.showKeyValue22(gg88);
+
+        // 泛型类型擦除，暂时不研究，原理层面跟反射有关系
+    }
+
+    // 另一个泛型方法设置界限的例子
+    // 在泛型方法中添加上下边界限制的时候，必须在权限声明与返回值之间的<T>上添加上下边界，即在泛型声明的时候添加
+    // public <T> T showKeyName(Generic<T extends Number> container)，编译器会报错："Unexpected bound"
+    public <T extends Number> T showKeyName(Generic<T> container) {
+        System.out.println("container key: " + container.getKey());
+        T test = container.getKey();
+        return test;
+    }
+
+    public void showKeyValue22(Generic22<? extends Number> obj) {
+        System.out.println("showKeyValue22 " + obj.getKey());
+    }
+
+    public <T> void printMsg(T... args) {
+        for (T t:args) {
+            System.out.println("t is " + t);
+        }
+    }
+
+    public static void getMyNumber(List<? extends Number> data) {
+        System.out.println("泛型上下边界测试：" + data.get(0));
+    }
+
+    // 此处 '?'是类型实参，而不是类型形参。用来代替具体的类型实参，直白点就是，此处的 ? 和Number、String、Integer一样都是一种实际的类型，可以把 ? 看成所有类型的父类
+    public void showKeyValue(Generic<?> obj) {
+        System.out.println("泛型通配符测试：" + obj.getKey());
     }
 
     public static void testBasicSecond() {
