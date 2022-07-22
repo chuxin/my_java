@@ -1261,9 +1261,6 @@ public class ZzzzApplication {
         //     N - Number（数值类型）
         //     ？ - 表示不确定的 java 类型
 
-        Random rand = new Random();
-        System.out.println(rand.nextInt(3));    // 输出 0 - 2
-
         // 泛型只在编译阶段有效，在编译之后程序会采取去泛型化的措施。在编译过程中，正确检验泛型结果后，会将泛型的相关信息擦出，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法。
 
         // 泛型类
@@ -1271,17 +1268,17 @@ public class ZzzzApplication {
         Generic<Integer> generic11 = new Generic<Integer>(123456);
         Generic<String> generic22 = new Generic<String>("key_value");
         Generic<Boolean> generic33 = new Generic<Boolean>(false);
-        System.out.println(generic11.getKey());
-        System.out.println(generic22.getKey());
-        System.out.println(generic33.getKey());
+        System.out.println(generic11.getKey());     // 123456
+        System.out.println(generic22.getKey());     // key_value
+        System.out.println(generic33.getKey());     // false
 
         // 泛型接口
         // 实现泛型接口，未传入泛型实参       下面是泛型类
         Generator<Integer> gg = new FruitGenerator<Integer>();
-        System.out.println(gg.next());
+        System.out.println(gg.next());      // null
         // 实现泛型接口，传入泛型实参    下面不是泛型类
         Generator<String> gg2 = new FruitGenerator22();
-        System.out.println(gg2.next());
+        System.out.println(gg2.next());     // banana
 
         // 泛型方法
         // 泛型类定义时的 T 与泛型类方法中的泛型方法定义的 T 是不一样的，两者没毛线关系
@@ -1289,13 +1286,17 @@ public class ZzzzApplication {
         gg5.xxxx();
         // 泛型方法与可变参数
         ZzzzApplication zzzzObj = new ZzzzApplication();
-        zzzzObj.printMsg("111", "222", "aaaa", "232.44", 66.66);
+        zzzzObj.printMsg("111", "222", "aaaa", "232.44");
+        // t is 111
+        // t is 222
+        // t is aaaa
+        // t is 232.44
 
         // 泛型通配符
         Generic<Integer> gg3 = new Generic<>(123);
         Generic<Number> gg4 = new Generic<>(456);
-        zzzzObj.showKeyValue(gg3);
-        zzzzObj.showKeyValue(gg4);
+        zzzzObj.showKeyValue(gg3);      // 泛型通配符测试：123
+        zzzzObj.showKeyValue(gg4);      // 泛型通配符测试：456
 
         // 泛型上下边界
         List<String> name = new ArrayList<String>();
@@ -1305,8 +1306,8 @@ public class ZzzzApplication {
         age.add(18);
         number.add(314);
 //        getMyNumber(name);  // 不兼容的类型: java.util.List<java.lang.String>无法转换为java.util.List<? extends java.lang.Number>
-        getMyNumber(age);
-        getMyNumber(number);
+        getMyNumber(age);       // 泛型上下边界测试：18
+        getMyNumber(number);    // 泛型上下边界测试：314
 
         // 这行代码会报错，因为String不是Number的子类
 //        Generic22<String> gg55 = new Generic22<String>("1111");
@@ -1315,9 +1316,9 @@ public class ZzzzApplication {
         Generic22<Double> gg88 = new Generic22<Double>(2.56);
 
 //        zzzzObj.showKeyValue22(gg55);
-        zzzzObj.showKeyValue22(gg66);
-        zzzzObj.showKeyValue22(gg77);
-        zzzzObj.showKeyValue22(gg88);
+        zzzzObj.showKeyValue22(gg66);   // showKeyValue22 2222
+        zzzzObj.showKeyValue22(gg77);   // showKeyValue22 2.4
+        zzzzObj.showKeyValue22(gg88);   // showKeyValue22 2.56
 
         // 泛型类型擦除，暂时不研究，原理层面跟反射有关系
     }

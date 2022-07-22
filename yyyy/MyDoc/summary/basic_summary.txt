@@ -834,6 +834,8 @@
         r = new Random(30);
         System.out.println(r.nextInt(100));     // 6
         System.out.println(r.nextInt(100));     // 68
+        Random rand = new Random();
+        System.out.println(rand.nextInt(3));    // 输出 0 - 2 之间的整数
         // 真随机数
         SecureRandom sr = null;
         try {
@@ -1229,10 +1231,23 @@
 
 
 5、泛型
-    定义：泛型就是编写模板代码来适应任意类型。不必对类型进行强制转换，它通过编译器对类型进行检查
+    概念：泛型的本质是为了参数化类型。在不创建新的类型的情况下，通过泛型指定的不同类型来控制形参具体限制的类型。可分为泛型类、泛型接口、泛型方法。
+         一提到泛型，用到最多的就是在集合中，其实，在实际的编程过程中，可以使用泛型去简化开发，保证代码质量。
+         泛型只在编译阶段有效，在编译之后程序会采取去泛型化的措施。
+               在编译过程中，正确检验泛型结果后，会将泛型的相关信息擦出，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法。
+
     注意：泛型的继承关系，可以把ArrayList<Integer>向上转型为List<Integer>（T不能变！），
-        但不能把ArrayList<Integer>向上转型为ArrayList<Number>（T不能变成父类）
-    例子：
+            但不能把ArrayList<Integer>向上转型为ArrayList<Number>（T不能变成父类）
+
+    泛型标记符号：
+        E - Element (在集合中使用，因为集合中存放的是元素)
+        T - Type（Java 类）
+        K - Key（键）
+        V - Value（值）
+        N - Number（数值类型）
+        ？ - 表示不确定的 java 类型
+
+    简单使用例子
         // 基本使用
         List<Number> list = new ArrayList<Number>();
         list.add(Integer.valueOf(33));
@@ -1243,7 +1258,89 @@
         // 可以省略后面的Number，编译器可以自动推断泛型类型：
         List<Number> list2 = new ArrayList<>();
 
-        // 泛型接口
+    泛型类
+        概念：泛型的类型参数只能是类类型（包括自定义类），不能是简单的基本类型
+        例子：
+            // 此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型
+            // 在实例化泛型类时，必须指定T的具体类型
+            public class Generic<T> {
+                // key这个成员变量的类型为T,T的类型由外部指定
+                private T key;
+
+                // 泛型构造方法形参key的类型也为T，T的类型由外部指定
+                public Generic(T key) {
+                    this.key = key;
+                }
+
+                // 泛型方法getKey的返回值类型为T，T的类型由外部指定
+                public T getKey() {
+                    return key;
+                }
+            }
+            Generic<Integer> generic11 = new Generic<Integer>(123456);
+            Generic<String> generic22 = new Generic<String>("key_value");
+            Generic<Boolean> generic33 = new Generic<Boolean>(false);
+            System.out.println(generic11.getKey());     // 123456
+            System.out.println(generic22.getKey());     // key_value
+            System.out.println(generic33.getKey());     // false
+
+            // 自定义的泛型类
+            public class Pair<T> {
+                private T first;
+                private T second;
+
+                public Pair(T first, T second) {
+                    this.first = first;
+                    this.second = second;
+                }
+                public T getFirst() {
+                    return this.first;
+                }
+                public T getSecond() {
+                    return this.second;
+                }
+                // 静态方法不能引用泛型类型<T>，必须定义其他类型（例如<K>）来实现静态泛型方法
+                public static<X> Pair<X> create(X first, X second) {
+                    return new Pair<X>(first, second);
+                }
+            }
+            Pair<String> p2 = new Pair<>("hello", "world");
+            String first2 = p2.getFirst();
+            String second2 = p2.getSecond();
+            System.out.println(first2 + ", " + second2);    // hello, world
+            // 所有泛型实例，无论T的类型是什么，getClass()返回同一个Class实例，因为编译后它们全部都是Pair<Object>
+            Pair<Integer> p3 = new Pair<>(99, 88);
+            Class c1 = p2.getClass();
+            Class c2 = p3.getClass();
+            System.out.println((c1 == c2) + ", " + (c1 == Pair.class)); // true, true
+
+    泛型接口
+        // 定义一个泛型接口
+        public interface Generator<T> {
+            public T next();
+        }
+        // 实现泛型接口，未传入泛型实参       下面是泛型类
+        public class FruitGenerator<T> implements Generator<T> {
+            @Override
+            public T next() {
+                return null;
+            }
+        }
+        Generator<Integer> gg = new FruitGenerator<Integer>();
+        System.out.println(gg.next());      // null
+        // 实现泛型接口，传入泛型实参    下面不是泛型类
+        public class FruitGenerator22 implements Generator<String> {
+            private String[] fruits = new String[]{"Apple", "banana", "pear"};
+
+            @Override
+            public String next() {
+                Random rand = new Random();
+                return fruits[rand.nextInt(3)];
+            }
+        }
+        Generator<String> gg2 = new FruitGenerator22();
+        System.out.println(gg2.next());     // banana
+
         // String本身已经实现了Comparable<String>接口,可以直接排序
         String[] ss = new String[] {"Orange", "Apple", "Pear"};
         Arrays.sort(ss);
@@ -1275,39 +1372,207 @@
         Arrays.sort(ps);
         System.out.println(Arrays.toString(ps));        // [alice,88, bob,61, lily,70]
 
-        // 自定义的泛型类
-        public class Pair<T> {
-            private T first;
-            private T second;
+    泛型方法
+        概念：泛型类定义时的 T 与泛型类方法中的泛型方法定义的 T 是不一样的，两者没毛线关系
+        例子：
+            // 例子一
+            public class GenericMethod {
 
-            public Pair(T first, T second) {
-                this.first = first;
-                this.second = second;
+                /**
+                 * 泛型方法的基本介绍
+                 * @param tClass 传入的泛型实参
+                 * @return T 返回值为T类型
+                 * 说明：
+                 *     1）public 与 返回值中间 <T> 非常重要，表明声明此方法为泛型方法。
+                 *     2）只有声明了 <T> 的方法才是泛型方法，泛型类中使用了泛型的成员方法并不是泛型方法。
+                 *     3）<T> 表明该方法将使用泛型类型T，此时才可以在方法中使用泛型类型T。
+                 *     4）与泛型类的定义一样，此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型。
+                 */
+                public <T> T genericMethod(Class<T> tClass) throws InstantiationException, IllegalAccessException {
+                    T instance = tClass.newInstance();
+                    return instance;
+                }
             }
-            public T getFirst() {
-                return this.first;
-            }
-            public T getSecond() {
-                return this.second;
-            }
-            // 静态方法不能引用泛型类型<T>，必须定义其他类型（例如<K>）来实现静态泛型方法
-            public static<X> Pair<X> create(X first, X second) {
-                return new Pair<X>(first, second);
-            }
-        }
-        Pair<String> p2 = new Pair<>("hello", "world");
-        String first2 = p2.getFirst();
-        String second2 = p2.getSecond();
-        System.out.println(first2 + ", " + second2);    // hello, world
-        // 所有泛型实例，无论T的类型是什么，getClass()返回同一个Class实例，因为编译后它们全部都是Pair<Object>
-        Pair<Integer> p3 = new Pair<>(99, 88);
-        Class c1 = p2.getClass();
-        Class c2 = p3.getClass();
-        System.out.println((c1 == c2) + ", " + (c1 == Pair.class)); // true, true
 
-        // extends 通配符  暂时先忽略，不学
+            // 例子二
+            public class GenericMethod22<T> {
+                private T key;
 
-        // super 通配符  暂时先忽略，不学
+                public GenericMethod22(T key) {
+                    this.key = key;
+                }
+
+                // 我想说的其实是这个，虽然在方法中使用了泛型，但是这并不是一个泛型方法。
+                // 这只是类中一个普通的成员方法，只不过他的返回值是在声明泛型类已经声明过的泛型。
+                // 所以在这个方法中才可以继续使用 T 这个泛型。
+                public T getKey(){
+                    return key;
+                }
+
+                /**
+                 * 这个方法显然是有问题的，在编译器会给我们提示这样的错误信息"cannot reslove symbol E"
+                 * 因为在类的声明中并未声明泛型E，所以在使用E做形参和返回值类型时，编译器会无法识别。
+                 */
+            //    public E setKey(E key){
+            //        this.key = key;
+            //    }
+
+                // 这也不是一个泛型方法，这就是一个普通的方法，只是使用了Generic<Number>这个泛型类做形参而已。
+                public void showKeyValue1(Generic<Number> obj){
+                    System.out.println("泛型测试 showKeyValue " + obj.getKey());
+                }
+
+                // 这也不是一个泛型方法，这也是一个普通的方法，只不过使用了泛型通配符?
+                public void showKeyValue2(Generic<?> obj) {
+                    System.out.println("泛型测试 showKeyValue2 " + obj.getKey());
+                }
+
+                /**
+                 * 这个方法是有问题的，编译器会为我们提示错误信息："UnKnown class 'E' "
+                 * 虽然我们声明了<T>,也表明了这是一个可以处理泛型的类型的泛型方法。
+                 * 但是只声明了泛型类型T，并未声明泛型类型E，因此编译器并不知道该如何处理E这个类型。
+                 */
+            //    public <T> T showKeyName(Generic<E> container){
+            //
+            //    }
+
+                /**
+                 * 这个方法也是有问题的，编译器会为我们提示错误信息："UnKnown class 'T' "
+                 * 对于编译器来说T这个类型并未项目中声明过，因此编译也不知道该如何编译这个类。
+                 * 所以这也不是一个正确的泛型方法声明。
+                 */
+            //    public void showkey(T genericObj){
+            //
+            //    }
+            }
+
+            // 例子三
+            public class GenericMethod33 {
+                class Fruit {
+                    @Override
+                    public String toString() {
+                        return "fruit";
+                    }
+                }
+
+                class Apple extends Fruit {
+                    @Override
+                    public String toString() {
+                        return "apple";
+                    }
+                }
+
+                class Person {
+                    @Override
+                    public String toString() {
+                        return "person";
+                    }
+                }
+
+                class GenerateTest<T> {
+                    public void show_1(T t) {
+                        System.out.println(t.toString());
+                    }
+
+                    // 在泛型类中声明了一个泛型方法，使用泛型E，这种泛型E可以为任意类型。可以类型与T相同，也可以不同。
+                    // 由于泛型方法在声明的时候会声明泛型<E>，因此即使在泛型类中并未声明泛型，编译器也能够正确识别泛型方法中的泛型。
+                    public <E> void show_3(E t) {
+                        System.out.println(t.toString());
+                    }
+
+                    // 在泛型类中声明了一个泛型方法，使用泛型T，注意这个T是一种全新的类型，可以与泛型类中声明的T不是同一种类型。
+                    public <T> void show_2(T t) {
+                        System.out.println(t.toString());
+                    }
+                }
+
+                public void xxxx() {
+                    Apple apple = new Apple();
+                    Person person = new Person();
+
+                    GenerateTest<Fruit> generateTest = new GenerateTest<Fruit>();
+                    // apple是Fruit的子类，所以这里可以
+                    generateTest.show_1(apple);     // apple
+                    // 编译器会报错，因为泛型类型实参指定的是Fruit，而传入的实参类是Person
+            //        generateTest.show_1(person);
+                    // 使用这两个方法都可以成功
+                    generateTest.show_2(apple);     // apple
+                    generateTest.show_2(person);    // person
+                    // 使用这两个方法都可以成功
+                    generateTest.show_3(apple);     // apple
+                    generateTest.show_3(person);    // person
+                }
+            }
+            GenericMethod33 gg5 = new GenericMethod33();
+            gg5.xxxx();
+
+            // 泛型方法与可变参数
+            ZzzzApplication zzzzObj = new ZzzzApplication();
+            public <T> void printMsg(T... args) {
+                for (T t:args) {
+                    System.out.println("t is " + t);
+                }
+            }
+            zzzzObj.printMsg("111", "222", "aaaa", "232.44");
+            // t is 111
+            // t is 222
+            // t is aaaa
+            // t is 232.44
+
+    泛型通配符
+        概念：解决具有父子关系的泛型类型，比如 Generic<Number> 和 Generic<Ingeter>
+        例子：
+            Generic<Integer> gg3 = new Generic<>(123);
+            Generic<Number> gg4 = new Generic<>(456);
+            // 此处 '?' 是类型实参，而不是类型形参。用来代替具体的类型实参，
+            // 直白点就是，此处的 ? 和Number、String、Integer一样都是一种实际的类型，可以把 ? 看成所有类型的父类
+            public void showKeyValue(Generic<?> obj) {
+                System.out.println("泛型通配符测试：" + obj.getKey());
+            }
+            zzzzObj.showKeyValue(gg3);      // 泛型通配符测试：123
+            zzzzObj.showKeyValue(gg4);      // 泛型通配符测试：456
+
+    泛型上下边界
+        概念：为泛型添加上边界，即传入的类型实参必须是指定类型的子类型
+        例子：
+            public static void getMyNumber(List<? extends Number> data) {
+                System.out.println("泛型上下边界测试：" + data.get(0));
+            }
+            List<String> name = new ArrayList<String>();
+            List<Integer> age = new ArrayList<Integer>();
+            List<Number> number = new ArrayList<Number>();
+            name.add("icon");
+            age.add(18);
+            number.add(314);
+            // getMyNumber(name);  // 不兼容的类型: java.util.List<java.lang.String>无法转换为java.util.List<? extends java.lang.Number>
+            getMyNumber(age);       // 泛型上下边界测试：18
+            getMyNumber(number);    // 泛型上下边界测试：314
+
+            // 这行代码会报错，因为String不是Number的子类
+            // Generic22<String> gg55 = new Generic22<String>("1111");
+            Generic22<Integer> gg66 = new Generic22<Integer>(2222);
+            Generic22<Float> gg77 = new Generic22<Float>(2.4f);
+            Generic22<Double> gg88 = new Generic22<Double>(2.56);
+
+            public void showKeyValue22(Generic22<? extends Number> obj) {
+                System.out.println("showKeyValue22 " + obj.getKey());
+            }
+            // zzzzObj.showKeyValue22(gg55);
+            zzzzObj.showKeyValue22(gg66);   // showKeyValue22 2222
+            zzzzObj.showKeyValue22(gg77);   // showKeyValue22 2.4
+            zzzzObj.showKeyValue22(gg88);   // showKeyValue22 2.56
+
+            // 另一个泛型方法设置界限的例子
+            // 在泛型方法中添加上下边界限制的时候，必须在权限声明与返回值之间的<T>上添加上下边界，即在泛型声明的时候添加
+            // public <T> T showKeyName(Generic<T extends Number> container)，编译器会报错："Unexpected bound"
+            public <T extends Number> T showKeyName(Generic<T> container) {
+                System.out.println("container key: " + container.getKey());
+                T test = container.getKey();
+                return test;
+            }
+
+    泛型擦除
+        // 泛型类型擦除，暂时不研究，原理层面跟反射有关系
 
 
 6、注解（Annotation）
