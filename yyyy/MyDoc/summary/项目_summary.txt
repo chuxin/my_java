@@ -1,0 +1,113 @@
+问题描述：
+    Cannot resolve plugin org.jfrog.buildinfo:artifactory-maven-plugin:2.6.1
+解决办法：
+    Preference -> Build tools -> maven -> User settings file -> 路径文件指向当前项目下的setting.txt
+
+注解
+    @RequestHeader
+        概念：是获取请求头中的数据，通过指定参数 value 的值来获取请求头中指定的参数值。
+        例子：public String getRequestHeader(@RequestHeader("User-Agent") String agent) {}
+
+    @PathVariable("xxx")
+        概念：通过 @PathVariable 可以将URL中占位符参数{xxx}绑定到处理器类的方法形参中@PathVariable(“xxx“)
+        例子：@RequestMapping(value=”user/{id}/{name}”)  请求路径：http://localhost:8080/hello/show5/1/james
+
+    @JsonProperty
+        概念：给实体类属性名起别名
+        例子：数据库使用的字段名是 user_id，但是实体类属性命名是 userId，通过在userId上添加@JsonProperty("user_id")，在进行数据库查询返回给客户端的时候，可以重命名字段
+
+    @FeignClient
+        概念：远程调用。
+        用法：
+            url：基于url属性访问对应的http请求
+            name：指定FeignClient的名称，如果项目使用了Ribbon，name属性会作为微服务的名称，用于服务发现
+        例子：@FeignClient(name = "baidu",url = "http://www.baidu.com")
+
+    @ApiOperation
+        概念：此注解不是Spring自带的，它是swagger里的，用来构建Api文档的
+        用法：
+            @ApiOperation(value = “接口说明”,
+                      httpMethod = “接口请求方式”,
+                      response = “接口返回参数类型”,
+                      notes = “接口发布说明”) 其他参数可参考源码；
+        例子：@ApiOperation(value = "Get list of accounts.", tags = {"Open Banking",})
+
+    @Value("${ffm.isDisable}")
+        概念：这个注解将环境变量写在配置文件中，从而根据不同的运行环境读取不同的值。用于多环境运行
+        例子：
+            @Service
+            public class TesseractOrcServiceImpl implements TesseractOrcService {
+                @Value("${savePath}")
+                private  String savePath ;
+            }
+
+            # yml配置文件部分
+            ### 自己配置的参数
+            savePath : /Users/a/Desktop/test998/
+            libraryPath : /opt/local/share/OpenCV/java/libopencv_java347.dylib
+
+    @RestController
+        概念：这个注解是 @ResponseBody 和 @Controller 两个注解的合体。标注在类上，表示：这个Controller类的所有方法返回的数据直接写给浏览器
+
+    @RequiredArgsConstructor
+        概念：lombok提供的一个注解。写在类上可以代替@Autowired注解，如果要实现自动注入，对字段要用 final 定义，或者使用@notnull注解
+
+StringUtils
+    概念：操作对象是 java.lang.String 类型的对象
+    用法：
+        isEmpty
+            概念：判断某字符串是否为空
+            例子：
+                StringUtils.isEmpty(null) = true
+                StringUtils.isEmpty("") = true
+                StringUtils.isEmpty(" ") = false //注意在 StringUtils 中空格作非空处理
+                StringUtils.isEmpty("   ") = false
+                StringUtils.isEmpty("bob") = false
+                StringUtils.isEmpty(" bob ") = false
+
+        removeStart(String str, String remove)
+            概念：如果字符串str是以字符串remove开始，则去掉这个开始，然后返回，否则返回原来的串。
+            例子：
+                StringUtils.removeStart(null, *)    = null
+                StringUtils.removeStart("", *)      = ""
+                StringUtils.removeStart(*, null)    = *
+                StringUtils.removeStart("asdf","")) = "asdf"
+                StringUtils.removeStart("asdf","as")) = "df"
+                StringUtils.removeStart("asdf","df")) = "asdf"
+                StringUtils.removeStart("asdf","gh")) = "asdf"
+
+UUID.randomUUID().toString()
+    概念：UUID(Universally Unique Identifier)，全局唯一标识符，它保证在同一时空中的所有机器都是唯一的，由一个十六位的数字组成。可以用作主键
+    例子：
+        // 4bc1dd0d-5625-4068-9624-31c77a4ee496
+        System.out.println(UUID.randomUUID().toString())
+
+Boolean.parseBoolean(isFFMDisable)
+    概念：将字符串参数解析为布尔值
+    例子：
+        Boolean.parseBoolean("True")返回true 。
+        Boolean.parseBoolean("yes")返回false 。
+
+List<Integer> list=new ArrayList<>(List.of());
+// List<Integer> list=new ArrayList<>(List.of(1,2,3,4,5,5));
+list.forEach(num-> System.out.println(num));
+
+Java之super用法   【进一步整理】
+    https://blog.csdn.net/m0_63093628/article/details/122633358
+    https://www.jb51.net/article/230391.htm
+    例子：
+        public UserHasBeenMigratedException() {
+                super(MESSAGE);
+            }
+
+需要熟悉的东西：
+    JWT 看看用法
+
+    很多地方返回值定义类型时，喜欢用 var，而不是特定指哪个对象
+    var migrationStatus = getClientMigrationStatus(accountNumber, UUID.randomUUID().toString());
+
+    Integer.parseInt
+
+    @ApiParam(value = "A users JWT token.", required = true)
+
+

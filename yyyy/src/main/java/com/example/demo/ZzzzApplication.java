@@ -91,6 +91,21 @@ public class ZzzzApplication {
     public static void main(String[] args) {
         SpringApplication.run(ZzzzApplication.class, args);
 
+        String[] xx = {"xxx", "yyy", "zzz"};
+        System.out.println(Arrays.toString(xx));
+
+        String[] namesArr = {"bob", "alice", "grace"};
+        var sb2 = new StringBuilder();
+        sb2.append("hello ");
+        for (String name:namesArr) {
+            sb2.append(name).append(", ");
+        }
+        System.out.println(sb2.toString());
+        sb2.delete(sb2.length()-2, sb2.length());
+        System.out.println(sb2.length());
+        System.out.println(sb2.toString());
+        sb2.append("!");
+        System.out.println(sb2.toString());     // hello bob, alice, grace!
 
         /*********   java 基础  *********/
 //        String[] myArgs = {"aaa", "bbb"};
@@ -107,7 +122,7 @@ public class ZzzzApplication {
 //        testAnnotationHaHa();
 
         /*********   泛型  *********/
-        testGenericity();
+//        testGenericity();
 
         /*********   集合  *********/
 //        testCollection();
