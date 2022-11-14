@@ -1212,7 +1212,8 @@
             System.out.println(deque.pollFirst());  // C   ,  A <- B
             System.out.println(deque.pollLast());   // B   ,  A
             System.out.println(deque.pollFirst());  // A   ,  null
-            // LinkedList真是一个全能选手，它即是List，又是Queue，还是Deque。但是我们在使用的时候，总是用特定的接口来引用它，这是因为持有接口说明代码的抽象层次更高，而且接口本身定义的方法代表了特定的用途。
+            // LinkedList真是一个全能选手，它即是List，又是Queue，还是Deque。但是我们在使用的时候，总是用特定的接口来引用它，
+            //   这是因为持有接口说明代码的抽象层次更高，而且接口本身定义的方法代表了特定的用途。
             // 面向抽象编程的一个原则就是：尽量持有接口，而不是具体的实现类
             // 不推荐的写法
             LinkedList<String> d1 = new LinkedList<>();
@@ -1348,6 +1349,7 @@
         String[] ss = new String[] {"Orange", "Apple", "Pear"};
         Arrays.sort(ss);
         System.out.println(Arrays.toString(ss));        // [Apple, Orange, Pear]
+        // String.compareTo 方法，逐个比较字符，并返回他们之间的ASCII长度差值
         System.out.println("zello".compareTo("bbb"));   // 24
         // 自定义一个类实现按name进行排序
         // 实现泛型接口
@@ -1523,7 +1525,7 @@
             // t is 232.44
 
     泛型通配符
-        概念：解决具有父子关系的泛型类型，比如 Generic<Number> 和 Generic<Ingeter>
+        概念：解决具有父子关系的泛型类型，比如 Generic<Number> 和 Generic<Integer>
         例子：
             Generic<Integer> gg3 = new Generic<>(123);
             Generic<Number> gg4 = new Generic<>(456);
@@ -1547,10 +1549,21 @@
             name.add("icon");
             age.add(18);
             number.add(314);
-            // getMyNumber(name);  // 不兼容的类型: java.util.List<java.lang.String>无法转换为java.util.List<? extends java.lang.Number>
+            // getMyNumber(name);   // 不兼容的类型: java.util.List<java.lang.String>无法转换为java.util.List<? extends java.lang.Number>
             getMyNumber(age);       // 泛型上下边界测试：18
             getMyNumber(number);    // 泛型上下边界测试：314
 
+            public class Generic22<T extends Number> {
+                private T key;
+
+                public Generic22(T key) {
+                    this.key = key;
+                }
+
+                public T getKey() {
+                    return key;
+                }
+            }
             // 这行代码会报错，因为String不是Number的子类
             // Generic22<String> gg55 = new Generic22<String>("1111");
             Generic22<Integer> gg66 = new Generic22<Integer>(2222);
@@ -1578,6 +1591,7 @@
         // 泛型类型擦除，暂时不研究，原理层面跟反射有关系
 
     参考博文：https://blog.csdn.net/m0_49508485/article/details/123070574  文章写得不错，可以再看看他写的其它文章
+
 
 6、注解（Annotation）
     定义：是Java语言用于工具处理的标注

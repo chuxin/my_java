@@ -17,7 +17,7 @@
         例子：数据库使用的字段名是 user_id，但是实体类属性命名是 userId，通过在userId上添加@JsonProperty("user_id")，在进行数据库查询返回给客户端的时候，可以重命名字段
 
     @FeignClient
-        概念：远程调用。
+        概念：远程调用
         用法：
             url：基于url属性访问对应的http请求
             name：指定FeignClient的名称，如果项目使用了Ribbon，name属性会作为微服务的名称，用于服务发现
@@ -109,5 +109,14 @@ Java之super用法   【进一步整理】
     Integer.parseInt
 
     @ApiParam(value = "A users JWT token.", required = true)
+
+    @Nonnull
+    @Nullable
+
+=======================
+一个项目过来了要怎么看，怎么去上手这个项目？
+1、看文档，磨刀不误砍柴工
+2、先看跟自己有关系的那部分，比如分配到一个任务，改项目里某个模块，那就先看那个模块
+3、不懂的随时记下来，上网查，找同事问。
 
 

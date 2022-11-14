@@ -75,6 +75,15 @@
             }
 
         ③ 使用Jackson
+            public class Book {
+                public long id;
+                public String name;
+                public String author;
+                public String isbn;
+                public List<String> tags;
+                public String pubDate;
+            }
+
             InputStream input33 = Main.class.getClassLoader().getResourceAsStream("book.xml");
             JacksonXmlModule module = new JacksonXmlModule();
             XmlMapper mapper = new XmlMapper(module);
@@ -104,7 +113,7 @@
             System.out.println(book44.name);
             // 序列化操作!!
             String json = mapper44.writeValueAsString(book44);
-            System.out.println(json);
+            System.out.println(json);   // {"id":1,"name":"Java核心技术","author":"Cay S. Horstmann","isbn":9787111547426,"tags":["Java","Network"],"pubDate":[2016,9,1],"price":119.5}
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,9 +211,9 @@
             // 显示指定时区下的指定时间
             LocalDateTime ldt = LocalDateTime.of(2019, 9, 15, 15, 16, 17);
             ZonedDateTime zbj22 = ldt.atZone(ZoneId.systemDefault());
-            System.out.println(zbj22); // 2019-09-15T15:16:17+08:00[Asia/Shanghai]
+            System.out.println(zbj22);  // 2019-09-15T15:16:17+08:00[Asia/Shanghai]
             ZonedDateTime zny22 = ldt.atZone(ZoneId.of("America/New_York"));
-            System.out.println(zny22); // 2019-09-15T15:16:17-04:00[America/New_York]
+            System.out.println(zny22);  // 2019-09-15T15:16:17-04:00[America/New_York]
 
     DateTimeFormatter
         概念：格式化时间
@@ -298,8 +307,8 @@
 
         // filter  过滤元素
         Stream.generate(new LocalDateSupplier()).limit(31)
-                .filter(ldt22 -> ldt22.getDayOprovidedfWeek() == DayOfWeek.SATURDAY || ldt22.getDayOfWeek() == DayOfWeek.SUNDAY)
-                .forEach(System.out::print); // 2022-06-04 2022-06-05 2022-06-11 2022-06-12 2022-06-18 2022-06-19 2022-06-25 2022-06-26 2022-07-02
+                        .filter(ldt22 -> ldt22.getDayOfWeek() == DayOfWeek.SATURDAY || ldt22.getDayOfWeek() == DayOfWeek.SUNDAY)
+                        .forEach(System.out::print); // 2022-06-04 2022-06-05 2022-06-11 2022-06-12 2022-06-18 2022-06-19 2022-06-25 2022-06-26 2022-07-02
 
         // reduce  把一个Stream的所有元素按照聚合函数聚合成一个结果
         System.out.println();
@@ -376,7 +385,7 @@
         naturals.forEach(System.out::print);    // 1 3 5 7 9 11 13 15 17 19
         // 排序
         List<String> list88 = List.of("Orange", "apple", "Banana").stream().sorted().collect(Collectors.toList());
-        System.out.println(list88); // [Banana, Orange, apple]
+        System.out.println(list88); // [Banana, Orange, apple]     注意这几个单词的首字母大小写
         // 去重
         List<String> list99 = List.of("A", "B", "A", "C", "B", "D").stream().distinct().collect(Collectors.toList());
         System.out.println(list99); // [A, B, C, D]
@@ -995,7 +1004,6 @@
             创建进程比创建线程开销大，尤其是在Windows系统上；
             进程间通信比线程间通信要慢，因为线程间通信就是读写同一个变量，速度很快。
 
-
     创建线程
         注意：
             一个线程对象只能调用一次start()方法；
@@ -1085,6 +1093,20 @@
 
             // 例子二
             // interrupt 终止 join 的等待，让 join 中的线程立马结束运行
+            class HelloThread extends Thread {
+                public void run() {
+                    int n = 0;
+                    while(!isInterrupted()) {
+                        n++;
+                        System.out.println(n + " helloThread");
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            break;
+                        }
+                    }
+                }
+            }
             class MyThread77 extends Thread {
                 public void run() {
                     Thread hello = new HelloThread();
@@ -1094,7 +1116,7 @@
                     // ...
                     // 10 helloThread
                     try {
-                        // t7.interrupt() 让这里做了捕获，并结束 MyThread77 线程
+                        // 外层调用 t7.interrupt() 此句，让这里做了捕获，并结束 MyThread77 线程
                         hello.join();
                     } catch (InterruptedException e) {
                         System.out.println("MyThread77 interrupted!");  // MyThread77 interrupted!
@@ -1553,7 +1575,7 @@
             System.out.println("Fork/join sum: " + result + " in " + (endTime - startTime) + " ms.");
             // Fork/join sum: 9788366 in 599 ms.
 
-     CompletableFuture
+    CompletableFuture
         Future概念：ExecutorService.submit()方法，会返回一个Future类型，Future类型代表一个未来能获取结果的对象。
                    Future获得异步执行结果时，要么调用阻塞方法get()，要么轮询看isDone()是否为true，这两种方法会让主线程被迫等待。
         CompletableFuture概念：① 对Future做了改进，实现异步回调机制。可以传入回调对象，当异步任务完成或者发生异常时，自动调用回调对象的回调方法。

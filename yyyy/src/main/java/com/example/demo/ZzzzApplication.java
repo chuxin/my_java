@@ -91,21 +91,16 @@ public class ZzzzApplication {
     public static void main(String[] args) {
         SpringApplication.run(ZzzzApplication.class, args);
 
-        String[] xx = {"xxx", "yyy", "zzz"};
-        System.out.println(Arrays.toString(xx));
+        System.out.println("zello".compareTo("bbb"));   // 24
 
-        String[] namesArr = {"bob", "alice", "grace"};
-        var sb2 = new StringBuilder();
-        sb2.append("hello ");
-        for (String name:namesArr) {
-            sb2.append(name).append(", ");
-        }
-        System.out.println(sb2.toString());
-        sb2.delete(sb2.length()-2, sb2.length());
-        System.out.println(sb2.length());
-        System.out.println(sb2.toString());
-        sb2.append("!");
-        System.out.println(sb2.toString());     // hello bob, alice, grace!
+        Stream<String> stream66 = Stream.of("appL:apple", "msft1:microsoft");
+        Map<String, String> map66 = stream66.collect(Collectors.toMap(
+                s6 -> s6.substring(0, s6.indexOf(":")-1), s6 -> s6.substring(s6.indexOf(":")+2)
+        ));
+        System.out.println(map66);  // {appL=apple, msft1=microsoft}
+
+        List<String> list88 = List.of("Orange", "apple", "Banana").stream().sorted().collect(Collectors.toList());
+        System.out.println(list88); // [Banana, Orange, apple]
 
         /*********   java 基础  *********/
 //        String[] myArgs = {"aaa", "bbb"};
@@ -197,6 +192,7 @@ public class ZzzzApplication {
         //      https://blog.csdn.net/m0_49508485/article/details/123070574   文章写得不错，可以再看看他写的其它文章
         //
         // 把目前的 summary 复习一遍    周末看一下
+        // maven 深入看一下，A项目依赖B项目，怎么通过Maven实现
         // 抽空背背 java 面试题        周末预热一下
         //
         // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！

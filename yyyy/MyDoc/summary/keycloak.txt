@@ -1,0 +1,13 @@
+1、网上关于 keycloak资料
+https://blog.csdn.net/wjssbp/category_11881573.html    个人文章，不错
+https://www.keycloak.org/guides   官网
+
+2、相关
+keycloak用的框架：Quarkus框架，Kurbernetes Native 的Java框架，和 springboot不是一个体系
+https://www.cnblogs.com/javalinux/p/15792495.html
+
+
+
+
+
+
