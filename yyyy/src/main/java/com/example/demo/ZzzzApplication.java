@@ -191,15 +191,6 @@ public class ZzzzApplication {
         // 泛型学习扩展
         //      https://blog.csdn.net/m0_49508485/article/details/123070574   文章写得不错，可以再看看他写的其它文章
         //
-        // 把目前的 summary 复习一遍    周末看一下
-        // maven 深入看一下，A项目依赖B项目，怎么通过Maven实现
-        // 抽空背背 java 面试题        周末预热一下
-        //
-        // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
-        //     什么是简单的项目？本地能跑起来的，能进行调试的项目
-        // 集合里先把 List 和 map 练熟再说，最最常用
-        //     看看其它 java 教程，会有新的感悟
-        //
 
 //        testBasicSecond();
 //        testBasicThird();
@@ -212,7 +203,15 @@ public class ZzzzApplication {
         // 2、github上找个完整的项目看看  （不一定做，后面再说）
         //      https://blog.csdn.net/qq_41288095/article/details/89743041
 
+        // 把目前的 summary 复习一遍    周末看一下
+        // maven 深入看一下，A项目依赖B项目，怎么通过Maven实现
+        // 抽空背背 java 面试题        周末预热一下
         //
+        // 看完以上，消化后，看项目代码，先从简单的项目着手 ！！！
+        //     什么是简单的项目？本地能跑起来的，能进行调试的项目
+        // 集合里先把 List 和 map 练熟再说，最最常用
+        //     看看其它 java 教程，会有新的感悟
+
         //  其它
         //    mybatis-plus
         //    tkmybatis
