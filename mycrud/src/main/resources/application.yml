@@ -1,0 +1,32 @@
+# 默认配置
+server:
+  port: 8066
+  servlet:
+    context-path: /mycrud
+
+spring:
+  #数据源配置
+  datasource:
+    # driver-class-name: com.mysql.cj.jdbc.Driver # 也可以
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8889/springboot?useSSL=false&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    initialSize: 20
+    minIdle: 50
+    maxActive: 500
+  # 选择对应的环境配置，这里选择了 test
+  profiles:
+    active: prod
+
+---
+# 生产环境
+#server:
+#  port: 80
+#  servlet:
+#    context-path: /aaa
+
+#spring:
+#  config:
+#    activate:
+#      on-profile: prod

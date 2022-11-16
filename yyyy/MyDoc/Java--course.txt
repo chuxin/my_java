@@ -45,12 +45,7 @@ Java高级
 数据库
 消息队列
 
-====
-
-list
-collection
-lombok
-Comparator
+=============
 
 应用层面
     java基础语法

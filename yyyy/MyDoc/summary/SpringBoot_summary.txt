@@ -4,10 +4,14 @@
         ② 简化配置
 
     IDEA创建Spring Boot项目
+        方法一 (感觉不太灵)
         ① 新建项目，选择 Spring Initializr, sdk 1.8, default
         ② 选择性配置：GroupId、ArtifactId、Type=Maven、Packaging=jar、Java version=8或11、Package
         ③ 选择 springboot 的版本 2.45, 选择所依赖的 Spring Boot 组件 web->springweb
 
+        方法二
+        ① 新建项目，选择 Maven，选择 java 版本 1.8
+        ② 找个其它项目把 pom.xml 里的内容拷贝过来，主要是 parent、dependencies、build 标签里的内容替换一下
 
 2、配置相关
     配置绑定：把配置文件中的值与 JavaBean 中对应的属性进行绑定。
