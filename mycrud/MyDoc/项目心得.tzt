@@ -1,0 +1,15 @@
+1、pom.xml 、 application.yml 等文件，一旦做了修改，代码区域的窗口右上角会有一个同步图标，别忘记点一下
+问题背景：springboot整合mybatis报错:Failed to configure a DataSource: ‘url‘ attribute is not specified
+
+2、问题描述：
+    Consider defining a bean of type 'org.example.demo.mapper.CrudMessageBoardMapper' in your configurat
+  解决办法：
+    使用@MapperScan注解。或使用@Mapper也可以。
+
+3、问题描述：
+    Could not find resource org/example/demo/mapper/CrudMessageBoardMapper.xml
+  解决办法：
+    在pom.xml文件中进行配置资源的路径，<build>标签里加上 <include>**/*.xml</include>
+
+4、遇到 java 报错，找错误时，可以去看看 编译生成的target文件夹里，代码是啥样的，资源文件有没有缺失 等等。
+
