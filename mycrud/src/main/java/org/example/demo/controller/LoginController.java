@@ -1,5 +1,6 @@
 package org.example.demo.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -8,6 +9,8 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Verification;
 import com.ctc.wstx.util.StringUtil;
+import com.google.gson.Gson;
+import kafka.utils.Json;
 import org.example.demo.bean.CrudUsers;
 import org.example.demo.bean.ResponseStandard;
 import org.example.demo.core.EncryptionUtils;
@@ -41,19 +44,34 @@ public class LoginController {
 
     @RequestMapping(value="/register", method=RequestMethod.POST)
     public ResponseEntity<ResponseStandard<String>> register(@RequestParam(defaultValue = "null") String username,
-                                                     @RequestParam(defaultValue = "null") String passwd,
-                                                     @RequestParam(defaultValue = "null") String ip) {
+                                 @RequestParam(defaultValue = "null") String passwd,
+                                 @RequestParam(defaultValue = "null") String mobile) throws NoSuchAlgorithmException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime current_time = LocalDateTime.parse(dtf.format(LocalDateTime.now()), dtf);
-        int resIns = crudUsersMapper.insertUserInfo(username, passwd, ip, current_time, current_time);
+
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        byte[] md5Byte = md5.digest(passwd.getBytes());
+        String passwdEncrytion = EncryptionUtils.bytesToHexString(md5Byte);
+
+        String ip = "";
+        try {
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        int resIns = crudUsersMapper.insertUserInfo(username, passwdEncrytion, ip, mobile, current_time, current_time);
         ResponseStandard<String> tt = new ResponseStandard<String>(200, "注册成功，标识符： " + resIns, String.valueOf(resIns));
         return new ResponseEntity<>(tt, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<ResponseStandard<List<CrudUsers>>> login(@RequestParam(defaultValue = "null") String username,
-                                                          @RequestParam(defaultValue = "null") String passwd) {
-        List<CrudUsers> res = crudUsersMapper.getUserInfo(username, passwd);
+                                    @RequestParam(defaultValue = "null") String passwd) throws NoSuchAlgorithmException {
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        byte[] md5Byte = md5.digest(passwd.getBytes());
+        String passwdEncryption = EncryptionUtils.bytesToHexString(md5Byte);
+
+        List<CrudUsers> res = crudUsersMapper.getUserInfo(username, passwdEncryption);
         ResponseStandard<List<CrudUsers>> tt = new ResponseStandard<List<CrudUsers>>(200, "返回结果。。", res);
         return new ResponseEntity<>(tt, HttpStatus.OK);
     }
@@ -218,5 +236,23 @@ public class LoginController {
         } catch (TokenExpiredException e) {
             System.out.println("令牌过期");
         }
+    }
+
+    @RequestMapping(value = "/testJson", method = RequestMethod.GET)
+    public void testJson() {
+        // 参考博文：https://blog.csdn.net/leosblog/article/details/80842640
+
+        // FastJson
+        CrudUsers crudUsers = new CrudUsers(11, "username", "passwd", "ip", "15851733229", LocalDateTime.now(), LocalDateTime.of(2022, 11, 11, 11, 11));
+        Object jsonString = JSON.toJSON(crudUsers);
+        System.out.println(jsonString.toString());
+
+        // GJson
+        Gson gson = new Gson();
+        String jsonString22 = gson.toJson(crudUsers);
+        System.out.println(jsonString22);
+        String jsonString33 = "{\"id\":11,\"username\":\"username\",\"passwd\":\"passwd\",\"ip\":\"ip\",\"mobile\":\"mobile\",\"create_time\":{\"date\":{\"year\":2022,\"month\":12,\"day\":30},\"time\":{\"hour\":17,\"minute\":53,\"second\":29,\"nano\":963975000}},\"update_time\":{\"date\":{\"year\":2022,\"month\":11,\"day\":11},\"time\":{\"hour\":11,\"minute\":11,\"second\":0,\"nano\":0}}}";
+        CrudUsers crudUsers22 = gson.fromJson(jsonString33, CrudUsers.class);
+        System.out.println(crudUsers22.toString());
     }
 }

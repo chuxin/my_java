@@ -7,8 +7,27 @@ public class CrudUsers {
     private String username;
     private String passwd;
     private String ip;
+    private String mobile;
     private LocalDateTime create_time;
     private LocalDateTime update_time;
+
+    public CrudUsers(int id, String username, String passwd, String ip, String mobile, LocalDateTime create_time, LocalDateTime update_time) {
+        this.id = id;
+        this.username = username;
+        this.passwd = passwd;
+        this.ip = ip;
+        this.mobile = mobile;
+        this.create_time = create_time;
+        this.update_time = update_time;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public int getId() {
         return id;
@@ -67,6 +86,7 @@ public class CrudUsers {
                 ", ip='" + ip + '\'' +
                 ", create_time=" + create_time +
                 ", update_time=" + update_time +
+                ", mobile='" + mobile + '\'' +
                 '}';
     }
 }

@@ -6,8 +6,8 @@
 <mapper namespace="org.example.demo.mapper.CrudUsersMapper">
     <!-- 插入记录-->
     <insert id="insertUserInfo" parameterType="org.example.demo.bean.CrudUsers">
-        insert into crud_users (username, passwd, ip, create_time, update_time)
-        values (#{username}, #{passwd}, #{ip}, #{create_time}, #{update_time})
+        insert into crud_users (username, passwd, ip, mobile, create_time, update_time)
+        values (#{username}, #{passwd}, #{ip}, #{mobile}, #{create_time}, #{update_time})
     </insert>
 
     <select id="getUserInfo" resultType="org.example.demo.bean.CrudUsers">

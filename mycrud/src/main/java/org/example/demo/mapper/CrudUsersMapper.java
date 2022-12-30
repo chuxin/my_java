@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface CrudUsersMapper {
     public int insertUserInfo(@Param("username") String username, @Param("passwd") String passwd,
-                              @Param("ip") String ip, @Param("create_time") LocalDateTime create_time,
-                              @Param("update_time") LocalDateTime update_time);
+                              @Param("ip") String ip, @Param("mobile") String mobile,
+                              @Param("create_time") LocalDateTime create_time, @Param("update_time") LocalDateTime update_time);
 
     public List<CrudUsers> getUserInfo(@Param("username") String username, @Param("passwd") String passwd);
 }
