@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.demo.mapper.CrudUsersMapper">
+    <!-- 插入记录-->
+    <insert id="insertUserInfo" parameterType="org.example.demo.bean.CrudUsers">
+        insert into crud_users (username, passwd, ip, create_time, update_time)
+        values (#{username}, #{passwd}, #{ip}, #{create_time}, #{update_time})
+    </insert>
+
+    <select id="getUserInfo" resultType="org.example.demo.bean.CrudUsers">
+        select * from crud_users where username=#{username} and passwd=#{passwd}
+    </select>
+</mapper>
