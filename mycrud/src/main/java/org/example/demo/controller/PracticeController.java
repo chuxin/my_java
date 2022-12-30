@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -14,12 +15,21 @@ public class PracticeController {
     @ResponseBody
     @RequestMapping("/Practice/test")
     public String showList() {
+        // 参考文档：https://www.shuzhiduo.com/A/LPdo0YoGz3/
+        //    https://new.qq.com/rain/a/20220608A01HXN00   没细看
+
         // reentrantLock + volatile 锁机制 + 线程内共享变量
 //        TT tt = new TT();
 //        tt.test();
 
         // Semaphore 信号量
-        Print1234.test22();
+//        Print1234.test22();
+
+        // atomic   使用原子变量
+        ABC5.test33();
+
+
+
         return "练习题";
     }
 }
@@ -163,3 +173,41 @@ class Print1234 {
         tcObj.start();
     }
 }
+
+class ABC5 {
+    private static AtomicInteger number22 = new AtomicInteger(0);
+
+
+    static class MyNewClass extends Thread {
+        private String name;
+        private int data;
+
+        public MyNewClass(String name, int data) {
+            this.name = name;
+            this.data = data;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+//            while (number22.get() < 100) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (number22.get() % 2 == this.data) {
+                    System.out.println(this.name + ": " + number22.getAndIncrement());
+                }
+            }
+        }
+    }
+
+    public static void test33() {
+        MyNewClass mmOjb1 = new MyNewClass("线程1", 0);
+        MyNewClass mmObj2 = new MyNewClass("线程2", 1);
+        mmOjb1.start();
+        mmObj2.start();
+    }
+}
+

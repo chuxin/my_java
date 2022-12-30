@@ -10,6 +10,20 @@
         select * from crud_message_board
     </select>
 
+    <!-- 插入记录-->
+    <insert id="insertMessage" parameterType="org.example.demo.bean.CrudMessageBoard">
+        insert into crud_message_board (title, content, author, category, create_time, updateTime)
+        values (#{title}, #{content}, #{author}, #{category}, #{create_time}, #{updateTime})
+    </insert>
 
+    <!-- 更新记录-->
+    <update id="updateMessage" parameterType="org.example.demo.bean.CrudMessageBoard">
+        update crud_message_board set content = #{content}, author = #{author} where m_id = #{id}
+    </update>
+
+    <!-- 删除记录-->
+    <delete id="deleteMessage" parameterType="org.example.demo.bean.CrudMessageBoard">
+        delete from crud_message_board where m_id = #{id}
+    </delete>
 
 </mapper>

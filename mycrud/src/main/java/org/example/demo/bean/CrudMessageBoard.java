@@ -1,30 +1,30 @@
 package org.example.demo.bean;
 
-import java.sql.Clob;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class CrudMessageBoard {
     private int m_id;
     private String title;
-    private Clob content;
+    private String content;
     private String author;
     private String category;
-    private Date create_time;
-    private Date updateTime;
+    private LocalDateTime create_time;
+    private LocalDateTime updateTime;
 
-    public Date getCreate_time() {
+    public LocalDateTime getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(LocalDateTime create_time) {
         this.create_time = create_time;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -44,11 +44,11 @@ public class CrudMessageBoard {
         this.title = title;
     }
 
-    public Clob getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Clob content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

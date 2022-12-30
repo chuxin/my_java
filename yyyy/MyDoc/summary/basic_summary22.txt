@@ -192,7 +192,7 @@
             LocalTime t3 = LocalTime.of(15, 16, 17);
             LocalDateTime ldt3 = LocalDateTime.of(2019, 11, 30, 15, 16, 17);
             System.out.println(d3 + " ==== " + t3 + " ==== " + ldt3);   // 2019-11-30 ==== 15:16:17 ==== 2019-11-30T15:16:17
-            // 解析日期
+            // 解析日期   字符串转日期
             LocalDateTime ldt4 = LocalDateTime.parse("2019-11-19T15:16:17");
             LocalDate d4 = LocalDate.parse("2019-11-19");
             LocalTime t4 = LocalTime.parse("15:16:17");

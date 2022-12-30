@@ -1,0 +1,36 @@
+JWT官网
+    https://jwt.io/
+
+概念：
+    全称是 JSON Web Token，用来实现端到端安全验证
+    后端对前端输入的用户信息进行加密产生一个令牌字符串， 前端再次请求时附加此字符串，后端再使用算法解密。
+    应用在前后端分离的用户验证上
+
+jwt流程：
+    MyDoc/资源文件/jwt流程.png
+
+组成部分：
+    由三部分组成，分别是数据头(Header)、Payload(数据体)、验证签名(Verify Signature)
+
+    数据头(Header)
+        加密算法和Token的类别，默认为 HS256 签名算法和 JWT 令牌类型
+        加密算法常见的有MD5、SHA、HMAC
+        {
+          "alg": "HS256",    // 指定签名算法
+          "typ": "JWT"       // 指定token令牌类型
+        }
+
+    Payload(数据体)
+        用户数据，一般为默认字段，也可以自定义一些私有字段，但不要放敏感信息
+        iss(Issuser): 签发人
+        exp(Expiration time): 过期时间戳
+        sub(sub Subject): 面向主体
+        aud(Audience): 用户/接收方
+        nbf(Not Before): 开始生效时间,在此之前不可用
+        iat(Issued at): 发布时间/签发时间
+        jti(JWT ID): JWT ID用于标识该JWT
+
+    验证签名(Verify Signature)
+        校验数据，Header.Payload.Signature
+        Header部分base64Url编码.Payload部分base64Url编码.一个自定义的secret字符串盐值进行HS256对称加密【也可以用其它算法或非对称加密】
+

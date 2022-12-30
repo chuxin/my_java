@@ -13,3 +13,10 @@
 
 4、遇到 java 报错，找错误时，可以去看看 编译生成的target文件夹里，代码是啥样的，资源文件有没有缺失 等等。
 
+5、spring 框架里的概念
+    @RequestMapping可以指定GET、POST请求方式
+    @GetMapping等价于@RequestMapping的GET请求方式
+
+6、
+
+
