@@ -268,6 +268,12 @@
         // 2022-07-01T23:59:59.900+08:00
         System.out.println(OffsetDateTime.of(LocalDate.of(2022, 7, 1), LocalTime.of(23, 59, 59, 900000000), ZoneOffset.ofHours(8)));
 
+    遗留问题：
+        LocalDateTime、 Date 、Calendar 、String 相互转换     https://blog.csdn.net/weixin_36158990/article/details/114170506
+        日期大小比较
+            Date自带方法before()和after()
+            String的compareTo()
+            转换为秒比较  getTime()
 
 3、使用 Stream
     概念：Stream 代表的是任意Java对象的序列

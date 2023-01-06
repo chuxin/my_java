@@ -26,4 +26,11 @@
         delete from crud_message_board where m_id = #{id}
     </delete>
 
+    <select id="getCount" resultType="Integer">
+        select count(1) from crud_message_board
+    </select>
+
+    <select id="getPageRecords" resultType="org.example.demo.bean.CrudMessageBoard">
+        select * from crud_message_board order by m_id asc limit #{pageStart}, #{pageSize}
+    </select>
 </mapper>

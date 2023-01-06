@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.example.demo.bean.CrudMessageBoard;
 import org.springframework.stereotype.Repository;
+import scala.Int;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -21,4 +22,8 @@ public interface CrudMessageBoardMapper {
                              @Param("author") String author);
 
     public int deleteMessage(int id);
+
+    public Integer getCount();
+
+    public List<CrudMessageBoard> getPageRecords(@Param("pageStart") int pageStart, @Param("pageSize") int pageSize);
 }

@@ -6,7 +6,11 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 public class JWTUtils {
@@ -15,10 +19,20 @@ public class JWTUtils {
     // 加密 token
     public static String generateToken(Map<String, String> payload) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, 24);
+//        calendar.add(Calendar.HOUR, 24);
         JWTCreator.Builder builder = JWT.create();
         payload.forEach(builder::withClaim);
-        String token = builder.withExpiresAt(calendar.getTime()).sign(Algorithm.HMAC256(SECRET_KEY));
+        System.out.println(calendar.getTime());
+        SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String expiresAt = dtf.format(calendar.getTime());
+        System.out.println(expiresAt);
+        Date dd = null;
+        try {
+            dd = dtf.parse(expiresAt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String token = builder.withExpiresAt(dd).sign(Algorithm.HMAC256(SECRET_KEY));
 
         return token;
     }

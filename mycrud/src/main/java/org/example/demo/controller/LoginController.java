@@ -16,6 +16,8 @@ import org.example.demo.bean.ResponseStandard;
 import org.example.demo.core.EncryptionUtils;
 import org.example.demo.core.JWTUtils;
 import org.example.demo.mapper.CrudUsersMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +43,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class LoginController {
     @Autowired
     public CrudUsersMapper crudUsersMapper;
+    public final Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(value="/register", method=RequestMethod.POST)
     public ResponseEntity<ResponseStandard<String>> register(@RequestParam(defaultValue = "null") String username,
@@ -65,14 +68,33 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity<ResponseStandard<List<CrudUsers>>> login(@RequestParam(defaultValue = "null") String username,
+    public ResponseEntity<ResponseStandard<Map<String, String>>> login(@RequestParam(defaultValue = "null") String username,
                                     @RequestParam(defaultValue = "null") String passwd) throws NoSuchAlgorithmException {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         byte[] md5Byte = md5.digest(passwd.getBytes());
         String passwdEncryption = EncryptionUtils.bytesToHexString(md5Byte);
 
-        List<CrudUsers> res = crudUsersMapper.getUserInfo(username, passwdEncryption);
-        ResponseStandard<List<CrudUsers>> tt = new ResponseStandard<List<CrudUsers>>(200, "返回结果。。", res);
+        CrudUsers res = crudUsersMapper.getUserInfo(username, passwdEncryption);
+        System.out.println(res);
+
+        Map<String, String> xxxx = new HashMap<>();
+        if (res == null) {
+            xxxx.put("jwt_token", "");
+            ResponseStandard<Map<String, String>> tt = new ResponseStandard<Map<String, String>>(499, "返回结果有问题。。", xxxx);
+            return new ResponseEntity<>(tt, HttpStatus.OK);
+        }
+
+        Map<String, String> payload = new HashMap<>();
+        payload.put("id", String.valueOf(res.getId()));
+        payload.put("username", String.valueOf(res.getUsername()));
+        payload.put("ip", String.valueOf(res.getIp()));
+        payload.put("mobile", String.valueOf(res.getMobile()));
+        payload.put("create_time", String.valueOf(res.getCreate_time()));
+        payload.put("update_time", String.valueOf(res.getUpdate_time()));
+        String token22 = JWTUtils.generateToken(payload);
+        xxxx.put("jwt_token", token22);
+        ResponseStandard<Map<String, String>> tt = new ResponseStandard<Map<String, String>>(200, "返回结果。。", xxxx);
+        logger.info("登录成功，" + String.valueOf(res.getMobile()));
         return new ResponseEntity<>(tt, HttpStatus.OK);
     }
 
