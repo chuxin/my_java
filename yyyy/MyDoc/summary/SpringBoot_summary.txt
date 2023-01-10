@@ -98,6 +98,8 @@
             ③ 同上
             遗留问题：中文乱码问题 ？？？
 
+        https://blog.csdn.net/qq_34093116/article/details/123710936  读取配置文件，可以参考一下，清洗明了
+
     导入 Spring 配置
         1、使用 @ImportResource 注解加载配置文件(不推荐)
             ① 创建一个接口 com/example/demo/fmConfig/service/PersonService.java

@@ -10,24 +10,38 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Verification;
 import com.ctc.wstx.util.StringUtil;
 import com.google.gson.Gson;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import kafka.utils.Json;
 import org.example.demo.bean.CrudUsers;
 import org.example.demo.bean.ResponseStandard;
 import org.example.demo.core.EncryptionUtils;
 import org.example.demo.core.JWTUtils;
+import org.example.demo.core.MailUtils;
 import org.example.demo.mapper.CrudUsersMapper;
+import org.example.demo.toolEntity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.StringWriter;
 import java.net.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,12 +52,25 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.thymeleaf.ITemplateEngine;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
-@RestController
+@Controller
 public class LoginController {
     @Autowired
     public CrudUsersMapper crudUsersMapper;
+
     public final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    JavaMailSenderImpl mailSender;
+    @Autowired
+    MailUtils mailUtils;
+    @Value("${spring.mail.username}")
+    private String mailUserName;
+    @Autowired
+    TemplateEngine templateEngine;
 
     @RequestMapping(value="/register", method=RequestMethod.POST)
     public ResponseEntity<ResponseStandard<String>> register(@RequestParam(defaultValue = "null") String username,
@@ -276,5 +303,37 @@ public class LoginController {
         String jsonString33 = "{\"id\":11,\"username\":\"username\",\"passwd\":\"passwd\",\"ip\":\"ip\",\"mobile\":\"mobile\",\"create_time\":{\"date\":{\"year\":2022,\"month\":12,\"day\":30},\"time\":{\"hour\":17,\"minute\":53,\"second\":29,\"nano\":963975000}},\"update_time\":{\"date\":{\"year\":2022,\"month\":11,\"day\":11},\"time\":{\"hour\":11,\"minute\":11,\"second\":0,\"nano\":0}}}";
         CrudUsers crudUsers22 = gson.fromJson(jsonString33, CrudUsers.class);
         System.out.println(crudUsers22.toString());
+    }
+
+    @RequestMapping(value="/testMail", method = RequestMethod.GET)
+    public void testMail() {
+        // 读取配置文件信息
+        System.out.println(mailUserName);
+
+        // 最简单的邮件发送
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setSubject("hello, world");
+//        message.setText("你好，时间");
+//        message.setTo("chuxin135@163.com");
+//        message.setFrom(mailUserName);
+//        mailSender.send(message);
+
+        // 邮件加附件
+        // 带图片资源的邮件
+//        mailUtils.sendAttachmentsMail(mailUserName, "chuxin135@163.com", "我是主题",
+//                "<div>内容，内容 图片2： <div><img src='cid:1'/></div></div>", new String[]{"1.jpg", "2.jpg"});
+
+        // 使用FreeMarker构建邮件模板
+//        mailUtils.sendFreeMarkerHtmlMail(mailUserName);
+
+        // 使用Thymeleaf构建邮件模板    没成功？？？
+        // 通过 Context 构造模版中变量需要的值
+//        Context ctx = new org.thymeleaf.context.Context();
+//        ctx.setVariable("username", "你好啊");
+//        ctx.setVariable("sex", "男");
+//        // 使用TemplateEngine 对模版进行渲染
+//        String content = templateEngine.process("mailTemplate.html", ctx);
+//        System.out.println("==============================" + content);
+//        mailUtils.sendThymeleafHtmlMail(mailUserName, content);
     }
 }

@@ -1,0 +1,28 @@
+SpringBoot工程自带 logback和 slf4j的依赖，所以重点放在编写配置文件上：
+
+application.properties或 application.yml （系统层面）
+
+logback-spring.xml（自定义文件方式）
+
+第一种方式比较简单，可做的事情也比较简单，比如：只能配置日志文件的输出路径、日志文件的格式、日志的级别等。
+
+第二种方式比较复杂，对日志的处理比较好，生产上推荐这种，运行维护好。如有以下需求：
+
+        a、区分 debug、info、error 等类型的日志，并分别输出到不同的日志文件。
+
+        b、对日志文件进行维护，如每天产生一个日志文件，并设置日志文件的大小和保留天数等。
+
+问题描述：
+    Missing integer token, that is %i, in FileNamePattern
+解决办法：
+    <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.log</fileNamePattern> 改成
+    <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+    https://blog.csdn.net/yuanquanl/article/details/73277067
+
+问题描述：
+    LoggerFactory is not a Logback LoggerContext but Logback is on the classpath. Either remove Logback or the competing implementation
+解决办法：
+    maven -> show dependencies  找到引用的包，到 pom.xml里去 exclusion 一下
+    https://blog.csdn.net/qq_20134605/article/details/97135442
+
+

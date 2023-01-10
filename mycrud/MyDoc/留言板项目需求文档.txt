@@ -8,37 +8,13 @@
     用 jwt 功能  ==
 3、提供分页查询功能接口  ==
     四种分页方式  https://blog.csdn.net/xueyijin/article/details/128365377
-4、程序里请求和返回的地方，加日志
-    SpringBoot工程自带 logback和 slf4j的依赖，所以重点放在编写配置文件上：
-
-    application.properties或 application.yml （系统层面）
-
-    logback-spring.xml（自定义文件方式）
-
-    第一种方式比较简单，可做的事情也比较简单，比如：只能配置日志文件的输出路径、日志文件的格式、日志的级别等。
-
-    第二种方式比较复杂，对日志的处理比较好，生产上推荐这种，运行维护好。如有以下需求：
-
-           a、区分 debug、info、error 等类型的日志，并分别输出到不同的日志文件。
-
-          b、对日志文件进行维护，如每天产生一个日志文件，并设置日志文件的大小和保留天数等。
-
-    问题描述：
-        Missing integer token, that is %i, in FileNamePattern
-    解决办法：
-        <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.log</fileNamePattern> 改成
-        <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-        https://blog.csdn.net/yuanquanl/article/details/73277067
-
-    问题描述：
-        LoggerFactory is not a Logback LoggerContext but Logback is on the classpath. Either remove Logback or the competing implementation
-    解决办法：
-        maven -> show dependencies  找到引用的包，到 pom.xml里去 exclusion 一下
-        https://blog.csdn.net/qq_20134605/article/details/97135442
-
-
-
+4、程序里请求和返回的地方，加日志 ==
+    需要学习一下 logback-spring.xml 配置文件的语法，了解常用标签在配置里做什么用
+    https://blog.csdn.net/java123456111/article/details/125498380       java 日志体系分类
+    https://blog.csdn.net/CSDN2497242041/article/details/122596582   logback-spring.xml demo有问题，但是可以做参考，实现了功能：单文件超过一定大小能再起一个日志文件
+    https://blog.csdn.net/m0_63004677/article/details/126504283      logback-spring.xml 可用
 5、程序错误时，提供发邮件功能
+    
 6、做成页面，登录页、注册页、分页查询页，编辑页。原始 html 页面就行，丑点没关系
 7、新增用户个人档案页的更新，页面包含，checkbox, radiobox, 上传头像，textarea，下拉框，富文本编辑器。
 8、列表页增加导出功能，调用第三方导出库实现
