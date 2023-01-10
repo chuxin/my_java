@@ -122,6 +122,7 @@ public class LoginController {
         xxxx.put("jwt_token", token22);
         ResponseStandard<Map<String, String>> tt = new ResponseStandard<Map<String, String>>(200, "返回结果。。", xxxx);
         logger.info("登录成功，" + String.valueOf(res.getMobile()));
+        mailUtils.sendSimpleMail(mailUserName);
         return new ResponseEntity<>(tt, HttpStatus.OK);
     }
 
@@ -311,12 +312,7 @@ public class LoginController {
         System.out.println(mailUserName);
 
         // 最简单的邮件发送
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setSubject("hello, world");
-//        message.setText("你好，时间");
-//        message.setTo("chuxin135@163.com");
-//        message.setFrom(mailUserName);
-//        mailSender.send(message);
+        mailUtils.sendSimpleMail(mailUserName);
 
         // 邮件加附件
         // 带图片资源的邮件

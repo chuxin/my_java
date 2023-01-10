@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,15 @@ import java.io.StringWriter;
 public class MailUtils {
     @Autowired
     JavaMailSender javaMailSender;
+
+    public void sendSimpleMail(String sender) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject("留言板系统登录通知");
+        message.setText("你好，某某用户，登录成功");
+        message.setTo("chuxin135@163.com");
+        message.setFrom(sender);
+        javaMailSender.send(message);
+    }
 
     public void sendAttachmentsMail(String sender, String receiver, String subject, String content, String[] srcPath) {
         try {
@@ -86,6 +96,7 @@ public class MailUtils {
         }
     }
 
+    // 没成功 ？？？
     public void sendThymeleafHtmlMail(String sender, String content) {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();

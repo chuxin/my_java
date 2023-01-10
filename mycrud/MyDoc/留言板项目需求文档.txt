@@ -13,15 +13,15 @@
     https://blog.csdn.net/java123456111/article/details/125498380       java 日志体系分类
     https://blog.csdn.net/CSDN2497242041/article/details/122596582   logback-spring.xml demo有问题，但是可以做参考，实现了功能：单文件超过一定大小能再起一个日志文件
     https://blog.csdn.net/m0_63004677/article/details/126504283      logback-spring.xml 可用
-5、程序错误时，提供发邮件功能
-    
-6、做成页面，登录页、注册页、分页查询页，编辑页。原始 html 页面就行，丑点没关系
-7、新增用户个人档案页的更新，页面包含，checkbox, radiobox, 上传头像，textarea，下拉框，富文本编辑器。
+5、程序错误时，提供发邮件功能   ==
+    参考demo地址： https://blog.csdn.net/qq_43581790/article/details/124874862
+11、这个 java 项目怎么发布到线上
+10、maven A项目依赖B项目，怎么通过Maven实现
 8、列表页增加导出功能，调用第三方导出库实现
 9、增加权限模块，对用户进行权限分配，不同的用户看到不同的页面
-10、maven A项目依赖B项目，怎么通过Maven实现
-11、这个 java 项目怎么发布到线上
 12、刷 java 面试题， 先刷一半，刷能刷的
+6、做成页面，登录页、注册页、分页查询页，编辑页。原始 html 页面就行，丑点没关系
+7、新增用户个人档案页的更新，页面包含，checkbox, radiobox, 上传头像，textarea，下拉框，富文本编辑器。
 13、单点登录，同一时间只能在一个浏览器上登录操作，包括强制下线功能
 14、增加 rabbitMQ，kafka 功能。发系统消息给每个用户，假设数据库里100个用户，每秒给10个用户发消息
     假设自己是第61个用户，那么第六秒的时候才会在 个人档案页看到系统消息。
