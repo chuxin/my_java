@@ -1,0 +1,10 @@
+问题描述：
+    Error resolving template [testMaven], template might not exist or might not be accessible by any of
+解决办法：
+    Controller 上的注解，由 @Controller 改成 @RestController
+
+
+
+参考demo地址： https://blog.csdn.net/qq_43581790/article/details/124874862
+
+

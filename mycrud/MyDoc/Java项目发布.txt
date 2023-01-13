@@ -1,0 +1,17 @@
+打包：
+    在我们IDEA右侧->Maven->Lifecycle->package
+发布：
+    安装jdk环境
+    安装tomcat，springboot自带tomcat，所以不安装也可以
+    安装数据库
+    打包项目成 jar 包
+        cd mycrud/target
+        java -jar demo-1.0-SNAPSHOT.jar
+    把本地打好的jar包上传到远程服务器
+    启动项目，nohup java -jar jar包名 2>&1 &
+        注：nohup加上&表示项目可以在后台永久的执行，即使关闭Xshell终端也不会停止运行；如果后面想要停止该项目的运行，
+        可以直接结束该项目端口占用的进程。
+
+参考文档：
+    https://zhuanlan.zhihu.com/p/478638813
+    https://blog.csdn.net/qq_41595452/article/details/120654855

@@ -2,7 +2,7 @@
 问题背景：springboot整合mybatis报错:Failed to configure a DataSource: ‘url‘ attribute is not specified
 
 2、问题描述：
-    Consider defining a bean of type 'org.example.demo.mapper.CrudMessageBoardMapper' in your configurat
+    Consider defining a bean of type 'CrudMessageBoardMapper' in your configurat
   解决办法：
     使用@MapperScan注解。或使用@Mapper也可以。
 

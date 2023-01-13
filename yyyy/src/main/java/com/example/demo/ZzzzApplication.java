@@ -2,10 +2,27 @@ package com.example.demo;
 
 import com.example.demo.bean.Book;
 import com.example.demo.bean.Book22;
+import com.example.demo.coreClass.MyCounter;
+import com.example.demo.coreClass.MyJavaBean;
+import com.example.demo.coreClass.Weekday;
 import com.example.demo.myQueue.KafkaConsumerTest;
 import com.example.demo.myQueue.KafkaProducerTest;
 import com.example.demo.myQueue.RabbitConsumerTest;
 import com.example.demo.myQueue.RabbitProducerTest;
+import com.example.demo.mypackages.*;
+import com.example.demo.polymorphic.Allowance;
+import com.example.demo.polymorphic.Income;
+import com.example.demo.polymorphic.Salary;
+import com.example.demo.polymorphic.TestFinal;
+import com.example.demo.testCollections.HisStudent;
+import com.example.demo.testCollections.MyStudent;
+import com.example.demo.testCollections.Students;
+import com.example.demo.testCollections.User;
+import com.example.demo.testFunctionalProgramming.Person;
+import com.example.demo.testStatic.MyScope;
+import com.example.demo.testStatic.MyStatic;
+import com.example.demo.testStatic.MyTestPackage;
+import com.example.demo.testStatic.StaticInterface;
 import com.example.demo.testT.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,27 +32,20 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sun.tools.javac.Main;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org22.example22.demo.core.JWTUtils;
 
-import com.example.demo.mypackages.OOPknowledge;
-import com.example.demo.mypackages.FirstChild;
-import com.example.demo.mypackages.SecondChid;
-import com.example.demo.mypackages.ThirdChild;
-
-import com.example.demo.polymorphic.Income;
-import com.example.demo.polymorphic.Salary;
-import com.example.demo.polymorphic.Allowance;
-import com.example.demo.polymorphic.TestFinal;
-
-import com.example.demo.testStatic.MyStatic;
-import com.example.demo.testStatic.StaticInterface;
-import com.example.demo.testStatic.MyScope;
-import com.example.demo.testStatic.MyTestPackage;
-
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -47,14 +57,6 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
-
-import com.example.demo.coreClass.MyCounter;
-import com.example.demo.coreClass.MyJavaBean;
-import com.example.demo.coreClass.Weekday;
-
-import java.math.BigDecimal;
-
-import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -62,24 +64,10 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.*;
-
-import com.example.demo.testCollections.MyStudent;
-import com.example.demo.testCollections.Students;
-import com.example.demo.testCollections.HisStudent;
-import com.example.demo.testCollections.User;
-
-import com.example.demo.testFunctionalProgramming.Person;
-import org.springframework.cglib.core.Converter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import com.example.demo.mypackages.MyHandler;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 // 方法①  @ImportResource 导入 Spring 配置文件  不推荐
 //@ImportResource(locations = {"classpath:/beans.xml"})
@@ -92,6 +80,11 @@ public class ZzzzApplication {
         SpringApplication.run(ZzzzApplication.class, args);
 
         System.out.println("zello".compareTo("bbb"));   // 24
+
+        Map<String, String> payload = new HashMap<>();
+        payload.put("xxx", "mmmm");
+        payload.put("xxx22", "mmmm22");
+        System.out.println("maven，调用自制jar包里的方法：" + JWTUtils.generateToken(payload));
 
         Stream<String> stream66 = Stream.of("appL:apple", "msft1:microsoft");
         Map<String, String> map66 = stream66.collect(Collectors.toMap(
@@ -192,7 +185,7 @@ public class ZzzzApplication {
         //      https://blog.csdn.net/m0_49508485/article/details/123070574   文章写得不错，可以再看看他写的其它文章
         //
 
-//        testBasicSecond();
+        testBasicSecond();
 //        testBasicThird();
 //        testTopicKafka();
 //        testRabbitMQ();
@@ -1994,7 +1987,7 @@ public class ZzzzApplication {
 
         // Maven基础      文档整理会多一些
         // Maven使用groupId，artifactId和version唯一定位一个依赖
-
+//        mailUtil
 
 
 

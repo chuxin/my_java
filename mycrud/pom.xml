@@ -10,14 +10,25 @@
         <version>2.6.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.example</groupId>
+    <groupId>org22.example22</groupId>
     <artifactId>demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Mycrud</name>
     <description>crud project</description>
 
     <properties>
+<!--        ① 自定义属性 （常用）-->
         <java.version>11</java.version>
+        <myvariable22>lalala</myvariable22>
+        <jquery.variable>3.6.0</jquery.variable>
+<!--        ② 内置属性-->
+        <my_version>${version}</my_version>
+<!--        ③ Setting属性-->
+        <my_java_home>${settings.localRepository}</my_java_home>
+<!--        ④ Java系统属性-->
+        <user_home>${user.home}</user_home>
+<!--        ⑤ 环境变量属性-->
+        <env_variable>${env.HOME}</env_variable>
     </properties>
     <dependencies>
         <dependency>
@@ -34,7 +45,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>3.6.0</version>
+            <version>${jquery.variable}</version>
         </dependency>
 
         <!--导入JDBC的场景启动器-->
@@ -176,6 +187,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>org22.example22.demo.MycrudApplication</mainClass>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <useDefaultDelimiters>true</useDefaultDelimiters>
+                </configuration>
             </plugin>
         </plugins>
 
@@ -188,6 +211,7 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
                 <includes>
                     <include>**/*.xml</include>
                     <include>**/*.properties</include>
@@ -196,6 +220,7 @@
                     <include>*.xml</include>
                     <include>**/*.ftl</include>
                     <include>**/*.html</include>
+                    <include>*.properties</include>
                 </includes>
             </resource>
         </resources>

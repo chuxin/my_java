@@ -1,0 +1,58 @@
+2023-01-12 15:50:23.403 [main] INFO  com.example.demo.ZzzzApplication - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 13280 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2023-01-12 15:50:23.405 [main] INFO  com.example.demo.ZzzzApplication - The following 1 profile is active: "prod"
+2023-01-12 15:50:23.957 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-12 15:50:23.974 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2023-01-12 15:50:24.336 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9987 (http)
+2023-01-12 15:50:24.343 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-12 15:50:24.344 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2023-01-12 15:50:24.447 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] - Initializing Spring embedded WebApplicationContext
+2023-01-12 15:50:24.448 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1001 ms
+2023-01-12 15:50:24.795 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-12 15:50:24.920 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-12 15:50:25.155 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2023-01-12 15:50:25.165 [main] INFO  com.example.demo.ZzzzApplication - Started ZzzzApplication in 2.269 seconds (JVM running for 7.978)
+2023-01-12 15:59:34.152 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-12 15:59:34.166 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-12 16:07:07.926 [main] INFO  com.example.demo.ZzzzApplication - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 14215 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2023-01-12 16:07:07.929 [main] INFO  com.example.demo.ZzzzApplication - The following 1 profile is active: "prod"
+2023-01-12 16:07:08.435 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-12 16:07:08.454 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2023-01-12 16:07:08.791 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9987 (http)
+2023-01-12 16:07:08.797 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-12 16:07:08.797 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2023-01-12 16:07:08.880 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] - Initializing Spring embedded WebApplicationContext
+2023-01-12 16:07:08.880 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 912 ms
+2023-01-12 16:07:08.915 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-01-12 16:07:08.929 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-01-12 16:07:52.837 [main] INFO  com.example.demo.ZzzzApplication - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 14271 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2023-01-12 16:07:52.840 [main] INFO  com.example.demo.ZzzzApplication - The following 1 profile is active: "prod"
+2023-01-12 16:07:53.387 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-12 16:07:53.404 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2023-01-12 16:07:53.795 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9987 (http)
+2023-01-12 16:07:53.804 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-12 16:07:53.804 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2023-01-12 16:07:53.904 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] - Initializing Spring embedded WebApplicationContext
+2023-01-12 16:07:53.905 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1027 ms
+2023-01-12 16:07:54.298 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-12 16:07:54.416 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-12 16:07:54.601 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2023-01-12 16:07:54.609 [main] INFO  com.example.demo.ZzzzApplication - Started ZzzzApplication in 2.166 seconds (JVM running for 7.622)
+2023-01-12 16:11:53.678 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-12 16:11:53.690 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-12 16:12:05.133 [main] INFO  com.example.demo.ZzzzApplication - Starting ZzzzApplication using Java 16.0.1 on macdeMacBook-Pro.local with PID 14518 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy)
+2023-01-12 16:12:05.135 [main] INFO  com.example.demo.ZzzzApplication - The following 1 profile is active: "prod"
+2023-01-12 16:12:05.642 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-12 16:12:05.658 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12 ms. Found 0 JDBC repository interfaces.
+2023-01-12 16:12:06.045 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9987 (http)
+2023-01-12 16:12:06.056 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-12 16:12:06.057 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2023-01-12 16:12:06.146 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/aaa] - Initializing Spring embedded WebApplicationContext
+2023-01-12 16:12:06.147 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 979 ms
+2023-01-12 16:12:06.511 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-12 16:12:06.622 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-12 16:12:06.821 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9987 (http) with context path '/aaa'
+2023-01-12 16:12:06.831 [main] INFO  com.example.demo.ZzzzApplication - Started ZzzzApplication in 2.08 seconds (JVM running for 7.543)
+2023-01-12 19:20:13.663 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-12 19:20:13.674 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -20,7 +20,7 @@ logback-spring.xml（自定义文件方式）
     https://blog.csdn.net/yuanquanl/article/details/73277067
 
 问题描述：
-    LoggerFactory is not a Logback LoggerContext but Logback is on the classpath. Either remove Logback or the competing implementation
+    LoggerFactory is not a Logback LoggerContext but Logback is on the classpath. Either remove Logback or the competing implementation (class org.slf4j.impl.Reload4jLoggerFactory loaded from file:/Users/mac/.m2/repository/org/slf4j/slf4j-reload4j/1.7.36/slf4j-reload4j-1.7.36.jar). If you are using WebLogic you will need to add 'org.slf4j' to prefer-application-packages in WEB-INF/weblogic.xml: org.slf4j.impl.Reload4jLoggerFactory
 解决办法：
     maven -> show dependencies  找到引用的包，到 pom.xml里去 exclusion 一下
     https://blog.csdn.net/qq_20134605/article/details/97135442

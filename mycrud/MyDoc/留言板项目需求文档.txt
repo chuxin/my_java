@@ -14,30 +14,17 @@
     https://blog.csdn.net/CSDN2497242041/article/details/122596582   logback-spring.xml demo有问题，但是可以做参考，实现了功能：单文件超过一定大小能再起一个日志文件
     https://blog.csdn.net/m0_63004677/article/details/126504283      logback-spring.xml 可用
 5、程序错误时，提供发邮件功能   ==
-    参考demo地址： https://blog.csdn.net/qq_43581790/article/details/124874862
 11、这个 java 项目怎么发布到线上    ==
-    打包：
-        在我们IDEA右侧->Maven->Lifecycle->package
-    发布：
-        安装jdk环境
-        安装tomcat，springboot自带tomcat，所以不安装也可以
-        安装数据库
-        打包项目成 jar 包
-            cd mycrud/target
-            java -jar demo-1.0-SNAPSHOT.jar
-        把本地打好的jar包上传到远程服务器
-        启动项目，nohup java -jar jar包名 2>&1 &
-            注：nohup加上&表示项目可以在后台永久的执行，即使关闭Xshell终端也不会停止运行；如果后面想要停止该项目的运行，可以直接结束该项目端口占用的进程。
-    参考文档：
-        https://zhuanlan.zhihu.com/p/478638813
-        https://blog.csdn.net/qq_41595452/article/details/120654855
-10、maven A项目依赖B项目，怎么通过Maven实现
-    maven 用法详解
-    第三方团队的项目依赖问题
-    maven 与 pom.xml
+10、maven A项目依赖B项目，怎么通过Maven实现  ==
+
+
+
+12、刷 java 面试题， 先刷一半，刷能刷的
 8、列表页增加导出功能，调用第三方导出库实现
 9、增加权限模块，对用户进行权限分配，不同的用户看到不同的页面
-12、刷 java 面试题， 先刷一半，刷能刷的
+    权限认证的两大框架，SpringSecurity 和 shiro
+    https://blog.csdn.net/qq_66991094/article/details/127660279
+    https://www.cnblogs.com/lumanmanqixiuyuanxi/p/16466834.html
 6、做成页面，登录页、注册页、分页查询页，编辑页。原始 html 页面就行，丑点没关系
 7、新增用户个人档案页的更新，页面包含，checkbox, radiobox, 上传头像，textarea，下拉框，富文本编辑器。
 13、单点登录，同一时间只能在一个浏览器上登录操作，包括强制下线功能
