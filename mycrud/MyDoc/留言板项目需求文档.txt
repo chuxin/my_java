@@ -9,17 +9,17 @@
 3、提供分页查询功能接口  ==
     四种分页方式  https://blog.csdn.net/xueyijin/article/details/128365377
 4、程序里请求和返回的地方，加日志 ==
-    需要学习一下 logback-spring.xml 配置文件的语法，了解常用标签在配置里做什么用
-    https://blog.csdn.net/java123456111/article/details/125498380       java 日志体系分类
-    https://blog.csdn.net/CSDN2497242041/article/details/122596582   logback-spring.xml demo有问题，但是可以做参考，实现了功能：单文件超过一定大小能再起一个日志文件
-    https://blog.csdn.net/m0_63004677/article/details/126504283      logback-spring.xml 可用
+    需要学习一下 logback-spring.xml 配置文件的语法，了解常用标签在配置里做什么用  ==
 5、程序错误时，提供发邮件功能   ==
 11、这个 java 项目怎么发布到线上    ==
 10、maven A项目依赖B项目，怎么通过Maven实现  ==
+12、刷 java 面试题，先刷一部分，刷你能刷的 ！！！
+    208道 基础面试题
+        https://blog.csdn.net/guorui_java/article/details/119299329
+        https://blog.csdn.net/uuqaz/article/details/123502779
+    java面试题高级工程师
+    结合招聘网，整理出常用但目前还不具备的技能， dubbo，
 
-
-
-12、刷 java 面试题， 先刷一半，刷能刷的
 8、列表页增加导出功能，调用第三方导出库实现
 9、增加权限模块，对用户进行权限分配，不同的用户看到不同的页面
     权限认证的两大框架，SpringSecurity 和 shiro

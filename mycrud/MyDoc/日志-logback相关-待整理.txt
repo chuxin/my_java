@@ -1,28 +1,114 @@
-SpringBoot工程自带 logback和 slf4j的依赖，所以重点放在编写配置文件上：
+概念：
+    SLF4J(Simple Logging Facade For Java) 是给Java日志访问提供一套规范的API接口，功能简单，一般很少用到
+    用 slf4j-api 作为门面，配上具体实现的框架 log4j、logback
 
-application.properties或 application.yml （系统层面）
+pom.xml 配置
+    slf4j 配置
+        <!--slf4j core 使用slf4j必須添加-->
+        <dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>slf4j-api</artifactId>
+        	<version>1.7.27</version>
+        </dependency>
 
-logback-spring.xml（自定义文件方式）
+        <!--slf4j 自带的简单日志实现 -->
+        <dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>slf4j-simple</artifactId>
+        	<version>1.7.27</version>
+        </dependency>
 
-第一种方式比较简单，可做的事情也比较简单，比如：只能配置日志文件的输出路径、日志文件的格式、日志的级别等。
+    logback 配置，在 slf4j 配置的基础上加下面配置
+        <!--logback日志实现框架-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
 
-第二种方式比较复杂，对日志的处理比较好，生产上推荐这种，运行维护好。如有以下需求：
+    log4j 配置，在 slf4j 配置的基础上加下面配置
+        <!--绑定log4j日志实现，需要导入适配器-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.12</version>
+        </dependency>
 
-        a、区分 debug、info、error 等类型的日志，并分别输出到不同的日志文件。
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
 
-        b、对日志文件进行维护，如每天产生一个日志文件，并设置日志文件的大小和保留天数等。
 
-问题描述：
-    Missing integer token, that is %i, in FileNamePattern
-解决办法：
-    <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.log</fileNamePattern> 改成
-    <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-    https://blog.csdn.net/yuanquanl/article/details/73277067
+logback 相关
+    功能：可以对日志进行归档，可以自动压缩日志成为归档文件
 
-问题描述：
-    LoggerFactory is not a Logback LoggerContext but Logback is on the classpath. Either remove Logback or the competing implementation (class org.slf4j.impl.Reload4jLoggerFactory loaded from file:/Users/mac/.m2/repository/org/slf4j/slf4j-reload4j/1.7.36/slf4j-reload4j-1.7.36.jar). If you are using WebLogic you will need to add 'org.slf4j' to prefer-application-packages in WEB-INF/weblogic.xml: org.slf4j.impl.Reload4jLoggerFactory
-解决办法：
-    maven -> show dependencies  找到引用的包，到 pom.xml里去 exclusion 一下
-    https://blog.csdn.net/qq_20134605/article/details/97135442
+    配置文件详解
+        configuration 标签
+            scan="true" 配置文件发生改变时会重新加载
+            scanPeriod设置时间间隔，当为scan="true"时才会生效
+        property 标签，设置变量
+        appender 标签，日志输出形式，可以定义多个
+            属性class
+                ch.qos.logback.core.ConsoleAppender     控制台输出
+                ch.qos.logback.core.rolling.RollingFileAppender 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。
+            file 标签，指定日志输出目录。可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。
+            append 标签，如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。
+            encoder 标签，对日志进行格式化
+            rollingPolicy 标签，当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名
+                属性class
+                    TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动。
+                    FixedWindowRollingPolicy： 根据固定窗口算法重命名文件的滚动策略
+                maxHistory 标签，控制保留的归档文件的最大数量，超出数量就删除旧文件。
+            triggeringPolicy 标签，告知 RollingFileAppender 何时激活滚动
+        pattern 标签，输出格式
+            %-5 level
+            %d{yyyy-MM-dd HH:mm:ss.SSS} 日期
+            %c  类的完整名称
+            %M  为method
+            %L  为行号
+            %thread 线程名称
+            %m或者%msg 信息
+            %n  换行
+        root 标签，只能有一个，日志的级别，TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF
+        logger 标签，用来设置某一个包或者具体的某一个类的日志打印级别。logger标签 优先级高于 root标签
+            属性name:用来指定受此logger约束的某一个包或者具体的某一个类。
+            属性level:用来设置打印级别，如果未设置此属性，那么当前logger将会继承上级的级别。
+            属性addtivity:是否向上级logger传递打印信息。默认是true
+        springProfile 标签，实现多渠道日志输出，比如 logger渠道，root渠道，那这样一条日志会输出两次
+            demo:
+                <!-- 基本策略(root级) + 根据profile在启动时, logger标签中定制化package日志级别 -->
+                <springProfile name="test">
+                    <root level="info">
+                        <appender-ref ref="CONSOLE" />
+                        <appender-ref ref="DEBUG_FILE" />
+                        <appender-ref ref="INFO_FILE" />
+                        <appender-ref ref="WARN_FILE" />
+                        <appender-ref ref="ERROR_FILE" />
+                        <appender-ref ref="ALL_FILE" />
+                    </root>
+                    <logger name="com.app.demo" level="info"/> <!-- 测试环境, 指定某包日志为info级 -->
+                </springProfile>
+
+        参考博文：
+            https://www.iteye.com/blog/aub-1101260
+            https://cloud.tencent.com/developer/article/1958286
+            https://blog.csdn.net/java123456111/article/details/125498380
+
+
+logback 问题相关
+    问题描述：
+        Missing integer token, that is %i, in FileNamePattern
+    解决办法：
+        <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.log</fileNamePattern> 改成
+        <fileNamePattern>${DEV_FILE_PATH}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        https://blog.csdn.net/yuanquanl/article/details/73277067
+
+    问题描述：
+        LoggerFactory is not a Logback LoggerContext but Logback is on the classpath. Either remove Logback or the competing implementation (class org.slf4j.impl.Reload4jLoggerFactory loaded from file:/Users/mac/.m2/repository/org/slf4j/slf4j-reload4j/1.7.36/slf4j-reload4j-1.7.36.jar). If you are using WebLogic you will need to add 'org.slf4j' to prefer-application-packages in WEB-INF/weblogic.xml: org.slf4j.impl.Reload4jLoggerFactory
+    解决办法：
+        maven -> show dependencies  找到引用的包，到 pom.xml里去 exclusion 一下
+        https://blog.csdn.net/qq_20134605/article/details/97135442
 
 

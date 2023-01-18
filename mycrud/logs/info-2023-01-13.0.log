@@ -1,0 +1,54 @@
+2023-01-13 11:44:39.540 [main] INFO  org22.example22.demo.MycrudApplication - Starting MycrudApplication using Java 11.0.17 on macdeMBP with PID 3257 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/mycrud/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/mycrud)
+2023-01-13 11:44:39.545 [main] INFO  org22.example22.demo.MycrudApplication - The following 1 profile is active: "prod"
+2023-01-13 11:44:40.215 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-13 11:44:40.225 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2023-01-13 11:44:40.683 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8066 (http)
+2023-01-13 11:44:40.692 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-13 11:44:40.693 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2023-01-13 11:44:40.854 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mycrud] - Initializing Spring embedded WebApplicationContext
+2023-01-13 11:44:40.854 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1264 ms
+2023-01-13 11:44:41.488 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-13 11:44:41.627 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-13 11:44:41.877 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8066 (http) with context path '/mycrud'
+2023-01-13 11:44:41.887 [main] INFO  org22.example22.demo.MycrudApplication - Started MycrudApplication in 2.933 seconds (JVM running for 3.61)
+2023-01-13 11:44:50.552 [http-nio-8066-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mycrud] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-13 11:44:50.553 [http-nio-8066-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-01-13 11:44:50.555 [http-nio-8066-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2023-01-13 11:46:57.806 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-13 11:46:57.825 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-13 11:47:03.403 [main] INFO  org22.example22.demo.MycrudApplication - Starting MycrudApplication using Java 11.0.17 on macdeMBP with PID 3395 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/mycrud/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/mycrud)
+2023-01-13 11:47:03.407 [main] INFO  org22.example22.demo.MycrudApplication - The following 1 profile is active: "prod"
+2023-01-13 11:47:04.093 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-13 11:47:04.104 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2023-01-13 11:47:04.570 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8066 (http)
+2023-01-13 11:47:04.581 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-13 11:47:04.581 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2023-01-13 11:47:04.702 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mycrud] - Initializing Spring embedded WebApplicationContext
+2023-01-13 11:47:04.702 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1229 ms
+2023-01-13 11:47:05.293 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-13 11:47:05.422 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-13 11:47:05.672 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8066 (http) with context path '/mycrud'
+2023-01-13 11:47:05.681 [main] INFO  org22.example22.demo.MycrudApplication - Started MycrudApplication in 2.747 seconds (JVM running for 3.373)
+2023-01-13 11:47:08.611 [http-nio-8066-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mycrud] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-13 11:47:08.612 [http-nio-8066-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-01-13 11:47:08.613 [http-nio-8066-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-01-13 14:57:28.793 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-13 14:57:28.801 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-13 14:57:40.520 [main] INFO  org22.example22.demo.MycrudApplication - Starting MycrudApplication using Java 11.0.17 on macdeMacBook-Pro.local with PID 8968 (/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/mycrud/target/classes started by mac in /Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/mycrud)
+2023-01-13 14:57:40.522 [main] INFO  org22.example22.demo.MycrudApplication - The following 1 profile is active: "prod"
+2023-01-13 14:57:41.136 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-01-13 14:57:41.146 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2023-01-13 14:57:41.608 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8066 (http)
+2023-01-13 14:57:41.618 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-13 14:57:41.618 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+2023-01-13 14:57:41.729 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mycrud] - Initializing Spring embedded WebApplicationContext
+2023-01-13 14:57:41.730 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1172 ms
+2023-01-13 14:57:42.411 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-13 14:57:42.566 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-13 14:57:42.874 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8066 (http) with context path '/mycrud'
+2023-01-13 14:57:42.884 [main] INFO  org22.example22.demo.MycrudApplication - Started MycrudApplication in 2.875 seconds (JVM running for 8.681)
+2023-01-13 14:57:47.814 [http-nio-8066-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/mycrud] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-13 14:57:47.815 [http-nio-8066-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-01-13 14:57:47.816 [http-nio-8066-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-01-13 18:36:03.521 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-13 18:36:03.536 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
