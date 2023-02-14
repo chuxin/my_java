@@ -34,7 +34,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org22.example22.demo.core.JWTUtils;
+//import org22.example22.demo.core.JWTUtils;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -84,7 +84,7 @@ public class ZzzzApplication {
         Map<String, String> payload = new HashMap<>();
         payload.put("xxx", "mmmm");
         payload.put("xxx22", "mmmm22");
-        System.out.println("maven，调用自制jar包里的方法：" + JWTUtils.generateToken(payload));
+//        System.out.println("maven，调用自制jar包里的方法：" + JWTUtils.generateToken(payload));
 
         Stream<String> stream66 = Stream.of("appL:apple", "msft1:microsoft");
         Map<String, String> map66 = stream66.collect(Collectors.toMap(
@@ -1712,7 +1712,7 @@ public class ZzzzApplication {
         // boolean canExecute()：是否可执行；
         // long length()：文件字节大小
 
-        File f7 = new File("/Applications/XAMPP/xamppfiles/htdocs/my_practice22/my_java/yyyy/mmm.txt");
+        File f7 = new File("/Applications/MAMP/htdocs/my_java/yyyy/mmm.txt");
         try {
             // 创建、删除文件
             if (f7.createNewFile()) {
