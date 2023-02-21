@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="my_run33" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org22.example22.demo.MycrudApplication" />
+    <module name="demo" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
