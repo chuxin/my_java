@@ -53,6 +53,7 @@ import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
@@ -94,6 +95,68 @@ public class ZzzzApplication {
 
         List<String> list88 = List.of("Orange", "apple", "Banana").stream().sorted().collect(Collectors.toList());
         System.out.println(list88); // [Banana, Orange, apple]
+
+         System.out.println("==============|||||||=============");
+        Integer ii333 = new Integer(-1);
+        System.out.println(ii333.intValue());
+
+        int aaa = 1;
+        while (true) {
+            System.out.println(aaa);
+            aaa++;
+            if (aaa > 10) {
+                System.out.println(aaa);
+                break;
+            }
+        }
+
+//        Integer bbb = new Integer(null);
+//        System.out.println(bbb.intValue());
+//        System.out.println(bbb.equals(null));
+
+        String aaa99 = "aabb";
+        String[] aaa99Arr = aaa99.split("\\|");
+        for(String part:aaa99Arr) {
+            System.out.println(part + " 1");
+        }
+        String aaa88 = "aabb|cc";
+        String[] aaa88Arr = aaa88.split("\\|");
+        for(String part:aaa88Arr) {
+            System.out.println(part + " 2");
+        }
+        String aaa77 = "aabb|";
+        String[] aaa77Arr = aaa77.split("\\|");
+        for(String part:aaa77Arr) {
+            System.out.println(part + " 3");
+        }
+
+        String aaa66 = "aabb";
+        String[] aaa66Arr = aaa66.split("_");
+        System.out.println(aaa66Arr.length + aaa66Arr[0]);
+        for(String part:aaa66Arr) {
+            System.out.println(part + " 4");
+        }
+
+        // 定义日期格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            // 解析字符串为 Date 对象
+//            Date sDate = sdf.parse("2018-01-03");
+            Date sDate = sdf.parse(null);
+            String sDateStr = sdf.format(sDate);
+            System.out.println(sDateStr + " date");
+        } catch (ParseException e) {
+            // 如果解析失败，则打印错误信息
+            System.err.println("日期字符串格式不正确: " + e.getMessage());
+        }
+
+        Integer testNull = null;
+        Integer test0 = 0;
+        Integer test1 = 1;
+        System.out.println(testNull > 0);
+        System.out.println(test0 > 0);
+        System.out.println(test1 > 0);
+        return ;
 
         /*********   java 基础  *********/
 //        String[] myArgs = {"aaa", "bbb"};
